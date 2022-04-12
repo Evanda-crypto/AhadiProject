@@ -1,6 +1,6 @@
 <?php
 include("session.php");
-include("../config/config.php");
+include("../../../config/config.php");
 
 ?>
 <!doctype html>
@@ -11,42 +11,45 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Users</title>
+    <title>Completed | Work</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-
-
+    <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+  <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../../../assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet"/>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
-    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-<!-- Bootstrap core JavaScript-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Page level plugin JavaScript--<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>-->
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-
+<style>
+tfoot td {
+	font-weight:bold;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
     <!-- Left Panel -->
@@ -59,27 +62,25 @@ include("../config/config.php");
                     </li>
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
                     <li>
-                        <a href="pap-daily-sales.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Signed </a>
+                        <a href="pending-installation.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Pending Installation </a>
                     </li>
                     <li>
                         <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Resitituted </a>
                     </li>
-                    <li>
-                        <a href="pending-installation.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Pending Installation </a>
-                    </li>
+
                     <li>
                         <a href="installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Installed </a>
                     </li>
                     <li>
                         <a href="turnedon.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
                     </li>
-                    <li class="menu-title">ACCOUNTS</li><!-- /.menu-title -->
+                    <li class="menu-title">PAYMENTS</li><!-- /.menu-title -->
 
                     <li>
-                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-themify-favicon-alt"></i>Add Teamleader </a>
+                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Today's Total </a>
                     </li>
                     <li>
-                        <a href="view-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-eye"></i>View Teamleader </a>
+                        <a href="completed-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Completed Work </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                     <li>
@@ -99,7 +100,7 @@ include("../config/config.php");
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                <img src="../images/picture1.png" style="width: 120px; height: 70px;" class="logo-icon" alt="logo icon">
+                <img src="../../../images/picture1.png" style="width: 120px; height: 70px;" class="logo-icon" alt="logo icon">
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -114,11 +115,10 @@ include("../config/config.php");
                         </div>
 
                         <div class="dropdown for-notification">
-                           
                         </div>
 
                         <div class="dropdown for-message">
-                         
+                      
                         </div>
                     </div>
 
@@ -130,7 +130,7 @@ include("../config/config.php");
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="../../../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
@@ -145,39 +145,66 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Teamleaders</strong></center>
+                           <center> <strong class="card-title">Completed Work</strong></center>
+                           <div class="table-responsive">
+        <table border="0" cellspacing="5" cellpadding="5">
+        <tbody><tr>
+            <td>Start date:</td>
+            <td><input type="text" id="min" placeholder="Start Date" style="color:red;" class="form-control" name="min"></td>
+        </tr>
+        <tr>
+            <td>End date:</td>
+            <td><input type="text" id="max" placeholder="End Date"   class="form-control" name="max"></td>
+        </tr>
+    </tbody></table>
                         </div>
                         <div class="card-body">
-                            <table class="table table-striped" id="example">
+                        <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th>No</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Department</th>
-                    <th>Details</th>
+                    <th>Building Name</th>
+                   <th>Client</th>
+                  <th>Contact</th>
+                    <th>Techie1</th>
+                    <th>Techie2</th>
+                    <th>Date Of Work</th>
+                    <th>Total Amount</th>
+                    <th>Amount Per Techie</th>
                                     </tr>
                                 </thead>
+                                <tfoot>
+		<tr>
+			<td></td>
+			<td></td>
+            <td></td>
+			<td></td>
+            <td></td>
+			<td>Totals</td>
+			<td></td>
+			<td></td>
+            <td></td>
+		</tr>
+	</tfoot>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT * FROM users where User<>4 OR User<>5 ";
-    $result=$connection->query($sql);
-    while($row=$result->fetch_array()){
-      ?>
-      <tr>
-        <td><?php echo $row['ID']?></td>
-        <td><?php echo $row['FirstName']?></td>
-        <td><?php echo $row['LastName']?></td>
-        <td><?php echo $row['Email']?></td>
-        <td><?php echo $row['Department']?></td>
-        <td>
-         <button class="btn btn-warning"><a href="new-tl.php?id=<?php echo $row['ID']; ?>">Add Teamleader</a></button>
-        </td>
-    </tr>
-    <?php } ?>
+    $sql="SELECT papdailysales.BuildingName,papdailysales.ClientName,papdailysales.ClientContact,papinstalled.Team_ID,token_teams.Techie1,token_teams.Techie2,papinstalled.DateInstalled from papdailysales LEFT JOIN papinstalled on papinstalled.ClientID=papdailysales.ClientID LEFT JOIN token_teams on token_teams.Team_ID=papinstalled.Team_ID where papinstalled.DateInstalled is not null";
+$result=$connection->query($sql);
+while($row=$result->fetch_array()){
+  ?>
+  <tr>
+    <td><?php echo $row['BuildingName']?></td>
+    <td><?php echo $row['ClientName']?></td>
+   <td><?php echo $row['ClientContact']?></td>
+    <td><?php echo $row['Techie1']?></td>
+    <td><?php echo $row['Techie2']?></td>
+    <td><?php echo $row['DateInstalled']?></td>
+    <td>300</td>
+    <td>150</td>
+</tr>
+<?php } ?>
                                 </tbody>
+                                
                             </table>
                         </div>
                     </div>
@@ -196,25 +223,78 @@ include("../config/config.php");
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
+<script src="../../../assets/js/main.js"></script>
 
-<script type="text/javascript">
-$( document ).ready(function() {
-$('#example').DataTable({
-		 "processing": true,
-		 "dom": 'lBfrtip',
-		 "buttons": [
-            {
-                extend: 'collection',
-                text: 'Export',
-                buttons: [
-                    'excel',
-                    'csv'
-                ]
-            }
-        ]
-        });
+
+<script>
+  var minDate, maxDate;
+ 
+ // Custom filtering function which will search data in column four between two values
+ $.fn.dataTable.ext.search.push(
+     function( settings, data, dataIndex ) {
+         var min = minDate.val();
+         var max = maxDate.val();
+         var date = new Date( data[5] );
+  
+         if (
+             ( min === null && max === null ) ||
+             ( min === null && date <= max ) ||
+             ( min <= date   && max === null ) ||
+             ( min <= date   && date <= max )
+         ) {
+             return true;
+         }
+         return false;
+     }
+ );
+  
+ $(document).ready(function() {
+     // Create date inputs
+     minDate = new DateTime($('#min'), {
+         format: 'MMMM Do YYYY'
+     });
+     maxDate = new DateTime($('#max'), {
+         format: 'MMMM Do YYYY'
+     });
+  
+     // DataTables initialisation
+     var table = $('#example').DataTable();
+  
+     // Refilter the table
+     $('#min, #max').on('change', function () {
+         table.draw();
+     });
+ });
+ $('#example').DataTable( {
+    "paging": false,
+			"autoWidth": true,
+			"footerCallback": function ( row, data, start, end, display ) {
+				var api = this.api();
+				nb_cols = api.columns().nodes().length;
+				var j = 6;
+				while(j < nb_cols){
+					var pageTotal = api
+                .column( j, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return Number(a) + Number(b);
+                }, 0 );
+          // Update footer
+          $( api.column( j ).footer() ).html(pageTotal);
+					j++;
+				} 
+			}
+} );
+  </script>
+ <!-- <script>
+  $(document).ready(function() {
+	// DataTable initialisation
+	$('#example').DataTable(
+		{
+		
+		}
+	);
 });
-</script>
+  </script>-->
 </body>
 </html>

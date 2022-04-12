@@ -4,14 +4,14 @@ include("../config/config.php");
 
 $id = $_GET["id"];
 
-$sql="select * from teamleaders where ID=$id";
+$sql="SELECT * from users where ID=$id";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
-$fname=$row['FIRST_NAME'];
-$lname=$row['LAST_NAME'];
-$email=$row['EMAIL'];
-$dpt=$row['DEPARTMENT'];
-$reg=$row['REGION'];
+$fname=$row['FirstName'];
+$lname=$row['LastName'];
+$email=$row['Email'];
+$dpt=$row['Department'];
+$reg=$row['Region'];
 
 if(isset($_POST['submit'])){
 $FirstName = $_POST['Fname'];
@@ -26,7 +26,7 @@ if($connection->connect_error){
 }
 else
 {
-  $sql="update teamleaders set ID=$id,FIRST_NAME='$FirstName',LAST_NAME='$LastName',EMAIL='$Email',DEPARTMENT='$Department',REGION='$Region' where ID=$id";
+  $sql="update users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',Department='$Department',Region='$Region' where ID=$id";
   
   $result=mysqli_query($connection,$sql);
   if ($result) {
@@ -263,7 +263,7 @@ else
                                         </thead>
                                         <tbody>
                                         <?php
-                        $query  = "SELECT * FROM teamleaders";
+                        $query  = "SELECT * FROM users where User=4 OR User=5";
                         $result  = mysqli_query($connection, $query);
 
                         $num_rows  = mysqli_num_rows($result);
@@ -275,11 +275,11 @@ else
                         ?>
                                 <tr>
                                     <td><?php echo $num; ?></td>
-                                    <td><?php echo $row['FIRST_NAME']; ?></td>
-                                    <td><?php echo $row['LAST_NAME']; ?></td>
-                                    <td><?php echo $row['EMAIL']; ?></td>
-                                    <td><?php echo $row['DEPARTMENT']; ?></td>
-                                    <td><?php echo $row['REGION']; ?></td>
+                                    <td><?php echo $row['FirstName']; ?></td>
+                                    <td><?php echo $row['LastName']; ?></td>
+                                    <td><?php echo $row['Email']; ?></td>
+                                    <td><?php echo $row['Department']; ?></td>
+                                    <td><?php echo $row['Region']; ?></td>
 
 
                                 </tr>

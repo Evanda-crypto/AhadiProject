@@ -17,8 +17,8 @@ if (isset($_POST["submit"])) {
         if ($stmt_result->num_rows > 0) {
             $data = $stmt_result->fetch_assoc();
             if (
-                $data["DEPARTMENT"] == "Nats" ||
-                $data["DEPARTMENT"] == "Executive"
+                $data["USER"] == 1 ||
+                $data["USER"] == 2 || $data["USER"] == 3
             ) {
                 if (password_verify($Password, $data["PASSWORD"])) {
                     $_SESSION["start"] = time();
@@ -31,7 +31,7 @@ if (isset($_POST["submit"])) {
                     $_SESSION["status"] = "Wrong Password";
                     header("Location: index.php");
                 }
-            } elseif ($data["DEPARTMENT"] == "Sales") {
+            } elseif ($data["USER"] == 6) {
                 if (password_verify($Password, $data["PASSWORD"])) {
                     $_SESSION["start"] = time();
                     $_SESSION["Sales"] = $EMAIL;

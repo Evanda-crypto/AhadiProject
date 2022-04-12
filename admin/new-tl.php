@@ -3,14 +3,14 @@ include("session.php");
 include("../config/config.php");
 
 $id = $_GET["id"];
-$sql="SELECT employees.ID,employees.FIRST_NAME,employees.LAST_NAME,employees.EMAIL,employees.DEPARTMENT,teamleaders.Email from employees left JOIN teamleaders on employees.EMAIL=teamleaders.Email WHERE teamleaders.EMAIL is null and employees.ID=$id";
+$sql=" SELECT * from users where ID=$id";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
 $EmpID=$row['ID'];
-$Fname=$row['FIRST_NAME'];
-$Lname=$row['LAST_NAME'];
-$email=$row['EMAIL'];
-$dpt=$row['DEPARTMENT'];
+$Fname=$row['FirstName'];
+$Lname=$row['LastNAme'];
+$email=$row['Email'];
+$dpt=$row['Department'];
 
 if(isset($_POST['submit'])){
   $FIRST_NAME = $_POST['Fname'];

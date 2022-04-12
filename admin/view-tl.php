@@ -164,7 +164,7 @@ include("../config/config.php");
                                 </thead>
                                 <tbody>
                                 <?php
-                    $query = "Select * from teamleaders";
+                    $query = "SELECT * from users where User=4 OR user=5";
                     $result = mysqli_query($connection, $query);
 
                     $num_rows = mysqli_num_rows($result);
@@ -175,14 +175,14 @@ include("../config/config.php");
                             $num++; ?>
                                 <tr>
                                     <td><?php echo $num; ?></td>
-                                    <td><?php echo $row["FIRST_NAME"]; ?></td>
-                                    <td><?php echo $row["LAST_NAME"]; ?></td>
-                                    <td><?php echo $row["EMAIL"]; ?></td>
-                                    <td><?php echo $row["DEPARTMENT"]; ?></td>
-                                    <td><?php echo $row["REGION"]; ?></td>
+                                    <td><?php echo $row["FirstName"]; ?></td>
+                                    <td><?php echo $row["LastName"]; ?></td>
+                                    <td><?php echo $row["Email"]; ?></td>
+                                    <td><?php echo $row["Department"]; ?></td>
+                                    <td><?php echo $row["Region"]; ?></td>
                                     <td>
                                     <button class="btn btn-warning" ><a href="edit-tl.php?id=<?php echo $row['ID']; ?> "> <i class="zmdi zmdi-refresh-alt"></i>Edit</a></button>
-                                    <button class="btn btn-danger" ><a href="delete-tl.php?id=<?php echo $row['ID']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['FIRST_NAME']; ?> <?php  echo $row['LAST_NAME']; ?> from teamleaders?')">Delete</a></button>
+                                    <button class="btn btn-danger" ><a href="delete-tl.php?id=<?php echo $row['ID']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['FirstName']; ?> <?php  echo $row['LastName']; ?> from teamleaders?')">Delete</a></button>
 
                                     </td>
                         <?php
