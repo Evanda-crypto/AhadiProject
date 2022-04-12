@@ -41,7 +41,7 @@
                 <div class="text-center">
 		 		     <img src="images/logo1.png" alt="logo icon" style="height:40%; width: 80%; ">
 		 	         </div>
-                    <form action="action.php" method="post">
+                    <form action="login.php" method="post">
  
                         <label for="inputPassword">Username<span style="color: #FF0000" >*</span></label>
                         <div class="form-label-group">
