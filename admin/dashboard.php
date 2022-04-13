@@ -653,63 +653,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
         type: 'doughnut',
         data: {
             datasets: [ {
-                data: [ <?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='ZMM'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='R&M'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='G44'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='G45S'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='G45N'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='KWT'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='LSM'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?>  ],
+                data:<?php echo json_encode($Clients)?>,
                 backgroundColor: [
                                     "#ee2c4e",
                                     "#ffb91f",
@@ -730,15 +674,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
                                 ]
 
                             } ],
-            labels: [
-                                   "ZMM",
-                                    "R&M",
-                                    "G44",
-                                    "G45S",
-                                    "G45N",
-                                    "KWT",
-                                    "LSM"
-                        ]
+            labels:<?php echo json_encode($Region)?>
         },
         options: {
             responsive: true

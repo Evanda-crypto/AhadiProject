@@ -10,12 +10,12 @@ if (!$connection) {
         mysqli_error();
 } else {
     $sql =
-        "SELECT upper(Region) as reg, COUNT(clientID) as pap FROM turnedonpap GROUP BY Region ORDER BY pap DESC";
+        "SELECT papdailysales.Region,COUNT(*)as pending from papdailysales LEFT JOIN papinstalled on papinstalled.ClientID=papdailysales.ClientID left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papinstalled.ClientID is null and papnotinstalled.ClientID is null GROUP BY papdailysales.Region";
     $result = mysqli_query($connection, $sql);
     $chart_data = "";
     while ($row = mysqli_fetch_array($result)) {
-        $Region[] = $row["reg"];
-        $Clients[] = $row["pap"];
+        $Region[] = $row["Region"];
+        $Pending[] = $row["pending"];
     }
 }
 ?>
@@ -47,7 +47,25 @@ if (!$connection) {
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
+<link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
+<link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<!-- Bootstrap core JavaScript-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
    <style>
     #weatherWidget .currentDesc {
         color: #ffffff!important;
@@ -116,10 +134,10 @@ if (!$connection) {
                     <li class="menu-title">PAYMENTS</li><!-- /.menu-title -->
 
                     <li>
-                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Today's Total </a>
+                        <a href="todays-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Today's Work </a>
                     </li>
                     <li>
-                        <a href="completed-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Completed Work </a>
+                        <a href="completed-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Work To Pay </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                     <li>
@@ -257,24 +275,23 @@ if (!$connection) {
                             </div>
                         </div></a>
                     </div>
-                    <div class="col-lg-3 col-md-6"><a href="pap-daily-sales.php">
+                    <div class="col-lg-3 col-md-6"><a href="restituted.php">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
-                                    <div class="stat-icon ">
-                                        <i class="pe-7s-cash"></i>
+                                    <div class="stat-icon dib flat-color-4">
+                                        <i class="pe-7s-refresh-2"></i>
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
-                  $query =
-                      "SELECT count(*) as clients from papdailysales left join papnotinstalled on papdailysales.ClientID=papnotinstalled.ClientID where papnotinstalled.ClientID is null";
-                  $data = mysqli_query($connection, $query);
-                  while ($row = mysqli_fetch_assoc($data)) {
-                      echo $row["clients"] . "<br><br>";
-                  }
-                  ?></span></div>
-                                            <div class="stat-heading">Completed Work</div>
+                                             $query="SELECT COUNT(*) AS restituted from papnotinstalled Where Reason='Already Installed'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['restituted']."<br><br>";
+                                              }
+                                              ?> </span></div>
+                                            <div class="stat-heading">Restituted</div>
                                         </div>
                                     </div>
                                 </div>
@@ -313,12 +330,43 @@ if (!$connection) {
                 <!--  /Traffic -->
                 <div class="clearfix"></div>
 
-                    <div class="row">
+                <div class="row">
                     <div class="col-lg-12">
                     <div class="card">
-                   
-    </div>
-    </div></div>
+                    <div class="card-body">
+                    <table class="table table-striped" id="example">
+                                <thead>
+                                    <tr>
+                                    <th>No</th>
+                    <th>Region</th>
+                    <th>Installation Today</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                      $query  = "SELECT Region,COUNT(*) as installed from papinstalled WHERE DateInstalled=CURRENT_DATE() GROUP BY Region order by installed DESC";
+                        $result  = mysqli_query($connection, $query);
+
+                        $num_rows  = mysqli_num_rows($result);
+
+                        $num = 0;
+                        if ($num_rows > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $num++;
+                        ?>
+                                <tr>
+                                    <td><?php echo $num; ?></td>
+                                    <td><?php echo $row['Region']; ?></td>
+                                    <td><?php echo $row['installed']; ?></td>
+                                </tr>
+                        <?php
+
+                            }
+                        }
+                        ?>
+                                </tbody>
+                            </table>
+                    </div></div></div></div>
             </div>
             <!-- .animated -->
         </div>
@@ -353,12 +401,29 @@ if (!$connection) {
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
     <script src="../../../assets/js/init/fullcalendar-init.js"></script>
 
-    <!--Local Stuff-->
-    <script>
 
+    <script type="text/javascript">
+$( document ).ready(function() {
+$('#example').DataTable({
+		 "processing": true,
+		 "dom": 'lBfrtip',
+		 "buttons": [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: [
+                    'excel',
+                    'csv'
+                ]
+            }
+        ]
+        });
+});
+</script>
+<script>
   //bar chart
-    var ctx = document.getElementById( "barChart" );
-    ctx.height = 100;
+  var ctx = document.getElementById( "barChart" );
+     ctx.height = 100;
     var myChart = new Chart( ctx, {
         type: 'bar',
         data: {
@@ -374,193 +439,179 @@ if (!$connection) {
 ); ?>","<?php echo date("Y-m-d"); ?>" ],
             datasets: [
                 {
-                    label: "Signed",
+                    label: "All Regions",
                     data: [ <?php
-      $sql =
-          "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY)";
-      $result = mysqli_query($connection, $sql);
-      $chart_data = "";
-      while ($signed = mysqli_fetch_assoc($result)) {
-          echo $signed["sales"];
-      }
-      ?>,<?php
-$sql =
-    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY)";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["sales"];
-}
-?>,<?php
-$sql =
-    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 4 DAY)";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["sales"];
-}
-?>,<?php
-$sql =
-    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY)";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["sales"];
-}
-?>,<?php
-$sql =
-    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY)";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["sales"];
-}
-?>,<?php
-$sql =
-    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY)";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["sales"];
-}
-?>,<?php
-$sql =
-    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=CURDATE()";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["sales"];
-}
-?> ],
+                  $query =
+                      "SELECT count(*) as installed from papinstalled Where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 6 DAY)";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["installed"];
+                  }
+                  ?>, <?php
+                  $query =
+                      "SELECT count(*) as installed from papinstalled Where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 5 DAY)";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["installed"];
+                  }
+                  ?>,  <?php
+                  $query =
+                      "SELECT count(*) as installed from papinstalled Where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 4 DAY)";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["installed"];
+                  }
+                  ?>,  <?php
+                  $query =
+                      "SELECT count(*) as installed from papinstalled Where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 3 DAY)";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["installed"];
+                  }
+                  ?>,  <?php
+                  $query =
+                      "SELECT count(*) as installed from papinstalled Where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 2 DAY)";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["installed"];
+                  }
+                  ?>, <?php
+                  $query =
+                      "SELECT count(*) as installed from papinstalled Where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 1 DAY)";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["installed"];
+                  }
+                  ?>,  <?php
+                  $query =
+                      "SELECT count(*) as installed from papinstalled Where DateInstalled=CURDATE()";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["installed"];
+                  }
+                  ?> ],
                     borderColor: "rgba(0, 194, 146, 0.9)",
                     borderWidth: "0",
-                    backgroundColor: "#0cbeaf"
+                    backgroundColor: "#85ce36"
                             },
                 {
-                    label: "Installed",
-                    data: [<?php
+                    label: "Best Region",
+                    data: [ "<?php
+          $sql =
+              "SELECT Region,Count(*) as bestreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 6 DAY) group by Region order by bestreg Desc limit 1";
+          $result = mysqli_query($connection, $sql);
+          $chart_data = "";
+          while ($signed = mysqli_fetch_assoc($result)) {
+              echo $signed["bestreg"];
+          }
+      ?>", "<?php
       $sql =
-          "SELECT COUNT(DateInstalled) as installed FROM papinstalled where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 6 DAY)";
+          "SELECT Region,Count(*) as bestreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 5 DAY) group by Region order by bestreg Desc limit 1";
       $result = mysqli_query($connection, $sql);
       $chart_data = "";
       while ($signed = mysqli_fetch_assoc($result)) {
-          echo $signed["installed"];
+          echo $signed["bestreg"];
       }
-      ?>,<?php
+  ?>", "<?php
+  $sql =
+      "SELECT Region,Count(*) as bestreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 4 DAY) group by Region order by bestreg Desc limit 1";
+  $result = mysqli_query($connection, $sql);
+  $chart_data = "";
+  while ($signed = mysqli_fetch_assoc($result)) {
+      echo $signed["bestreg"];
+  }
+?>", "<?php
 $sql =
-    "SELECT COUNT(DateInstalled) as installed FROM papinstalled where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 5 DAY)";
+    "SELECT Region,Count(*) as bestreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 3 DAY) group by Region order by bestreg Desc limit 1";
 $result = mysqli_query($connection, $sql);
 $chart_data = "";
 while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["installed"];
+    echo $signed["bestreg"];
 }
-?>,<?php
+?>", "<?php
 $sql =
-    "SELECT COUNT(DateInstalled) as installed FROM papinstalled where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 4 DAY)";
+    "SELECT Region,Count(*) as bestreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 2 DAY) group by Region order by bestreg Desc limit 1";
 $result = mysqli_query($connection, $sql);
 $chart_data = "";
 while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["installed"];
+    echo $signed["bestreg"];
 }
-?>,<?php
+?>","<?php
 $sql =
-    "SELECT COUNT(DateInstalled) as installed FROM papinstalled where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 3 DAY)";
+    "SELECT Region,Count(*) as bestreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 1 DAY) group by Region order by bestreg Desc limit 1";
 $result = mysqli_query($connection, $sql);
 $chart_data = "";
 while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["installed"];
+    echo $signed["bestreg"];
 }
-?>,<?php
+?>", "<?php
 $sql =
-    "SELECT COUNT(DateInstalled) as installed FROM papinstalled where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 2 DAY)";
+    "SELECT Region,Count(*) as bestreg from papinstalled where DateInstalled =CURDATE() group by Region order by bestreg Desc limit 1";
 $result = mysqli_query($connection, $sql);
 $chart_data = "";
 while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["installed"];
+    echo $signed["bestreg"];
 }
-?>,<?php
-$sql =
-    "SELECT COUNT(DateInstalled) as installed FROM papinstalled where DateInstalled=DATE_SUB(CURDATE(), INTERVAL 1 DAY)";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["installed"];
-}
-?>,<?php
-$sql =
-    "SELECT COUNT(DateInstalled) as installed FROM papinstalled where DateInstalled=CURDATE()";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["installed"];
-}
-?> ],
+?>" ],
                     borderColor: "rgba(0,0,0,0.09)",
                     borderWidth: "0",
-                    backgroundColor: "#ffb91f"
+                    backgroundColor: "#FFB91F"
                             },
-                            {
-                    label: "Turned On",
-                    data: [ <?php
-      $sql =
-          "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 6 DAY)";
-      $result = mysqli_query($connection, $sql);
-      $chart_data = "";
-      while ($signed = mysqli_fetch_assoc($result)) {
-          echo $signed["turnedon"];
-      }
-      ?>,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 5 DAY)";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?>,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 4 DAY)";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?>,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 3 DAY)";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?>,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 2 DAY)";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?>,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 1 DAY)";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?>,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where DateTurnedOn=CURDATE()";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ],
+                {
+                    label: "Least Region",
+                    data: [<?php
+                  $query =
+                      "SELECT Region,Count(*) as leastreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 6 DAY) group by Region order by leastreg ASC limit 1";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["leastreg"];
+                  }
+                  ?>, <?php
+                  $query =
+                      "SELECT Region,Count(*) as leastreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 5 DAY) group by Region order by leastreg ASC limit 1";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["leastreg"];
+                  }
+                  ?>, <?php
+                  $query =
+                      "SELECT Region,Count(*) as leastreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 4 DAY) group by Region order by leastreg ASC limit 1";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["leastreg"];
+                  }
+                  ?>,<?php
+                  $query =
+                      "SELECT Region,Count(*) as leastreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 3 DAY) group by Region order by leastreg ASC limit 1";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["leastreg"];
+                  }
+                  ?>, <?php
+                  $query =
+                      "SELECT Region,Count(*) as leastreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 2 DAY) group by Region order by leastreg ASC limit 1";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["leastreg"];
+                  }
+                  ?>,<?php
+                  $query =
+                      "SELECT Region,Count(*) as leastreg from papinstalled where DateInstalled =DATE_SUB(CURDATE(), INTERVAL 1 DAY) group by Region order by leastreg ASC limit 1";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["leastreg"];
+                  }
+                  ?>,<?php
+                  $query =
+                      "SELECT Region,Count(*) as leastreg from papinstalled where DateInstalled =CURDATE() group by Region order by leastreg ASC limit 1";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["leastreg"];
+                  }
+                  ?>],
                     borderColor: "rgba(0,0,0,0.09)",
                     borderWidth: "0",
-                    backgroundColor: "#fe2d38"
+                    backgroundColor: "#EE2C4E"
                             }
                         ]
         },
@@ -573,7 +624,10 @@ while ($signed = mysqli_fetch_assoc($result)) {
                                 } ]
             }
         }
-    } );
+    } );      
+    
+</script>
+    <script>
            //doughut chart
     var ctx = document.getElementById( "doughutChart" );
     ctx.height = 250;
@@ -581,63 +635,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
         type: 'doughnut',
         data: {
             datasets: [ {
-                data: [ <?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='ZMM'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='R&M'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='G44'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='G45S'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='G45N'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='KWT'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?> ,<?php
-$sql =
-    "SELECT COUNT(DateTurnedOn) as turnedon FROM turnedonpap where Region='LSM'";
-$result = mysqli_query($connection, $sql);
-$chart_data = "";
-while ($signed = mysqli_fetch_assoc($result)) {
-    echo $signed["turnedon"];
-}
-?>  ],
+                data: <?php echo json_encode($Pending)?>,
                 backgroundColor: [
                                     "#ee2c4e",
                                     "#ffb91f",
@@ -658,15 +656,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
                                 ]
 
                             } ],
-            labels: [
-                                   "ZMM",
-                                    "R&M",
-                                    "G44",
-                                    "G45S",
-                                    "G45N",
-                                    "KWT",
-                                    "LSM"
-                        ]
+            labels: <?php echo json_encode($Region)?>
         },
         options: {
             responsive: true

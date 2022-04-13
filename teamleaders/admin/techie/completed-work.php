@@ -77,10 +77,10 @@ tfoot td {
                     <li class="menu-title">PAYMENTS</li><!-- /.menu-title -->
 
                     <li>
-                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Today's Total </a>
+                        <a href="todays-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Today's Work </a>
                     </li>
                     <li>
-                        <a href="completed-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Completed Work </a>
+                        <a href="completed-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Work To Pay </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                     <li>
@@ -145,7 +145,7 @@ tfoot td {
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Completed Work</strong></center>
+                           <center> <strong class="card-title">Work To Pay</strong></center>
                            <div class="table-responsive">
         <table border="0" cellspacing="5" cellpadding="5">
         <tbody><tr>
@@ -266,7 +266,7 @@ while($row=$result->fetch_array()){
      });
  });
  $('#example').DataTable( {
-    "paging": false,
+    "paging": true,
 			"autoWidth": true,
 			"footerCallback": function ( row, data, start, end, display ) {
 				var api = this.api();

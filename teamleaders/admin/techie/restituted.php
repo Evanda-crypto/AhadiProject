@@ -73,10 +73,10 @@ include("../../../config/config.php");
                     <li class="menu-title">PAYMENTS</li><!-- /.menu-title -->
 
                     <li>
-                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Today's Total </a>
+                        <a href="todays-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Today's Work </a>
                     </li>
                     <li>
-                        <a href="completed-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Completed Work </a>
+                        <a href="completed-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Work To Pay </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                     <li>
@@ -162,7 +162,7 @@ include("../../../config/config.php");
                                
  <?php
  $query =
-     "SELECT papnotinstalled.ClientID,papnotinstalled.ClientName,papnotinstalled.BuildingName,papnotinstalled.BuildingCode,papnotinstalled.Region,papnotinstalled.Floor,papnotinstalled.DateSigned,papnotinstalled.Reason,papnotinstalled.Contact,papnotinstalled.ChampName,CONCAT(papnotinstalled.Techie1,'/',papnotinstalled.Techie2) as techies from papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID where trash.ClientID is null  order by DateSigned Desc";
+     "SELECT papnotinstalled.ClientID,papnotinstalled.ClientName,papnotinstalled.BuildingName,papnotinstalled.BuildingCode,papnotinstalled.Region,papnotinstalled.Floor,papnotinstalled.DateSigned,papnotinstalled.Reason,papnotinstalled.Contact,papnotinstalled.ChampName,CONCAT(papnotinstalled.Techie1,'/',papnotinstalled.Techie2) as techies from papnotinstalled order by DateSigned Desc";
  $result = mysqli_query($connection, $query);
  while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
