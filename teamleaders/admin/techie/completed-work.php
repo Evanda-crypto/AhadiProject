@@ -34,11 +34,10 @@ include("../../../config/config.php");
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
 
-
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -83,9 +82,9 @@ tfoot td {
                         <a href="completed-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Work To Pay </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                    <li>
+                   <!-- <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
                     </li>
@@ -158,53 +157,52 @@ tfoot td {
         </tr>
     </tbody></table>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" id="demo">
                         <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                    <th>Building Name</th>
-                   <th>Client</th>
-                  <th>Contact</th>
-                    <th>Techie1</th>
-                    <th>Techie2</th>
-                    <th>Date Of Work</th>
-                    <th>Total Amount</th>
-                    <th>Amount Per Techie</th>
+      <th class="th-sm">Building Name
+      </th>
+      <th class="th-sm">Building Code
+      </th>
+      <th class="th-sm">Mac Address
+      </th>
+      <th class="th-sm">Techies
+      </th>
+      <th class="th-sm">Date Installed
+      </th>
+      <th class="th-sm">Date Turned On
+      </th>
+      <th class="th-sm">Total Amount
+      </th>
+      <th class="th-sm">Amount Per Techie
+      </th>
                                     </tr>
                                 </thead>
-                                <tfoot>
-		<tr>
-			<td></td>
-			<td></td>
-            <td></td>
-			<td></td>
-            <td></td>
-			<td>Totals</td>
-			<td></td>
-			<td></td>
-            <td></td>
-		</tr>
-	</tfoot>
                                 <tbody>
                                 <?php
-    
-    $sql="SELECT papdailysales.BuildingName,papdailysales.ClientName,papdailysales.ClientContact,papinstalled.Team_ID,token_teams.Techie1,token_teams.Techie2,papinstalled.DateInstalled from papdailysales LEFT JOIN papinstalled on papinstalled.ClientID=papdailysales.ClientID LEFT JOIN token_teams on token_teams.Team_ID=papinstalled.Team_ID where papinstalled.DateInstalled is not null";
-$result=$connection->query($sql);
-while($row=$result->fetch_array()){
-  ?>
-  <tr>
-    <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['ClientName']?></td>
-   <td><?php echo $row['ClientContact']?></td>
-    <td><?php echo $row['Techie1']?></td>
-    <td><?php echo $row['Techie2']?></td>
-    <td><?php echo $row['DateInstalled']?></td>
-    <td>300</td>
-    <td>150</td>
-</tr>
-<?php } ?>
-                                </tbody>
+                        $query  = "SELECT turnedonpap.ClientID,turnedonpap.ClientName,turnedonpap.ChampName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode,upper(turnedonpap.MacAddress) as mac,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
+                        turnedonpap.DateTurnedOn,papdailysales.Region,papinstalled.DateInstalled FROM turnedonpap JOIN papdailysales ON papdailysales.ClientID=turnedonpap.ClientID left join papinstalled ON papinstalled.ClientID=papdailysales.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE turnedonpap.ClientID IS NOT null and turnedonpap.DateTurnedOn >= DATE_SUB(CURDATE(), INTERVAL 21 DAY)";
+                        $result  = mysqli_query($connection, $query);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
                                 
+                        ?>
+                                <tr>
+                                    <td><?php echo $row['BuildingName']; ?></td>
+                                    <td><?php echo $row['BuildingCode']; ?></td>
+                                    <td><?php echo $row['mac']; ?></td>
+                                    <td><?php echo $row['techies']; ?></td>
+                                    <td><?php echo $row['DateInstalled']; ?></td>
+                                    <td><?php echo $row['DateTurnedOn']; ?></td>
+                                    <td>300</td>
+                                    <td>150</td>
+                                </tr>
+                        <?php
+
+                            }
+                        ?>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -226,8 +224,18 @@ while($row=$result->fetch_array()){
 <script src="../../../assets/js/main.js"></script>
 
 
-<script>
-  var minDate, maxDate;
+
+  <script>
+      
+      $.fn.dataTable.Api.register( 'column().data().sum()', function () {
+    return this.reduce( function (a, b) {
+        var x = parseFloat( a ) || 0;
+        var y = parseFloat( b ) || 0;
+        return x + y;
+    } );
+} );
+ 
+var minDate, maxDate;
  
  // Custom filtering function which will search data in column four between two values
  $.fn.dataTable.ext.search.push(
@@ -248,53 +256,33 @@ while($row=$result->fetch_array()){
      }
  );
   
- $(document).ready(function() {
-     // Create date inputs
-     minDate = new DateTime($('#min'), {
+/* Init the table and fire off a call to get the hidden nodes. */
+$(document).ready(function() {
+    // Create date inputs
+    minDate = new DateTime($('#min'), {
          format: 'MMMM Do YYYY'
      });
      maxDate = new DateTime($('#max'), {
          format: 'MMMM Do YYYY'
      });
-  
-     // DataTables initialisation
-     var table = $('#example').DataTable();
-  
+
      // Refilter the table
      $('#min, #max').on('change', function () {
          table.draw();
      });
- });
- $('#example').DataTable( {
-    "paging": true,
-			"autoWidth": true,
-			"footerCallback": function ( row, data, start, end, display ) {
-				var api = this.api();
-				nb_cols = api.columns().nodes().length;
-				var j = 6;
-				while(j < nb_cols){
-					var pageTotal = api
-                .column( j, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return Number(a) + Number(b);
-                }, 0 );
-          // Update footer
-          $( api.column( j ).footer() ).html(pageTotal);
-					j++;
-				} 
-			}
+    var table = $('#example').DataTable(
+        {
+    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+        }
+    );
+    
+ 
+    $('<button class="btn btn-success" style="margin-bottom:10px; margin-left:70px;">Calculate</button>')
+        .prependTo( '#demo' )
+        .on( 'click', function () {
+            alert( 'Total Amount: '+ 'Ksh ' + table.column( 7, {page:'current'} ).data().sum() );
+        } );
 } );
   </script>
- <!-- <script>
-  $(document).ready(function() {
-	// DataTable initialisation
-	$('#example').DataTable(
-		{
-		
-		}
-	);
-});
-  </script>-->
 </body>
 </html>

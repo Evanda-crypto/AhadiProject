@@ -1,6 +1,6 @@
 <?php
 include("session.php");
-include("../../../config/config.php");
+include("../../config/config.php");
 
 ?>
 <!doctype html>
@@ -11,7 +11,7 @@ include("../../../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Today's | Work</title>
+    <title>Completed | Tasks</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,8 +24,8 @@ include("../../../config/config.php");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="../../../assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
 
     <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet"/>
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -38,7 +38,7 @@ include("../../../config/config.php");
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+ <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">-->
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -52,40 +52,46 @@ tfoot td {
 </style>
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+  <!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="dashboard.php"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
+                    <li class="menu-title">ACTIVITIES</li><!-- /.menu-title -->
+                    <li>
+                        <a href="create-team.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Create New Team </a>
+                    </li>
+                    <li>
+                        <a href="assign-task.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Assign Task </a>
+                    </li>
+                    <li>
+                        <a href="reasign-task.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Reasign Task</a>
+                    </li>
+                    <li>
+                        <a href="reminders.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Reminders</a>
+                    </li>
+                    <li>
+                        <a href="rejected-meters.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Rejected Meters</a>
+                    </li>
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
-                    <li>
-                        <a href="pending-installation.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Pending Installation </a>
-                    </li>
-                    <li>
-                        <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Resitituted </a>
-                    </li>
 
                     <li>
-                        <a href="installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Installed </a>
+                        <a href="installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Installed</a>
                     </li>
                     <li>
-                        <a href="turnedon.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
-                    </li>
-                    <li class="menu-title">PAYMENTS</li><!-- /.menu-title -->
-
-                    <li>
-                        <a href="todays-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Today's Work </a>
+                        <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Restituted </a>
                     </li>
                     <li>
-                        <a href="completed-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Work To Pay </a>
-                    </li>
+                        <a href="turned-on.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On</a>
+                    </li>  
+                    <li class="menu-title" >COMPLETED TASKS</li><!-- /.menu-title --> 
+                    <li>
+                        <a href="completed-tasks.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Completed Tasks </a>
+                    </li>         
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                   <!-- <li>
-                        <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
-                    </li>-->
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
                     </li>
@@ -100,7 +106,7 @@ tfoot td {
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                <img src="../../../images/picture1.png" style="width: 120px; height: 70px;" class="logo-icon" alt="logo icon">
+                <img src="../../images/picture1.png" style="width: 120px; height: 70px;" class="logo-icon" alt="logo icon">
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -130,7 +136,7 @@ tfoot td {
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="../../../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="../../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
@@ -145,56 +151,65 @@ tfoot td {
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Today's Work</strong></center>
+                           <center> <strong class="card-title">Completed Tasks</strong></center>
                            <div class="table-responsive">
+        <table border="0" cellspacing="5" cellpadding="5">
+        <tbody><tr>
+            <td>Start date:</td>
+            <td><input type="text" id="min" placeholder="Start Date" style="color:red;" class="form-control" name="min"></td>
+        </tr>
+        <tr>
+            <td>End date:</td>
+            <td><input type="text" id="max" placeholder="End Date"   class="form-control" name="max"></td>
+        </tr>
+    </tbody></table>
                         </div>
                         <div class="card-body">
                         <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                    <th>Building Name</th>
-                   <th>Client</th>
-                  <th>Contact</th>
-                    <th>Techie1</th>
-                    <th>Techie2</th>
-                    <th>Date Of Work</th>
-                    <th>Total Amount</th>
-                    <th>Amount Per Techie</th>
+      <th class="th-sm">Client Name
+      </th>
+      <th class="th-sm">Contact
+      </th>
+      <th class="th-sm">Building Name
+      </th>
+      <th class="th-sm">Building Code
+      </th>
+      <th class="th-sm">Mac Address
+      </th>
+      <th class="th-sm">Techies
+      </th>
+      <th class="th-sm">Date Installed
+      </th>
+      <th class="th-sm">Date Turned On
+      </th>
                                     </tr>
                                 </thead>
-                                <tfoot>
-		<tr>
-			<td></td>
-			<td></td>
-            <td></td>
-			<td></td>
-            <td></td>
-			<td>Totals</td>
-			<td></td>
-			<td></td>
-            <td></td>
-		</tr>
-	</tfoot>
                                 <tbody>
                                 <?php
-    
-    $sql="SELECT papdailysales.BuildingName,papdailysales.ClientName,papdailysales.ClientContact,papinstalled.Team_ID,token_teams.Techie1,token_teams.Techie2,papinstalled.DateInstalled from papdailysales LEFT JOIN papinstalled on papinstalled.ClientID=papdailysales.ClientID LEFT JOIN token_teams on token_teams.Team_ID=papinstalled.Team_ID where papinstalled.DateInstalled is not null and papinstalled.DateInstalled=CURDATE()";
-$result=$connection->query($sql);
-while($row=$result->fetch_array()){
-  ?>
-  <tr>
-    <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['ClientName']?></td>
-   <td><?php echo $row['ClientContact']?></td>
-    <td><?php echo $row['Techie1']?></td>
-    <td><?php echo $row['Techie2']?></td>
-    <td><?php echo $row['DateInstalled']?></td>
-    <td>300</td>
-    <td>150</td>
-</tr>
-<?php } ?>
-                                </tbody>
+                        $query  = "SELECT turnedonpap.ClientID,turnedonpap.ClientName,turnedonpap.ChampName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode,upper(turnedonpap.MacAddress) as mac,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
+                        turnedonpap.DateTurnedOn,papdailysales.Region,papinstalled.DateInstalled FROM turnedonpap JOIN papdailysales ON papdailysales.ClientID=turnedonpap.ClientID left join papinstalled ON papinstalled.ClientID=papdailysales.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE turnedonpap.ClientID IS NOT null and papdailysales.Region='".$_SESSION['Region']."'";
+                        $result  = mysqli_query($connection, $query);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
                                 
+                        ?>
+                                <tr>
+                                    <td><?php echo $row['ClientName']; ?></td>
+                                    <td><?php echo $row['ClientContact']; ?></td>
+                                    <td><?php echo $row['BuildingName']; ?></td>
+                                    <td><?php echo $row['BuildingCode']; ?></td>
+                                    <td><?php echo $row['mac']; ?></td>
+                                    <td><?php echo $row['techies']; ?></td>
+                                    <td><?php echo $row['DateInstalled']; ?></td>
+                                    <td><?php echo $row['DateTurnedOn']; ?></td>
+                                </tr>
+                        <?php
+
+                            }
+                        ?>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -213,34 +228,61 @@ while($row=$result->fetch_array()){
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../../../assets/js/main.js"></script>
+<script src="../../assets/js/main.js"></script>
+
 
 <script>
+  var minDate, maxDate;
+ 
+ // Custom filtering function which will search data in column four between two values
+ $.fn.dataTable.ext.search.push(
+     function( settings, data, dataIndex ) {
+         var min = minDate.val();
+         var max = maxDate.val();
+         var date = new Date( data[7] );
+  
+         if (
+             ( min === null && max === null ) ||
+             ( min === null && date <= max ) ||
+             ( min <= date   && max === null ) ||
+             ( min <= date   && date <= max )
+         ) {
+             return true;
+         }
+         return false;
+     }
+ );
+  
  $(document).ready(function() {
+     // Create date inputs
+     minDate = new DateTime($('#min'), {
+         format: 'MMMM Do YYYY'
+     });
+     maxDate = new DateTime($('#max'), {
+         format: 'MMMM Do YYYY'
+     });
+  
+     // DataTables initialisation
+     var table = $('#example').DataTable();
+  
+     // Refilter the table
+     $('#min, #max').on('change', function () {
+         table.draw();
+     });
+ });
+ $('#myTable').DataTable( {
+    fixedColumns: true
+} );
+  </script>
+ <!-- <script>
+  $(document).ready(function() {
 	// DataTable initialisation
 	$('#example').DataTable(
 		{
-			"paging": true,
-			"autoWidth": true,
-			"footerCallback": function ( row, data, start, end, display ) {
-				var api = this.api();
-				nb_cols = api.columns().nodes().length;
-				var j = 6;
-				while(j < nb_cols){
-					var pageTotal = api
-                .column( j, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return Number(a) + Number(b);
-                }, 0 );
-          // Update footer
-          $( api.column( j ).footer() ).html(pageTotal);
-					j++;
-				} 
-			}
+		
 		}
 	);
 });
-</script>
+  </script>-->
 </body>
 </html>

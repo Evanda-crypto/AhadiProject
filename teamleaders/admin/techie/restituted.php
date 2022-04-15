@@ -79,9 +79,9 @@ include("../../../config/config.php");
                         <a href="completed-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Work To Pay </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                    <li>
+                   <!-- <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
                     </li>
