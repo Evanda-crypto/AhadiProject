@@ -93,6 +93,9 @@ else
                     <li>
                         <a href="new-user.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Create New User </a>
                     </li>
+                    <li>
+                        <a href="users.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Users </a>
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -141,7 +144,7 @@ else
             <div class="animated fadeIn">
 
 
-                <div class="row">
+            <div class="row">
                 <div class="col-lg-3">
                                 <div class="card">
                                     <div class="card-header"></div>
@@ -192,7 +195,6 @@ else
                                                   <option value="G45N">G45N</option>
                                               <option value="R&M">R&M</option>
                                              <option value="LSM">LSM</option>
-                                              <option value="JCR">JCR</option>
                                                <option value="KWT">KWT</option> 
                                               </select>
                                             </div>
@@ -208,7 +210,6 @@ else
                                              <option value="G45N">G45N</option>
                                             <option value="R&M">R&M</option>
                                             <option value="LSM">LSM</option>
-                                           <option value="JCR">JCR</option>
                                             <option value="KWT">KWT</option> 
                                               </select>
                                             </div>
@@ -233,7 +234,7 @@ else
                                                <option value="3">Maton(user 3)</option>
                                               <option value="4">SalesTL(user 4)</option>
                                               <option value="5">Techie TL(user 5)</option>
-                                               <option value="6">Sales(user 6)</option>
+                                               <option value="6">Champ(user 6)</option>
                                               <option value="7">Overall (user 7)</option>
                                               </select>
                                             </div>
@@ -255,48 +256,6 @@ else
                                     </div>
                                 </div>
                             </div><!--/.col-->
-
-                   <div class="col-lg-9">
-              <div class="card"><div class="card-body">
-              <div class="card-header">
-                           <center> <strong class="card-title">Users</strong></center>
-                        </div>
-                        <div class="table-responsive">
-                                    <table class="table table-borderless table-striped " id="example">
-                                        <thead>
-                                            <tr>
-                                            <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
-                    
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-    
-    $sql="select * from Users order by ID ASC";
-    $result=$connection->query($sql);
-    while($row=$result->fetch_array()){
-      ?>
-      <tr>
-        <td><?php echo $row['FirstName']?></td>
-        <td><?php echo $row['LastName']?></td>
-        <td><?php echo $row['Email']?></td>
-        <td><?php echo $row['Department']?></td>
-       <td>
-       <button class="btn btn-warning"><a href="edit-user.php?userid=<?php echo $row['ID']; ?>">Edit</i></a></button>
-    </td><td>
-        <button class="btn btn-danger"><a href="del-user.php?userid=<?php echo $row['ID']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['FirstName']; ?> <?php  echo $row['LastName']; ?> from Users?')">Delete</a></button>
-        </td>
-    </tr>
-    <?php } ?>
-                                    </tbody>
-                                    </table>
-                                </div>
-              </div></div>
                     </div>
         </div><!-- .animated -->
     </div><!-- .content -->

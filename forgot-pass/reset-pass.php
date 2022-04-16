@@ -1,6 +1,6 @@
 <?php
 include('../config/config.php');
-include("session.php");
+session_start();
 
 if (isset($_POST["submit"])) {
     $EMAIL = trim($_POST["uname"]);
@@ -12,12 +12,12 @@ if (isset($_POST["submit"])) {
         $_SESSION["status"] = "There is no connection at this time.Please try again later.";
         header("Location: reset-pass.php");
     } else {
-        $stmt = $connection->prepare("select * from employees where EMAIL= ?");
+        $stmt = $connection->prepare("select * from Users where Email= ?");
         $stmt->bind_param("s", $EMAIL);
         $stmt->execute();
         $stmt_result = $stmt->get_result();
         if ($stmt_result->num_rows > 0) {
-            $sql="UPDATE employees set PASSWORD='$hashpass' WHERE EMAIL='$EMAIL'";
+            $sql="UPDATE Users set Password='$hashpass' WHERE Email='$EMAIL'";
             $result=mysqli_query($connection,$sql);
             if($result){
                 $_SESSION["success"] = "Password Reset was successfully.";

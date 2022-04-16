@@ -90,6 +90,9 @@ include("../config/config.php");
                     <li class="active">
                         <a href="new-meter-form.php"><i class="menu-icon fa fa-lightbulb-o"></i>New Meter</a>
                     </li>
+                    <li class="active">
+                        <a href="completed-tasks.php"><i class="menu-icon fa fa-tasks"></i>Completed Tasks</a>
+                    </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APs</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -230,55 +233,6 @@ include("../config/config.php");
                             </div>
                         </div></a>
                     </div>
-
-                    <div class="col-lg-3 col-md-6"><a href="restituted.php">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="stat-widget-five">
-                                    <div class="stat-icon dib flat-color-2">
-                                        <i class="pe-7s-attention"></i>
-                                    </div>
-                                    <div class="stat-content">
-                                        <div class="text-left dib">
-                                            <div class="stat-text"><span class="count"><?php
-                                            $query="SELECT COUNT(*) as restituted from papnotinstalled where TeamID='".$_SESSION['TeamID']."'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['restituted']."<br><br>";
-                                              }
-                                              ?></span></div>
-                                            <div class="stat-heading">Restituted</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div></a>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6"><a href="not-turnedon.php" >
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="stat-widget-five">
-                                    <div class="stat-icon dib flat-color-3">
-                                        <i class="pe-7s-signal"></i>
-                                    </div>
-                                    <div class="stat-content">
-                                        <div class="text-left dib">
-                                            <div class="stat-text"><span class="count"><?php
-                                             $query="SELECT COUNT(*) as installed from papinstalled where DateInstalled>=DATE_ADD(CURDATE(), INTERVAL -6 DAY) and Team_ID='".$_SESSION['TeamID']."'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['installed']."<br><br>";
-                                              }
-                                              ?></span></div>
-                                            <div class="stat-heading">Installed[Last 7 days]</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div></a>
-                    </div>
-
                     <div class="col-lg-3 col-md-6"><a href="installed.php">
                         <div class="card">
                             <div class="card-body">
@@ -302,6 +256,57 @@ include("../config/config.php");
                             </div>
                         </div></a>
                     </div>
+
+                    <div class="col-lg-3 col-md-6"><a href="completed-taks.php" >
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-3">
+                                        <i class="pe-7s-signal"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text"><span class="count"><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled where DateInstalled>=DATE_ADD(CURDATE(), INTERVAL -13 DAY) and Team_ID='".$_SESSION['TeamID']."'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed']."<br><br>";
+                                              }
+                                              ?></span></div>
+                                            <div class="stat-heading">Installed[Last 14 days]</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></a>
+                    </div>
+                    <div class="col-lg-3 col-md-6"><a href="completed-tasks.php">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-2">
+                                        <i class="pe-7s-cash"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text"><span class="count"><?php
+                                             $query="SELECT (COUNT(*)*150) as amount from papinstalled where DateInstalled>=DATE_ADD(CURDATE(), INTERVAL -13 DAY) and Team_ID='".$_SESSION['TeamID']."'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['amount']."<br><br>";
+                                              }
+                                              ?></span></div>
+                                            <div class="stat-heading">Amount[1 Techie][Last 14 days]</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></a>
+                    </div>
+
+                    
+
+                 
                 </div>
                 <!-- /Widgets -->
                 <!--  Traffic  -->
@@ -365,7 +370,7 @@ include("../config/config.php");
 
     //bar chart
     var ctx = document.getElementById( "barChart" );
-   ctx.height = 100;
+   ctx.height = 190;
     var myChart = new Chart( ctx, {
         type: 'bar',
         data: {

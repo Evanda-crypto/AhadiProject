@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
     $Region = $_POST['reg'];
     $BuildingName = $_POST['bname'];
     $BuildingCode = $_POST['bcode'];
-    $Date = $_POST['date'];
+    $Date = date('Y-m-d h:ia');;
 
     if($connection->connect_error){
         die('connection failed : '.$connection->connect_error);
@@ -310,22 +310,12 @@ if(isset($_POST['submit'])){
                                         </div>
                                         <hr>
                                         <form method="POST" action="">
-                                        <div class="row">
-                                                <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Team ID</label>
                                                         <input id="cc-exp" name="teamid" type="tel" class="form-control cc-exp" value="<?php echo $_SESSION['Region']?>-"data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Team ID">
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">Date of Work</label>
-                                                    <div class="input-group">
-                                                        <input id="work" name="date" type="date" class="form-control cc-cvc" value=""  autocomplete="off">
-                                                       
-                                                    </div>
-                                                </div>
-                                            </div>
+ 
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Client ID</label>
                                                 <input id="cc-pament" name="ClientID"  type="text" value="<?php echo $id?>" readonly class="form-control" aria-required="true" aria-invalid="false" placeholder="Client ID">

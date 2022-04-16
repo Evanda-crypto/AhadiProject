@@ -6,7 +6,7 @@ $id = $_GET['userid'];
 $msg = "";
 if (isset($id)) {
 
-    $query = "DELETE FROM  employees  WHERE ID= '$id'";
+    $query = "DELETE FROM  Users  WHERE ID= '$id'";
     $result = mysqli_query($connection, $query);
     if ($result) {
         $msg = '<div class="alert alert-success" role="alert">
@@ -42,7 +42,7 @@ if (isset($id)) {
             </div>
 
             <div class="col-md-12 text-center pt-5 ">
-                <a href="new-user.php" class="btn btn-info">Go back</a>
+                <a href="users.php" class="btn btn-info">Go back</a>
             </div>
         </div>
     </div>

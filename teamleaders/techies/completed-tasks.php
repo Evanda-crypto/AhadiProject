@@ -239,7 +239,7 @@ tfoot td {
      function( settings, data, dataIndex ) {
          var min = minDate.val();
          var max = maxDate.val();
-         var date = new Date( data[7] );
+         var date = new Date( data[6] );
   
          if (
              ( min === null && max === null ) ||
@@ -263,7 +263,11 @@ tfoot td {
      });
   
      // DataTables initialisation
-     var table = $('#example').DataTable();
+     var table = $('#example').DataTable(
+         {
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+         }
+     );
   
      // Refilter the table
      $('#min, #max').on('change', function () {

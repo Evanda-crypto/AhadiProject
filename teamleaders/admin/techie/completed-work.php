@@ -165,13 +165,13 @@ tfoot td {
       </th>
       <th class="th-sm">Building Code
       </th>
+      <th class="th-sm">Region
+      </th>
       <th class="th-sm">Mac Address
       </th>
       <th class="th-sm">Techies
       </th>
       <th class="th-sm">Date Installed
-      </th>
-      <th class="th-sm">Date Turned On
       </th>
       <th class="th-sm">Total Amount
       </th>
@@ -181,8 +181,8 @@ tfoot td {
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT turnedonpap.ClientID,turnedonpap.ClientName,turnedonpap.ChampName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode,upper(turnedonpap.MacAddress) as mac,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
-                        turnedonpap.DateTurnedOn,papdailysales.Region,papinstalled.DateInstalled FROM turnedonpap JOIN papdailysales ON papdailysales.ClientID=turnedonpap.ClientID left join papinstalled ON papinstalled.ClientID=papdailysales.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE turnedonpap.ClientID IS NOT null and turnedonpap.DateTurnedOn >= DATE_SUB(CURDATE(), INTERVAL 21 DAY)";
+                        $query  = "SELECT papinstalled.ClientID,papdailysales.Region,papdailysales.BuildingName,papdailysales.BuildingCode,upper(papinstalled.MacAddress) as mac,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
+                        papdailysales.Region,papinstalled.DateInstalled FROM papdailysales left join papinstalled ON papinstalled.ClientID=papdailysales.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE papinstalled.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 21 DAY)";
                         $result  = mysqli_query($connection, $query);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -191,10 +191,10 @@ tfoot td {
                                 <tr>
                                     <td><?php echo $row['BuildingName']; ?></td>
                                     <td><?php echo $row['BuildingCode']; ?></td>
+                                    <td><?php echo $row['Region']; ?></td>
                                     <td><?php echo $row['mac']; ?></td>
                                     <td><?php echo $row['techies']; ?></td>
                                     <td><?php echo $row['DateInstalled']; ?></td>
-                                    <td><?php echo $row['DateTurnedOn']; ?></td>
                                     <td>300</td>
                                     <td>150</td>
                                 </tr>

@@ -2,6 +2,37 @@
 include("session.php");
 include("../config/config.php");
 
+if(isset($_POST['submit'])){
+$FirstName = $_POST['FName'];
+$LastName = $_POST['LName'];
+$Email = $_POST['Email'];
+$Department = $_POST['Department'];
+$Password = $_POST['password'];
+$Region = $_POST['Region'];
+$Region1 = $_POST['Region1'];
+$Role = $_POST['Role'];
+$user = $_POST['user'];
+
+$hashpass= password_hash($Password, PASSWORD_DEFAULT);
+
+//checking if connection is not created successfully
+if($connection->connect_error){
+    die('connection failed : '.$connection->connect_error);
+}
+else
+{
+    $stmt= $connection->prepare("INSERT INTO Users (FirstName,LastName,Email,Department,Password,Region,Region1,Role,User)
+    values(?,?,?,?,?,?,?,?,?)");
+       //values from the fields
+    $stmt->bind_param("sssssssss",$FirstName,$LastName,$Email,$Department,$hashpass,$Region,$Region1,$Role,$user);
+    $stmt->execute();
+    echo "<script>alert('Successfull.');</script>";
+    echo '<script>window.location.href="new-user.php";</script>';
+    $stmt->close();
+   # $connection->close();
+   
+}
+}
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -11,11 +42,12 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pending Installation</title>
+    <title>Users</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -29,7 +61,7 @@ include("../config/config.php");
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
+    
     <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -49,44 +81,20 @@ include("../config/config.php");
 </head>
 <body style="background-color:#e1e1e1">
     <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="dashboard.php"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                        <a href="#"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
-                    <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
+                    <li class="menu-title">ACTIVITIES</li><!-- /.menu-title -->
                     <li>
-                        <a href="pap-daily-sales.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Signed </a>
-                    </li>
-                    <li>
-                        <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Resitituted </a>
+                        <a href="new-user.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Create New User </a>
                     </li>
                     <li>
-                        <a href="pending-installation.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Pending Installation </a>
-                    </li>
-                    <li>
-                        <a href="installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Installed </a>
-                    </li>
-                    <li>
-                        <a href="turnedon.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
-                    </li>
-                    <li class="menu-title">ACCOUNTS</li><!-- /.menu-title -->
-
-                    <li>
-                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-themify-favicon-alt"></i>Add Teamleader </a>
-                    </li>
-                    <li>
-                        <a href="view-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-eye"></i>View Teamleader </a>
-                    </li>
-                    <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                    <li>
-                        <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
-                    </li>
-                
-                    <li>
-                        <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
+                        <a href="users.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Users </a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -113,79 +121,76 @@ include("../config/config.php");
                             </form>
                         </div>
 
-                        <div class="dropdown for-notification">
-                        </div>
-
-                        <div class="dropdown for-message">
-                      
-                        </div>
-                    </div>
-
+               
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="name float-left"><?php echo $_SESSION[
-                 "FName"
-             ]; ?> <?php echo $_SESSION["LName"]; ?></span>
+                 "superadmin"
+             ]; ?> <?php echo $_SESSION["superadmin"]; ?></span>
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="index.php"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
                 </div>
             </div>
-        </header><!-- /header -->
+        </header>
+        <!-- /#header -->
         <!-- Header-->
 
         <div class="content">
             <div class="animated fadeIn">
-                <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                           <center> <strong class="card-title">Pending Installation</strong></center>
+
+
+            <div class="row">
+                   <div class="col-lg-12">
+              <div class="card"><div class="card-body">
+              <div class="card-header">
+                           <center> <strong class="card-title">Users</strong></center>
                         </div>
-                        <div class="card-body">
-                            <table class="table table-striped" id="example">
-                                <thead>
-                                    <tr>
-                                    <th>Building Name</th>
-                    <th>Building Code</th>
-                    <th>Region</th>
-                    <th>Client Name</th>
-                    <th>Client Contact</th>
-                    <th>Date Signed</th>
-                    <th>Availability</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php
+                        <div class="table-responsive">
+                                    <table class="table table-borderless table-striped " id="example">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                    
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
     
-    $sql="SELECT papdailysales.ClientAvailability,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.DateSigned,papdailysales.Region FROM papdailysales left join papinstalled on papdailysales.ClientID=papinstalled.ClientID left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papinstalled.ClientID is null and papnotinstalled.ClientID is null";
-$result=$connection->query($sql);
-while($row=$result->fetch_array()){
-  ?>
-  <tr>
-    <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['BuildingCode']?></td>
-    <td><?php echo $row['Region']?></td>
-    <td><?php echo $row['ClientName']?></td>
-    <td><?php echo $row['ClientContact']?></td>
-    <td><?php echo $row['DateSigned']?></td>
-     <td><?php echo $row['ClientAvailability']?></td>
-
-</tr>
-<?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
+    $sql="select * from Users order by ID ASC";
+    $result=$connection->query($sql);
+    while($row=$result->fetch_array()){
+      ?>
+      <tr>
+        <td><?php echo $row['FirstName']?></td>
+        <td><?php echo $row['LastName']?></td>
+        <td><?php echo $row['Email']?></td>
+        <td><?php echo $row['Department']?></td>
+       <td>
+       <button class="btn btn-warning"><a href="edit-user.php?userid=<?php echo $row['ID']; ?>">Edit</i></a></button>
+    </td><td>
+        <button class="btn btn-danger"><a href="del-user.php?userid=<?php echo $row['ID']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['FirstName']; ?> <?php  echo $row['LastName']; ?> from Users?')">Delete</a></button>
+        </td>
+    </tr>
+    <?php } ?>
+                                    </tbody>
+                                    </table>
+                                </div>
+              </div></div>
                     </div>
-                </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
 
-</div><!-- .content -->
-
-<div class="clearfix"></div>
+    <div class="clearfix"></div>
 
 </div><!-- /#right-panel -->
 
@@ -197,7 +202,15 @@ while($row=$result->fetch_array()){
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
-
+<script>
+    jQuery(document).ready(function() {
+        jQuery(".standardSelect").chosen({
+            disable_search_threshold: 10,
+            no_results_text: "Oops, nothing matches",
+            width: "100%"
+        });
+    });
+</script>
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
@@ -212,8 +225,7 @@ $('#example').DataTable({
                     'csv'
                 ]
             }
-        ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+        ]
         });
 });
 </script>

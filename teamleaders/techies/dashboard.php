@@ -443,9 +443,11 @@ if (!$connection) {
 
                 <div class="row">
                     <div class="col-lg-12">
-                    <div class="card">
+                    <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Daily Installation Per Team</strong></center>
+                        </div>
                     <div class="card-body">
-                    <table class="table table-striped" id="example">
+                    <table class="table table-striped" id="completed">
                                 <thead>
                                     <tr>
                                     <th>No</th>
@@ -481,6 +483,43 @@ if (!$connection) {
                                 </tbody>
                             </table>
                     </div></div></div></div>
+
+
+                    <div class="row">
+                    <div class="col-lg-12">
+                    <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Pending Tasks Per Team</strong></center>
+                        </div>
+                    <div class="card-body">
+                    <div class="table-responsive">
+                                    <table class="table table-striped" id="pending">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">Team ID</th>
+                                            <th scope="col">Techie 1</th>
+                                            <th scope="col">Techie 2</th>
+                                            <th scope="col">Pending Tasks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+    
+    $sql="SELECT techietask.TeamID, COUNT(techietask.TeamID) as tasks,Token_teams.Techie1,Token_teams.Techie2 FROM techietask left join papinstalled on papinstalled.ClientID=techietask.ClientID
+    left join Token_teams on techietask.TeamID=Token_teams.Team_ID WHERE papinstalled.ClientID is null and techietask.Region='".$_SESSION['Region']."' 
+    GROUP BY techietask.TeamID HAVING COUNT(techietask.TeamID)>1 OR COUNT(techietask.TeamID)=1";
+$result=$connection->query($sql);
+while($row=$result->fetch_array()){
+  ?>
+  <tr>
+    <td><?php echo $row['TeamID']?></td>
+    <td><?php echo $row['Techie1']?></td>
+    <td><?php echo $row['Techie2']?></td>
+   <td><?php echo $row['tasks']?></td>
+</tr>
+<?php } ?>
+                                    </tbody>
+                                    </table>
+                                </div></div></div></div>
             <!-- .animated -->
         </div>
         <!-- /.content -->
@@ -517,7 +556,25 @@ if (!$connection) {
     <!--Local Stuff-->
     <script type="text/javascript">
 $( document ).ready(function() {
-$('#example').DataTable({
+$('#completed').DataTable({
+		 "processing": true,
+		 "dom": 'lBfrtip',
+		 "buttons": [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: [
+                    'excel',
+                    'csv'
+                ]
+            }
+        ]
+        });
+});
+</script>
+<script type="text/javascript">
+$( document ).ready(function() {
+$('#pending').DataTable({
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [

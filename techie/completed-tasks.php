@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Installed | Today</title>
+    <title>Completed | Tasks</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -26,20 +26,23 @@ include("../config/config.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
+    <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet"/>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-<!-- Bootstrap core JavaScript-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Page level plugin JavaScript--<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>-->
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 
 </head>
@@ -187,29 +190,43 @@ include("../config/config.php");
                 <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                            <center><strong class="card-title">Installed Today</strong></center>
+                            <center><strong class="card-title">Completed Tasks</strong></center>
                             </div>
-                            <div class="card-body">
-                                <table class="table" id="example">
+                            <div class="table-responsive">
+        <table border="0" cellspacing="5" cellpadding="5">
+        <tbody><tr>
+            <td>Start date:</td>
+            <td><input type="text" id="min" placeholder="Start Date" style="color:red;" class="form-control" name="min"></td>
+        </tr>
+        <tr>
+            <td>End date:</td>
+            <td><input type="text" id="max" placeholder="End Date"  class="form-control" name="max"></td>
+        </tr>
+    </tbody></table>
+                        </div>
+                            <div class="card-body" id="payment">
+                            
+                                <table class="table table-striped" id="example">
                                     <thead>
                                         <tr>
-                          <th scope="th-sm">Building Name</th>
-                      <th scope="th-sm">Client Name</th>
-                      <th scope="th-sm">Mac Address</th>
+                                        <th scope="th-sm">Techies</th>
+                                        <th scope="th-sm">Date</th>
+                                        <th scope="th-sm">Amount[1 Techie]</th>
                                       </tr>
                                   </thead>
                                   <tbody>
                                   <?php
                                   $query = 
-                                      "SELECT papinstalled.ClientID,papdailysales.ClientName,papdailysales.BuildingName,papdailysales.BuildingCode,papinstalled.Floor,papinstalled.MacAddress from papinstalled left join papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE DateInstalled=CURDATE() and Team_ID='".$_SESSION['TeamID']."'";
+                                      "SELECT papdailysales.ClientID,papinstalled.DateInstalled,papinstalled.Team_ID,CONCAT(token_teams.Techie1,'/',token_teams.Techie2) as techies from papdailysales LEFT JOIN papinstalled on papinstalled.ClientID=papdailysales.ClientID LEFT JOIN token_teams ON 
+                                      token_teams.Team_ID=papinstalled.Team_ID WHERE papinstalled.Team_ID is not null and papinstalled.DateInstalled>=DATE_SUB(CURDATE(), INTERVAL 21 DAY)";
                                  $result  = mysqli_query($connection, $query);
                                   while ($row = mysqli_fetch_assoc($result)) {
                             
                                     ?>
                                             <tr>
-                                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="getinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
-                                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="getinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
-                                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="getinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['MacAddress']; ?></a></td>
+                                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="gettaskinfo.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['techies']; ?></a></td>
+                                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="gettaskinfo.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['DateInstalled']; ?></a></td>
+                                                <td>150</td>
                                                
                                             </tr>
                                     <?php
@@ -260,11 +277,64 @@ include("../config/config.php");
 <script src="../assets/js/main.js"></script>
 
 <script>
- $(document).ready(function () {
-$('#example').DataTable();
-$('.dataTables_length').addClass('bs-select');
-});
-</script>
+      
+      $.fn.dataTable.Api.register( 'column().data().sum()', function () {
+    return this.reduce( function (a, b) {
+        var x = parseFloat( a ) || 0;
+        var y = parseFloat( b ) || 0;
+        return x + y;
+    } );
+} );
+ 
+var minDate, maxDate;
+ 
+ // Custom filtering function which will search data in column four between two values
+ $.fn.dataTable.ext.search.push(
+     function( settings, data, dataIndex ) {
+         var min = minDate.val();
+         var max = maxDate.val();
+         var date = new Date( data[1] );
+  
+         if (
+             ( min === null && max === null ) ||
+             ( min === null && date <= max ) ||
+             ( min <= date   && max === null ) ||
+             ( min <= date   && date <= max )
+         ) {
+             return true;
+         }
+         return false;
+     }
+ );
+  
+/* Init the table and fire off a call to get the hidden nodes. */
+$(document).ready(function() {
+    // Create date inputs
+    minDate = new DateTime($('#min'), {
+         format: 'MMMM Do YYYY'
+     });
+     maxDate = new DateTime($('#max'), {
+         format: 'MMMM Do YYYY'
+     });
+
+     // Refilter the table
+     $('#min, #max').on('change', function () {
+         table.draw();
+     });
+    var table = $('#example').DataTable(
+        {
+    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+        }
+    );
+    
+ 
+    $('<button class="btn btn-success" style="margin-bottom:10px; margin-left:70px;">Calculate</button>')
+        .prependTo( '#payment' )
+        .on( 'click', function () {
+            alert( 'Total Amount: '+ 'Ksh ' + table.column( 2, {page:'current'} ).data().sum() );
+        } );
+} );
+  </script>
 <script>
 $(document).ready(function(){
   $(document).on('click','.openPopup',function(){
@@ -274,9 +344,6 @@ $(document).ready(function(){
         });
     }); 
 });
-$('#example').DataTable( {
-    fixedColumn: true
-} );
 </script>
 </body>
 </html>

@@ -32,7 +32,7 @@ else
   $result=mysqli_query($connection,$sql);
   if ($result) {
     echo '<script>alert("Update Successfull!")</script>';
-      echo '<script>window.location.href="new-user.php";</script>';
+      echo '<script>window.location.href="users.php";</script>';
   } else {
     echo '<script>alert("Not submitted try again!")</script>';
       echo '<script>window.location.href="edit-user.php";</script>';
@@ -87,7 +87,7 @@ else
 
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
+      <!-- Left Panel -->
 <!-- Left Panel -->
 <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -99,6 +99,9 @@ else
                     <li class="menu-title">ACTIVITIES</li><!-- /.menu-title -->
                     <li>
                         <a href="new-user.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Create New User </a>
+                    </li>
+                    <li>
+                        <a href="users.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Users </a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -233,7 +236,7 @@ else
                                 </div>
                             </div><!--/.col-->
 
-                   <div class="col-lg-9">
+                   <!--<div class="col-lg-9">
               <div class="card"><div class="card-body">
               <div class="card-header">
                            <center> <strong class="card-title">Users</strong></center>
@@ -267,7 +270,7 @@ else
                                     </tbody>
                                     </table>
                                 </div>
-              </div></div>
+              </div></div>-->
                     </div>
         </div><!-- .animated -->
     </div><!-- .content -->

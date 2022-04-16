@@ -10,14 +10,14 @@ $row=mysqli_fetch_assoc($result);
 $fname=$row['FirstName'];
 $lname=$row['LastName'];
 $email=$row['Email'];
-$dpt=$row['Department'];
+$user=$row['User'];
 $reg=$row['Region'];
 
 if(isset($_POST['submit'])){
 $FirstName = $_POST['Fname'];
 $LastName = $_POST['Lname'];
 $Email = $_POST['email'];
-$Department = $_POST['Department'];
+$User = $_POST['User'];
 $Region = $_POST['Region'];
 
 //checking if connection is not created successfully
@@ -26,7 +26,7 @@ if($connection->connect_error){
 }
 else
 {
-  $sql="update users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',Department='$Department',Region='$Region' where ID=$id";
+  $sql="update users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',User='$User',Region='$Region' where ID=$id";
   
   $result=mysqli_query($connection,$sql);
   if ($result) {
@@ -213,13 +213,20 @@ else
                                                 <input id="cc-pament" name="email"  type="email"  value="<?php echo $email; ?>" class="form-control" aria-required="true" aria-invalid="false" placeholder="Email">
                                             </div>
                                             <div class="form-group has-success">
-                                            <select data-placeholder="Choose  Department..." class="standardSelect form-control" name="Department" tabindex="1">
-                                            <option value="<?php echo $dpt?>"><?php echo $dpt?></option>
-                                            <option value="SalesTL">SalesTL</option>
-                                            <option value="TechieTL">TechieTL</option>
+                                            <label for="cc-payment" class="control-label mb-1">User</label>
+                                            <select data-placeholder="Choose  User..." class="standardSelect form-control" name="User" tabindex="1">
+                                            <option value="<?php echo $user?>">User <?php echo $user?></option>
+                                                <option value="1">Executive(user 1)</option>
+                                                  <option value="2">Nats(user 2)</option>
+                                               <option value="3">Maton(user 3)</option>
+                                              <option value="4">SalesTL(user 4)</option>
+                                              <option value="5">Techie TL(user 5)</option>
+                                               <option value="6">Champ(user 6)</option>
+                                              <option value="7">Overall Tl(user 7)</option>
                                             </select>
                                             </div>
                                             <div class="form-group has-success">
+                                            <label for="cc-payment" class="control-label mb-1">Region</label>
                                             <select class="standardSelect form-control" name="Region" tabindex="1">
                                             <option value="<?php echo $reg?>" ><?php echo $reg?></option>
                                            <option value="G44">G44</option>
@@ -228,9 +235,7 @@ else
                                            <option value="G45N">G45N</option>
                                            <option value="R&M">R&M</option>
                                            <option value="LSM">LSM</option>
-                                           <option value="JCR">JCR</option>
                                            <option value="KWT">KWT</option>
-                                           <option value="admin">admin</option>
                                               </select>
                                             </div>
                                             <div>

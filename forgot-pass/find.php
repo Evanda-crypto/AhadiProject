@@ -9,7 +9,7 @@ if (isset($_POST["submit"])) {
         echo "<script>alert('There is no connection at this time.Please try again later.');</script>";
         echo '<script>window.location.href="index.php";</script>';
     } else {
-        $stmt = $connection->prepare("select * from employees where EMAIL= ?");
+        $stmt = $connection->prepare("select * from Users where email= ?");
         $stmt->bind_param("s", $EMAIL);
         $stmt->execute();
         $stmt_result = $stmt->get_result();

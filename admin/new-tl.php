@@ -8,31 +8,35 @@ $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
 $EmpID=$row['ID'];
 $Fname=$row['FirstName'];
-$Lname=$row['LastNAme'];
+$Lname=$row['LastName'];
 $email=$row['Email'];
-$dpt=$row['Department'];
 
 if(isset($_POST['submit'])){
-  $FIRST_NAME = $_POST['Fname'];
-  $LAST_TNAME = $_POST['Lname'];
-  $EMAIL = $_POST['email'];
-  $DEPARTMENT = $_POST['Department'];
-  $REGION = $_POST['Region'];
-  $PASSWORD = $_POST['password'];
-  
-  $hashpass= password_hash($PASSWORD,PASSWORD_DEFAULT);
-
-  $stmt= $connection->prepare("insert into teamleaders (FIRST_NAME,LAST_NAME,EMAIl,DEPARTMENT,REGION,PASSWORD)
-values(?,?,?,?,?,?)");
-//values from the fields
-$stmt->bind_param("ssssss",$FIRST_NAME,$LAST_TNAME,$EMAIL,$DEPARTMENT,$REGION,$hashpass);
-$stmt->execute();
-echo "<script>alert('Successfull');</script>";
-echo '<script>window.location.href="add-tl.php";</script>';
-$stmt->close();
-
-#$connection->close();
-}
+    $FirstName = $_POST['Fname'];
+    $LastName = $_POST['Lname'];
+    $Email = $_POST['email'];
+    $User = $_POST['user'];
+    $Region = $_POST['Region'];
+    
+    //checking if connection is not created successfully
+    if($connection->connect_error){
+        die('connection failed : '.$connection->connect_error);
+    }
+    else
+    {
+      $sql="update users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',User='$User',Region='$Region' where ID=$id";
+      
+      $result=mysqli_query($connection,$sql);
+      if ($result) {
+        echo '<script>alert("Update Successfull!")</script>';
+          echo '<script>window.location.href="view-tl.php";</script>';
+      } else {
+        echo '<script>alert("Not submitted try again!")</script>';
+          echo '<script>window.location.href="edit-tl.php";</script>';
+      }
+       
+    }
+    }
 else{
     
 }
@@ -209,15 +213,24 @@ else{
                                                 <label for="cc-payment" class="control-label mb-1">Email</label>
                                                 <input id="cc-pament" name="email"  type="email"  value="<?php echo $email; ?>" class="form-control" aria-required="true" aria-invalid="false" placeholder="Email">
                                             </div>
-                                            <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="Department" tabindex="1">
-                                            <option value="<?php echo $dpt?>"><?php echo $dpt?></option>
-                                            <option value="SalesTL">SalesTL</option>
-                                            <option value="TechieTL">TechieTL</option>
-                                            </select>
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">User</label>
+                                                <div class="form-group has-success">
+                                            <select data-placeholder="Choose a user..." class="standardSelect form-control" name="user" tabindex="1" required>
+                                            <option disabled selected> Select User</option>
+                                                <option value="1">Executive(user 1)</option>
+                                                  <option value="2">Nats(user 2)</option>
+                                               <option value="3">Maton(user 3)</option>
+                                              <option value="4">SalesTL(user 4)</option>
+                                              <option value="5">Techie TL(user 5)</option>
+                                               <option value="6">Champs(user 6)</option>
+                                              <option value="7">Overall TL(user 7)</option>
+                                              </select>
+                                            </div>
                                             </div>
                                             <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="Region" tabindex="1">
+                                            <label for="cc-number" class="control-label mb-1">Region</label>
+                                            <select data-placeholder="Choose a Region..." class="standardSelect form-control" name="Region" tabindex="1">
                                             <option disabled selected>Select Region</option>
                                            <option value="G44">G44</option>
                                            <option value="ZMM">ZMM</option>
@@ -225,19 +238,9 @@ else{
                                            <option value="G45N">G45N</option>
                                            <option value="R&M">R&M</option>
                                            <option value="LSM">LSM</option>
-                                           <option value="JCR">JCR</option>
                                            <option value="KWT">KWT</option>
-                                           <option value="admin">admin</option>
                                               </select>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Password</label>
-                                                <input id="cc-number" name="password" type="password" class="form-control " value="123456" data-val="true"
-                                                    data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number"
-                                                    autocomplete="cc-number">
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                            </div>
-                                            
                                             <div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
                                                     <span id="payment-button-amount">Submit</span>

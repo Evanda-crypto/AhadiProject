@@ -182,8 +182,6 @@ include("../config/config.php");
                                     <td><?php echo $row["Region"]; ?></td>
                                     <td>
                                     <button class="btn btn-warning" ><a href="edit-tl.php?id=<?php echo $row['ID']; ?> "> <i class="zmdi zmdi-refresh-alt"></i>Edit</a></button>
-                                    <button class="btn btn-danger" ><a href="delete-tl.php?id=<?php echo $row['ID']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['FirstName']; ?> <?php  echo $row['LastName']; ?> from teamleaders?')">Delete</a></button>
-
                                     </td>
                         <?php
                         }
