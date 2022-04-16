@@ -18,14 +18,14 @@ if (isset($_POST["submit"])) {
         echo '<script>window.location.href="login.php";</script>';
     }
     else{
-        $stmt = $connection->prepare("SELECT * from employees where ID= ?");
+        $stmt = $connection->prepare("SELECT * from Users where ID= ?");
         $stmt->bind_param("s", $id);
         $stmt->execute();
         $stmt_result = $stmt->get_result();
         if ($stmt_result->num_rows > 0) {
             $data = $stmt_result->fetch_assoc();
-            if (password_verify($Password, $data["PASSWORD"])) {
-                $sql="update employees set FIRST_NAME='$FirstName',LAST_NAME='$LastName',EMAIL='$Email',PASSWORD='$hashpass' where ID=$id";
+            if (password_verify($Password, $data["Password"])) {
+                $sql="update employees set FirstName='$FirstName',LastName='$LastName',Email='$Email',Password='$hashpass' where ID=$id";
                 $result=mysqli_query($connection,$sql);
                 if ($result) {
                   echo '<script>alert("Password reset Succesfull")</script>';

@@ -15,14 +15,14 @@ if (isset($_POST["submit"])) {
         echo '<script>window.location.href="login.php";</script>';
     }
     else{
-        $stmt = $connection->prepare("SELECT * from teams where ID= ?");
+        $stmt = $connection->prepare("SELECT * from Token_teams where ID= ?");
         $stmt->bind_param("s", $id);
         $stmt->execute();
         $stmt_result = $stmt->get_result();
         if ($stmt_result->num_rows > 0) {
             $data = $stmt_result->fetch_assoc();
             if (password_verify($Password, $data["Password"])) {
-                $sql="update teams set Password='$hashpass' where ID=$id";
+                $sql="update Token_teams set Password='$hashpass' where ID=$id";
                 $result=mysqli_query($connection,$sql);
                 if ($result) {
                   echo '<script>alert("Password reset Succesfull")</script>';
