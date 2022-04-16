@@ -3,7 +3,7 @@ include("session.php");
 include("../config/config.php");
 
 $id = $_GET["id"];
-$sql=" SELECT * from users where ID=$id";
+$sql=" SELECT * from Users where ID=$id";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
 $EmpID=$row['ID'];
@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
     }
     else
     {
-      $sql="update users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',User='$User',Region='$Region' where ID=$id";
+      $sql="update Users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',User='$User',Region='$Region' where ID=$id";
       
       $result=mysqli_query($connection,$sql);
       if ($result) {

@@ -164,7 +164,7 @@ include("../config/config.php");
                                 </thead>
                                 <tbody>
                                 <?php
-                    $query = "SELECT * from users where User=4 OR user=5";
+                    $query = "SELECT * from Users where User=4 OR user=5";
                     $result = mysqli_query($connection, $query);
 
                     $num_rows = mysqli_num_rows($result);

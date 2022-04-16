@@ -209,6 +209,7 @@ include("../config/config.php");
                                 <table class="table table-striped" id="example">
                                     <thead>
                                         <tr>
+                                        <th scope="th-sm">TeamID</th>
                                         <th scope="th-sm">Techies</th>
                                         <th scope="th-sm">Date</th>
                                         <th scope="th-sm">Amount[1 Techie]</th>
@@ -217,13 +218,14 @@ include("../config/config.php");
                                   <tbody>
                                   <?php
                                   $query = 
-                                      "SELECT papdailysales.ClientID,papinstalled.DateInstalled,papinstalled.Team_ID,CONCAT(token_teams.Techie1,'/',token_teams.Techie2) as techies from papdailysales LEFT JOIN papinstalled on papinstalled.ClientID=papdailysales.ClientID LEFT JOIN token_teams ON 
-                                      token_teams.Team_ID=papinstalled.Team_ID WHERE papinstalled.Team_ID is not null and papinstalled.DateInstalled>=DATE_SUB(CURDATE(), INTERVAL 21 DAY)";
+                                      "SELECT papinstalled.ClientID,papinstalled.Team_ID,papinstalled.DateInstalled,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
+                                      papdailysales.Region,papinstalled.DateInstalled FROM papdailysales left join papinstalled ON papinstalled.ClientID=papdailysales.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE papinstalled.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 21 DAY)";
                                  $result  = mysqli_query($connection, $query);
                                   while ($row = mysqli_fetch_assoc($result)) {
                             
                                     ?>
                                             <tr>
+                                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="gettaskinfo.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['Team_ID']; ?></a></td>
                                                 <td><a data-toggle="modal" data-target="#mediumModal" data-href="gettaskinfo.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['techies']; ?></a></td>
                                                 <td><a data-toggle="modal" data-target="#mediumModal" data-href="gettaskinfo.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['DateInstalled']; ?></a></td>
                                                 <td>150</td>
@@ -293,7 +295,7 @@ var minDate, maxDate;
      function( settings, data, dataIndex ) {
          var min = minDate.val();
          var max = maxDate.val();
-         var date = new Date( data[1] );
+         var date = new Date( data[2] );
   
          if (
              ( min === null && max === null ) ||
@@ -331,7 +333,7 @@ $(document).ready(function() {
     $('<button class="btn btn-success" style="margin-bottom:10px; margin-left:70px;">Calculate</button>')
         .prependTo( '#payment' )
         .on( 'click', function () {
-            alert( 'Total Amount: '+ 'Ksh ' + table.column( 2, {page:'current'} ).data().sum() );
+            alert( 'Total Amount: '+ 'Ksh ' + table.column( 3, {page:'current'} ).data().sum() );
         } );
 } );
   </script>

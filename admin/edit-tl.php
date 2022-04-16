@@ -4,7 +4,7 @@ include("../config/config.php");
 
 $id = $_GET["id"];
 
-$sql="SELECT * from users where ID=$id";
+$sql="SELECT * from Users where ID=$id";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
 $fname=$row['FirstName'];
@@ -26,7 +26,7 @@ if($connection->connect_error){
 }
 else
 {
-  $sql="update users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',User='$User',Region='$Region' where ID=$id";
+  $sql="update Users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',User='$User',Region='$Region' where ID=$id";
   
   $result=mysqli_query($connection,$sql);
   if ($result) {
@@ -268,7 +268,7 @@ else
                                         </thead>
                                         <tbody>
                                         <?php
-                        $query  = "SELECT * FROM users where User=4 OR User=5";
+                        $query  = "SELECT * FROM Users where User=4 OR User=5";
                         $result  = mysqli_query($connection, $query);
 
                         $num_rows  = mysqli_num_rows($result);

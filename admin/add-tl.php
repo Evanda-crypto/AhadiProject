@@ -162,7 +162,7 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT * FROM users where User<>4 OR User<>5 ";
+    $sql="SELECT * FROM Users where User<>4 OR User<>5 ";
     $result=$connection->query($sql);
     while($row=$result->fetch_array()){
       ?>

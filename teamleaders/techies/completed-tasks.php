@@ -182,14 +182,12 @@ tfoot td {
       </th>
       <th class="th-sm">Date Installed
       </th>
-      <th class="th-sm">Date Turned On
-      </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT turnedonpap.ClientID,turnedonpap.ClientName,turnedonpap.ChampName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode,upper(turnedonpap.MacAddress) as mac,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
-                        turnedonpap.DateTurnedOn,papdailysales.Region,papinstalled.DateInstalled FROM turnedonpap JOIN papdailysales ON papdailysales.ClientID=turnedonpap.ClientID left join papinstalled ON papinstalled.ClientID=papdailysales.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE turnedonpap.ClientID IS NOT null and papdailysales.Region='".$_SESSION['Region']."'";
+                        $query  = "SELECT papinstalled.ClientID,papdailysales.Region,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode,upper(papinstalled.MacAddress) as mac,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
+                        papdailysales.Region,papinstalled.DateInstalled FROM papdailysales left join papinstalled ON papinstalled.ClientID=papdailysales.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE papinstalled.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 21 DAY) and papdailysales.Region='".$_SESSION['Region']."'";
                         $result  = mysqli_query($connection, $query);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -203,7 +201,6 @@ tfoot td {
                                     <td><?php echo $row['mac']; ?></td>
                                     <td><?php echo $row['techies']; ?></td>
                                     <td><?php echo $row['DateInstalled']; ?></td>
-                                    <td><?php echo $row['DateTurnedOn']; ?></td>
                                 </tr>
                         <?php
 
