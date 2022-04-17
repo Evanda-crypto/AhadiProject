@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
     $Region = $_POST['reg'];
     $BuildingName = $_POST['bname'];
     $BuildingCode = $_POST['bcode'];
-    $Date = date('Y-m-d');
+    $Date = date('Y-m-a');
 
     if($connection->connect_error){
         die('connection failed : '.$connection->connect_error);

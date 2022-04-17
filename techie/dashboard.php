@@ -257,7 +257,7 @@ include("../config/config.php");
                         </div></a>
                     </div>
 
-                    <div class="col-lg-3 col-md-6"><a href="completed-taks.php" >
+                    <div class="col-lg-3 col-md-6"><a href="completed-tasks.php" >
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
