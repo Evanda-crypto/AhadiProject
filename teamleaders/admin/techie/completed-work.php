@@ -275,14 +275,13 @@ $(document).ready(function() {
     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
         }
     );
-    
  
-    $('<button class="btn btn-success" style="margin-bottom:10px; margin-left:70px;">Calculate</button>')
+    $('<button class="btn btn-success" style="margin-bottom:10px; margin-left:70px;">Show Total</button>')
         .prependTo( '#demo' )
         .on( 'click', function () {
-            alert( 'Total Amount: '+ 'Ksh ' + table.column( 7, {page:'current'} ).data().sum() );
+            alert( 'Total Amount[All Techies]: '+ '   Ksh ' + table.column( 6, {page:'current'} ).data().sum() + '\n' + '\n' +'Total Amount[Divided by 2]: '+ 'Ksh ' + table.column( 7, {page:'current'} ).data().sum() );
         } );
 } );
   </script>
 </body>
-</html>
+</html> 
