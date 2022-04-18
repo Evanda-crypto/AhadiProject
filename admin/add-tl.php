@@ -145,7 +145,7 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Teamleaders</strong></center>
+                           <center> <strong class="card-title">Users</strong></center>
                         </div>
                         <div class="card-body">
                             <table class="table table-striped" id="example">
@@ -162,7 +162,7 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT * FROM Users where User<>4 OR User<>5 ";
+    $sql="SELECT * FROM Users where User=6 OR User=8";
     $result=$connection->query($sql);
     while($row=$result->fetch_array()){
       ?>

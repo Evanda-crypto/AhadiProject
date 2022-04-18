@@ -271,7 +271,7 @@ else{
                                         </thead>
                                         <tbody>
                                         <?php
-                        $query  = "SELECT * FROM teamleaders";
+                        $query  = "SELECT * FROM Users where User=5 OR User=4";
                         $result  = mysqli_query($connection, $query);
 
                         $num_rows  = mysqli_num_rows($result);
@@ -283,11 +283,11 @@ else{
                         ?>
                                 <tr>
                                     <td><?php echo $num; ?></td>
-                                    <td><?php echo $row['FIRST_NAME']; ?></td>
-                                    <td><?php echo $row['LAST_NAME']; ?></td>
-                                    <td><?php echo $row['EMAIL']; ?></td>
-                                    <td><?php echo $row['DEPARTMENT']; ?></td>
-                                    <td><?php echo $row['REGION']; ?></td>
+                                    <td><?php echo $row['FirstName']; ?></td>
+                                    <td><?php echo $row['LastName']; ?></td>
+                                    <td><?php echo $row['Email']; ?></td>
+                                    <td><?php echo $row['Department']; ?></td>
+                                    <td><?php echo $row['Region']; ?></td>
 
 
                                 </tr>
