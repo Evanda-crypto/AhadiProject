@@ -361,7 +361,26 @@ if (!$connection) {
 
                     <div class="row">
                     <div class="col-lg-12">
-                    <div class="card">
+                    <div class="card"><div class="card-header">
+                            <center><strong class="card-title">Best Champ: <?php
+         $query = "SELECT ChampName,Count(*) as bestchamp from papdailysales where DateSigned =CURDATE() group by ChampName order by bestchamp DESC limit 1";
+         $result = mysqli_query($connection, $query);
+         while ($row = mysqli_fetch_assoc($result)) {
+             echo $row["ChampName"];
+         }
+         ?>:<?php
+         $sql =
+             "SELECT (SELECT MAX(mycount)
+             FROM (SELECT ChampName,COUNT(DateSigned) AS mycount,DateSigned 
+             FROM papdailysales where DateSigned=CURDATE()
+             GROUP BY ChampName,DateSigned) as maxm) as sales";
+         $result = mysqli_query($connection, $sql);
+         $chart_data = "";
+         while ($signed = mysqli_fetch_assoc($result)) {
+             echo $signed["sales"];
+         }
+     ?></strong></center>
+                            </div>
                     <div class="card-body">
                     <table class="table table-striped" id="example">
                                 <thead>
