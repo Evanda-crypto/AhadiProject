@@ -88,6 +88,9 @@ if (isset($_POST["submit"])) {
                         <a href="pending-installation.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Pending Installation </a>
                     </li>
                     <li>
+                        <a href="assigned-tasks.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Assigned </a>
+                    </li>
+                    <li>
                         <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Resitituted </a>
                     </li>
 

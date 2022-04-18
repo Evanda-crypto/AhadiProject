@@ -11,7 +11,7 @@ include("../../../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Installed</title>
+    <title>Assigned Tasks</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,8 +48,8 @@ include("../../../config/config.php");
 
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+     <!-- Left Panel -->
+     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -82,7 +82,7 @@ include("../../../config/config.php");
                         <a href="completed-work.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-money"></i>Work To Pay </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                   <!-- <li>
+                  <!--  <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
                     </li>-->
                     <li>
@@ -144,37 +144,49 @@ include("../../../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Installed</strong></center>
+                           <center> <strong class="card-title">Assigned Tasks[Not Installed]</strong></center>
                         </div>
                         <div class="card-body">
                         <table class="table table-striped" id="example">
-                                <thead>
-                                    <tr>
-                    <th>Client Name</th>
-                   <th>Contact</th>
-                  <th>Building Name</th>
-                    <th>Techies</th>
-                    <th>Mac Address</th>
-                    <th>Date Installed</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-    
-    $sql="SELECT papdailysales.ClientName,papdailysales.BuildingName,papdailysales.ClientContact,papinstalled.ClientID,Token_teams.Team_ID,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID 
-    FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID left join papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE papinstalled.ClientID is NOT null and turnedonpap.ClientID is null ORDER BY papinstalled.DateInstalled ASC";
-$result=$connection->query($sql);
-while($row=$result->fetch_array()){
-  ?>
-  <tr>
-    <td><?php echo $row['ClientName']?></td>
-    <td><?php echo $row['ClientContact']?></td>
-   <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['techies']?></td>
-    <td><?php echo $row['Mac']?></td>
-    <td><?php echo $row['DateInstalled']?></td>
-</tr>
-<?php } ?>
+                                    <thead>
+                                        <tr>
+    <th class="th-sm">Building Name
+      </th>
+      <th class="th-sm">Building Code
+      </th>
+      <th class="th-sm">Region
+      </th>
+      <th class="th-sm">Client Name
+      </th>
+      <th class="th-sm">Contact
+      </th>
+      <th class="th-sm">Availability
+      </th>
+      <th class="th-sm">Techies
+      </th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                  <?php
+                        $query  = "SELECT papdailysales.Region,techietask.ClientName,techietask.ClientID,techietask.ClientContact,techietask.ClientAvailability,papdailysales.BuildingName,papdailysales.Region,techietask.Date,Token_teams.Team_ID,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
+                        papdailysales.BuildingCode,papdailysales.Floor,papdailysales.Apt from papdailysales LEFT JOIN 
+                        techietask on techietask.ClientID=papdailysales.ClientID LEFT JOIN Token_teams ON Token_teams.Team_ID=techietask.TeamID  LEFT JOIN papinstalled ON papinstalled.ClientID=papdailysales.ClientID WHERE techietask.ClientID is not null AND papinstalled.ClientID is null";
+                        $result  = mysqli_query($connection, $query);
+                            while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
+                                <tr>
+                                    <td><a href="javascript:void(0);" data-href="getnotinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
+                                    <td><a href="javascript:void(0);" data-href="getnotinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingCode']; ?></a></td>
+                                    <td><a href="javascript:void(0);" data-href="getnotinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['Region']; ?></a></td>
+                                    <td><a href="javascript:void(0);" data-href="getnotinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
+                                    <td><a href="javascript:void(0);" data-href="getnotinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
+                                    <td><a href="javascript:void(0);" data-href="getnotinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientAvailability']; ?></a></td>
+                                    <td><a href="javascript:void(0);" data-href="getnotinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['techies']; ?></a></td>
+                                </tr>
+                        <?php
+
+                            }
+                        ?>
                                 </tbody>
                             </table>
                         </div>
@@ -199,6 +211,7 @@ while($row=$result->fetch_array()){
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
+    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
