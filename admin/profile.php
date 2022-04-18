@@ -25,7 +25,7 @@ if (isset($_POST["submit"])) {
         if ($stmt_result->num_rows > 0) {
             $data = $stmt_result->fetch_assoc();
             if (password_verify($Password, $data["Password"])) {
-                $sql="update employees set FirstName='$FirstName',LastName='$LastName',Email='$Email',Password='$hashpass' where ID=$id";
+                $sql="update Users set FirstName='$FirstName',LastName='$LastName',Email='$Email',Password='$hashpass' where ID=$id";
                 $result=mysqli_query($connection,$sql);
                 if ($result) {
                   echo '<script>alert("Password reset Succesfull")</script>';
