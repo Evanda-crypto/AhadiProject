@@ -368,7 +368,7 @@ if (!$connection) {
          while ($row = mysqli_fetch_assoc($result)) {
              echo $row["ChampName"];
          }
-         ?>:<?php
+         ?>: <?php
          $sql =
              "SELECT (SELECT MAX(mycount)
              FROM (SELECT ChampName,COUNT(DateSigned) AS mycount,DateSigned 
@@ -737,7 +737,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
                         mysqli_error();
                 } else {
                     $sql =
-                        "SELECT COUNT(ClientID) restituted FROM papnotinstalled  WHERE Region='" .
+                        "SELECT COUNT(ClientID) restituted FROM papnotinstalled  WHERE Reason<>'Already Installed' and Region='" .
                         $_SESSION["Region"] .
                         "'";
                     $result = mysqli_query($connection, $sql);
