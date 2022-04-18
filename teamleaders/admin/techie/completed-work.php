@@ -275,7 +275,7 @@ $(document).ready(function() {
      });
     var table = $('#example').DataTable(
         {
-    "lengthMenu": [[10, 25, 50, -1], ["All",10, 25, 50]]
+    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
         }
     );
  
