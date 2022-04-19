@@ -153,9 +153,11 @@ include("../config/config.php");
                             </table>
                         </div>
                     </div>
-                    <!-- Modal -->
+                    
+                </div>
+<!-- Modal -->
 
-                    <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -173,8 +175,6 @@ include("../config/config.php");
                     </div>
                 </div>
             </div><!--end of modal--><!--End of modal-->
-                </div>
-
 </div><!-- .content -->
 <div class="clearfix"></div>
 
