@@ -28,6 +28,19 @@ if (isset($_POST["submit"])) {
                     $_SESSION["status"] = "Wrong Password";
                     header("Location: index.php");
                 }
+            }
+            elseif ($data["User"] == 0) {
+                if (password_verify($Password, $data["Password"])) {
+                    $_SESSION["start"] = time();
+                    $_SESSION["FName"] = $data["FirstName"];
+                    $_SESSION["LName"] = $data["LastName"];
+                    $_SESSION["Admin"] = $EMAIL;
+                    $_SESSION["ID"] = $data["ID"];
+                    header("Location: super-admin/new-user.php ");
+                } else {
+                    $_SESSION["status"] = "Wrong Password";
+                    header("Location: index.php");
+                }
             } elseif ($data["User"] == 4) {
                 if (password_verify($Password, $data["Password"])) {
                     $_SESSION["start"] = time();

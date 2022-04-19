@@ -14,8 +14,6 @@ if($connection){
     if($stmt_result->num_rows>0){
         $data= $stmt_result->fetch_assoc();
         if($data['Password']==$Password){
-
-           $_SESSION['superadmin']=$Username;
            header("Location: new-user.php");
         }
         else{
