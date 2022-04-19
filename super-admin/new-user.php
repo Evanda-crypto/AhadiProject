@@ -232,6 +232,7 @@ else
                                                 <div class="form-group has-success">
                                             <select data-placeholder="Choose a user..." class="standardSelect form-control" name="user" tabindex="1" required>
                                             <option disabled selected> Select User</option>
+                                            <option value="0">AdminMain(user 0)</option>
                                                 <option value="1">Executive(user 1)</option>
                                                   <option value="2">Nats(user 2)</option>
                                                <option value="3">Maton(user 3)</option>
