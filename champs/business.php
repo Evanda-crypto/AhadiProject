@@ -137,7 +137,7 @@ include("session.php");
                                             <h3 class="text-center">Business Report</h3>
                                         </div>
                                         <hr>
-                                        <form  method="post" enctype="multipart/form-data" action="bizzdetails.php">
+                                        <form  method="post" action="bizzdetails.php">
                                         <?php
             if(isset($_SESSION['status'])){
                 ?>
@@ -322,7 +322,7 @@ include("session.php");
                                                 <label for="cc-number" class="control-label mb-1">Category<span style="color: #FF0000" >*</span></label>
                                                 <div class="form-group has-success">
                                             
-                                                <select data-placeholder="Choose a Category..." class="standardSelect" tabindex="1" name="bizcat" required>
+                                                <select data-placeholder="Choose a Category..." class="standardSelect form-control" tabindex="1" name="bizcat" required>
                                                 <optgroup label="F-Food">
                             <option  value="F-Food (Grocery (FG))">Grocery (FG)</option>  
                               <option value="F-Food (Butchery (FU))">Butchery (FU)</option>
