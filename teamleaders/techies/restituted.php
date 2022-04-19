@@ -161,7 +161,7 @@ include("../../config/config.php");
           echo $row['rejected'];
     }
     ?> Rejected Meter(s)</p>
-                                <a class="dropdown-item media" href="restituted.php">
+                                <a class="dropdown-item media" href="rejected-meters.php">
                                     <i class="fa fa-check"></i>
                                     <p>Check Out.</p>
                                 </a>

@@ -194,8 +194,10 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT COUNT(papdailysales.ClientID) as notinstalled  FROM papdailysales LEFT JOIN papinstalled on papdailysales.ClientID=papinstalled.ClientID LEFT JOIN reminders on reminders.ClientID=papdailysales.ClientID LEFT JOIN techietask on techietask.ClientID=papdailysales.ClientID  WHERE 
-                      papinstalled.ClientID is null and techietask.ClientID is null and reminders.ClientID is null and papdailysales.ChampName='" .
+                      "SELECT COUNT(papdailysales.ClientID) as notinstalled  FROM papdailysales LEFT JOIN papinstalled on papdailysales.ClientID=papinstalled.ClientID LEFT JOIN 
+                      reminders on reminders.ClientID=papdailysales.ClientID LEFT JOIN techietask on techietask.ClientID=papdailysales.ClientID left join 
+                      papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE 
+                     papnotinstalled.ClientID is null and papinstalled.ClientID is null and techietask.ClientID is null and reminders.ClientID is null and papdailysales.ChampName='" .
                       $_SESSION["FName"] .
                       " " .
                       $_SESSION["LName"] .
@@ -282,7 +284,7 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT count(*) as allpap from papdailysales where ChampName='" .
+                      "SELECT count(*) as allpap from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papnotinstalled.ClientID is null and papdailysales.ChampName='" .
                       $_SESSION["FName"] .
                       " " .
                       $_SESSION["LName"] .
@@ -1588,21 +1590,6 @@ while ($signed = mysqli_fetch_assoc($result)) {
     while ($notinstalled = mysqli_fetch_assoc($result)) {
         echo $notinstalled["assigned"];
     }
-} ?>,  <?php if (!$connection) {
-    echo "Problem in database connection! Contact administrator!" .
-        mysqli_error();
-} else {
-    $sql =
-        "SELECT COUNT(ClientID) torestore FROM papnotinstalled  WHERE ChampName='" .
-        $_SESSION["FName"] .
-        " " .
-        $_SESSION["LName"] .
-        "'";
-    $result = mysqli_query($connection, $sql);
-    $chart_data = "";
-    while ($torestore = mysqli_fetch_assoc($result)) {
-        echo $torestore["torestore"];
-    }
 } ?>, <?php if (!$connection) {
     echo "Problem in database connection! Contact administrator!" .
         mysqli_error();
@@ -1633,31 +1620,46 @@ while ($signed = mysqli_fetch_assoc($result)) {
     while ($turnedon = mysqli_fetch_assoc($result)) {
         echo $turnedon["turnedon"];
     }
+} ?>,<?php if (!$connection) {
+    echo "Problem in database connection! Contact administrator!" .
+        mysqli_error();
+} else {
+    $sql =
+        " SELECT COUNT(reminders.ClientID) as reminded FROM reminders where ChampName='" .
+        $_SESSION["FName"] .
+        " " .
+        $_SESSION["LName"] .
+        "'";
+    $result = mysqli_query($connection, $sql);
+    $chart_data = "";
+    while ($remind = mysqli_fetch_assoc($result)) {
+        echo $remind["reminded"];
+    }
 } ?>],
                 backgroundColor: [
                                     "#ee2c4e",
                                     "#ffb91f",
                                     "#0cbeaf",
                                     "#3072f5",
-                                    "#000000",
-                                    "#85ce36"
+                                    "#85ce36",
+                                    "#800080"
                                 ],
                 hoverBackgroundColor: [
                                     "#ee2c4e",
                                     "#ffb91f",
                                     "#0cbeaf",
                                     "#3072f5",
-                                    "#000000",
-                                    "#85ce36"
+                                    "#85ce36",
+                                    "#800080"
                                 ]
 
                             } ],
             labels: [
                             "Signed",
                             "Assigned",
-                            "To Restore",
                             "Installed",
-                            "Turned On"
+                            "Turned On",
+                            "Reminded"
                         ]
         },
         options: {

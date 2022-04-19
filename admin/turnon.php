@@ -33,9 +33,9 @@ if (isset($_POST["submit"])) {
     $DateTurnedOn = $_POST["date"];
     $ClientID = $row["ClientID"];
 
-    $sql = "Update papinstalled set ClientID=$id,MacAddress='$MacAddress' where ClientID=$id";
-    $result = mysqli_query($connection, $sql);
-    $query = "Update papdailysales set ClientID=$id,PapStatus='Turned On' where ClientID=$id";
+    $sql = "UPDATE papinstalled set MacAddress='$MacAddress' where ClientID=$id";
+    $res = mysqli_query($connection, $sql);
+    $query = "UPDATE papdailysales set PapStatus='Turned On' where ClientID=$id";
     $result = mysqli_query($connection, $query);
 
     $stmt = $connection->prepare("insert into turnedonpap(Team_ID,MacAddress,ChampName,Region,ClientName,ClientContact,BuildingName,BuildingCode,PapStatus,DateTurnedOn,ClientID)

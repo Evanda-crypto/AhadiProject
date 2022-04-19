@@ -120,12 +120,17 @@ include("../config/config.php");
                         <div class="card">
                             <div class="card-header">
                             <center><strong class="card-title">All Paps[<?php
-         $query="SELECT COUNT(*) as pap FROM papdailysales WHERE ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
-          $data=mysqli_query($connection,$query);
-          while($row=mysqli_fetch_assoc($data)){
-          echo $row['pap'];
-    }
-    ?> Records]</strong></center>
+                  $query =
+                      "SELECT count(*) as allpap from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papnotinstalled.ClientID is null and papdailysales.ChampName='" .
+                      $_SESSION["FName"] .
+                      " " .
+                      $_SESSION["LName"] .
+                      "'";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["allpap"];
+                  }
+                  ?> Records]</strong></center>
                             </div>
                             <div class="card-body">
                                  <table class="table table-striped" id="example">
@@ -140,7 +145,7 @@ include("../config/config.php");
                                   <tbody>
                                   <?php
     
-    $sql="SELECT * from papdailysales WHERE ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+    $sql="SELECT papdailysales.ClientID,papdailysales.ClientName,papdailysales.BuildingName from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papnotinstalled.ClientID is null and papdailysales.ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
     $result=$connection->query($sql);
     while($row=$result->fetch_array()){
       ?>
