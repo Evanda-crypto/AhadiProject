@@ -148,7 +148,7 @@ include("../config/config.php");
                                         <tr>
                                         <th class="th-sm">Client
                                         </th>
-                                     <th class="th-sm">Building Name
+                                     <th class="th-sm">Bname
                                      </th>
                                       </tr>
                                   </thead>
