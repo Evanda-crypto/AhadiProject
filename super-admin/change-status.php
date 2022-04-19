@@ -1,19 +1,22 @@
 <?php
 include("session.php");
 include("../config/config.php");
+$id=$_GET['id'];
+
+$sql="select * from building where ID=$id";
+$result=mysqli_query($connection,$sql);
+$row=mysqli_fetch_assoc($result);
+$bname=$row['BuildingName'];
+$bcode=$row['BuildingCode'];
+$region=$row['Region'];
+$status=$row['BuildingStatus'];
+
 
 if(isset($_POST['submit'])){
-$FirstName = $_POST['FName'];
-$LastName = $_POST['LName'];
-$Email = $_POST['Email'];
-$Department = $_POST['Department'];
-$Password = $_POST['password'];
-$Region = $_POST['Region'];
-$Region1 = $_POST['Region1'];
-$Role = $_POST['Role'];
-$user = $_POST['user'];
+$Bname = $_POST['bname'];
+$Bcode = $_POST['bcode'];
+$Status = $_POST['status'];
 
-$hashpass= password_hash($Password, PASSWORD_DEFAULT);
 
 //checking if connection is not created successfully
 if($connection->connect_error){
@@ -21,15 +24,16 @@ if($connection->connect_error){
 }
 else
 {
-    $stmt= $connection->prepare("INSERT INTO Users (FirstName,LastName,Email,Department,Password,Region,Region1,Role,User)
-    values(?,?,?,?,?,?,?,?,?)");
-       //values from the fields
-    $stmt->bind_param("sssssssss",$FirstName,$LastName,$Email,$Department,$hashpass,$Region,$Region1,$Role,$user);
-    $stmt->execute();
-    echo "<script>alert('Successfull.');</script>";
-    echo '<script>window.location.href="new-user.php";</script>';
-    $stmt->close();
-   # $connection->close();
+  $sql="UPDATE building set BuildingName='$Bname',BuildingCode='$Bcode',BuildingStatus='$Status' where ID=$id";
+  
+  $result=mysqli_query($connection,$sql);
+  if ($result) {
+    echo '<script>alert("Update Successfull!")</script>';
+      echo '<script>window.location.href="buildings.php";</script>';
+  } else {
+    echo '<script>alert("Not submitted try again!")</script>';
+      echo '<script>window.location.href="change-status.php";</script>';
+  }
    
 }
 }
@@ -42,7 +46,7 @@ else
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>New User</title>
+    <title>Change status</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -80,7 +84,7 @@ else
 
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
+      <!-- Left Panel -->
 <!-- Left Panel -->
 <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -147,7 +151,7 @@ else
             <div class="animated fadeIn">
 
 
-            <div class="row">
+                <div class="row">
                 <div class="col-lg-3">
                                 <div class="card">
                                     <div class="card-header"></div>
@@ -158,100 +162,35 @@ else
                                         <hr>
                                         <form method="POST" action="">
                                             <div class="form-group">
-                                                <label for="cc-payment" class="control-label mb-1">First Name</label>
-                                                <input id="cc-pament" name="FName"  type="text"   class="form-control" aria-required="true" aria-invalid="false" placeholder="First Name">
+                                                <label for="cc-payment" class="control-label mb-1">Building Name</label>
+                                                <input id="cc-pament" name="bname"  type="text" value="<?php echo $bname?>"  class="form-control" aria-required="true" aria-invalid="false" placeholder="Building Name">
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Last name</label>
-                                                <input id="cc-name" name="LName" type="text" class="form-control cc-name valid"  data-val="true" placeholder="Last Name"
+                                                <label for="cc-name" class="control-label mb-1">Building Code</label>
+                                                <input id="cc-name" name="bcode" type="text" class="form-control cc-name valid" value="<?php echo $bcode?>"  data-val="true" placeholder="Building Code"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Email</label>
-                                                <input id="cc-name" name="Email" type="text" class="form-control cc-name valid"  data-val="true" placeholder="Email"
+                                                <label for="cc-name" class="control-label mb-1">Region</label>
+                                                <input id="cc-name" name="region" type="text" class="form-control cc-name valid" value="<?php echo $region?>"  data-val="true" placeholder="Region"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Department</label>
+                                                <label for="cc-number" class="control-label mb-1">Status</label>
                                                 <div class="form-group has-success">
-                                            <select data-placeholder="Choose a region..." class="standardSelect form-control" name="Department" tabindex="1">
-                                            <option disabled selected> Select Deprtment</option>
-                                                <option value="Executive">Executive</option>
-                                                  <option value="HR">HR</option>
-                                               <option value="Nats">Nats</option>
-                                              <option value="Maton">Maton</option>
-                                              <option value="Sales">Sales</option>
-                                              <option value="Techie">Techie</option>
+                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="status" tabindex="1">
+                                            <option value="<?php echo $status?>"><?php echo $status?></option>
+                                                <option value="6. IAP In Service">6. IAP In Service</option>
+                                                  <option value="7. PAP In Service">7. PAP In Service</option>
+                                               <option value="4. Fully Installed">4. Fully Installed</option>
                                               </select>
                                             </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Region</label>
-                                                <div class="form-group has-success">
-                                            <select data-placeholder="Choose a region..." class="standardSelect form-control" name="Region" tabindex="1">
-                                            <option disabled selected>Select Region</option>
-                                              <option value="G44">G44</option>
-                                             <option value="ZMM">ZMM</option>
-                                               <option value="G45S">G45S</option>
-                                                  <option value="G45N">G45N</option>
-                                              <option value="R&M">R&M</option>
-                                             <option value="LSM">LSM</option>
-                                               <option value="KWT">KWT</option> 
-                                              </select>
-                                            </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Region 1</label>
-                                                <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="Region1" tabindex="1">
-                                            <option disabled selected>Select Region</option>
-                                             <option value="G44">G44</option>
-                                            <option value="ZMM">ZMM</option>
-                                           <option value="G45S">G45S</option>
-                                             <option value="G45N">G45N</option>
-                                            <option value="R&M">R&M</option>
-                                            <option value="LSM">LSM</option>
-                                            <option value="KWT">KWT</option> 
-                                              </select>
-                                            </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Role</label>
-                                                <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Role..." class="standardSelect form-control" name="Role" tabindex="1">
-                                            <option disabled selected> Select Role</option>
-                                            <option value="1">Overall</option>
-                                              <option value="0">NotTL</option>
-                                              </select>
-                                            </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">User</label>
-                                                <div class="form-group has-success">
-                                            <select data-placeholder="Choose a user..." class="standardSelect form-control" name="user" tabindex="1" required>
-                                            <option disabled selected> Select User</option>
-                                                <option value="1">Executive(user 1)</option>
-                                                  <option value="2">Nats(user 2)</option>
-                                               <option value="3">Maton(user 3)</option>
-                                              <option value="4">SalesTL(user 4)</option>
-                                              <option value="5">Techie TL(user 5)</option>
-                                               <option value="6">Champ(user 6)</option>
-                                              <option value="7">Overall (user 7)</option>
-                                              </select>
-                                            </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Password</label>
-                                                <input id="cc-number" name="password" type="password" class="form-control "  value="123456" data-val="true"
-                                                    data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number"
-                                                    autocomplete="cc-number">
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                            </div> 
                                             <div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
-                                                    <span id="payment-button-amount">Submit</span>
+                                                    <span id="payment-button-amount">Change Status</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button>
                                             </div>
@@ -259,6 +198,42 @@ else
                                     </div>
                                 </div>
                             </div><!--/.col-->
+
+                   <!--<div class="col-lg-9">
+              <div class="card"><div class="card-body">
+              <div class="card-header">
+                           <center> <strong class="card-title">Users</strong></center>
+                        </div>
+                        <div class="table-responsive">
+                                    <table class="table table-striped " id="example">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Department</th>
+                    
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+    
+    $sql="select * from users order by ID ASC";
+    $result=$connection->query($sql);
+    while($row=$result->fetch_array()){
+      ?>
+      <tr>
+        <td><?php echo $row['FirstName']?></td>
+        <td><?php echo $row['LastName']?></td>
+        <td><?php echo $row['Email']?></td>
+        <td><?php echo $row['Department']?></td>
+
+    </tr>
+    <?php } ?>
+                                    </tbody>
+                                    </table>
+                                </div>
+              </div></div>-->
                     </div>
         </div><!-- .animated -->
     </div><!-- .content -->

@@ -2,37 +2,6 @@
 include("session.php");
 include("../config/config.php");
 
-if(isset($_POST['submit'])){
-$FirstName = $_POST['FName'];
-$LastName = $_POST['LName'];
-$Email = $_POST['Email'];
-$Department = $_POST['Department'];
-$Password = $_POST['password'];
-$Region = $_POST['Region'];
-$Region1 = $_POST['Region1'];
-$Role = $_POST['Role'];
-$user = $_POST['user'];
-
-$hashpass= password_hash($Password, PASSWORD_DEFAULT);
-
-//checking if connection is not created successfully
-if($connection->connect_error){
-    die('connection failed : '.$connection->connect_error);
-}
-else
-{
-    $stmt= $connection->prepare("INSERT INTO Users (FirstName,LastName,Email,Department,Password,Region,Region1,Role,User)
-    values(?,?,?,?,?,?,?,?,?)");
-       //values from the fields
-    $stmt->bind_param("sssssssss",$FirstName,$LastName,$Email,$Department,$hashpass,$Region,$Region1,$Role,$user);
-    $stmt->execute();
-    echo "<script>alert('Successfull.');</script>";
-    echo '<script>window.location.href="new-user.php";</script>';
-    $stmt->close();
-   # $connection->close();
-   
-}
-}
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -42,7 +11,7 @@ else
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Users</title>
+    <title>Buildings | Ref</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -57,11 +26,6 @@ else
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../assets/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-    
     <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -80,8 +44,7 @@ else
 
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
-<!-- Left Panel -->
+ <!-- Left Panel -->
 <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -145,92 +108,131 @@ else
 
         <div class="content">
             <div class="animated fadeIn">
-
-
-            <div class="row">
-                   <div class="col-lg-12">
-              <div class="card"><div class="card-body">
-              <div class="card-header">
-                           <center> <strong class="card-title">Users</strong></center>
-                        </div>
-                        <div class="table-responsive">
-                                    <table class="table table-borderless table-striped " id="example">
-                                        <thead>
-                                            <tr>
-                                            <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
-                    
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
+                <div class="row">
+                <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                            <center><strong class="card-title">Buildings[<?php
+         $query="SELECT COUNT(*) as buildings FROM building";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['buildings'];
+    }
+    ?> Records]</strong></center>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped" id="example">
+                                    <thead>
+                                        <tr>
+                                          <th scope="col">B Name</th>
+                                          <th scope="col">B Code</th>
+                                          <th scope="col">Region</th>
+                                          <th scope="col">Change Status</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                  <?php
     
-    $sql="SELECT * from Users order by ID ASC";
+    $sql="SELECT * from building";
     $result=$connection->query($sql);
     while($row=$result->fetch_array()){
       ?>
       <tr>
-        <td><?php echo $row['FirstName']?></td>
-        <td><?php echo $row['LastName']?></td>
-        <td><?php echo $row['Email']?></td>
-        <td><?php echo $row['Department']?></td>
-       <td>
-       <button class="btn btn-warning"><a href="edit-user.php?userid=<?php echo $row['ID']; ?>">Edit</i></a></button>
-    </td><td>
-        <button class="btn btn-danger"><a href="del-user.php?userid=<?php echo $row['ID']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['FirstName']; ?> <?php  echo $row['LastName']; ?> from Users?')">Delete</a></button>
-        </td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['BuildingName']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['BuildingCode']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['Region']?></a></td>
+        <td>
+       <button class="btn btn-warning"><a href="change-status.php?id=<?php echo $row['ID']; ?>">Edit</i></a></button>
+    </td>
     </tr>
     <?php } ?>
-                                    </tbody>
-                                    </table>
-                                </div>
-              </div></div>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
+                </div>
 
-    <div class="clearfix"></div>
+</div><!-- .content -->
+    <!-- Modal -->
+
+    <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mediumModalLabel"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end of modal--><!--End of modal-->
+<div class="clearfix"></div>
 
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
-
+<script>
+  $(document).ready(function(){
+    $(document).on('click','.openPopup',function(){
+        var dataURL = $(this).attr('data-href');
+        $('.modal-body').load(dataURL,function(){
+            $('#myModal').modal({show:true});
+        });
+    }); 
+});
+</script>
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
+
+    <!--  Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+
+    <!--Chartist Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
+    <script src="../assets/js/init/weather-init.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+    <script src="../assets/js/init/fullcalendar-init.js"></script>
+
+    <!--Local Stuff-->
 <script>
-    jQuery(document).ready(function() {
-        jQuery(".standardSelect").chosen({
-            disable_search_threshold: 10,
-            no_results_text: "Oops, nothing matches",
-            width: "100%"
-        });
-    });
-</script>
-<script type="text/javascript">
-$( document ).ready(function() {
-$('#example').DataTable({
-		 "processing": true,
-		 "dom": 'lBfrtip',
-		 "buttons": [
-            {
-                extend: 'collection',
-                text: 'Export',
-                buttons: [
-                    'excel',
-                    'csv'
-                ]
-            }
-        ]
-        });
+ $(document).ready(function () {
+$('#example').DataTable();
+$('.dataTables_length').addClass('bs-select');
 });
 </script>
+<script>
+$(document).ready(function(){
+  $(document).on('click','.openPopup',function(){
+        var dataURL = $(this).attr('data-href');
+        $('.modal-body').load(dataURL,function(){
+            $('#myModal').modal({show:true});
+        });
+    }); 
+});
+$('#example').DataTable( {
+    fixedColumn: true
+} );
+</script>
+    
 </body>
 </html>
