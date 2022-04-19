@@ -161,7 +161,7 @@ include("session.php");
             ?>
                                         <div class="form-group has-success">
                                                 <label for="cc-name" class="control-label mb-1">DateSigned<span style="color: #FF0000" >*</span></label>
-                                                <input id="datesigned" name="DateSigned" type="date" class="form-control cc-name valid" data-val="true" value="<?php date('Y-m-d');?>" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
+                                                <input id="datesigned" name="DateSigned" type="date" class="form-control cc-name valid" data-val="true" value="<?php echo date("Y-m-d"); ?>" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group has-success">
