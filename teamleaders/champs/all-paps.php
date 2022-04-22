@@ -207,7 +207,7 @@ include("../../config/config.php");
                         $query  = "SELECT papdailysales.ClientID,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,papdailysales.ChampName,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.ClientAvailability,papdailysales.AptLayout,papdailysales.DateSigned,papdailysales.Note from papdailysales LEFT JOIN papnotinstalled ON papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null order by papdailysales.DateSigned Desc";
                         $result  = mysqli_query($connection, $query);
 
-                            while ($row = mysqli_fetch_assoc($result)) {
+                            while ($row = mysqli_fetch_array($result)) {
                             
                         ?>
                                 <tr>

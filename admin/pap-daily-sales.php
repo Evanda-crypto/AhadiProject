@@ -190,7 +190,7 @@ include("../config/config.php");
                         LEFT JOIN papnotinstalled ON papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null and papdailysales.DateSigned >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) order by papdailysales.ClientID Desc";
                         $result  = mysqli_query($connection, $query);
 
-                            while ($row = mysqli_fetch_assoc($result)) {
+                            while ($row = mysqli_fetch_array($result)) {
                             
                         ?>
                                 <tr>
