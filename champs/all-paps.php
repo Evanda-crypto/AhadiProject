@@ -205,7 +205,13 @@ include("../config/config.php");
 <script src="../assets/js/main.js"></script>
 <script>
  $(document).ready(function () {
-$('#example').DataTable();
+$('#example').DataTable(
+    {
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "scrollY":        "700px",
+        "scrollCollapse": true
+    }
+);
 $('.dataTables_length').addClass('bs-select');
 });
 </script>
@@ -218,9 +224,6 @@ $(document).ready(function(){
         });
     }); 
 });
-$('#example').DataTable( {
-    fixedColumn: true
-} );
 </script>
 </body>
 </html>
