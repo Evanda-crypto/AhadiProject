@@ -11,12 +11,11 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pap | Daily | Sales</title>
+    <title>Turned | On</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -49,8 +48,8 @@ include("../config/config.php");
 
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+ <!-- Left Panel -->
+ <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -59,33 +58,15 @@ include("../config/config.php");
                     </li>
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
                     <li>
-                        <a href="pap-daily-sales.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Signed </a>
-                    </li>
-                    <li>
-                        <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Resitituted </a>
-                    </li>
-                    <li>
-                        <a href="pending-installation.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Pending Installation </a>
-                    </li>
-                    <li>
                         <a href="installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Installed </a>
                     </li>
                     <li>
                         <a href="turnedon.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
                     </li>
-                    <li class="menu-title">ACCOUNTS</li><!-- /.menu-title -->
-
-                    <li>
-                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-themify-favicon-alt"></i>Add Teamleader </a>
-                    </li>
-                    <li>
-                        <a href="view-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-eye"></i>View Teamleader </a>
-                    </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                    <li>
+                   <!-- <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
-                    </li>
-                
+                    </li>-->
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
                     </li>
@@ -119,7 +100,7 @@ include("../config/config.php");
                         </div>
 
                         <div class="dropdown for-message">
-                         
+                          
                         </div>
                     </div>
 
@@ -146,72 +127,59 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Signed Pap</strong></center>
+                           <center> <strong class="card-title">Turned On</strong></center>
                         </div>
                         <div class="card-body">
-                        <?php
-            if(isset($_SESSION['status'])){
-                ?>
-               <center><span> <div class="alert alert-danger" role="alert">
-                   <?php echo $_SESSION['status'];
-                unset($_SESSION['status']);?>
-                 </div></span></center>
-                <?php
-                
-            }
-            elseif(isset($_SESSION['success'])){
-                ?>
-                <center><span><div class="alert alert-success" role="alert">
-                   <?php echo $_SESSION['success'];
-                unset($_SESSION['success']);?>
-                 </div></span></center>
-                <?php
-                
-            }
-            ?>
-                            <table class="table table-striped" id="example">
+                            <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
-                     <th>Building Name</th>
-                     <th>Building Code</th>
-                     <th>Region</th>
-                     <th>ChampName</th>
-                     <th>Client Name</th>
-                     <th>Client Contact</th>
-                     <th>Date Signed</th>
-                     <th>Availability</th>
-                     <th>Champs Comment</th>
-                     <th>More</th>
+                                    <th class="th-sm">PAP Code
+                  </th>
+                   <th class="th-sm">Building Name
+                   </th>
+                   <th class="th-sm">Building Code
+                   </th>
+                   <th class="th-sm">Region
+                  </th>
+                   <th class="th-sm">Champ Name
+                   </th>
+                   <th class="th-sm">Client Name
+                   </th>
+                   <th class="th-sm">Client Contact
+                   </th>
+                   <th class="th-sm">MAC Address
+                   </th>
+                   <th class="th-sm">Date Turned On
+                   </th>
+                   <th class="th-sm">More
+                   </th>  
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT papdailysales.ClientID,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,papdailysales.ChampName,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.ClientAvailability,papdailysales.AptLayout,papdailysales.DateSigned,papdailysales.Note from papdailysales 
-                        LEFT JOIN papnotinstalled ON papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null and papdailysales.DateSigned >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) order by papdailysales.ClientID Desc";
-                        $result  = mysqli_query($connection, $query);
-
-                            while ($row = mysqli_fetch_assoc($result)) {
-                            
-                        ?>
-                                <tr>
-                                    <td><?php echo $row['BuildingName']; ?></td>
-                                    <td><?php echo $row['BuildingCode']; ?></td>
-                                    <td><?php echo $row['Region']; ?></td>
-                                    <td><?php echo $row['ChampName']; ?></td>
-                                    <td><?php echo $row['ClientName']; ?></td>
-                                    <td><?php echo $row['ClientContact']; ?></td>
-                                    <td><?php echo $row['DateSigned']; ?></td>
-                                    <td><?php echo $row['ClientAvailability']; ?></td>
-                                    <td><?php echo $row['Note']; ?></td>
-                                    <td>
-                                    <button class="btn btn-warning" ><a href="edit-records.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
-                                    </td>
-                                </tr>
-                        <?php
-
-                            }
-                    
-                        ?>
+    
+    $sql="SELECT turnedonpap.ClientID,papdailysales.BuildingName,upper(papdailysales.BuildingCode) as bcode,upper(papdailysales.Region) as reg,turnedonpap.ChampName,papdailysales.ClientName,papdailysales.ClientContact,Upper(turnedonpap.MacAddress) as Mac,turnedonpap.PapStatus,turnedonpap.DateTurnedOn, CASE WHEN LENGTH(papdailysales.BuildingCode)>11 THEN CONCAT(papdailysales.BuildingCode,'-',(row_number() over(partition by papdailysales.BuildingCode)),'P')
+    WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) <=9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,'0',(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
+    WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) >9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
+    end as papcode from papdailysales LEFT JOIN turnedonpap ON turnedonpap.ClientID=papdailysales.ClientID where turnedonpap.ClientID is not null";
+$result=$connection->query($sql);
+while($row=$result->fetch_array()){
+  ?>
+  <tr>
+    <td><?php echo $row['papcode']?></td>
+    <td><?php echo $row['BuildingName']?></td>
+    <td><?php echo $row['bcode']?></td>
+    <td><?php echo $row['reg']?></td>
+    <td><?php echo $row['ChampName']?></td>
+    <td><?php echo $row['ClientName']?></td>
+    <td><?php echo $row['ClientContact']?></td>
+    <td><?php echo $row['Mac']?></td>
+    <td><?php echo $row['DateTurnedOn']?></td>
+    <td>
+    <button class="btn btn-warning" ><a href="edit-turnedon.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
+    </td>
+</tr>
+<?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -233,6 +201,7 @@ include("../config/config.php");
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
 
+
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
@@ -248,9 +217,7 @@ $('#example').DataTable({
                 ]
             }
         ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
         });
 });
 </script>

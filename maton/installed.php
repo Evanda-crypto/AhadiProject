@@ -1,6 +1,6 @@
 <?php
 include("session.php");
-include("../../config/config.php");
+include("../config/config.php");
 
 ?>
 <!doctype html>
@@ -11,12 +11,11 @@ include("../../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>All | Paps</title>
+    <title>Installed</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -24,8 +23,8 @@ include("../../config/config.php");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="../../assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -49,8 +48,8 @@ include("../../config/config.php");
 
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+   <!-- Left Panel -->
+   <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -58,36 +57,23 @@ include("../../config/config.php");
                         <a href="dashboard.php"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
-
                     <li>
-                        <a href="all-paps.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>All Paps</a>
+                        <a href="installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Installed </a>
                     </li>
                     <li>
-                        <a href="not-installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Not Installed </a>
+                        <a href="turnedon.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
                     </li>
-                    <li>
-                        <a href="assigned.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Assigned</a>
-                    </li>
-                    <li>
-                        <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Restituted </a>
-                    </li>
-                    <li>
-                        <a href="turned-on.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
-                    </li>
-                    <li>
-                    <li class="menu-title">BUILDINGS</li><!-- /.menu-title -->
-                    <li>
-                        <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
-                    </li>     
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
+                   <!-- <li>
+                        <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
+                    </li>-->
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
-    </aside>  
-    <!-- /#left-panel -->
+    </aside>
     <!-- /#left-panel -->
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
@@ -95,7 +81,7 @@ include("../../config/config.php");
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                <img src="../../images/picture1.png" style="width: 120px; height: 70px;" class="logo-icon" alt="logo icon">
+                <img src="../images/picture1.png" style="width: 120px; height: 70px;" class="logo-icon" alt="logo icon">
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -110,33 +96,10 @@ include("../../config/config.php");
                         </div>
 
                         <div class="dropdown for-notification">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell"></i>
-                                <span class="count bg-danger"><?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID WHERE trash.ClientID is null and papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
-          $data=mysqli_query($connection,$query);
-          while($row=mysqli_fetch_assoc($data)){
-          echo $row['restituted'];
-    }
-    ?></span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="notification">
-                                <p class="red">You have <?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID WHERE trash.ClientID is null and papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
-          $data=mysqli_query($connection,$query);
-          while($row=mysqli_fetch_assoc($data)){
-          echo $row['restituted'];
-    }
-    ?> Restitute(s)</p>
-                                <a class="dropdown-item media" href="restituted.php">
-                                    <i class="fa fa-check"></i>
-                                    <p>Check Out.</p>
-                                </a>
-                            </div>
                         </div>
 
                         <div class="dropdown for-message">
-
+                      
                         </div>
                     </div>
 
@@ -148,14 +111,13 @@ include("../../config/config.php");
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="../../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
                 </div>
             </div>
-        </header>
-        <!-- /#header -->
+        </header><!-- /header -->
         <!-- Header-->
 
         <div class="content">
@@ -164,10 +126,9 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">All Paps</strong></center>
+                           <center> <strong class="card-title">Installed</strong></center>
                         </div>
-                        <div class="card-body">
-                        <?php
+                        <div class="card-body"><?php
             if(isset($_SESSION['status'])){
                 ?>
                <center><span> <div class="alert alert-danger" role="alert">
@@ -187,49 +148,42 @@ include("../../config/config.php");
                 
             }
             ?>
-                            <table class="table table-striped" id="example">
+                            <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
-                     <th>Building Name</th>
-                     <th>Building Code</th>
-                     <th>Region</th>
-                     <th>ChampName</th>
-                     <th>Client Name</th>
-                     <th>Client Contact</th>
-                     <th>Date Signed</th>
-                     <th>Availability</th>
-                     <th>Champs Comment</th>
-                     <th>Edit</th>
+                                    <th>Building Name</th>
+                    <th>Building Code</th>
+                    <th>Region</th>
+                    <th>Mac Address</th>
+                    <th>Date Installed</th>
+                    <th>Client Name</th>
+                    <th>Contact</th>
+                   <th>Floor</th>
+                    <th>More</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT papdailysales.ClientID,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,papdailysales.ChampName,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.ClientAvailability,papdailysales.AptLayout,papdailysales.DateSigned,papdailysales.Note from papdailysales LEFT JOIN papnotinstalled ON papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null order by papdailysales.DateSigned Desc";
-                        $result  = mysqli_query($connection, $query);
-
-                            while ($row = mysqli_fetch_assoc($result)) {
-                            
-                        ?>
-                                <tr>
-                                    <td><?php echo $row['BuildingName']; ?></td>
-                                    <td><?php echo $row['BuildingCode']; ?></td>
-                                    <td><?php echo $row['Region']; ?></td>
-                                    <td><?php echo $row['ChampName']; ?></td>
-                                    <td><?php echo $row['ClientName']; ?></td>
-                                    <td><?php echo $row['ClientContact']; ?></td>
-                                    <td><?php echo $row['DateSigned']; ?></td>
-                                    <td><?php echo $row['ClientAvailability']; ?></td>
-                                    <td><?php echo $row['Note']; ?></td>
-                                    <td>
-                                    <button class="btn btn-warning" ><a href="edit-records.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
-                                    </td>
-
-                                </tr>
-                        <?php
-
-                            }
-                    
-                        ?>
+    
+    $sql="SELECT papdailysales.Floor,papdailysales.ClientName,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID,papdailysales.ClientContact  
+    FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID JOIN papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE turnedonpap.ClientID is null ORDER BY papinstalled.DateInstalled ASC";
+$result=$connection->query($sql);
+while($row=$result->fetch_array()){
+  ?>
+  <tr>
+    <td><?php echo $row['BuildingName']?></td>
+    <td><?php echo $row['BuildingCode']?></td>
+    <td><?php echo $row['Region']?></td>
+    <td><?php echo $row['Mac']?></td>
+    <td><?php echo $row['DateInstalled']?></td>
+    <td><?php echo $row['ClientName']?></td>
+     <td><?php echo $row['ClientContact']?></td>
+    <td><?php echo $row['Floor']?></td>
+    <td>
+    <button class="btn btn-warning" ><a href="turnon.php?clientid=<?php echo $row['ClientID']?>" class="text-bold">Turn On</a></button>
+    </td>
+</tr>
+<?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -249,7 +203,7 @@ include("../../config/config.php");
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../../assets/js/main.js"></script>
+<script src="../assets/js/main.js"></script>
 
 <script type="text/javascript">
 $( document ).ready(function() {
@@ -266,9 +220,7 @@ $('#example').DataTable({
                 ]
             }
         ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
         });
 });
 </script>
