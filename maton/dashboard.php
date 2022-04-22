@@ -195,7 +195,7 @@ if (!$connection) {
                             </div>
                         </div></a>
                     </div>
-                    <div class="col-lg-3 col-md-6"><a href="pap-daily-sales.php">
+                    <div class="col-lg-3 col-md-6"><a href="turnedon.php">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
