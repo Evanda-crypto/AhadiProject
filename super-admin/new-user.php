@@ -239,7 +239,8 @@ else
                                               <option value="4">SalesTL(user 4)</option>
                                               <option value="5">Techie TL(user 5)</option>
                                                <option value="6">Champ(user 6)</option>
-                                              <option value="7">Overall (user 7)</option>
+                                              <option value="7">Overall Techie TL (user 7)</option>
+                                              <option value="8">Overall champs TL (user 8)</option>
                                               </select>
                                             </div>
                                             </div>
