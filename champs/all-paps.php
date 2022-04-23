@@ -143,7 +143,7 @@ include("../config/config.php");
                   ?> Records]</strong></center>
                             </div>
                             <div class="card-body">
-                                 <table class="table table-striped" id="example">
+                                 <table class="table table-bordered table-striped" id="example">
                                     <thead>
                                         <tr>
                                         <th class="th-sm">Client
