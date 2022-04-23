@@ -413,7 +413,8 @@ $('#example').DataTable({
         ],
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "scrollY":        "600px",
-        "scrollCollapse": true
+        "scrollCollapse": true,
+        "pagingType": "full_numbers"
         });
 });
 </script>
