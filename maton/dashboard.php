@@ -200,7 +200,7 @@ if (!$connection) {
                             </div>
                         </div></a>
                     </div>
-                    <div class="col-lg-3 col-md-6"><a href="turnedon.php">
+                    <div class="col-lg-3 col-md-6"><a href="turnedontoday.php">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
@@ -225,7 +225,7 @@ if (!$connection) {
                         </div></a>
                     </div>
 
-                    <div class="col-lg-3 col-md-6"><a href="turnedon.php">
+                    <div class="col-lg-3 col-md-6"><a href="last-7-days.php">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
