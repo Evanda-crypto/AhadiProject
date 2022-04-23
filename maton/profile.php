@@ -75,8 +75,8 @@ if (isset($_POST["submit"])) {
 
 </head>
 <body style="background-color:#e1e1e1">
- <!-- Left Panel -->
- <aside id="left-panel" class="left-panel">
+  <!-- Left Panel -->
+  <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -87,8 +87,13 @@ if (isset($_POST["submit"])) {
                     <li>
                         <a href="installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Installed </a>
                     </li>
-                    <li>
-                        <a href="turnedon.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>TURNED ON</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-table"></i><a href="turnedontoday.php">Today</a></li>
+                            <li><i class="fa fa-table"></i><a href="last-7-days.php">Last 7 days</a></li>
+                            <li><i class="fa fa-table"></i><a href="turnedon.php">All Records</a></li>
+                        </ul>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                    <!-- <li>

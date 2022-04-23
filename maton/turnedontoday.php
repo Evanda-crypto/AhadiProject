@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Installed</title>
+    <title>Turned | On</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,8 +48,8 @@ include("../config/config.php");
 
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+   <!-- Left Panel -->
+   <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -101,10 +101,11 @@ include("../config/config.php");
                         </div>
 
                         <div class="dropdown for-notification">
+                     
                         </div>
 
                         <div class="dropdown for-message">
-                      
+                          
                         </div>
                     </div>
 
@@ -131,61 +132,53 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Installed</strong></center>
+                           <center> <strong class="card-title">Turned On[Today}</strong></center>
                         </div>
-                        <div class="card-body"><?php
-            if(isset($_SESSION['status'])){
-                ?>
-               <center><span> <div class="alert alert-danger" role="alert">
-                   <?php echo $_SESSION['status'];
-                unset($_SESSION['status']);?>
-                 </div></span></center>
-                <?php
-                
-            }
-            elseif(isset($_SESSION['success'])){
-                ?>
-                <center><span><div class="alert alert-success" role="alert">
-                   <?php echo $_SESSION['success'];
-                unset($_SESSION['success']);?>
-                 </div></span></center>
-                <?php
-                
-            }
-            ?>
+                        <div class="card-body">
                             <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th>Building Name</th>
-                    <th>Building Code</th>
-                    <th>Region</th>
-                    <th>Mac Address</th>
-                    <th>Date Installed</th>
-                    <th>Client Name</th>
-                    <th>Contact</th>
-                   <th>Floor</th>
-                    <th>More</th>
+                                    <th class="th-sm">PAP Code
+                  </th>
+                   <th class="th-sm">Building Name
+                   </th>
+                   <th class="th-sm">Building Code
+                   </th>
+                   <th class="th-sm">Region
+                  </th>
+                   <th class="th-sm">Champ Name
+                   </th>
+                   <th class="th-sm">Client Name
+                   </th>
+                   <th class="th-sm">Client Contact
+                   </th>
+                   <th class="th-sm">MAC Address
+                   </th>
+                   <th class="th-sm">More
+                   </th>  
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT papdailysales.Floor,papdailysales.ClientName,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID,papdailysales.ClientContact  
-    FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID JOIN papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE turnedonpap.ClientID is null ORDER BY papinstalled.DateInstalled ASC";
+    $sql="SELECT turnedonpap.ClientID,papdailysales.BuildingName,upper(papdailysales.BuildingCode) as bcode,upper(papdailysales.Region) as reg,turnedonpap.ChampName,papdailysales.ClientName,papdailysales.ClientContact,Upper(turnedonpap.MacAddress) as Mac,turnedonpap.DateTurnedOn, CASE WHEN LENGTH(papdailysales.BuildingCode)>11 THEN CONCAT(papdailysales.BuildingCode,'-',(row_number() over(partition by papdailysales.BuildingCode)),'P')
+    WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) <=9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,'0',(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
+    WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) >9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
+    end as papcode from papdailysales LEFT JOIN turnedonpap ON turnedonpap.ClientID=papdailysales.ClientID where turnedonpap.ClientID is not null and turnedonpap.DateTurnedOn=CURDATE()";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
+    <td><?php echo $row['papcode']?></td>
     <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['BuildingCode']?></td>
-    <td><?php echo $row['Region']?></td>
-    <td><?php echo $row['Mac']?></td>
-    <td><?php echo $row['DateInstalled']?></td>
+    <td><?php echo $row['bcode']?></td>
+    <td><?php echo $row['reg']?></td>
+    <td><?php echo $row['ChampName']?></td>
     <td><?php echo $row['ClientName']?></td>
-     <td><?php echo $row['ClientContact']?></td>
-    <td><?php echo $row['Floor']?></td>
+    <td><?php echo $row['ClientContact']?></td>
+    <td><?php echo $row['Mac']?></td>
     <td>
-    <button class="btn btn-warning" ><a href="turnon.php?clientid=<?php echo $row['ClientID']?>" class="text-bold">Turn On</a></button>
+    <button class="btn btn-warning" ><a href="edit-turnedon.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
     </td>
 </tr>
 <?php } ?>
@@ -210,6 +203,7 @@ while($row=$result->fetch_array()){
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
 
+
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
@@ -228,7 +222,6 @@ $('#example').DataTable({
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "scrollY":        "700px",
         "scrollCollapse": true
-        
         });
 });
 </script>
