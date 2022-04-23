@@ -132,7 +132,7 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Turned On[Today}</strong></center>
+                           <center> <strong class="card-title">Turned On[Today]</strong></center>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered table-striped" id="example">
