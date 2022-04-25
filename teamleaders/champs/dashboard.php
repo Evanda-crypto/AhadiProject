@@ -704,15 +704,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
         type: 'doughnut',
         data: {
             datasets: [ {
-                data: [ <?php
-                  $query =
-                      "SELECT count(*) as clients from papdailysales left join papnotinstalled on papdailysales.ClientID=papnotinstalled.ClientID where papnotinstalled.ClientID is null 
-                      and papdailysales.Region='".$_SESSION['Region']."'";
-                  $data = mysqli_query($connection, $query);
-                  while ($row = mysqli_fetch_assoc($data)) {
-                      echo $row["clients"];
-                  }
-                  ?>, <?php if (!$connection) {
+                data: [<?php if (!$connection) {
                     echo "Problem in database connection! Contact administrator!" .
                         mysqli_error();
                 } else {
@@ -751,35 +743,24 @@ while ($signed = mysqli_fetch_assoc($result)) {
                     while ($installed = mysqli_fetch_assoc($result)) {
                         echo $installed["installed"];
                     }
-                } ?> ,<?php
-                $query = "SELECT count(*) as turnedon from turnedonpap Where Region='".$_SESSION['Region']."'";
-                $data = mysqli_query($connection, $query);
-                while ($row = mysqli_fetch_assoc($data)) {
-                    echo $row["turnedon"];
-                }
-                ?>],
+                } ?>],
                 backgroundColor: [
-                                    "#EE2C4E",
                                     "#FFB91F",
                                     "#0CBEAF",
-                                    "#3072F5",
-                                    "#85CE36"
+                                    "#3072F5"
                                 ],
                 hoverBackgroundColor: [
-                                    "#EE2C4E",
+                                
                                     "#FFB91F",
                                     "#0CBEF",
-                                    "#3072F5",
-                                    "#85CE36"
+                                    "#3072F5"
                                 ]
 
                             } ],
             labels: [
-                            "Signed",
                             "Assigned",
                             "Restituted",
-                            "Installed",
-                            "Turned On"
+                            "Installed"
                         ]
         },
         options: {

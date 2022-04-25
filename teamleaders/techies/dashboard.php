@@ -871,25 +871,17 @@ while ($signed = mysqli_fetch_assoc($result)) {
                     while ($installed = mysqli_fetch_assoc($result)) {
                         echo $installed["installed"];
                     }
-                } ?> ,<?php
-                $query = "SELECT count(*) as turnedon from turnedonpap Where Region='".$_SESSION['Region']."'";
-                $data = mysqli_query($connection, $query);
-                while ($row = mysqli_fetch_assoc($data)) {
-                    echo $row["turnedon"];
-                }
-                ?>],
+                } ?>],
                 backgroundColor: [
                                     "#EE2C4E",
                                     "#FFB91F",
-                                    "#0CBEAF",
-                                    "#3072F5"
+                                    "#0CBEAF"
                                    
                                 ],
                 hoverBackgroundColor: [
                                     "#EE2C4E",
                                     "#FFB91F",
-                                    "#0CBEAF",
-                                    "#3072F5"
+                                    "#0CBEAF"
                                     
                                 ]
 
@@ -897,8 +889,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
             labels: [
                             "Assigned",
                             "Restituted",
-                            "Installed",
-                            "Turned On"
+                            "Installed"
                         ]
         },
         options: {
