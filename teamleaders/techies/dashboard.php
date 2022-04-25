@@ -314,7 +314,7 @@ if (!$connection) {
                  <div class="row">
 
 
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6"><a href="assign-task.php">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
@@ -336,9 +336,9 @@ if (!$connection) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6"><a href="installed.php">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
@@ -360,9 +360,9 @@ if (!$connection) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6"><a href="turned-on.php">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
@@ -383,11 +383,11 @@ if (!$connection) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                     </div>
            
 
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6"><a href="restituted.php">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
@@ -408,7 +408,7 @@ if (!$connection) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                     </div>
                 </div>
                 <!-- /Widgets -->
