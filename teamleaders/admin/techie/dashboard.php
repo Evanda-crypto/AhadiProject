@@ -340,33 +340,179 @@ if (!$connection) {
                     <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th>No</th>
                     <th>Region</th>
-                    <th>Installation Today</th>
+                    <th><?php echo date("Y-m-d",strtotime("-2 days")); ?></th>
+                    <th><?php echo date("Y-m-d",strtotime("-1 days")); ?></th>
+                    <th><?php echo date("Y-m-d"); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
-                      $query  = "SELECT Region,COUNT(*) as installed from papinstalled WHERE DateInstalled=CURRENT_DATE() GROUP BY Region order by installed DESC";
-                        $result  = mysqli_query($connection, $query);
-
-                        $num_rows  = mysqli_num_rows($result);
-
-                        $num = 0;
-                        if ($num_rows > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $num++;
-                        ?>
                                 <tr>
-                                    <td><?php echo $num; ?></td>
-                                    <td><?php echo $row['Region']; ?></td>
-                                    <td><?php echo $row['installed']; ?></td>
-                                </tr>
-                        <?php
-
-                            }
-                        }
-                        ?>
+                                        <td>ZMM</td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='ZMM'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='ZMM'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=CURDATE() AND Region='ZMM'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?> </td>
+                                        </tr>
+                                    <tr>
+                                        <td>R&M</td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='R&M'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='R&M'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=CURDATE() AND Region='R&M'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?> </td>
+                                        </tr>
+                                     <tr>
+                                        <td>G44</td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G44'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G44'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=CURDATE() AND Region='G44'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?> </td>
+                                        </tr>
+                                        <td>G45S</td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G45S'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G45S'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=CURDATE() AND Region='G45S'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?> </td>
+                                        </tr>
+                                        <tr>
+                                        <td>G45N</td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G45N'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G45N'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=CURDATE() AND Region='G45N'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?> </td>
+                                        </tr><tr>
+                                        <td>KWT</td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='KWT'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='KWT'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=CURDATE() AND Region='KWT'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?> </td>
+                                        </tr>
+                                        <tr>
+                                        <td>LSM</td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='LSM'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='LSM'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=CURDATE() AND Region='LSM'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?> </td>
+                                        </tr>
                                 </tbody>
                             </table>
                     </div></div></div></div>
