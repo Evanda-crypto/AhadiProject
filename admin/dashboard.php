@@ -674,6 +674,10 @@ while ($signed = mysqli_fetch_assoc($result)) {
             }
         }
     } );
+
+
+    </script>
+    <script>
            //doughut chart
     var ctx = document.getElementById( "doughutChart" );
     ctx.height = 250;

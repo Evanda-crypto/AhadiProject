@@ -376,7 +376,7 @@ if (!$connection) {
                                 <thead>
                                     <tr>
                                     <th>No</th>
-                    <th>Champ Name</th>
+                    <th>Champ</th>
                     <th>Pap Signed Today</th>
                                     </tr>
                                 </thead>

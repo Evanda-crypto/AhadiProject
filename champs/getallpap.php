@@ -13,10 +13,6 @@ if(!empty($_GET['id'])){
         $cmsData = $query->fetch_assoc(); 
         echo "<table class='table table-striped'>";
         echo "<tr>";
-        echo "<td>ClientID</td>";
-        echo "<td>".$cmsData['ClientID']."</td>";
-        echo "</tr>";
-        echo "<tr>";
         echo "<td>DateSigned</td>";
         echo "<td>".$cmsData['DateSigned']."</td>";
         echo "</tr>";
