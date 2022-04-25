@@ -186,8 +186,8 @@ include("../config/config.php");
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT papdailysales.ClientID,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,papdailysales.ChampName,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.ClientAvailability,papdailysales.AptLayout,papdailysales.DateSigned,papdailysales.Note from papdailysales 
-                        LEFT JOIN papnotinstalled ON papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null and papdailysales.DateSigned >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) order by papdailysales.ClientID Desc";
+                        $query  = "SELECT p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note from papdailysales AS p 
+                        LEFT JOIN papnotinstalled AS r ON r.ClientID=p.ClientID WHERE r.ClientID is null and p.DateSigned >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) order by p.ClientID Desc";
                         $result  = mysqli_query($connection, $query);
 
                             while ($row = mysqli_fetch_array($result)) {

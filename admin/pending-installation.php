@@ -96,10 +96,10 @@ include("../config/config.php");
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
         <!-- Header-->
-        <header id="header" class="header">
+        <header id="header" class="header" style="height: 65px;">
             <div class="top-left">
                 <div class="navbar-header">
-                <img src="../images/picture1.png" style="width: 120px; height: 70px;" class="logo-icon" alt="logo icon">
+                <img src="../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -162,7 +162,8 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT papdailysales.ClientAvailability,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.DateSigned,papdailysales.Region FROM papdailysales left join papinstalled on papdailysales.ClientID=papinstalled.ClientID left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papinstalled.ClientID is null and papnotinstalled.ClientID is null";
+    $sql="SELECT p.ClientAvailability,p.ClientName,p.ClientContact,p.BuildingName,p.BuildingCode,p.DateSigned,p.Region FROM papdailysales as p left join 
+    papinstalled as i on p.ClientID=i.ClientID left join papnotinstalled as r on r.ClientID=p.ClientID where i.ClientID is null and r.ClientID is null";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
