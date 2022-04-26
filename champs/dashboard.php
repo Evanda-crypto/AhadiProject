@@ -1561,21 +1561,6 @@ while ($signed = mysqli_fetch_assoc($result)) {
         data: {
             datasets: [ {
                 data: [<?php if (!$connection) {
-          echo "Problem in database connection! Contact administrator!" .
-              mysqli_error();
-      } else {
-          $sql =
-              "SELECT COUNT(papdailysales.ClientID) as signed FROM papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papnotinstalled.ClientID is null and papdailysales.ChampName='" .
-              $_SESSION["FName"] .
-              " " .
-              $_SESSION["LName"] .
-              "'";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["signed"];
-          }
-      } ?>, <?php if (!$connection) {
     echo "Problem in database connection! Contact administrator!" .
         mysqli_error();
 } else {
@@ -1605,21 +1590,6 @@ while ($signed = mysqli_fetch_assoc($result)) {
     while ($installed = mysqli_fetch_assoc($result)) {
         echo $installed["installed"];
     }
-} ?>, <?php if (!$connection) {
-    echo "Problem in database connection! Contact administrator!" .
-        mysqli_error();
-} else {
-    $sql =
-        " SELECT COUNT(turnedonpap.ClientID) as turnedon FROM turnedonpap where ChampName='" .
-        $_SESSION["FName"] .
-        " " .
-        $_SESSION["LName"] .
-        "'";
-    $result = mysqli_query($connection, $sql);
-    $chart_data = "";
-    while ($turnedon = mysqli_fetch_assoc($result)) {
-        echo $turnedon["turnedon"];
-    }
 } ?>,<?php if (!$connection) {
     echo "Problem in database connection! Contact administrator!" .
         mysqli_error();
@@ -1637,28 +1607,22 @@ while ($signed = mysqli_fetch_assoc($result)) {
     }
 } ?>],
                 backgroundColor: [
-                                    "#ee2c4e",
+                            
                                     "#ffb91f",
                                     "#0cbeaf",
-                                    "#3072f5",
-                                    "#85ce36",
-                                    "#800080"
+                                    "#3072f5"
                                 ],
                 hoverBackgroundColor: [
-                                    "#ee2c4e",
+                                 
                                     "#ffb91f",
                                     "#0cbeaf",
-                                    "#3072f5",
-                                    "#85ce36",
-                                    "#800080"
+                                    "#3072f5"
                                 ]
 
                             } ],
             labels: [
-                            "Signed",
                             "Assigned",
                             "Installed",
-                            "Turned On",
                             "Reminded"
                         ]
         },
