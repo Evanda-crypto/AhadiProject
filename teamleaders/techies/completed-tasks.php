@@ -168,17 +168,17 @@ tfoot td {
                         <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-      <th class="th-sm">Client Name
-      </th>
-      <th class="th-sm">Contact
-      </th>
       <th class="th-sm">Building Name
       </th>
       <th class="th-sm">Building Code
       </th>
       <th class="th-sm">Mac Address
       </th>
-      <th class="th-sm">Techies
+      <th class="th-sm">Techie 1
+      </th>
+      <th class="th-sm">Techie 2
+      </th>
+      <th class="th-sm">Techie 3
       </th>
       <th class="th-sm">Date Installed
       </th>
@@ -186,20 +186,20 @@ tfoot td {
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT papinstalled.ClientID,papdailysales.Region,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode,upper(papinstalled.MacAddress) as mac,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
-                        papdailysales.Region,papinstalled.DateInstalled FROM papdailysales left join papinstalled ON papinstalled.ClientID=papdailysales.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE papinstalled.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 21 DAY) and papdailysales.Region='".$_SESSION['Region']."'";
+                        $query  = "SELECT i.ClientID,p.Region,p.ClientName,p.ClientContact,p.BuildingName,p.BuildingCode,upper(i.MacAddress) as mac,t.Techie1,t.Techie2,t.Techie3,
+                        p.Region,i.DateInstalled FROM papdailysales as p left join papinstalled as i ON i.ClientID=p.ClientID left join Token_teams as t on t.Team_ID=i.Team_ID WHERE i.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 35 DAY) and p.Region='".$_SESSION['Region']."'";
                         $result  = mysqli_query($connection, $query);
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 
                         ?>
                                 <tr>
-                                    <td><?php echo $row['ClientName']; ?></td>
-                                    <td><?php echo $row['ClientContact']; ?></td>
                                     <td><?php echo $row['BuildingName']; ?></td>
                                     <td><?php echo $row['BuildingCode']; ?></td>
                                     <td><?php echo $row['mac']; ?></td>
-                                    <td><?php echo $row['techies']; ?></td>
+                                    <td><?php echo $row['Techie1']; ?></td>
+                                    <td><?php echo $row['Techie2']; ?></td>
+                                    <td><?php echo $row['Techie3']; ?></td>
                                     <td><?php echo $row['DateInstalled']; ?></td>
                                 </tr>
                         <?php
