@@ -12,6 +12,7 @@ if(isset($_POST["submit"])){
     $Note = $_POST['note'];
     $layout = $_POST['layout'];
     $status = "Installed";
+    $split = $_POST['split'];
    
        
                     // Insert image file name into database
@@ -26,7 +27,7 @@ if(isset($_POST["submit"])){
                     else{
                     $sql="update papdailysales set ClientID=$ClientID,Floor='$Floor',AptLayout='$layout',PapStatus='$status' where ClientID=$ClientID";
                     $result=mysqli_query($connection,$sql);
-                    $insert = $connection->query("INSERT into papinstalled (Team_ID,ClientID,MacAddress,SerialNumber,DateInstalled,Region,Note,Floor,AptLayout) VALUES ('$Team_ID','$ClientID','$MacAddress','$SerialNumber','$DateInstalled','$Region','$Note','$Floor','$layout')"); 
+                    $insert = $connection->query("INSERT into papinstalled (Team_ID,ClientID,MacAddress,SerialNumber,DateInstalled,Region,Note,Floor,AptLayout,split) VALUES ('$Team_ID','$ClientID','$MacAddress','$SerialNumber','$DateInstalled','$Region','$Note','$Floor','$layout','$split')"); 
 
                     if($insert && $result){
                         $_SESSION["success"] = "Submitted";

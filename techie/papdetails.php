@@ -4,7 +4,7 @@ include("../config/config.php");
 include("session.php");
 $id=$_GET['clientid'];
 
-$sql="SELECT techietask.ClientName,techietask.Region,papdailysales.AptLayout,papdailysales.Floor,papdailysales.ClientID,techietask.ClientContact,papdailysales.ClientAvailability,papdailysales.BuildingName,papdailysales.Region,techietask.Date,Token_teams.Team_ID,Token_teams.Techie1,Token_teams.Techie2,
+$sql="SELECT techietask.split,techietask.ClientName,techietask.Region,papdailysales.AptLayout,papdailysales.Floor,papdailysales.ClientID,techietask.ClientContact,papdailysales.ClientAvailability,papdailysales.BuildingName,papdailysales.Region,techietask.Date,Token_teams.Team_ID,Token_teams.Techie1,Token_teams.Techie2,
 papdailysales.BuildingCode,papdailysales.Floor from papdailysales LEFT JOIN 
 techietask on techietask.ClientID=papdailysales.ClientID LEFT JOIN Token_teams ON Token_teams.Team_ID=techietask.TeamID WHERE techietask.ClientID is not null AND techietask.ClientID=$id AND Token_teams.Team_ID='".$_SESSION['TeamID']."'";
 $result=mysqli_query($connection,$sql);
@@ -17,6 +17,7 @@ $t1=$row['Techie1'];
 $t2=$row['Techie2'];
 $floor=$row['Floor'];
 $layout=$row['AptLayout'];
+$split=$row['split'];
 
 ?>
 
@@ -211,6 +212,11 @@ $layout=$row['AptLayout'];
                                         <label for="x_card_code" class="control-label mb-1">Team ID</label>
                                         <div class="input-group">
                                         <input id="bname" name="teamid" type="text" class="form-control cc-cvc" value="<?php echo $teamid?>"   placeholder="Team ID" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="x_card_code" class="control-label mb-1">Split</label>
+                                        <div class="input-group">
+                                        <input  name="split" type="text" class="form-control cc-cvc" value="<?php echo $split?>"   placeholder="Split" readonly>
                                         </div>
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Region</label>

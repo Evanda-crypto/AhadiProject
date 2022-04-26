@@ -161,7 +161,11 @@ tfoot td {
       </th>
       <th class="th-sm">Mac Address
       </th>
-      <th class="th-sm">Techies
+      <th class="th-sm">Techie 1
+      </th>
+      <th class="th-sm">Techie 2
+      </th>
+      <th class="th-sm">Techie 3
       </th>
       <th class="th-sm">Techies Comments
       </th>
@@ -171,7 +175,7 @@ tfoot td {
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT papinstalled.Note,papinstalled.ClientID,papdailysales.Region,papdailysales.BuildingName,papdailysales.BuildingCode,upper(papinstalled.MacAddress) as mac,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
+                        $query  = "SELECT papinstalled.Note,papinstalled.ClientID,papdailysales.Region,papdailysales.BuildingName,papdailysales.BuildingCode,upper(papinstalled.MacAddress) as mac,Token_teams.Techie1,Token_teams.Techie3,Token_teams.Techie2,
                        papinstalled.DateInstalled FROM papinstalled JOIN papdailysales ON papdailysales.ClientID=papinstalled.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE papinstalled.DateInstalled=CURDATE()";
                         $result  = mysqli_query($connection, $query);
 
@@ -183,7 +187,9 @@ tfoot td {
                                     <td><?php echo $row['BuildingCode']; ?></td>
                                     <td><?php echo $row['Region']; ?></td>
                                     <td><?php echo $row['mac']; ?></td>
-                                    <td><?php echo $row['techies']; ?></td>
+                                    <td><?php echo $row['Techie1']; ?></td>
+                                    <td><?php echo $row['Techie2']; ?></td>
+                                    <td><?php echo $row['Techie3']; ?></td>
                                     <td><?php echo $row['Note']; ?></td>
 
                                 </tr>

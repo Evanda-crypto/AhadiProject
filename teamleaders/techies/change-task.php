@@ -3,7 +3,7 @@ include("session.php");
 include("../../config/config.php");
 $id=$_GET['client-id'];
 
-$sql="select * from papdailysales where ClientID=$id";
+$sql="SELECT * from papdailysales where ClientID=$id";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
 $id=$row['ClientID'];
@@ -19,32 +19,37 @@ if(isset($_POST['submit'])){
     $ClientID = $_POST['ClientID'];
     $Date = date('Y-m-d');
     $Region = $_POST['Region'];
+    $split = $_POST['split'];
+
 
     if($connection->connect_error){
         die('connection failed : '.$connection->connect_error);
     }
     else
     {    
-      $stmt= $connection->prepare("select * from Token_teams where Team_ID= ? and Region= ?");
+      $stmt= $connection->prepare("SELECT * from Token_teams where Team_ID= ? and Region= ?");
       $stmt->bind_param("ss",$TeamID,$Region);
       $stmt->execute();
       $stmt_result= $stmt->get_result();
     if($stmt_result->num_rows>0){
-        $sql="update techietask set ClientID=$id,TeamID='$TeamID',Date='$Date' where ClientID=$id";
+        $sql="UPDATE techietask set ClientID=$id,TeamID='$TeamID',Date='$Date',split='$split' where ClientID=$id";
   
         $result=mysqli_query($connection,$sql);
         if ($result) {
-          echo '<script>alert("Successfully reasigned!")</script>';
-            echo '<script>window.location.href="reasign-task.php";</script>';
+            $_SESSION["success"] = "Successfully reasigned!";
+            header("Location: reasign-task.php");
         } else {
-          echo '<script>alert("Not submitted try again!")</script>';
-            echo '<script>window.location.href="change-task.php";</script>';
+
+            $_SESSION["status"] = "Not submitted try again!";
+            header("Location: reasign-task.php");
         }
     
     }
     else{
-      echo "<script>alert('Team does not exist.');</script>";
-      echo '<script>window.location.href="reasign-task.php";</script>';
+
+        
+        $_SESSION["status"] = "Team does not exist";
+        header("Location: reasign-task.php");
     }
     }
 }
@@ -302,7 +307,12 @@ if(isset($_POST['submit'])){
                                         <form method="POST" action="">
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Team ID</label>
-                                                        <input id="cc-exp" name="teamid" type="tel" class="form-control cc-exp" value="<?php echo $_SESSION['Region']?>-"data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Team ID">
+                                                        <input id="teamid" name="teamid" type="tel" class="form-control cc-exp" onkeyup="GetDetail(this.value)" value="<?php echo $_SESSION['Region']?>-"data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Team ID">
+                                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">Members</label>
+                                                        <input id="members" name="split" type="number" class="form-control cc-exp" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;"  placeholder="Team Members">
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
                                             <div class="form-group">
@@ -366,13 +376,14 @@ if(isset($_POST['submit'])){
                                             <th scope="col">Team ID</th>
                                             <th scope="col">Techie 1</th>
                                             <th scope="col">Techie 2</th>
+                                            <th scope="col">Techie 3</th>
                                             <th scope="col">Pending Tasks</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <?php
     
-    $sql="SELECT techietask.TeamID, COUNT(techietask.TeamID) as tasks,Token_teams.Techie1,Token_teams.Techie2 FROM techietask left join papinstalled on papinstalled.ClientID=techietask.ClientID
+    $sql="SELECT techietask.TeamID, COUNT(techietask.TeamID) as tasks,Token_teams.Techie1,Token_teams.Techie2,Token_teams.Techie3 FROM techietask left join papinstalled on papinstalled.ClientID=techietask.ClientID
     left join Token_teams on techietask.TeamID=Token_teams.Team_ID WHERE papinstalled.ClientID is null and techietask.Region='".$_SESSION['Region']."' 
     GROUP BY techietask.TeamID HAVING COUNT(techietask.TeamID)>1 OR COUNT(techietask.TeamID)=1";
 $result=$connection->query($sql);
@@ -382,6 +393,7 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['TeamID']?></td>
     <td><?php echo $row['Techie1']?></td>
     <td><?php echo $row['Techie2']?></td>
+    <td><?php echo $row['Techie3']?></td>
    <td><?php echo $row['tasks']?></td>
 </tr>
 <?php } ?>
@@ -437,6 +449,49 @@ if(month<10){
 }
  mindate= year +"-" + month + "-" + todate;
  document.getElementById("work").setAttribute("min",mindate);
+</script>
+<script>
+
+// onkeyup event will occur when the user
+// release the key and calls the function
+// assigned to this event
+function GetDetail(str) {
+  if (str.length == 0) {
+    document.getElementById("teamid").value = "";
+    return;
+  }
+  else {
+
+    // Creates a new XMLHttpRequest object
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+
+      // Defines a function to be called when
+      // the readyState property changes
+      if (this.readyState == 4 &&
+          this.status == 200) {
+        
+        // Typical action to be performed
+        // when the document is ready
+        var myObj = JSON.parse(this.responseText);
+
+        // Returns the response data as a
+        // string and store this array in
+        // a variable assign the value
+        // received to first name input field
+        
+        document.getElementById
+          ("members").value = myObj[0];
+      }
+    };
+
+    // xhttp.open("GET", "filename", true);
+    xmlhttp.open("GET", "retrieve.php?teamid=" + str, true);
+    
+    // Sends the request to the server
+    xmlhttp.send();
+  }
+}
 </script>
 </body>
 </html>

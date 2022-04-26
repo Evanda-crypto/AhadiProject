@@ -1,7 +1,6 @@
 <?php
-include("session.php");
-include("../../../config/config.php");
-
+include "session.php";
+include "../../../config/config.php";
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -34,16 +33,22 @@ include("../../../config/config.php");
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
 
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-<!-- Page level plugin JavaScript--<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>-->
-
-<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>-->
 <style>
 tfoot td {
 	font-weight:bold;
@@ -127,8 +132,8 @@ tfoot td {
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="name float-left"><?php echo $_SESSION[
-                 "FName"
-             ]; ?> <?php echo $_SESSION["LName"]; ?></span>
+                            "FName"
+                        ]; ?> <?php echo $_SESSION["LName"]; ?></span>
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -152,11 +157,11 @@ tfoot td {
         <table border="0" cellspacing="5" cellpadding="5">
         <tbody><tr>
             <td>Start date:</td>
-            <td><input type="text" id="min" placeholder="Start Date" style="color:red;" class="form-control" name="min"></td>
+            <td><input type="text" id="min" placeholder="Start Date" style="color:black;" class="form-control" name="min"></td>
         </tr>
         <tr>
             <td>End date:</td>
-            <td><input type="text" id="max" placeholder="End Date"   class="form-control" name="max"></td>
+            <td><input type="text" id="max" placeholder="End Date" style="color:black;"  class="form-control" name="max"></td>
         </tr>
     </tbody></table>
                         </div>
@@ -172,39 +177,41 @@ tfoot td {
       </th>
       <th class="th-sm">Mac Address
       </th>
-      <th class="th-sm">Techies
+      <th class="th-sm">Techie 1
+      </th>
+      <th class="th-sm">Techie 2
+      </th>
+      <th class="th-sm">Techie 3
       </th>
       <th class="th-sm">Date Installed
       </th>
-      <th class="th-sm">Total Amount
-      </th>
-      <th class="th-sm">Amount Per Techie
+      <th class="th-sm">Labour Cost
       </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT papinstalled.ClientID,papdailysales.Region,papdailysales.BuildingName,papdailysales.BuildingCode,upper(papinstalled.MacAddress) as mac,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
-                        papdailysales.Region,papinstalled.DateInstalled FROM papdailysales left join papinstalled ON papinstalled.ClientID=papdailysales.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE papinstalled.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 21 DAY)";
-                        $result  = mysqli_query($connection, $query);
+                                $query = "SELECT i.ClientID,p.Region,p.BuildingName,p.BuildingCode,upper(i.MacAddress) as mac,t.Techie1,t.Techie2,t.Techie3,FLOOR(300/i.split) as amount,
+                        p.Region,i.DateInstalled FROM papdailysales as p left join papinstalled as i ON i.ClientID=p.ClientID left join Token_teams as t on t.Team_ID=i.Team_ID 
+                        WHERE i.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 35 DAY)";
+                                $result = mysqli_query($connection, $query);
 
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                
-                        ?>
+                                while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
-                                    <td><?php echo $row['BuildingName']; ?></td>
-                                    <td><?php echo $row['BuildingCode']; ?></td>
-                                    <td><?php echo $row['Region']; ?></td>
-                                    <td><?php echo $row['mac']; ?></td>
-                                    <td><?php echo $row['techies']; ?></td>
-                                    <td><?php echo $row['DateInstalled']; ?></td>
-                                    <td>300</td>
-                                    <td>150</td>
+                                    <td><?php echo $row["BuildingName"]; ?></td>
+                                    <td><?php echo $row["BuildingCode"]; ?></td>
+                                    <td><?php echo $row["Region"]; ?></td>
+                                    <td><?php echo $row["mac"]; ?></td>
+                                    <td><?php echo $row["Techie1"]; ?></td>
+                                    <td><?php echo $row["Techie2"]; ?></td>
+                                    <td><?php echo $row["Techie3"]; ?></td>
+                                    <td><?php echo $row[
+                                        "DateInstalled"
+                                    ]; ?></td>
+                                    <td><?php echo $row["amount"]; ?></td>
                                 </tr>
-                        <?php
-
-                            }
-                        ?>
+                        <?php }
+                                ?>
                                 </tbody>
                             </table>
                         </div>
@@ -245,7 +252,7 @@ var minDate, maxDate;
      function( settings, data, dataIndex ) {
          var min = minDate.val();
          var max = maxDate.val();
-         var date = new Date( data[5] );
+         var date = new Date( data[7] );
   
          if (
              ( min === null && max === null ) ||
@@ -275,18 +282,24 @@ $(document).ready(function() {
      });
     var table = $('#example').DataTable(
         {
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "scrollY":        "700px",
         "scrollCollapse": true,
-        "pagingType": "full_numbers"
+        "pagingType": "full_numbers",
+        "processing": true,
+		 "dom": 'lBfrtip',
+		 "buttons": [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: [
+                    'excel',
+                    'csv'
+                ]
+            }
+        ]
         }
     );
- 
-    $('<button class="btn btn-success" style="margin-bottom:10px; margin-left:70px;">Show Total</button>')
-        .prependTo( '#demo' )
-        .on( 'click', function () {
-            alert( 'Total Amount[All Techies]: '+ '   Ksh ' + table.column( 6, {page:'current'} ).data().sum() + '\n' + '\n' +'Total Amount[Divided by 2]: '+ 'Ksh ' + table.column( 7, {page:'current'} ).data().sum() );
-        } );
 } );
   </script>
 </body>

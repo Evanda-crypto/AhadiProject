@@ -3,7 +3,7 @@ include("session.php");
 include("../../config/config.php");
 $id=$_GET['clientid'];
 
-$sql="select papinstalled.ClientID,papinstalled.MacAddress,papinstalled.DateInstalled,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode from papinstalled left join papdailysales on papdailysales.ClientID=papinstalled.ClientID where papinstalled.ClientID=$id";
+$sql="SELECT papinstalled.split,papinstalled.ClientID,papinstalled.MacAddress,papinstalled.DateInstalled,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode from papinstalled left join papdailysales on papdailysales.ClientID=papinstalled.ClientID where papinstalled.ClientID=$id";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
 $mac=$row['MacAddress'];
@@ -12,6 +12,7 @@ $bcode=$row['BuildingCode'];
 $contact=$row['ClientContact'];
 $cname=$row['ClientName'];
 $date=$row['DateInstalled'];
+$split=$row['split'];
 
 
 if(isset($_POST['submit'])){
@@ -308,7 +309,11 @@ else
                                             <input id="cc-number" value="<?php echo $mac?>" pattern="[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}"
                                              name="macaddress" style="text-transform: uppercase" type="text" class="form-control cc-number identified visa"  data-val="true" required placeholder="Format AB-CD-EF-GH-IJ-KL" > 
                                             </div>
-                                            
+                                            <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">Members</label>
+                                                        <input id="members" name="members" type="number" value="<?php echo $split?>" class="form-control cc-exp" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;"  placeholder="Team Members">
+                                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                    </div>
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Building Name</label>
                                                 <input id="cc-pament" name="bname"  type="text" value="<?php echo $bname?>" readonly class="form-control" aria-required="true" aria-invalid="false" placeholder="Team ID">
@@ -359,14 +364,13 @@ else
                                             <tr>
                                             <th scope="col">No</th>
                     <th>Team ID</th>
-                    <th>Techies</th>
                     <th>Mac Address</th>
                     <th>Date Installed</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <?php
-                        $query  = "SELECT papinstalled.ClientID,Token_teams.Team_ID,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID 
+                        $query  = "SELECT papinstalled.ClientID,Token_teams.Team_ID,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID 
                         FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID WHERE papinstalled.ClientID is NOT null and turnedonpap.ClientID is null and papinstalled.Region='".$_SESSION['Region']."' ORDER BY papinstalled.DateInstalled ASC";
                         $result  = mysqli_query($connection, $query);
 
@@ -380,7 +384,6 @@ else
                                 <tr>
                                     <th><?php echo $num; ?></th>
                                     <td><?php echo $row['Team_ID']?></td>
-                                    <td><?php echo $row['techies']?></td>
                                     <td><?php echo $row['Mac']?></td>
                                     <td><?php echo $row['DateInstalled']?></td>
                                 </tr>

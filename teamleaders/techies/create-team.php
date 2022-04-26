@@ -6,8 +6,10 @@ if(isset($_POST['submit'])){
     $Team_ID=$_POST['teamid'];
     $Techie1 = $_POST['Techie1'];
     $Techie2 = $_POST['Techie2'];
+    $Techie3 = $_POST['Techie3'];
     $password = $_POST['password'];
     $Region = $_POST['region'];
+    $members = $_POST['members'];
 
     $hassh= password_hash($password, PASSWORD_DEFAULT);
     
@@ -17,7 +19,7 @@ if(isset($_POST['submit'])){
     }
     else
     {
-      $stmt= $connection->prepare("select * from Token_teams where Team_ID= ?");
+      $stmt= $connection->prepare("SELECT Team_ID from Token_teams where Team_ID= ?");
       $stmt->bind_param("s",$Team_ID);
       $stmt->execute();
      $stmt_result= $stmt->get_result();
@@ -31,10 +33,10 @@ if(isset($_POST['submit'])){
      }
      else{
          //Insert query
-        $stmt= $connection->prepare("insert into Token_teams (Team_ID,Techie1,Techie2,Region,Password)
-        values(?,?,?,?,?)");
+        $stmt= $connection->prepare("INSERT INTO Token_teams (Team_ID,Techie1,Techie2,Techie3,Region,Password,members)
+        values(?,?,?,?,?,?,?)");
            //values from the fields
-        $stmt->bind_param("sssss",$Team_ID,$Techie1,$Techie2,$Region,$hassh);
+        $stmt->bind_param("sssssss",$Team_ID,$Techie1,$Techie2,$Techie3,$Region,$hassh,$members);
         $stmt->execute();
         echo "<script>alert('New team created successfully');</script>";
         echo '<script>window.location.href="create-team.php";</script>';
@@ -305,14 +307,31 @@ if(isset($_POST['submit'])){
                                             <div class="form-group has-success">
                                                 <label for="cc-name" class="control-label mb-1">Techie 1</label>
                                                 <input id="cc-name" name="Techie1" type="text" class="form-control cc-name valid"  data-val="true" placeholder="Techie 1 Full Names"
-                                                    autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                    autocomplete="cc-name" required aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group has-success">
                                                 <label for="cc-name" class="control-label mb-1">Techie 2</label>
                                                 <input id="cc-name" name="Techie2" type="text" class="form-control cc-name valid"  data-val="true" placeholder="Techie 2 Full Names"
-                                                    autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                    autocomplete="cc-name"  required aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="cc-name" class="control-label mb-1">Techie 3</label>
+                                                <input id="cc-name" name="Techie3" type="text" class="form-control cc-name valid"  data-val="true" placeholder="Techie 3 Full Names"
+                                                    autocomplete="cc-name"  aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Members</label>
+                                                <div class="form-group has-success">
+                                            <select data-placeholder="Choose a Number..." class="standardSelect form-control" name="members" tabindex="1" required>
+                                            <option disabled selected>Select No of Team Members</option>
+                                            <option value="3">3</option>
+                                              <option value="2">2</option>
+                                              <option value="1">1</option>
+                                              </select>
+                                            </div>
                                             </div>
                                             <div class="form-group has-success">
                                                 <label for="cc-name" class="control-label mb-1">Region</label>
@@ -352,12 +371,13 @@ if(isset($_POST['submit'])){
                                             <th scope="col">Team ID</th>
                                             <th scope="col">Techie 1</th>
                                             <th scope="col">Techie 2</th>
+                                            <th scope="col">Techie 3</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                         <?php
-                    $query = "select * from Token_teams where Region='".$_SESSION['Region']."' order by Team_ID ASC";
+                    $query = "SELECT Team_ID,Techie1,Techie2,Techie3 from Token_teams where Region='".$_SESSION['Region']."' order by Team_ID ASC";
                     $result = mysqli_query($connection, $query);
 
                     $num_rows = mysqli_num_rows($result);
@@ -371,6 +391,7 @@ if(isset($_POST['submit'])){
                                     <td><?php echo $row["Team_ID"]; ?></td>
                                     <td><?php echo $row["Techie1"]; ?></td>
                                     <td><?php echo $row["Techie2"]; ?></td>
+                                    <td><?php echo $row["Techie3"]; ?></td>
                         <?php
                         }
                     }

@@ -257,7 +257,9 @@ include("../../config/config.php");
                     <th>Client Name</th>
                    <th>Contact</th>
                   <th>Building Name</th>
-                    <th>Techies</th>
+                    <th>Techie 1</th>
+                    <th>Techie 2</th>
+                    <th>Techie 3</th>
                     <th>Mac Address</th>
                     <th>Date Installed</th>
                     <th>Edit mac</th>
@@ -266,7 +268,7 @@ include("../../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT papdailysales.ClientName,papdailysales.BuildingName,papdailysales.ClientContact,papinstalled.ClientID,Token_teams.Team_ID,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID 
+    $sql="SELECT papdailysales.ClientName,papdailysales.BuildingName,papdailysales.ClientContact,papinstalled.ClientID,Token_teams.Team_ID,Token_teams.Techie1,Token_teams.Techie3,Token_teams.Techie2,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID 
     FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID left join papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE papinstalled.ClientID is NOT null and turnedonpap.ClientID is null and papinstalled.Region='".$_SESSION['Region']."' ORDER BY papinstalled.DateInstalled ASC";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
@@ -275,7 +277,9 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['ClientName']?></td>
     <td><?php echo $row['ClientContact']?></td>
    <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['techies']?></td>
+    <td><?php echo $row['Techie1']?></td>
+    <td><?php echo $row['Techie2']?></td>
+    <td><?php echo $row['Techie3']?></td>
     <td><?php echo $row['Mac']?></td>
     <td><?php echo $row['DateInstalled']?></td>
     <td>

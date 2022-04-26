@@ -160,7 +160,7 @@ else
                                     <div class="card-header"></div>
                                     <div class="card-body">
                                         <div class="card-title">
-                                            <h3 class="text-center title-2">New user</h3>
+                                            <h3 class="text-center title-2">Edit User Info</h3>
                                         </div>
                                         <hr>
                                         <form method="POST" action="">
