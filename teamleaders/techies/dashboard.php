@@ -452,13 +452,15 @@ if (!$connection) {
                                     <tr>
                                     <th>No</th>
                     <th>Team ID</th>
-                    <th>Techies</th>
+                    <th>Techie 1</th>
+                    <th>Techie 2</th>
+                    <th>Techie 3</th>
                     <th>Installed Today</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-                      $query  = "SELECT papinstalled.Team_ID,COUNT(papinstalled.Team_ID) as installed,Token_teams.Team_ID,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies from 
+                      $query  = "SELECT papinstalled.Team_ID,COUNT(papinstalled.Team_ID) as installed,Token_teams.Team_ID,Token_teams.Techie1,Token_teams.Techie2,Token_teams.Techie3 from 
                       papinstalled left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE papinstalled.DateInstalled=CURRENT_DATE() and papinstalled.Region='".$_SESSION['Region']."' GROUP BY papinstalled.Team_ID order by installed DESC";
                         $result  = mysqli_query($connection, $query);
 
@@ -472,7 +474,9 @@ if (!$connection) {
                                 <tr>
                                     <td><?php echo $num; ?></td>
                                     <td><?php echo $row['Team_ID']; ?></td>
-                                    <td><?php echo $row['techies']; ?></td>
+                                    <td><?php echo $row['Techie1']; ?></td>
+                                    <td><?php echo $row['Techie2']; ?></td>
+                                    <td><?php echo $row['Techie3']; ?></td>
                                     <td><?php echo $row['installed']; ?></td>
                                 </tr>
                         <?php
@@ -498,13 +502,14 @@ if (!$connection) {
                                             <th scope="col">Team ID</th>
                                             <th scope="col">Techie 1</th>
                                             <th scope="col">Techie 2</th>
+                                            <th scope="col">Techie 3</th>
                                             <th scope="col">Pending Tasks</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <?php
     
-    $sql="SELECT techietask.TeamID, COUNT(techietask.TeamID) as tasks,Token_teams.Techie1,Token_teams.Techie2 FROM techietask left join papinstalled on papinstalled.ClientID=techietask.ClientID
+    $sql="SELECT techietask.TeamID, COUNT(techietask.TeamID) as tasks,Token_teams.Techie1,Token_teams.Techie2,Token_teams.Techie3 FROM techietask left join papinstalled on papinstalled.ClientID=techietask.ClientID
     left join Token_teams on techietask.TeamID=Token_teams.Team_ID WHERE papinstalled.ClientID is null and techietask.Region='".$_SESSION['Region']."' 
     GROUP BY techietask.TeamID HAVING COUNT(techietask.TeamID)>1 OR COUNT(techietask.TeamID)=1";
 $result=$connection->query($sql);
@@ -514,6 +519,7 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['TeamID']?></td>
     <td><?php echo $row['Techie1']?></td>
     <td><?php echo $row['Techie2']?></td>
+    <td><?php echo $row['Techie3']?></td>
    <td><?php echo $row['tasks']?></td>
 </tr>
 <?php } ?>
