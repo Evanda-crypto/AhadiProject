@@ -209,8 +209,9 @@ include("../config/config.php");
                                 <table class="table table-striped" id="example">
                                     <thead>
                                         <tr>
-                                        <th scope="th-sm">TeamID</th>
-                                        <th scope="th-sm">Techies</th>
+                                        <th scope="th-sm">Techie 1</th>
+                                        <th scope="th-sm">Techie 2</th>
+                                        <th scope="th-sm">Techie 3</th>
                                         <th scope="th-sm">Date</th>
                                         <th scope="th-sm">Amount[1 Techie]</th>
                                       </tr>
@@ -218,17 +219,18 @@ include("../config/config.php");
                                   <tbody>
                                   <?php
                                   $query = 
-                                      "SELECT papinstalled.ClientID,papinstalled.Team_ID,papinstalled.DateInstalled,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
-                                      papdailysales.Region,papinstalled.DateInstalled FROM papdailysales left join papinstalled ON papinstalled.ClientID=papdailysales.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE papinstalled.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 21 DAY)";
+                                      "SELECT i.ClientID,i.Team_ID,i.DateInstalled,t.Techie1,t.Techie2,t.Techie3,FLOOR(300/i.split) as amount,
+                                      p.Region,i.DateInstalled FROM papdailysales as p left join papinstalled as i ON i.ClientID=p.ClientID left join Token_teams as t on t.Team_ID=i.Team_ID WHERE i.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 35 DAY)";
                                  $result  = mysqli_query($connection, $query);
                                   while ($row = mysqli_fetch_assoc($result)) {
                             
                                     ?>
                                             <tr>
-                                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="gettaskinfo.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['Team_ID']; ?></a></td>
-                                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="gettaskinfo.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['techies']; ?></a></td>
+                                            <td><a data-toggle="modal" data-target="#mediumModal" data-href="gettaskinfo.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['Techie1']; ?></a></td>
+                                            <td><a data-toggle="modal" data-target="#mediumModal" data-href="gettaskinfo.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['Techie2']; ?></a></td>
+                                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="gettaskinfo.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['Techie3']; ?></a></td>
                                                 <td><a data-toggle="modal" data-target="#mediumModal" data-href="gettaskinfo.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['DateInstalled']; ?></a></td>
-                                                <td>150</td>
+                                                <td><?php echo $row['amount']; ?></td>
                                                
                                             </tr>
                                     <?php
@@ -295,7 +297,7 @@ var minDate, maxDate;
      function( settings, data, dataIndex ) {
          var min = minDate.val();
          var max = maxDate.val();
-         var date = new Date( data[2] );
+         var date = new Date( data[3] );
   
          if (
              ( min === null && max === null ) ||
@@ -325,7 +327,9 @@ $(document).ready(function() {
      });
     var table = $('#example').DataTable(
         {
-    "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]]
+          "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
+          "scrollY":        "500px",
+        "scrollCollapse": true
         }
     );
     
@@ -333,7 +337,7 @@ $(document).ready(function() {
     $('<button class="btn btn-success" style="margin-bottom:10px; margin-left:70px;">Calculate</button>')
         .prependTo( '#payment' )
         .on( 'click', function () {
-            alert( 'Total Amount: '+ 'Ksh ' + table.column( 3, {page:'current'} ).data().sum() );
+            alert( 'Total Amount: '+ 'Ksh ' + table.column( 4, {page:'current'} ).data().sum() );
         } );
 } );
   </script>

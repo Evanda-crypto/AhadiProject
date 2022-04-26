@@ -17,6 +17,7 @@ $split=$row['split'];
 
 if(isset($_POST['submit'])){
 $Mac = $_POST['macaddress'];
+$members = $_POST['members'];
 
 //checking if connection is not created successfully
 if($connection->connect_error){
@@ -24,7 +25,7 @@ if($connection->connect_error){
 }
 else
 {
-    $stmt= $connection->prepare("select * from papinstalled where MacAddress= ?");
+    $stmt= $connection->prepare("SELECT * from papinstalled where MacAddress= ?");
     $stmt->bind_param("s",$MacAddress);
     $stmt->execute();
     $stmt_result= $stmt->get_result();
@@ -33,7 +34,7 @@ else
       echo '<script>window.location.href="edit-mac.php";</script>';
     }
     else{
-  $query="update papinstalled set ClientID=$id,MacAddress='$Mac' where ClientID=$id";
+  $query="UPDATE papinstalled set ClientID=$id,MacAddress='$Mac',split='$members' where ClientID=$id";
   $result=mysqli_query($connection,$query);
   if ($result) {
     echo '<script>alert("Update Successfull!")</script>';

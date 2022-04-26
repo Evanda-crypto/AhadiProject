@@ -280,23 +280,23 @@ include("../config/config.php");
                             </div>
                         </div></a>
                     </div>
-                    <div class="col-lg-3 col-md-6"><a href="completed-tasks.php">
+                    <div class="col-lg-3 col-md-6"><a href="restituted.php">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
                                     <div class="stat-icon dib flat-color-2">
-                                        <i class="pe-7s-cash"></i>
+                                        <i class="pe-7s-attention"></i>
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
-                                             $query="SELECT (COUNT(*)*150) as amount from papinstalled where DateInstalled>=DATE_ADD(CURDATE(), INTERVAL -13 DAY) and Team_ID='".$_SESSION['TeamID']."'";
+                                             $query="SELECT (COUNT(*)) as restituted from papnotinstalled where TeamID='".$_SESSION['TeamID']."'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['amount']."<br><br>";
+                                             echo $row['restituted']."<br><br>";
                                               }
                                               ?></span></div>
-                                            <div class="stat-heading">Amount[1 Techie][Last 14 days]</div>
+                                            <div class="stat-heading">Restituted</div>
                                         </div>
                                     </div>
                                 </div>
