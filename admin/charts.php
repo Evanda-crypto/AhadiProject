@@ -1380,7 +1380,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?> ],
                     borderColor: "#0CBEAF",
                     borderWidth: "2",
-                    backgroundColor: "transparent"
+                    backgroundColor: "rgba(40, 169, 42, .9)"
                             },
                 {
                     label: "Restituted",
@@ -1443,7 +1443,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
       ?> ],
                     borderColor: "#EE2C4E",
                     borderWidth: "2",
-                    backgroundColor: "transparent"
+                    backgroundColor: "rgba(245, 23, 66,.5)"
                             },
                 {
                     label: "Installed",
@@ -1506,7 +1506,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?> ],
                     borderColor: "#3972F5",
                     borderWidth: "2",
-                    backgroundColor: "transparent"
+                    backgroundColor: "rgba(4, 73, 203,.7)"
                             },
                 {
                     label: "Turned On",
@@ -1569,7 +1569,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?> ],
                     borderColor: "#85CE36",
                     borderWidth: "2",
-                    backgroundColor: "transparent"
+                    backgroundColor: "rgba(0, 194, 147, 0.9)"
                             }
                         ]
         },
