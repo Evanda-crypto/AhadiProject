@@ -1380,7 +1380,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?> ],
                     borderColor: "#0CBEAF",
                     borderWidth: "2",
-                    backgroundColor: "rgba(40, 169, 42, .9)"
+                    backgroundColor: "rgba(40, 169, 46, .5)"
                             },
                 {
                     label: "Restituted",
@@ -1569,7 +1569,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?> ],
                     borderColor: "#85CE36",
                     borderWidth: "2",
-                    backgroundColor: "rgba(0, 194, 147, 0.9)"
+                    backgroundColor: "rgba(0, 194, 146, 0.5)"
                             }
                         ]
         },
