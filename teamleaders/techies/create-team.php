@@ -323,16 +323,12 @@ if(isset($_POST['submit'])){
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Members</label>
-                                                <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Number..." class="standardSelect form-control" name="members" tabindex="1" required>
-                                            <option disabled selected>Select No of Team Members</option>
-                                            <option value="3">3</option>
-                                              <option value="2">2</option>
-                                              <option value="1">1</option>
-                                              </select>
-                                            </div>
-                                            </div>
+                                                        <label for="cc-exp" class="control-label mb-1">Members</label>
+                                                        <input  name="members" type="tel" pattern="[1-3]{1}" id="members" name="ClientContact" placeholder="Number of Team Members 1-3" required class="form-control cc-exp" 
+                                                            data-val-cc-exp="Please enter a valid month and year" 
+                                                            autocomplete="cc-exp">
+                                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                    </div>
                                             <div class="form-group has-success">
                                                 <label for="cc-name" class="control-label mb-1">Region</label>
                                                 <input id="cc-name" name="region" type="text" class="form-control cc-name valid"  data-val="true" placeholder="Region"
