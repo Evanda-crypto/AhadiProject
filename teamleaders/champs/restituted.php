@@ -163,7 +163,7 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Restituted</strong></center>
+                           <center> <strong class="card-title">Restituted[<?php echo $_SESSION['Region'];?>]</strong></center>
                         </div>
                          <div class="card-body">
                         <?php
@@ -195,8 +195,7 @@ include("../../config/config.php");
                      <th>Contact</th>
                      <th>Building Name</th>
                      <th>BuildingCode</th>
-                     <th>ChampName</th>
-                     <th>Region</th>
+                     <th>Champ</th>
                      <th>Techies</th>
                      <th>Restituted Date</th>
                     <th>Reason</th>
@@ -208,7 +207,7 @@ include("../../config/config.php");
                                
  <?php
  $query =
-     "SELECT papnotinstalled.ClientID,papnotinstalled.ClientName,papnotinstalled.BuildingName,papnotinstalled.BuildingCode,papnotinstalled.Region,papnotinstalled.Floor,papnotinstalled.DateSigned,papnotinstalled.Reason,papnotinstalled.Contact,papnotinstalled.ChampName,papnotinstalled.RestitutedDate,CONCAT(papnotinstalled.Techie1,'/',papnotinstalled.Techie2) as techies from papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID where trash.ClientID is null and papnotinstalled.Reason<>'Already Installed' and papnotinstalled.Region='".$_SESSION['Region']."' order by DateSigned Desc";
+     "SELECT p.ClientID,p.ClientName,p.BuildingName,p.BuildingCode,p.Floor,p.DateSigned,p.Reason,p.Contact,p.ChampName,p.RestitutedDate,CONCAT(p.Techie1,'/',p.Techie2) as techies from papnotinstalled as p  where  p.Reason<>'Already Installed' and p.Region='".$_SESSION['Region']."' order by DateSigned Desc";
  $result = mysqli_query($connection, $query);
  while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
@@ -217,7 +216,6 @@ include("../../config/config.php");
                                     <td><?php echo $row["BuildingName"]; ?></td>
                                     <td><?php echo $row["BuildingCode"]; ?></td>
                                     <td><?php echo $row["ChampName"]; ?></td>
-                                    <td><?php echo $row["Region"]; ?></td>
                                     <td><?php echo $row["techies"]; ?></td>
                                    <td><?php echo $row["RestitutedDate"]; ?></td>
                                     <td><?php echo $row["Reason"]; ?></td>

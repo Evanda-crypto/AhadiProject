@@ -193,7 +193,7 @@ include("../../config/config.php");
                      <th>Building Name</th>
                      <th>Building Code</th>
                      <th>Region</th>
-                     <th>ChampName</th>
+                     <th>Champ</th>
                      <th>Client Name</th>
                      <th>Client Contact</th>
                      <th>Date Signed</th>

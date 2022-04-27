@@ -176,9 +176,7 @@ include("../../config/config.php");
                    </th>
                    <th class="th-sm">Building Code
                    </th>
-                   <th class="th-sm">Region
-                  </th>
-                   <th class="th-sm">Champ Name
+                   <th class="th-sm">Champ
                    </th>
                    <th class="th-sm">Client Name
                    </th>
@@ -193,7 +191,7 @@ include("../../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT turnedonpap.ClientID,papdailysales.BuildingName,upper(papdailysales.BuildingCode) as bcode,upper(papdailysales.Region) as reg,turnedonpap.ChampName,turnedonpap.ClientName,papdailysales.ClientContact,Upper(turnedonpap.MacAddress) as Mac,turnedonpap.PapStatus,turnedonpap.DateTurnedOn, CASE WHEN LENGTH(papdailysales.BuildingCode)>11 THEN CONCAT(papdailysales.BuildingCode,'-',(row_number() over(partition by papdailysales.BuildingCode)),'P')
+    $sql="SELECT turnedonpap.ClientID,papdailysales.BuildingName,upper(papdailysales.BuildingCode) as bcode,turnedonpap.ChampName,turnedonpap.ClientName,papdailysales.ClientContact,Upper(turnedonpap.MacAddress) as Mac,turnedonpap.PapStatus,turnedonpap.DateTurnedOn, CASE WHEN LENGTH(papdailysales.BuildingCode)>11 THEN CONCAT(papdailysales.BuildingCode,'-',(row_number() over(partition by papdailysales.BuildingCode)),'P')
     WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) <=9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,'0',(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
     WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) >9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
     end as papcode from papdailysales LEFT JOIN turnedonpap ON turnedonpap.ClientID=papdailysales.ClientID WHERE papdailysales.Region='".$_SESSION['Region']."' and DateTurnedOn >= DATE_SUB(CURDATE(), INTERVAL 70 DAY) order by turnedonpap.DateTurnedOn Desc";
@@ -204,7 +202,6 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['papcode']?></td>
     <td><?php echo $row['BuildingName']?></td>
     <td><?php echo $row['bcode']?></td>
-    <td><?php echo $row['reg']?></td>
     <td><?php echo $row['ChampName']?></td>
     <td><?php echo $row['ClientName']?></td>
     <td><?php echo $row['ClientContact']?></td>
