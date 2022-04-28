@@ -4,7 +4,7 @@ $output=array();
 $output['turnedon']=array();
 
 if ($connection) {
-    $sql = "SELECT turnedonpap.BuildingCode,papdailysales.BuildingName,upper(papdailysales.BuildingCode) as bcode,upper(papdailysales.Region) as reg,turnedonpap.ChampName,turnedonpap.Region,papdailysales.ClientContact,Upper(turnedonpap.MacAddress) as Mac,turnedonpap.PapStatus,turnedonpap.DateTurnedOn, CASE WHEN LENGTH(papdailysales.BuildingCode)>11 THEN CONCAT(papdailysales.BuildingCode,'-',(row_number() over(partition by papdailysales.BuildingCode)),'P')
+    $sql = "SELECT turnedonpap.ClientID,papdailysales.BuildingName,upper(papdailysales.BuildingCode) as bcode,upper(papdailysales.Region) as reg,turnedonpap.ChampName,turnedonpap.Region,papdailysales.ClientContact,Upper(turnedonpap.MacAddress) as Mac,turnedonpap.PapStatus,turnedonpap.DateTurnedOn, CASE WHEN LENGTH(papdailysales.BuildingCode)>11 THEN CONCAT(papdailysales.BuildingCode,'-',(row_number() over(partition by papdailysales.BuildingCode)),'P')
 WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) <=9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,'0',(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
 WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) >9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
 end as papcode from papdailysales LEFT JOIN turnedonpap ON turnedonpap.ClientID=papdailysales.ClientID WHERE DateTurnedOn >= DATE_SUB(CURDATE(), INTERVAL 70 DAY) order by turnedonpap.DateTurnedOn Desc";
@@ -16,9 +16,11 @@ end as papcode from papdailysales LEFT JOIN turnedonpap ON turnedonpap.ClientID=
         while ($row = mysqli_fetch_assoc($result)) {
            extract($row);
            $item=array(
+            'id' =>$row['ClientID'],
             'papcode' =>$row['papcode'],
-            'BuildingName' =>$row['BuildingName'],
-            'BuildingCode' =>$row['BuildingCode'],
+            'Mac' =>$row['Mac'],
+            'bname' =>$row['BuildingName'],
+            'bcode' =>$row['bcode'],
             'Region' =>$row['Region'],
             'Contact' =>$row['ClientContact'],
            );
