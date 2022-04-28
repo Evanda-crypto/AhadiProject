@@ -10,13 +10,13 @@ if (!$connection) {
         mysqli_error();
 } else {
     $sql =
-        "SELECT papinstalled.Region,COUNT(papinstalled.MacAddress) as pap FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on
+        "SELECT Upper(papinstalled.Region) as reg,COUNT(papinstalled.MacAddress) as pap FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on
          papinstalled.ClientID=turnedonpap.ClientID JOIN papdailysales on 
         papdailysales.ClientID=papinstalled.ClientID WHERE papinstalled.ClientID is NOT null and turnedonpap.ClientID is null GROUP BY papinstalled.Region";
     $result = mysqli_query($connection, $sql);
     $chart_data = "";
     while ($row = mysqli_fetch_array($result)) {
-        $Region[] = $row["Region"];
+        $Region[] = $row["reg"];
         $Clients[] = $row["pap"];
     }
 }
