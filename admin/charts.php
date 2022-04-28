@@ -893,7 +893,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?> ],
                     borderColor: "#85CE36",
                     borderWidth: "2",
-                    backgroundColor: "rgba(4, 73, 203,.5)"
+                    backgroundColor: "transparent"
                             },
                 {
                     label: "Best Region",
@@ -977,7 +977,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?>" ],
                     borderColor: "#FFB91F",
                     borderWidth: "2",
-                    backgroundColor: "rgba(40, 169, 46, .5)"
+                    backgroundColor: "transparent"
                             },
                 {
                     label: "Least Region",
@@ -1061,7 +1061,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?>"],
                     borderColor: "#FE2D38",
                     borderWidth: "2",
-                    backgroundColor: "rgba(245, 23, 66,.5)"
+                    backgroundColor: "transparent"
                             }
                         ]
         },
@@ -1380,7 +1380,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?> ],
                     borderColor: "#0CBEAF",
                     borderWidth: "2",
-                    backgroundColor: "rgba(40, 169, 46, .5)"
+                    backgroundColor: "transparent"
                             },
                 {
                     label: "Restituted",
@@ -1443,7 +1443,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
       ?> ],
                     borderColor: "#EE2C4E",
                     borderWidth: "2",
-                    backgroundColor: "rgba(245, 23, 66,.5)"
+                    backgroundColor: "transparent"
                             },
                 {
                     label: "Installed",
@@ -1506,7 +1506,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?> ],
                     borderColor: "#3972F5",
                     borderWidth: "2",
-                    backgroundColor: "rgba(4, 73, 203,.7)"
+                    backgroundColor: "transparent"
                             },
                 {
                     label: "Turned On",
@@ -1569,7 +1569,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?> ],
                     borderColor: "#85CE36",
                     borderWidth: "2",
-                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+                    backgroundColor: "transparent"
                             }
                         ]
         },
