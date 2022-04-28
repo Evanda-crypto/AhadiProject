@@ -271,9 +271,10 @@ include("../../config/config.php");
                      <th>Building Name</th>
                      <th>Building Code</th>
                      <th>Door No</th>
-                    <th>Champ Name</th>
+                    <th>Champ</th>
                      <th>Client Name</th>
                      <th>Client Contact</th>
+                     <th>Date Signed</th>
                      <th>Availability</th>
                      <th>Champs Comment</th>
                      <th>More</th>
@@ -282,14 +283,16 @@ include("../../config/config.php");
                                   </thead>
                                   <tbody>
                                   <?php
-    $query=mysqli_query($connection,"SELECT DISTINCT papdailysales.ClientID,papdailysales.ClientName,papdailysales.Apt,papdailysales.ClientContact,papdailysales.ClientAvailability,papdailysales.Note,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.ChampName from papdailysales LEFT OUTER JOIN techietask on techietask.ClientID=papdailysales.ClientID left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID
-    WHERE techietask.ClientID is null and papnotinstalled.clientID is null and papdailysales.Region='".$_SESSION['Region']."'");
+    $query=mysqli_query($connection,"SELECT DISTINCT p.ClientID,p.ClientName,p.Apt,p.ClientContact,p.ClientAvailability,p.Note,p.BuildingName,p.BuildingCode,p.ChampName,p.DateSigned from 
+    papdailysales as p LEFT OUTER JOIN techietask as t on t.ClientID=p.ClientID left join papnotinstalled as r on r.ClientID=p.ClientID
+    WHERE t.ClientID is null and r.clientID is null and p.Region='".$_SESSION['Region']."'");
     while($row=mysqli_fetch_assoc($query)){
       $id=$row['ClientID'];
       $cname=$row['ClientName'];
        $champ=$row['ChampName'];
       $contact=$row['ClientContact'];
       $availD=$row['ClientAvailability'];
+      $date=$row['DateSigned'];
       $bname=$row['BuildingName'];
       $bcode=$row['BuildingCode'];
       $note=$row['Note'];
@@ -302,6 +305,7 @@ include("../../config/config.php");
      <td>'.$champ.'</td>
       <td>'.$cname.'</td>
       <td>'.$contact.'</td>
+      <td>'.$date.'</td>
       <td>'.$availD.'</td>
       <td>'.$note.'</td>
       
