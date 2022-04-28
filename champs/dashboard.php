@@ -343,7 +343,7 @@ if (!$connection) {
          $query = "SELECT ChampName,Count(*) as bestchamp from papdailysales where DateSigned =CURDATE() group by ChampName order by bestchamp DESC limit 1";
          $result = mysqli_query($connection, $query);
          while ($row = mysqli_fetch_assoc($result)) {
-             echo $row["ChampName"] . "<br></br>";
+             echo $row["ChampName"]; echo ":"; echo $row["bestchamp"]; 
          }
          ?>   </h5>
 			   <small class="mb-0"><span>Best Champ Today<i class="fa fa-arrow-"></i></span></small>
