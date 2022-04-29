@@ -208,7 +208,7 @@ include("../config/config.php");
 $('#example').DataTable(
     {
         "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
-        "scrollY":        "700px",
+        "scrollY":        "500px",
         "scrollCollapse": true
     }
 );

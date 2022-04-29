@@ -216,7 +216,7 @@ $('#example').DataTable(
     {
 
 "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
-"scrollY":        "700px",
+"scrollY":        "500px",
 "scrollCollapse": true
 }
 );
