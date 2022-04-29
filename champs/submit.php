@@ -43,7 +43,17 @@ if (isset($_POST["submit"])) {
         if ($stmt_result->num_rows > 0) {
             $_SESSION["status"] = "Client already exists";
                     header("Location: residential.php");
-        } else { 
+        } else {
+            $stmt = $connection->prepare(
+                "select * from building  where BuildingCode= ?"
+            );
+            $stmt->bind_param("s", $BuildingCode);
+            $stmt->execute();
+            $stmt_result = $stmt->get_result();
+            if ($stmt_result->num_rows < 1){
+                $_SESSION["status"] = "The BuildingCode entered does not exist";
+                header("Location: residential.php");
+            } else { 
                 $insert = $connection->prepare("insert into papdailysales (DateSigned,ChampName,BuildingName,BuildingCode,Region,Apt,AptLayout,Floor,ClientName,ClientAvailability,ClientContact,
       ClientWhatsApp,ClientGender,ClientAge,ClientOccupation,HouseholdSize,Children,Teenagers,Adults,Birthday,Note,FamilyName,CurrentPackage,Email,PhoneAlt,PapStatus)
       values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -88,7 +98,7 @@ if (isset($_POST["submit"])) {
                     $_SESSION["status"] = "Error.Please try again";
                     header("Location: residential.php");
                 }
-            
+            }
         }
     }
 }
