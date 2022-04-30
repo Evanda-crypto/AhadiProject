@@ -160,13 +160,7 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                            <center><strong class="card-title">Not Installed[<?php
-         $query="SELECT COUNT(*) as notinstalled FROM papdailysales left join papinstalled on papinstalled.ClientID=papdailysales.ClientID left join techietask on techietask.ClientID=papdailysales.ClientID left join reminders on papdailysales.ClientID=reminders.ClientID WHERE reminders.ClientID is null and techietask.ClientID is null and papinstalled.ClientID is null and papdailysales.Region='".$_SESSION['Region']."'";
-          $data=mysqli_query($connection,$query);
-          while($row=mysqli_fetch_assoc($data)){
-          echo $row['notinstalled'];
-    }
-    ?> Records]</strong></center>
+                            <center><strong class="card-title">Not Installed</strong></center>
                             </div>
                             <div class="card-body">
                                 <table class="table table-striped" id="example">
