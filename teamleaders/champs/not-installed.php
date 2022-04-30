@@ -178,12 +178,14 @@ include("../../config/config.php");
       </th>
       <th class="th-sm">Availability
       </th>
+      <th class="th-sm">Champs comment
+      </th>
                                       </tr>
                                   </thead>
                                   <tbody>
                                   <?php
-                        $query  = "SELECT papdailysales.ClientName,papdailysales.ClientContact,papdailysales.ClientID,papdailysales.BuildingCode,papdailysales.BuildingName,papdailysales.ChampName,papdailysales.ClientAvailability from papdailysales left join papinstalled on papinstalled.ClientID=papdailysales.ClientID left join techietask on techietask.ClientID=papdailysales.ClientID
-                        left join reminders on papdailysales.ClientID=reminders.ClientID left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papnotinstalled.ClientID IS null and reminders.ClientID is null and techietask.ClientID is null and papinstalled.ClientID is null and papdailysales.Region='".$_SESSION['Region']."'";
+                        $query  = "SELECT p.Note,p.ClientName,p.ClientContact,p.ClientID,p.BuildingCode,p.BuildingName,p.ChampName,p.ClientAvailability from papdailysales as p left join papinstalled as i on i.ClientID=p.ClientID left join techietask as t on t.ClientID=p.ClientID
+                        left join reminders as r on p.ClientID=r.ClientID left join papnotinstalled as n on n.ClientID=p.ClientID where n.ClientID IS null and r.ClientID is null and t.ClientID is null and i.ClientID is null and p.Region='".$_SESSION['Region']."'";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
@@ -194,6 +196,7 @@ include("../../config/config.php");
                                     <td><a href="javascript:void(0);" data-href="getnotinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
                                     <td><a href="javascript:void(0);" data-href="getnotinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
                                     <td><a href="javascript:void(0);" data-href="getnotinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientAvailability']; ?></a></td>
+                                    <td><a href="javascript:void(0);" data-href="getnotinstalled.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['Note']; ?></a></td>
                                 </tr>
                         <?php
 
