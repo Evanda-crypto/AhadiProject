@@ -310,7 +310,7 @@ if(isset($_POST['submit'])){
                                             <h3 class="text-center title-2">New Task</h3>
                                         </div>
                                         <hr>
-                                        <form method="POST" action="">
+                                        <form method="POST" action="" autocomplete="off">
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Team ID</label>
                                                         <input id="teamid" name="teamid" type="tel" class="form-control cc-exp" onkeyup="GetDetail(this.value)" value="<?php echo $_SESSION['Region']?>-"data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Team ID">
@@ -319,7 +319,7 @@ if(isset($_POST['submit'])){
 
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Members</label>
-                                                        <input id="members" name="members" type="number" class="form-control cc-exp" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;" readonly placeholder="Team Members">
+                                                        <input id="members" name="members" type="number" class="form-control cc-exp" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;" required placeholder="Enter number of team members 2-3">
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
                                             <div class="form-group">
