@@ -112,10 +112,10 @@ include("../config/config.php");
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
         <!-- Header-->
-        <header id="header" class="header">
+        <header id="header" class="header" style="height: 65px;">
             <div class="top-left">
                 <div class="navbar-header">
-                <img src="../images/picture1.png" style="width: 120px; height: 70px;" class="logo-icon" alt="logo icon">
+                <img src="../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -316,13 +316,9 @@ include("../config/config.php");
                             <div class="card-body">
                                 <h4 class="box-title">Pap Progress </h4>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="card-body">
+                            
                                     <canvas id="barChart"></canvas>   
-                                    </div>
-                                </div>
-                            </div> <!-- /.row -->
+                                   
                             <div class="card-body"></div>
                         </div>
                     </div><!-- /# column -->
@@ -370,7 +366,7 @@ include("../config/config.php");
 
     //bar chart
     var ctx = document.getElementById( "barChart" );
-   ctx.height = 190;
+   ctx.height = 200;
     var myChart = new Chart( ctx, {
         type: 'bar',
         data: {
