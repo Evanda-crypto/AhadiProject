@@ -125,7 +125,7 @@ if (!$connection) {
                         <a href="assigned-tasks.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Assigned </a>
                     </li>
                     <li>
-                        <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Resitituted </a>
+                        <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Restituted </a>
                     </li>
 
                     <li>
@@ -288,7 +288,7 @@ if (!$connection) {
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
-                                             $query="SELECT COUNT(*) AS restituted from papnotinstalled Where Reason='Already Installed'";
+                                             $query="SELECT COUNT(*) AS restituted from papnotinstalled";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['restituted']."<br><br>";

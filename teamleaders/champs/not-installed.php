@@ -184,8 +184,28 @@ include("../../config/config.php");
                                   </thead>
                                   <tbody>
                                   <?php
-                        $query  = "SELECT p.Note,p.ClientName,p.ClientContact,p.ClientID,p.BuildingCode,p.BuildingName,p.ChampName,p.ClientAvailability from papdailysales as p left join papinstalled as i on i.ClientID=p.ClientID left join techietask as t on t.ClientID=p.ClientID
-                        left join reminders as r on p.ClientID=r.ClientID left join papnotinstalled as n on n.ClientID=p.ClientID where n.ClientID IS null and r.ClientID is null and t.ClientID is null and i.ClientID is null and p.Region='".$_SESSION['Region']."'";
+                        $query  = "SELECT 
+                        p.Note, 
+                        p.ClientName, 
+                        p.ClientContact, 
+                        p.ClientID, 
+                        p.BuildingCode, 
+                        p.BuildingName, 
+                        p.ChampName, 
+                        p.ClientAvailability 
+                      from 
+                        papdailysales as p 
+                        left join papinstalled as i on i.ClientID = p.ClientID 
+                        left join techietask as t on t.ClientID = p.ClientID 
+                        left join reminders as r on p.ClientID = r.ClientID 
+                        left join papnotinstalled as n on n.ClientID = p.ClientID 
+                      where 
+                        n.ClientID IS null 
+                        and r.ClientID is null 
+                        and t.ClientID is null 
+                        and i.ClientID is null 
+                        and p.Region = '".$_SESSION['Region']."'
+                      ";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
@@ -257,3 +277,5 @@ $('.dataTables_length').addClass('bs-select');
 </script>
 </body>
 </html>
+
+
