@@ -220,7 +220,7 @@ include("../config/config.php");
                 
             }
             ?>
-                                <table class="table table-striped" id="example">
+                                <table class="table table-bordered table-striped" id="example">
                                     <thead>
                                         <tr>
                                         <th scope="th-sm">Building Name</th>
