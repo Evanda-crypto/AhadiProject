@@ -96,7 +96,7 @@ if (isset($_POST["submit"])) {
                     header("Location: index.php");
                 }
             }
-            if ($data["User"] == 7) {
+            else if ($data["User"] == 7) {
                 if (password_verify($Password, $data["Password"])) {
                     $_SESSION["start"] = time();
                     $_SESSION["overall"] = $EMAIL;
@@ -104,6 +104,19 @@ if (isset($_POST["submit"])) {
                     $_SESSION["LName"] = $data["LastName"];
                     $_SESSION["ID"] = $data["ID"];
                     header("Location: teamleaders/admin/techie/dashboard.php");
+                } else {
+                    $_SESSION["status"] = "Wrong Password";
+                    header("Location: index.php");
+                }
+            }
+            else if($data["User"] == 8){
+                if (password_verify($Password, $data["Password"])) {
+                    $_SESSION["start"] = time();
+                    $_SESSION["overall"] = $EMAIL;
+                    $_SESSION["FName"] = $data["FirstName"];
+                    $_SESSION["LName"] = $data["LastName"];
+                    $_SESSION["ID"] = $data["ID"];
+                    header("Location: teamleaders/admin/champs/dashboard.php");
                 } else {
                     $_SESSION["status"] = "Wrong Password";
                     header("Location: index.php");
