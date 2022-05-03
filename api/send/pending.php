@@ -6,8 +6,8 @@ $output=array();
 $output['pending']=array();
 
 if ($connection) {
-    $sql = "SELECT papdailysales.ClientID,papdailysales.ClientAvailability,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.DateSigned,papdailysales.Region FROM papdailysales left join papinstalled on papdailysales.ClientID=papinstalled.ClientID left join papnotinstalled on 
-    papnotinstalled.ClientID=papdailysales.ClientID where papinstalled.ClientID is null and papnotinstalled.ClientID is null";
+    $sql = "SELECT p.ClientID,p.ClientAvailability,p.ClientName,p.ClientContact,p.BuildingName,p.BuildingCode,p.DateSigned,p.Region FROM papdailysales as p left join papinstalled as i on p.ClientID=i.ClientID left join papnotinstalled as r on 
+    r.ClientID=p.ClientID where i.ClientID is null and r.ClientID is null";
 
     $result = mysqli_query($connection, $sql);
     if ($result) {
