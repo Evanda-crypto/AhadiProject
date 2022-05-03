@@ -614,21 +614,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
                             },
                 {
                     label: "Least Region",
-                    data: [],
-                    borderColor: "rgba(0,0,0,0.09)",
-                    borderWidth: "0",
-                    backgroundColor: "#EE2C4E"
-                            }
-                        ]
-        },
-        options: {
-            scales: {
-                yAxes: [ {
-                    ticks: {
-                        beginAtZero: true
-                    }
-                                } ]
-            } "<?php
+                    data: ["<?php
           $sql =
               "SELECT (SELECT MIN(mycount)
               FROM (SELECT Region,COUNT(DateSigned) AS mycount,DateSigned 
@@ -705,7 +691,21 @@ $chart_data = "";
 while ($signed = mysqli_fetch_assoc($result)) {
     echo $signed["leastreg"];
 }
-?>" 
+?>" ],
+                    borderColor: "rgba(0,0,0,0.09)",
+                    borderWidth: "0",
+                    backgroundColor: "#EE2C4E"
+                            }
+                        ]
+        },
+        options: {
+            scales: {
+                yAxes: [ {
+                    ticks: {
+                        beginAtZero: true
+                    }
+                                } ]
+            } 
         }
     } );      
     
