@@ -7,8 +7,7 @@ $output['signed']=array();
 if ($connection) {
     $sql = "SELECT p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,p.ClientName,p.ClientContact,p.ClientAvailability,
     p.AptLayout,p.DateSigned,p.Note from papdailysales as p 
-    LEFT JOIN papnotinstalled as r ON r.ClientID=p.ClientID WHERE r.ClientID is null and 
-    p.DateSigned >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) order by p.DateSigned Desc";
+    LEFT JOIN papnotinstalled as r ON r.ClientID=p.ClientID WHERE r.ClientID is null order by p.DateSigned Desc";
 
     $result = mysqli_query($connection, $sql);
     if ($result) {

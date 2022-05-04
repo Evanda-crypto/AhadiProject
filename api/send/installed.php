@@ -5,8 +5,9 @@ $output=array();
 $output['installed']=array();
 
 if ($connection) {
-    $sql = "SELECT papdailysales.Floor,papdailysales.ClientName,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID,papdailysales.ClientContact  
-    FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID JOIN papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE papinstalled.ClientID is NOT null and turnedonpap.ClientID is null ORDER BY papinstalled.DateInstalled ASC";
+    $sql = "SELECT p.Floor,p.ClientName,p.BuildingName,p.BuildingCode,p.Region,Upper(i.MacAddress) as Mac,i.DateInstalled,i.ClientID,p.ClientContact  
+    FROM Token_teams as t LEFT JOIN papinstalled as i on t.Team_ID=i.Team_ID left join turnedonpap on i.ClientID=turnedonpap.ClientID JOIN papdailysales as p 
+    on p.ClientID=i.ClientID WHERE i.ClientID is NOT null and turnedonpap.ClientID is null ORDER BY i.DateInstalled ASC";
 
     $result = mysqli_query($connection, $sql);
     if ($result) {

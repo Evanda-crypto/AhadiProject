@@ -312,7 +312,7 @@ if(isset($_POST['submit'])){
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Members</label>
-                                                        <input id="members" name="split" type="number" class="form-control cc-exp" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;"  placeholder="Team Members">
+                                                        <input id="members" name="split" type="number" class="form-control cc-exp" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;" required  placeholder="Team Members">
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
                                             <div class="form-group">
