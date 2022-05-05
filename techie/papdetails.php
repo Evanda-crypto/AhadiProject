@@ -77,7 +77,7 @@ $split=$row['split'];
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APs</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="installed.php">Installed Today</a></li>
-                            <li><i class="fa fa-table"></i><a href="not-turnedon.php">Not Turned On</a></li>
+                            <li><i class="fa fa-table"></i><a href="not-turnedon.php">Offlines</a></li>
                             <li><i class="fa fa-table"></i><a href="restituted.php">Restituted</a></li>
                         </ul>
                     </li>

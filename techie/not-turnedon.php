@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Not Turned on</title>
+    <title>Offlines</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -65,7 +65,7 @@ include("../config/config.php");
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APs</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="installed.php">Installed Today</a></li>
-                            <li><i class="fa fa-table"></i><a href="not-turnedon.php">Not Turned On</a></li>
+                            <li><i class="fa fa-table"></i><a href="not-turnedon.php">Offlines</a></li>
                             <li><i class="fa fa-table"></i><a href="restituted.php">Restituted</a></li>
                         </ul>
                     </li>
@@ -179,7 +179,7 @@ include("../config/config.php");
                 <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                            <center><strong class="card-title">Not Turned On[<?php
+                            <center><strong class="card-title">Offlines[<?php
          $query="SELECT COUNT(*) as installed FROM papinstalled left join turnedonpap on turnedonpap.ClientID=papinstalled.ClientID WHERE turnedonpap.ClientID is Null and  papinstalled.Team_ID='".$_SESSION['TeamID']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
