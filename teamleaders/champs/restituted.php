@@ -187,7 +187,7 @@ include("../../config/config.php");
             }
             ?>
             <form method="POST" action="delete.php">
-                            <p align="right"> <input class="btn btn-danger" type="submit" name="delete"  value="Delete"></p>
+                            <p align="right"> <input class="btn btn-danger" type="submit" name="delete" onClick="return confirm('Sure to delete marked records from KOMP database?')"  value="Delete"></p>
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>

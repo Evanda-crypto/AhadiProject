@@ -3,7 +3,7 @@ include("session.php");
 include("../../config/config.php");
 $id=$_GET['clientid'];
 
-$sql="SELECT papinstalled.split,papinstalled.ClientID,papinstalled.MacAddress,papinstalled.DateInstalled,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode from papinstalled left join papdailysales on papdailysales.ClientID=papinstalled.ClientID where papinstalled.ClientID=$id";
+$sql="SELECT i.split,i.ClientID,i.MacAddress,i.DateInstalled,p.ClientName,p.ClientContact,p.BuildingName,p.BuildingCode from papinstalled as i left join papdailysales as p on p.ClientID=i.ClientID where i.ClientID=$id";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
 $mac=$row['MacAddress'];

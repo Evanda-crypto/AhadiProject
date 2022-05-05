@@ -237,7 +237,11 @@ include("../../config/config.php");
       </th>
       <th class="th-sm">Mac Address
       </th>
-      <th class="th-sm">Techies
+      <th class="th-sm">Techie 1
+      </th>
+      <th class="th-sm">Techie 2
+      </th>
+      <th class="th-sm">Techie 3
       </th>
       <th class="th-sm">Date Installed
       </th>
@@ -247,8 +251,28 @@ include("../../config/config.php");
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT turnedonpap.ClientID,turnedonpap.ClientName,turnedonpap.ChampName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode,upper(turnedonpap.MacAddress) as mac,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
-                        turnedonpap.DateTurnedOn,papdailysales.Region,papinstalled.DateInstalled FROM turnedonpap JOIN papdailysales ON papdailysales.ClientID=turnedonpap.ClientID left join papinstalled ON papinstalled.ClientID=papdailysales.ClientID left join Token_teams on Token_teams.Team_ID=papinstalled.Team_ID WHERE turnedonpap.ClientID IS NOT null and papdailysales.Region='".$_SESSION['Region']."'";
+                        $query  = "SELECT 
+                        t.ClientID, 
+                        t.ClientName, 
+                        t.ChampName, 
+                        p.ClientContact, 
+                        p.BuildingName, 
+                        p.BuildingCode, 
+                        upper(t.MacAddress) as mac, 
+                        g.Techie1, 
+                        g.Techie2, 
+                        g.Techie3, 
+                        t.DateTurnedOn, 
+                        p.Region, 
+                        i.DateInstalled 
+                      FROM 
+                        turnedonpap as t 
+                        JOIN papdailysales as p ON p.ClientID = t.ClientID 
+                        left join papinstalled as i ON i.ClientID = p.ClientID 
+                        left join Token_teams as g on g.Team_ID = i.Team_ID 
+                      WHERE 
+                        t.ClientID IS NOT null 
+                        and p.Region = '".$_SESSION['Region']."'";
                         $result  = mysqli_query($connection, $query);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -260,7 +284,9 @@ include("../../config/config.php");
                                     <td><?php echo $row['BuildingName']; ?></td>
                                     <td><?php echo $row['BuildingCode']; ?></td>
                                     <td><?php echo $row['mac']; ?></td>
-                                    <td><?php echo $row['techies']; ?></td>
+                                    <td><?php echo $row['Techie1']; ?></td>
+                                    <td><?php echo $row['Techie2']; ?></td>
+                                    <td><?php echo $row['Techie3']; ?></td>
                                     <td><?php echo $row['DateInstalled']; ?></td>
                                     <td><?php echo $row['DateTurnedOn']; ?></td>
                                 </tr>
