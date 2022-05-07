@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Installed</title>
+    <title>Reports</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -138,7 +138,7 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Installed</strong></center>
+                           <center> <strong class="card-title">Reports</strong></center>
                         </div>
                         <div class="card-body"><?php
             if(isset($_SESSION['status'])){
@@ -163,37 +163,32 @@ include("../config/config.php");
                             <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th>Building Name</th>
-                    <th>Building Code</th>
-                    <th>Region</th>
-                    <th>Mac Address</th>
-                    <th>Date Installed</th>
-                    <th>Client Name</th>
-                    <th>Contact</th>
-                   <th>Floor</th>
-                    <th>More</th>
+                                    <th>Date</th>
+                                    <th>Occurance</th>
+                    <th>Zone(s)</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Duration</th>
+                    <th>Reported By</th>
+                    <th>Comments</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT papdailysales.Floor,papdailysales.ClientName,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID,papdailysales.ClientContact  
-    FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID JOIN papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE turnedonpap.ClientID is null ORDER BY papinstalled.DateInstalled ASC";
+    $sql="SELECT zone,occurrence,starttime,endtime,duration,reporter,occurancedate,comments from reports where Department='MATON'";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
-    <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['BuildingCode']?></td>
-    <td><?php echo $row['Region']?></td>
-    <td><?php echo $row['Mac']?></td>
-    <td><?php echo $row['DateInstalled']?></td>
-    <td><?php echo $row['ClientName']?></td>
-     <td><?php echo $row['ClientContact']?></td>
-    <td><?php echo $row['Floor']?></td>
-    <td>
-    <button class="btn btn-warning" ><a href="turnon.php?clientid=<?php echo $row['ClientID']?>" class="text-bold">Turn On</a></button>
-    </td>
+    <td><?php echo $row['occurancedate']?></td>
+    <td><?php echo $row['occurrence']?></td>
+    <td><?php echo $row['zone']?></td>
+    <td><?php echo $row['starttime']?></td>
+    <td><?php echo $row['endtime']?></td>
+    <td><?php echo $row['duration']?></td>
+     <td><?php echo $row['reporter']?></td>
+     <td><?php echo $row['comments']?></td>
 </tr>
 <?php } ?>
                                 </tbody>

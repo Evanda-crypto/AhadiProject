@@ -8,7 +8,8 @@ if(!empty($_GET['id'])){
     } 
      
     // Get content from the database 
-    $query = $connection->query("SELECT papinstalled.ClientID,papdailysales.ChampName,papdailysales.ClientContact,papdailysales.Apt,papdailysales.ClientName,papdailysales.BuildingName,papdailysales.BuildingCode,papinstalled.Floor,papinstalled.MacAddress,papinstalled.DateInstalled from papinstalled left join papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE papinstalled.ClientID = {$_GET['id']}"); 
+    $query = $connection->query("SELECT i.ClientID,p.ChampName,p.ClientContact,p.Apt,p.ClientName,p.BuildingName,p.BuildingCode,i.Floor,i.MacAddress,i.DateInstalled 
+    from papinstalled as i left join papdailysales as p on p.ClientID=1.ClientID WHERE i.ClientID = {$_GET['id']}"); 
      
     if($query->num_rows > 0){ 
         $cmsData = $query->fetch_assoc(); 

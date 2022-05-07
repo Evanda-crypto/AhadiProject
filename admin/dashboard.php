@@ -158,6 +158,10 @@ if (!$connection) {
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
                     </li>
+                    <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
+                    <li>
+                        <a href="view-reports.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>View Reports </a>
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

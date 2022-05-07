@@ -8,7 +8,9 @@ if(!empty($_GET['id'])){
     } 
      
     // Get content from the database 
-    $query = $connection->query("SELECT papdailysales.Apt,papdailysales.ChampName,papdailysales.ClientContact,papinstalled.ClientID,papdailysales.ClientName,papdailysales.BuildingName,papdailysales.BuildingCode,papinstalled.Floor,papinstalled.MacAddress from papinstalled left join papdailysales on papdailysales.ClientID=papinstalled.ClientID left join turnedonpap on turnedonpap.ClientID=papinstalled.ClientID WHERE turnedonpap.ClientID is null and papinstalled.Team_ID='".$_SESSION['TeamID']."' and papinstalled.ClientID = {$_GET['id']}"); 
+    $query = $connection->query("SELECT p.Apt,p.ChampName,p.ClientContact,i.ClientID,p.ClientName,p.BuildingName,p.BuildingCode,i.Floor,i.MacAddress 
+    from papinstalled as i left join papdailysales as p on p.ClientID=i.ClientID left join turnedonpap as t on t.ClientID=i.ClientID WHERE t.ClientID is null 
+    and i.Team_ID='".$_SESSION['TeamID']."' and i.ClientID = {$_GET['id']}"); 
      
     if($query->num_rows > 0){ 
         $cmsData = $query->fetch_assoc(); 

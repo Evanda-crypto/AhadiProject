@@ -57,24 +57,6 @@ if(!empty($_GET['id'])){
     echo 'Content not found....2'; 
 } 
 ?>
-<?php
-include('../config/config.php');
-
-if(isset($_POST['submit'])){
-    $upd=$_POST['Day'];
-
-    $sql="update papdailysales set ClientID=$id,ClientAvailability='$upd' where ClientID=$id";
-    $result=mysqli_query($connection,$sql);
-    if($result){
-        echo "<script>alert('Updated');</script>";
-        echo '<script>window.location.href="turned-on.php";</script>';
-    }
-    else{
-        echo "<script>alert('An error occured while updating your request');</script>";
-    echo '<script>window.location.href="turned-on.php";</script>';
-    }
-}
-?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

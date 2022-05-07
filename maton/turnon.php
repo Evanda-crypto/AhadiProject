@@ -127,6 +127,13 @@ values(?,?,?,?,?,?,?,?,?,?,?)");
                             <li><i class="fa fa-table"></i><a href="turnedon.php">All Records</a></li>
                         </ul>
                     </li>
+                    <li class="menu-title" >REPORT</li><!-- /.menu-title -->
+                    <li>
+                        <a href="evants.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-list"></i>Fill Report </a>
+                    </li>
+                    <li>
+                        <a href="view-reports.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>View Reports </a>
+                    </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                    <!-- <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>

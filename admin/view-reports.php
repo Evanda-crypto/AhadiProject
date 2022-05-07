@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Installed</title>
+    <title>Reports</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,8 +48,8 @@ include("../config/config.php");
 
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+     <!-- Left Panel -->
+     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -58,29 +58,47 @@ include("../config/config.php");
                     </li>
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
                     <li>
+                        <a href="pap-daily-sales.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Signed </a>
+                    </li>
+                    <li>
+                        <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Resitituted </a>
+                    </li>
+                    <li>
+                        <a href="pending-installation.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Pending Installation </a>
+                    </li>
+                    <li>
                         <a href="installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Installed </a>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>TURNED ON</a>
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Turned On</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="turnedontoday.php">Today</a></li>
-                            <li><i class="fa fa-table"></i><a href="last-7-days.php">Last 7 days</a></li>
-                            <li><i class="fa fa-table"></i><a href="turnedon.php">All Records</a></li>
+                            <li><i class="fa fa-table"></i><a href="turnedontoday.php" style="color:black; font-size: 15px;">Today</a></li>
+                            <li><i class="fa fa-table"></i><a href="last-7-days.php"style="color:black; font-size: 15px;">Last 7 Days</a></li>
+                            <li><i class="fa fa-table"></i><a href="last-30-days.php" style="color:black; font-size: 15px;">Last 30 Days</a></li>
+                            <li><i class="fa fa-table"></i><a href="turnedon.php" style="color:black; font-size: 15px;">All Records</a></li>
                         </ul>
                     </li>
-                    <li class="menu-title" >REPORT</li><!-- /.menu-title -->
+                    <li class="menu-title">ACCOUNTS</li><!-- /.menu-title -->
+
                     <li>
-                        <a href="events.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-list"></i>Fill Report </a>
+                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-themify-favicon-alt"></i>Add Teamleader </a>
                     </li>
                     <li>
-                        <a href="view-reports.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>View Reports </a>
+                        <a href="view-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-eye"></i>View Teamleader </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                   <!-- <li>
+                    <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
-                    </li>-->
+                    </li>
+                    <li>
+                        <a href="completed-tasks.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-money"></i>Completed Tasks </a>
+                    </li>
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
+                    </li>
+                    <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
+                    <li>
+                        <a href="view-reports.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>View Reports </a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -138,7 +156,7 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Installed</strong></center>
+                           <center> <strong class="card-title">Reports</strong></center>
                         </div>
                         <div class="card-body"><?php
             if(isset($_SESSION['status'])){
@@ -163,37 +181,32 @@ include("../config/config.php");
                             <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th>Building Name</th>
-                    <th>Building Code</th>
-                    <th>Region</th>
-                    <th>Mac Address</th>
-                    <th>Date Installed</th>
-                    <th>Client Name</th>
-                    <th>Contact</th>
-                   <th>Floor</th>
-                    <th>More</th>
+                                    <th>Date</th>
+                                    <th>Occurance</th>
+                    <th>Zone(s)</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Duration</th>
+                    <th>Reported By</th>
+                    <th>Comments</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT papdailysales.Floor,papdailysales.ClientName,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID,papdailysales.ClientContact  
-    FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID JOIN papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE turnedonpap.ClientID is null ORDER BY papinstalled.DateInstalled ASC";
+    $sql="SELECT zone,occurrence,starttime,endtime,duration,reporter,occurancedate,comments from reports where Department='MATON'";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
-    <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['BuildingCode']?></td>
-    <td><?php echo $row['Region']?></td>
-    <td><?php echo $row['Mac']?></td>
-    <td><?php echo $row['DateInstalled']?></td>
-    <td><?php echo $row['ClientName']?></td>
-     <td><?php echo $row['ClientContact']?></td>
-    <td><?php echo $row['Floor']?></td>
-    <td>
-    <button class="btn btn-warning" ><a href="turnon.php?clientid=<?php echo $row['ClientID']?>" class="text-bold">Turn On</a></button>
-    </td>
+    <td><?php echo $row['occurancedate']?></td>
+    <td><?php echo $row['occurrence']?></td>
+    <td><?php echo $row['zone']?></td>
+    <td><?php echo $row['starttime']?></td>
+    <td><?php echo $row['endtime']?></td>
+    <td><?php echo $row['duration']?></td>
+     <td><?php echo $row['reporter']?></td>
+     <td><?php echo $row['comments']?></td>
 </tr>
 <?php } ?>
                                 </tbody>
