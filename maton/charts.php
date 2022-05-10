@@ -3,6 +3,38 @@ include("session.php");
 include("../config/config.php");
 
 ?>
+
+<?php 
+if(isset($_POST["submit"])){
+    $start=$_POST['start'];
+    $end=$_POST['end'];
+    $sql =
+        "SELECT issue,COUNT(issue) as occ
+        FROM reports where occurancedate BETWEEN '".$start."' AND '".$end."'
+        GROUP BY issue";
+    $result = mysqli_query($connection, $sql);
+    $chart_data = "";
+    while ($row = mysqli_fetch_array($result)) {
+        $issue[] = $row["issue"];
+        $occ[] = $row["occ"];
+        
+    }
+}
+else{
+    $sql =
+        "SELECT issue,COUNT(issue) as occ
+        FROM reports where occurancedate>= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+        GROUP BY issue";
+    $result = mysqli_query($connection, $sql);
+    $chart_data = "";
+    while ($row = mysqli_fetch_array($result)) {
+        $issue[] = $row["issue"];
+        $occ[] = $row["occ"];
+    }
+}
+?>
+
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -11,7 +43,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Turned | On | All | Records</title>
+    <title>Graphs and Charts</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,31 +57,13 @@ include("../config/config.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../assets/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
-    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
-
-<link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-<!-- Bootstrap core JavaScript-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
 </head>
+
 <body style="background-color:#e1e1e1">
-  <!-- Left Panel -->
-  <aside id="left-panel" class="left-panel">
+   <!-- Left Panel -->
+   <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -79,7 +93,7 @@ include("../config/config.php");
                         <a href="general-report.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>Compiled Reports </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                    <li>
+                  <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
                     </li>
                     <li>
@@ -111,11 +125,11 @@ include("../config/config.php");
                         </div>
 
                         <div class="dropdown for-notification">
-                     
+
                         </div>
 
                         <div class="dropdown for-message">
-                          
+
                         </div>
                     </div>
 
@@ -133,110 +147,94 @@ include("../config/config.php");
 
                 </div>
             </div>
-        </header><!-- /header -->
-        <!-- Header-->
-
+        </header>
+        <!-- /#header -->
+        <!-- Content -->
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                           <center> <strong class="card-title">Turned On</strong></center>
+
+                   <div class="col-lg-12">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Daily Reports[Number of Times Issue was Reported]</strong></center>
+                        </div><form method="POST">
+                       <center> <div class="table-responsive">
+        <table border="0" cellspacing="5" cellpadding="5">
+        <tbody><tr>
+        <td><input type="date" value="<?php echo date("Y-m-d", strtotime("-6 days")); ?>" style="color:black; margin-top:20px;" class="form-control" name="start"></td>
+            <td><input type="date" value="<?php echo date("Y-m-d"); ?>" style="color:black; margin-top:20px;" class="form-control" name="end"></td>
+            <td><button type="submit" name="submit" class="btn btn-primary btn-block" style="background-color:#85ce36;margin-top:20px;">Show Graph</button></td>
+        </tr>
+    </tbody></table></div></center></form>
+                            <div class="card-body">
+                                <h4 class="mb-3"></h4>
+                                <canvas id="reports"></canvas>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <table class="table table-bordered table-striped" id="example">
-                                <thead>
-                                    <tr>
-                                    <th class="th-sm">PAP Code
-                  </th>
-                   <th class="th-sm">Building Name
-                   </th>
-                   <th class="th-sm">Building Code
-                   </th>
-                   <th class="th-sm">Region
-                  </th>
-                   <th class="th-sm">Champ Name
-                   </th>
-                   <th class="th-sm">Client Name
-                   </th>
-                   <th class="th-sm">Client Contact
-                   </th>
-                   <th class="th-sm">MAC Address
-                   </th>
-                   <th class="th-sm">Date Turned On
-                   </th>
-                   <th class="th-sm">More
-                   </th>  
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-    
-    $sql="SELECT turnedonpap.ClientID,papdailysales.BuildingName,upper(papdailysales.BuildingCode) as bcode,upper(papdailysales.Region) as reg,turnedonpap.ChampName,papdailysales.ClientName,papdailysales.ClientContact,Upper(turnedonpap.MacAddress) as Mac,turnedonpap.DateTurnedOn, CASE WHEN LENGTH(papdailysales.BuildingCode)>11 THEN CONCAT(papdailysales.BuildingCode,'-',(row_number() over(partition by papdailysales.BuildingCode)),'P')
-    WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) <=9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,'0',(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
-    WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) >9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
-    end as papcode from papdailysales LEFT JOIN turnedonpap ON turnedonpap.ClientID=papdailysales.ClientID where turnedonpap.ClientID is not null";
-$result=$connection->query($sql);
-while($row=$result->fetch_array()){
-  ?>
-  <tr>
-    <td><?php echo $row['papcode']?></td>
-    <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['bcode']?></td>
-    <td><?php echo $row['reg']?></td>
-    <td><?php echo $row['ChampName']?></td>
-    <td><?php echo $row['ClientName']?></td>
-    <td><?php echo $row['ClientContact']?></td>
-    <td><?php echo $row['Mac']?></td>
-    <td><?php echo $row['DateTurnedOn']?></td>
-    <td>
-    <button class="btn btn-warning" ><a href="edit-turnedon.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
-    </td>
-</tr>
-<?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                    </div><!-- /# column -->
+                              </div><!--/row-->
+        <!-- /.content -->
+        <div class="clearfix"></div>
+    </div>
+    <!-- /#right-panel -->
 
-</div><!-- .content -->
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <!--  Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+    <script>
 
-<div class="clearfix"></div>
-
-</div><!-- /#right-panel -->
-
-<!-- Right Panel -->
-
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
-
-
-<script type="text/javascript">
-$( document ).ready(function() {
-$('#example').DataTable({
-		 "processing": true,
-		 "dom": 'lBfrtip',
-		 "buttons": [
-            {
-                extend: 'collection',
-                text: 'Export',
-                buttons: [
-                    'excel',
-                    'csv'
-                ]
+    //bar chart
+    var ctx = document.getElementById( "reports" );
+     ctx.height = 90;
+    var myChart = new Chart( ctx, {
+        type: 'bar',
+        data: {
+            labels: <?php echo json_encode($issue)?>,
+            datasets: [
+                {
+                    labels:"Reports",
+                    data: <?php echo json_encode($occ)?>,
+                    borderColor: "#ffb91f",
+                    borderWidth: "2",
+                    backgroundColor: [
+                                    "#ffb91f",
+                                    "#0cbeaf",
+                                    "#3072f5",
+                                    "#ee2c4e",
+                                    "#85ce36",
+                                    "#800080"
+                                     ]
+                            }
+                        ]
+        },
+        options: {
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
             }
-        ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true
-        });
-});
-</script>
+
+        }
+    } );
+
+
+     
+    </script>
+
+   
+    <!--Flot Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+    
 </body>
+
 </html>

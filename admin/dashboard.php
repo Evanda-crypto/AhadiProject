@@ -235,7 +235,7 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT count(*) as clients from papdailysales left join papnotinstalled on papdailysales.ClientID=papnotinstalled.ClientID where papnotinstalled.ClientID is null";
+                      "SELECT count(*) as clients from papdailysales as p left join papnotinstalled as r on p.ClientID=r.ClientID where r.ClientID is null";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
                       echo $row["clients"] . "<br><br>";
@@ -260,7 +260,7 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT COUNT(*)as pending from papdailysales LEFT JOIN papinstalled on papinstalled.ClientID=papdailysales.ClientID left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papinstalled.ClientID is null and papnotinstalled.ClientID is null";
+                      "SELECT COUNT(*)as pending from papdailysales as p LEFT JOIN papinstalled as i on i.ClientID=p.ClientID left join papnotinstalled as r on r.ClientID=p.ClientID WHERE i.ClientID is null and r.ClientID is null";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
                       echo $row["pending"] . "<br><br>";
@@ -285,7 +285,8 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT COUNT(papinstalled.MacAddress) as pap FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID JOIN papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE papinstalled.ClientID is NOT null and turnedonpap.ClientID is null";
+                      "SELECT COUNT(i.MacAddress) as pap FROM Token_teams as t LEFT JOIN papinstalled as i on t.Team_ID=i.Team_ID left join turnedonpap as o on i.ClientID=o.ClientID 
+                      JOIN papdailysales as p on p.ClientID=i.ClientID WHERE i.ClientID is NOT null and o.ClientID is null";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
                       echo $row["pap"] . "<br><br>";
@@ -399,7 +400,7 @@ if (!$connection) {
                                                 <tr><td class="serial">Past 30 Days</td>
                                                     <td class="serial"><?php
          $query =
-             "SELECT COUNT(*) as SignedPaP from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papdailysales.DateSigned >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) and papnotinstalled.ClientID is null";
+             "SELECT COUNT(*) as SignedPaP from papdailysales as p left join papnotinstalled as r on r.ClientID=p.ClientID where p.DateSigned >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) and r.ClientID is null";
          $data = mysqli_query($connection, $query);
          while ($row = mysqli_fetch_assoc($data)) {
              echo $row["SignedPaP"] . "<br><br>";

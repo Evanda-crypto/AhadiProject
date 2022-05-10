@@ -119,6 +119,9 @@ if ($result && $updt && $change) {
                     <li>
                         <a href="view-reports.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>View Reports </a>
                     </li>
+                    <li>
+                        <a href="general-report.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>Compiled Reports </a>
+                    </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                    <!-- <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>

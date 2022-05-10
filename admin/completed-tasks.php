@@ -160,7 +160,7 @@ tfoot td {
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Completed Tasks</strong></center>
+                           <center> <strong class="card-title">Completed Tasks</strong></center></div>
                            <div class="table-responsive">
         <table border="0" cellspacing="5" cellpadding="5">
         <tbody><tr>

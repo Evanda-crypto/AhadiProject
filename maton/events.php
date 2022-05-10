@@ -66,6 +66,9 @@ date_default_timezone_set("Africa/Nairobi");
                     <li>
                         <a href="view-reports.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>View Reports </a>
                     </li>
+                    <li>
+                        <a href="general-report.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>Compiled Reports </a>
+                    </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                    <!-- <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
@@ -174,22 +177,25 @@ date_default_timezone_set("Africa/Nairobi");
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Start Time<span style="color: #FF0000" >*</span></label>
-                                                        <input id="start"  placeholder="Start Time" value="00:30" name="start" type="time" class="form-control cc-exp"  placeholder="Start Time" required>
+                                                        <input id="start"  placeholder="Start Time" value="00:00"  name="start" type="time" class="form-control cc-exp"  placeholder="Start Time">
                                                         <span class="help-block"  data-valmsg-replace="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <label for="x_card_code" class="control-label mb-1">End Time<span style="color: #FF0000" >*</span></label>
                                                     <div class="input-group">
-                                                        <input id="end" name="end" value="<?php echo date(
-                                                            "h:i"
-                                                        ); ?>"  type="time" class="form-control cc-cvc"  placeholder="End Time" required>
+                                                        <input id="end" name="end" value="00:00" type="time" class="form-control cc-cvc"  placeholder="End Time">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Duration<span style="color: #FF0000" >*</span></label>
                                                 <input id="diff" name="duration" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Duration">
+                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Building<span style="color: #FF0000" >*</span></label>
+                                                <input id="cc-number" name="bname" type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Building">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
@@ -357,13 +363,14 @@ date_default_timezone_set("Africa/Nairobi");
                              </div>
                               </div>
                                         <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Occurrence</label>
+                                                <label for="cc-number" class="control-label mb-1">Issue</label>
                                                 <div class="form-group has-success">
-                                            <select data-placeholder="Choose an Occurrence..." class="standardSelect form-control" name="occurrence" tabindex="1" required>
+                                            <select data-placeholder="Choose an issue..." class="standardSelect form-control" name="issue" tabindex="1" required>
                                             <option value=""></option>
                                             <option value="Power Outage">Power Outage</option> 
                                             <option value="Fiber Link">Fiber Link</option>  
                                             <option value="Switch Theft">Switch Theft</option>
+                                            <option value="Low Voltage">Low Voltage</option>
                                               </select>
                                             </div>
                                             </div>

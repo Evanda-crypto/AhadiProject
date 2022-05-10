@@ -75,10 +75,13 @@ include("../config/config.php");
                     <li>
                         <a href="view-reports.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>View Reports </a>
                     </li>
+                    <li>
+                        <a href="general-report.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>Compiled Reports </a>
+                    </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                   <!-- <li>
+                   <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
-                    </li>-->
+                    </li>
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
                     </li>
@@ -166,8 +169,7 @@ include("../config/config.php");
                                     <th>Date</th>
                                     <th>Occurance</th>
                     <th>Zone(s)</th>
-                    <th>Start</th>
-                    <th>End</th>
+                    <th>Building</th>
                     <th>Duration</th>
                     <th>Reported By</th>
                     <th>Comments</th>
@@ -176,16 +178,15 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT zone,occurrence,starttime,endtime,duration,reporter,occurancedate,comments from reports where Department='MATON'";
+    $sql="SELECT zone,issue,starttime,endtime,duration,reporter,occurancedate,comments,building from reports where Department='MATON'";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
     <td><?php echo $row['occurancedate']?></td>
-    <td><?php echo $row['occurrence']?></td>
+    <td><?php echo $row['issue']?></td>
     <td><?php echo $row['zone']?></td>
-    <td><?php echo $row['starttime']?></td>
-    <td><?php echo $row['endtime']?></td>
+    <td><?php echo $row['building']?></td>
     <td><?php echo $row['duration']?></td>
      <td><?php echo $row['reporter']?></td>
      <td><?php echo $row['comments']?></td>
