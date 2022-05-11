@@ -2,27 +2,25 @@
 include("session.php");
 include("../config/config.php");
 
-?>
-
-<?php 
-if(isset($_POST["submit"])){
-    $start=$_POST['start'];
-    $end=$_POST['end'];
+if (isset($_POST["submit"])) {
+    $start = $_POST["start"];
+    $end = $_POST["end"];
     $sql =
         "SELECT issue,COUNT(issue) as occ
-        FROM reports where occurancedate BETWEEN '".$start."' AND '".$end."'
+        FROM reports where occurancedate BETWEEN '" .
+        $start .
+        "' AND '" .
+        $end .
+        "'
         GROUP BY issue";
     $result = mysqli_query($connection, $sql);
     $chart_data = "";
     while ($row = mysqli_fetch_array($result)) {
         $issue[] = $row["issue"];
         $occ[] = $row["occ"];
-        
     }
-}
-else{
-    $sql =
-        "SELECT issue,COUNT(issue) as occ
+} else {
+    $sql = "SELECT issue,COUNT(issue) as occ
         FROM reports where occurancedate>= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
         GROUP BY issue";
     $result = mysqli_query($connection, $sql);
@@ -33,6 +31,7 @@ else{
     }
 }
 ?>
+
 
 
 <!doctype html>

@@ -173,7 +173,7 @@ include("session.php");
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Building Code<span style="color: #FF0000" >*</span></label>
-                                                        <input id="bcode" onkeyup="GetDetail(this.value)" placeholder="Search in 'BUILDING' to copy the EXACT building code here" required name="BuildingCode" type="text" class="form-control cc-exp"   placeholder="Building Name" required>
+                                                        <input id="bcode" onkeyup="GetDetail(this.value)" placeholder="Search in 'BUILDING' to copy the EXACT building code here" required name="BuildingCode" pattern="[A-Z]{5}[0-9]{5}" type="text" class="form-control cc-exp"   placeholder="Building Name" required>
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
                                                 </div>

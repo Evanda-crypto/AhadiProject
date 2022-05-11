@@ -182,29 +182,33 @@ include("../config/config.php");
                                 <thead>
                                     <tr>
                                     <th>Date</th>
-                                    <th>Issue</th>
-                    <th>Zone(s)</th>
-                    <th>Building</th>
-                    <th>Duration</th>
-                    <th>Reported By</th>
-                    <th>Comments</th>
+                                    <th>Occurance</th>
+                                    <th>Zone(s) affected</th>
+                                    <th>Buildings</th>
+                                    <th>Reported By</th>
+                                    <th>Count</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT zone,issue,building,duration,reporter,occurancedate,comments from reports where Department='MATON'";
+    $sql="SELECT issue, occurancedate, 
+    group_concat( zone ) AS zones,
+    group_concat( building ) AS buildings,
+    group_concat( reporter ) AS reporter,COUNT(issue) as occ
+FROM reports
+GROUP BY issue,occurancedate ORDER BY occurancedate ASC";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
     <td><?php echo $row['occurancedate']?></td>
     <td><?php echo $row['issue']?></td>
-    <td><?php echo $row['zone']?></td>
-    <td><?php echo $row['building']?></td>
-    <td><?php echo $row['duration']?></td>
+    <td><?php echo $row['zones']?></td>
+    <td><?php echo $row['buildings']?></td>
      <td><?php echo $row['reporter']?></td>
-     <td><?php echo $row['comments']?></td>
+     <td><?php echo $row['occ']?></td>
+ 
 </tr>
 <?php } ?>
                                 </tbody>

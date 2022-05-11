@@ -389,7 +389,7 @@ if (!$connection) {
          ?></td>
                                                 <td class="serial"><?php
          $query =
-             "SELECT COUNT(*) as dailyturnedon from turnedonpap where DateTurnedOn>=DATE_ADD(CURDATE(), INTERVAL -6 DAY)";
+             "SELECT COUNT(*) as dailyturnedon from turnedonpap left join papdailysales on papdailysales.clientID=turnedonpap.ClientID where turnedonpap.ClientID is not null and turnedonpap.DateTurnedOn >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
          $data = mysqli_query($connection, $query);
          while ($row = mysqli_fetch_assoc($data)) {
              echo $row["dailyturnedon"] . "<br><br>";
@@ -416,7 +416,7 @@ if (!$connection) {
          ?></td>
                                                     <td class="serial"><?php
          $query =
-             "SELECT COUNT(*) as dailyturnedon from turnedonpap where DateTurnedOn >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)";
+             "SELECT COUNT(*) as dailyturnedon from turnedonpap left join papdailysales on papdailysales.clientID=turnedonpap.ClientID where turnedonpap.ClientID is not null and turnedonpap.DateTurnedOn >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)";
          $data = mysqli_query($connection, $query);
          while ($row = mysqli_fetch_assoc($data)) {
              echo $row["dailyturnedon"] . "<br><br>";

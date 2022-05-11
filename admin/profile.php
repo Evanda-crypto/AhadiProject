@@ -135,7 +135,7 @@ if (isset($_POST["submit"])) {
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
         <!-- Header-->
-        <header id="header" class="header">
+        <header id="header" class="header" style="height: 65px;">
             <div class="top-left">
                 <div class="navbar-header" style="height: 65px;">
                 <img src="../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">

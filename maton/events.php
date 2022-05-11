@@ -70,9 +70,9 @@ date_default_timezone_set("Africa/Nairobi");
                         <a href="general-report.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>Compiled Reports </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                   <!-- <li>
+                   <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
-                    </li>-->
+                    </li>
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
                     </li>
@@ -141,7 +141,7 @@ date_default_timezone_set("Africa/Nairobi");
                                 <div id="pay-invoice">
                                     <div class="card-body">
                                         <div class="card-title">
-                                            <h3 class="text-center">Daily Events Report</h3>
+                                            <h3 class="text-center">Daily Issue Report</h3>
                                         </div>
                                         <hr>
                                         <?php
@@ -176,25 +176,25 @@ date_default_timezone_set("Africa/Nairobi");
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Start Time<span style="color: #FF0000" >*</span></label>
+                                                        <label for="cc-exp" class="control-label mb-1">Start Time</label>
                                                         <input id="start"  placeholder="Start Time" value="00:00"  name="start" type="time" class="form-control cc-exp"  placeholder="Start Time">
                                                         <span class="help-block"  data-valmsg-replace="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">End Time<span style="color: #FF0000" >*</span></label>
+                                                    <label for="x_card_code" class="control-label mb-1">End Time</label>
                                                     <div class="input-group">
                                                         <input id="end" name="end" value="00:00" type="time" class="form-control cc-cvc"  placeholder="End Time">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Duration<span style="color: #FF0000" >*</span></label>
-                                                <input id="diff" name="duration" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Duration">
+                                                <label for="cc-number" class="control-label mb-1">Duration</label>
+                                                <input id="diff" name="duration" type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Duration">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Building<span style="color: #FF0000" >*</span></label>
+                                                <label for="cc-number" class="control-label mb-1">Building</label>
                                                 <input id="cc-number" name="bname" type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Building">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>

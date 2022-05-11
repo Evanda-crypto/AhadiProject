@@ -198,7 +198,7 @@ include("../config/config.php");
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note from papdailysales AS p 
+                        $query  = "SELECT p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note,p.PapStatus from papdailysales AS p 
                         LEFT JOIN papnotinstalled AS r ON r.ClientID=p.ClientID WHERE r.ClientID is null and p.DateSigned >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) order by p.ClientID Desc";
                         $result  = mysqli_query($connection, $query);
 
