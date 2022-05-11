@@ -8,6 +8,7 @@ if (isset($_POST["submit"])) {
     if(isset($_POST["zone"])){
     $zones = $_POST["zone"];
     $extractzones = implode(",", $zones);
+    if($extractzones){
     $date = $_POST["date"];
     $start = $_POST["start"];
     $end = $_POST["end"];
@@ -24,7 +25,7 @@ if (isset($_POST["submit"])) {
         die("connection failed : " . $connection->connect_error);
     } else {
         $insert = $connection->query(
-            "INSERT into reports (issue,zones,reporter,starttime,endtime,duration,comments,timereported,occurancedate,Department,building) VALUES 
+            "INSERT INTO reports (issue,zones,reporter,starttime,endtime,duration,comments,timereported,occurancedate,Department,building) VALUES 
             ('$occurence','$extractzones','$reporter','$start','$end','$duration','$comments','$time','$date','$department','$bname')"
         );
 
@@ -36,6 +37,14 @@ if (isset($_POST["submit"])) {
             header("Location: events.php");
         }
     }
+}else {
+    $_SESSION["status"] = "zones not extracted";
+    header("Location: events.php");
+}
+}
+else {
+    $_SESSION["status"] = "Please select Zone(s) affected";
+    header("Location: events.php");
 }
 }
 ?>
