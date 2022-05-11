@@ -3,7 +3,9 @@ include "session.php";
 include "../config/config.php";
 date_default_timezone_set("Africa/Nairobi");
 
-if (isset($_POST["submit"]) && isset($_POST["zone"])) {
+if (isset($_POST["submit"])) {
+
+    if(isset($_POST["zone"])){
     $zones = $_POST["zone"];
     $extractzones = implode(",", $zones);
     $date = $_POST["date"];
@@ -34,5 +36,6 @@ if (isset($_POST["submit"]) && isset($_POST["zone"])) {
             header("Location: events.php");
         }
     }
+}
 }
 ?>
