@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
     $reporter = $_POST["reporter"];
     $comments = $_POST["comments"];
     $bname = $_POST["bname"];
-    $time = date("Y-m-d h:ia");
+    $time = date("Y-m-d");
     $department = "MATON";
 
     //checking if connection is not created successfully
