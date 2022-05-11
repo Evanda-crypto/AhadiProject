@@ -146,7 +146,7 @@ tfoot td {
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Today's Work</strong></center>
+                           <center> <strong class="card-title">Today's Work</strong></center></div>
                            <div class="table-responsive">
                         </div>
                         <div class="card-body">

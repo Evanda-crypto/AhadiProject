@@ -290,9 +290,11 @@ if (!$connection) {
                 <!--  Traffic  -->
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class="card">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Pap Progress</strong></center>
+                        </div>
                             <div class="card-body">
-                                <h4 class="box-title">Pap Progress </h4>
+                                <h4 class="box-title"></h4>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -305,9 +307,11 @@ if (!$connection) {
                         </div>
                     </div><!-- /# column -->
                     <div class="col-lg-4">
-                            <div class="card">
+                            <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Offlines Per Region</strong></center>
+                        </div>
                                 <div class="card-body">
-                                    <h4 class="mb-3">Offlines Per Region</h4>
+                                    <h4 class="mb-3"></h4>
                                     <canvas id="doughutChart"></canvas>
                                 </div>
                             </div>

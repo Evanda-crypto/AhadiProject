@@ -151,12 +151,12 @@ tfoot td {
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Completed Tasks</strong></center>
+                           <center> <strong class="card-title">Completed Tasks</strong></center></div>
                            <div class="table-responsive">
         <table border="0" cellspacing="5" cellpadding="5">
         <tbody><tr>
             <td>Start date:</td>
-            <td><input type="text" id="min" placeholder="Start Date" style="color:red;" class="form-control" name="min"></td>
+            <td><input type="text" id="min" placeholder="Start Date" style="color:black;" class="form-control" name="min"></td>
         </tr>
         <tr>
             <td>End date:</td>

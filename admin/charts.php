@@ -208,76 +208,94 @@ if (!$connection) {
                 <div class="row">
 
                    <div class="col-lg-12">
-                        <div class="card">
+                        <div class="card"> <div class="card-header">
+                           <center> <strong class="card-title">Overall Pap Progress</strong></center>
+                        </div>
                             <div class="card-body">
-                                <h4 class="mb-3">Overall Pap Progress</h4>
+                                <h4 class="mb-3"></h4>
                                 <canvas id="overall"></canvas>
                             </div>
                         </div>
                     </div><!-- /# column -->
                    
                     <div class="col-lg-6">
-                        <div class="card">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">SigningProgress</strong></center>
+                        </div>
                             <div class="card-body">
-                                <h4 class="mb-3">Signing Progress</h4>
+                                <h4 class="mb-3"></h4>
                                 <canvas id="signing"></canvas>
                             </div>
                         </div>
                     </div><!-- /# column -->
 
                     <div class="col-lg-6">
-                        <div class="card">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Installation Progress</strong></center>
+                        </div>
                             <div class="card-body">
-                                <h4 class="mb-3">Installation Progress</h4>
+                                <h4 class="mb-3"></h4>
                                 <canvas id="installation"></canvas>
                             </div>
                         </div>
                     </div><!-- /# column -->
 
                     <div class="col-lg-6">
-                        <div class="card">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Turned On Progress</strong></center>
+                        </div>
                             <div class="card-body">
-                                <h4 class="mb-3">Turn On Progress</h4>
+                                <h4 class="mb-3"></h4>
                                 <canvas id="turnon"></canvas>
                             </div>
                         </div>
                    </div>
                     <div class="col-lg-6">
-                            <div class="card">
+                            <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Restituted</strong></center>
+                        </div>
                                 <div class="card-body">
-                                    <h4 class="mb-3">Restituted </h4>
+                                    <h4 class="mb-3"> </h4>
                                     <canvas id="restituted"></canvas>
                                 </div>
                             </div>
                      </div><!-- /# column -->
                      <div class="col-lg-6">
-                        <div class="card">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Daily Signing Per Region</strong></center>
+                        </div>
                             <div class="card-body">
-                                <h4 class="mb-3">Daily Signing Per Region</h4>
+                                <h4 class="mb-3"></h4>
                                 <canvas id="signing/region"></canvas>
                             </div>
                         </div>
                    </div>
                     <div class="col-lg-6">
-                            <div class="card">
+                            <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Daily Installation Per Region</strong></center>
+                        </div>
                                 <div class="card-body">
-                                    <h4 class="mb-3">Daily Installation Per Region </h4>
+                                    <h4 class="mb-3"> </h4>
                                     <canvas id="installation/region"></canvas>
                                 </div>
                             </div>
                      </div><!-- /# column -->
                      <div class="col-lg-6">
-                        <div class="card">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Daily Turnon Per Region</strong></center>
+                        </div>
                             <div class="card-body">
-                                <h4 class="mb-3">Daily Turnon Per Region</h4>
+                                <h4 class="mb-3"></h4>
                                 <canvas id="turnon/region"></canvas>
                             </div>
                         </div>
                    </div>
                     <div class="col-lg-6">
-                            <div class="card">
+                            <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Daily Restitued Per Region</strong></center>
+                        </div>
                                 <div class="card-body">
-                                    <h4 class="mb-3">Daily Restitued Per Region </h4>
+                                    <h4 class="mb-3"> </h4>
                                     <canvas id="restituted/region"></canvas>
                                 </div>
                             </div>
