@@ -22,9 +22,9 @@ if (!$connection) {
 <?php 
  
  $sql =
-     "SELECT MONTHNAME(papdailysales.DateSigned) as month,COUNT(papdailysales.ClientID) as pap
+     "SELECT EXTRACT(MONTH FROM papdailysales.DateSigned),MONTHNAME(papdailysales.DateSigned) as month,COUNT(papdailysales.ClientID) as pap
      FROM papdailysales LEFT JOIN papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null and papdailysales.ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'
-     GROUP BY month order by EXTRACT(MONTH FROM papdailysales.DateSigned) asc";
+     GROUP BY month,EXTRACT(MONTH FROM papdailysales.DateSigned) order by EXTRACT(MONTH FROM papdailysales.DateSigned) asc";
  $result = mysqli_query($connection, $sql);
  $chart_data = "";
  while ($row = mysqli_fetch_array($result)) {
