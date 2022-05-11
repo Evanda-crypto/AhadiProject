@@ -197,7 +197,7 @@ include("../config/config.php");
                                 <?php
     
     $sql="SELECT issue, occurancedate, 
-    group_concat( zone ) AS zones,
+    group_concat( zones ) AS affectedzones,
     group_concat( building ) AS buildings,
     group_concat( reporter ) AS reporter,COUNT(issue) as occ
 FROM reports
@@ -208,7 +208,7 @@ while($row=$result->fetch_array()){
   <tr>
     <td><?php echo $row['occurancedate']?></td>
     <td><?php echo $row['issue']?></td>
-    <td><?php echo $row['zones']?></td>
+    <td><?php echo $row['affectedzones']?></td>
     <td><?php echo $row['buildings']?></td>
      <td><?php echo $row['reporter']?></td>
      <td><?php echo $row['occ']?></td>

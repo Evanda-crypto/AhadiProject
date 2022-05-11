@@ -24,7 +24,7 @@ if (isset($_POST["submit"])) {
         die("connection failed : " . $connection->connect_error);
     } else {
         $insert = $connection->query(
-            "INSERT into reports (issue,zone,reporter,starttime,endtime,duration,comments,timereported,occurancedate,Department,building) VALUES 
+            "INSERT into reports (issue,zones,reporter,starttime,endtime,duration,comments,timereported,occurancedate,Department,building) VALUES 
             ('$occurence','$extractzones','$reporter','$start','$end','$duration','$comments','$time','$date','$department','$bname')"
         );
 
