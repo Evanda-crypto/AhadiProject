@@ -23,9 +23,9 @@ if (!$connection) {
 <?php 
  
     $sql =
-        "SELECT MONTHNAME(papdailysales.DateSigned) as month,COUNT(papdailysales.ClientID) as pap
+        "SELECT EXTRACT(MONTH FROM papdailysales.DateSigned),MONTHNAME(papdailysales.DateSigned) as month,COUNT(papdailysales.ClientID) as pap
         FROM papdailysales LEFT JOIN papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null
-        GROUP BY month order by EXTRACT(MONTH FROM papdailysales.DateSigned) asc";
+        GROUP BY month,EXTRACT(MONTH FROM papdailysales.DateSigned) order by EXTRACT(MONTH FROM papdailysales.DateSigned) asc";
     $result = mysqli_query($connection, $sql);
     $chart_data = "";
     while ($row = mysqli_fetch_array($result)) {
@@ -36,9 +36,9 @@ if (!$connection) {
 <?php 
  
  $sql =
-     "SELECT MONTHNAME(DateInstalled) as month,COUNT(ClientID) as installed
+     "SELECT EXTRACT(MONTH FROM DateInstalled),MONTHNAME(DateInstalled) as month,COUNT(ClientID) as installed
      FROM papinstalled
-     GROUP BY month order by EXTRACT(MONTH FROM DateInstalled) asc";
+     GROUP BY month,EXTRACT(MONTH FROM DateInstalled) order by EXTRACT(MONTH FROM DateInstalled) asc";
  $result = mysqli_query($connection, $sql);
  $chart_data = "";
  while ($row = mysqli_fetch_array($result)) {
@@ -49,9 +49,9 @@ if (!$connection) {
 <?php 
  
  $sql =
-     "SELECT MONTHNAME(turnedonpap.DateTurnedOn) as month,COUNT(turnedonpap.ClientID) as pap
+     "SELECT EXTRACT(MONTH FROM turnedonpap.DateTurnedOn),MONTHNAME(turnedonpap.DateTurnedOn) as month,COUNT(turnedonpap.ClientID) as pap
      FROM turnedonpap LEFT JOIN papdailysales on papdailysales.ClientID=turnedonpap.ClientID WHERE turnedonpap.ClientID is not null
-     GROUP BY month order by EXTRACT(MONTH FROM DateTurnedOn) asc";
+     GROUP BY EXTRACT(MONTH FROM turnedonpap.DateTurnedOn),month order by EXTRACT(MONTH FROM turnedonpap.DateTurnedOn) asc";
  $result = mysqli_query($connection, $sql);
  $chart_data = "";
  while ($row = mysqli_fetch_array($result)) {
