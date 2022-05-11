@@ -46,11 +46,27 @@ include("../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .green {
+  color: green;
+}
 
+.violet {
+  color: violet;
+}
+.blue{
+    color:blue;
+}.orange{
+    color:orange;
+}
+.red{
+    color:red;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
-     <!-- Left Panel -->
-     <aside id="left-panel" class="left-panel">
+    <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -98,8 +114,12 @@ include("../config/config.php");
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
                     </li>
                     <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
-                    <li>
-                        <a href="view-reports.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>View Reports </a>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Maton</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-inbox"></i><a href="view-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="graphical-report.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
+                        </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -193,12 +213,13 @@ include("../config/config.php");
                      <th>Date Signed</th>
                      <th>Availability</th>
                      <th>Champs Comment</th>
+                     <th>Pap Status</th>
                      <th>More</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note,p.PapStatus from papdailysales AS p 
+                        $query  = "SELECT p.PapStatus,p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note from papdailysales AS p 
                         LEFT JOIN papnotinstalled AS r ON r.ClientID=p.ClientID WHERE r.ClientID is null and p.DateSigned >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) order by p.ClientID Desc";
                         $result  = mysqli_query($connection, $query);
 
@@ -215,6 +236,7 @@ include("../config/config.php");
                                     <td><?php echo $row['DateSigned']; ?></td>
                                     <td><?php echo $row['ClientAvailability']; ?></td>
                                     <td><?php echo $row['Note']; ?></td>
+                                    <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>
                                     <td>
                                     <button class="btn btn-warning" ><a href="edit-records.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
                                     </td>
@@ -267,6 +289,27 @@ $('#example').DataTable({
         });
         
 });
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent === "Assigned") {
+      cell.classList.toggle('violet');
+    }
+    if (cell.textContent === "Turned On") {
+      cell.classList.toggle('green');
+    }
+    if (cell.textContent === "Signed") {
+      cell.classList.toggle('blue');
+    }
+    if (cell.textContent === "Installed") {
+      cell.classList.toggle('orange');
+    }
+    if (cell.textContent === "Restored") {
+      cell.classList.toggle('red');
+    }
+  })
+})
 </script>
 </body>
 </html>

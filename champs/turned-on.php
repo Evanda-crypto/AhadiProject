@@ -69,6 +69,9 @@ include("../config/config.php");
                         </ul>
                     </li>
                     <li>
+                        <a href="monthly-counts.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-calendar"></i>Monthly Counts</a>
+                    </li> 
+                    <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>  
                     <li class="active">

@@ -36,6 +36,7 @@ if (isset($_POST["submit"])) {
                     $_SESSION["FName"] = $data["FirstName"];
                     $_SESSION["LName"] = $data["LastName"];
                     $_SESSION["ID"] = $data["ID"];
+                    $_SESSION["Region"] = $data["Region"];
                     header("Location: maton/dashboard.php");
                 } else {
                     $_SESSION["status"] = "Wrong Password";

@@ -52,9 +52,9 @@ if(!empty($_GET['id'])){
         echo "</tr>";
         echo "</table>";
     }else{ 
-        echo 'Content not found....1'; 
+        echo 'Content not found'; 
     } 
 }else{ 
-    echo 'Content not found....2'; 
+    echo 'Content not found'; 
 } 
 ?>

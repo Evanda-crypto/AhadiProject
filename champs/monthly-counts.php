@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>To | Restore</title>
+    <title>Monthly Count</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -41,6 +41,7 @@ include("../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
 </head>
 <body style="background-color:#e1e1e1">
 <!-- Left Panel -->
@@ -133,42 +134,28 @@ include("../config/config.php");
                 <div class="row">
                 <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header">
-                            <center><strong class="card-title">To Restore[<?php
-         $query="SELECT COUNT(*) as torestore FROM papnotinstalled WHERE ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
-          $data=mysqli_query($connection,$query);
-          while($row=mysqli_fetch_assoc($data)){
-          echo $row['torestore'];
-    }
-    ?> Records]</strong></center>
-                            </div>
+                            <div class="card-header"><center>Monthly Counts</center> </div>
                             <div class="card-body">
-                                 <table class="table table-bordered table-striped" id="example">
+                                <table class="table table-striped" id="example">
                                     <thead>
                                         <tr>
-                                        <th class="th-sm">Restore
+                                        <th class="th-sm">Month
       </th>
-      <th class="th-sm">Client Name
+      <th class="th-sm">Signed
       </th>
-      <th class="th-sm">Building Name
-      </th>
-    
                                       </tr>
                                   </thead>
                                   <tbody>
                                   <?php
-                        $query  = "SELECT ClientID,ClientName,BuildingName,BuildingCode,Region,Floor,DateSigned,Reason,Contact from papnotinstalled WHERE ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+                        $query  = "SELECT MONTHNAME(papdailysales.DateSigned) as month,COUNT(papdailysales.ClientID) as pap
+                        FROM papdailysales LEFT JOIN papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null and papdailysales.ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'
+                        GROUP BY EXTRACT(MONTH FROM papdailysales.DateSigned) asc";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                                 <tr>
-                                <td>
-                                    <button class="btn btn-warning" ><a href="restore.php?clientid=<?php echo $row['ClientID']; ?> " onClick="return confirm('Sure to restore <?php  echo $row['ClientName']; ?> as pap client  again?')">Restore</a></button>
-                                    </td>
-                                    
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getrestituted.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getrestituted.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
-                                   
+                                    <td><?php echo $row['month']; ?></td>
+                                    <td><?php echo $row['pap']; ?></td>
                                 </tr>
                         <?php
 
@@ -179,8 +166,8 @@ include("../config/config.php");
                         </div>
                     </div>
                     <!-- Modal -->
-
-                    <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                    
+<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -197,8 +184,9 @@ include("../config/config.php");
                         </div>
                     </div>
                 </div>
-            </div><!--end of modal--><!--End of modal-->
-                </div>
+            </div>
+<!--End of modal-->
+                
 
 </div><!-- .content -->
 <div class="clearfix"></div>
@@ -213,11 +201,11 @@ include("../config/config.php");
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
+
 <script>
  $(document).ready(function () {
 $('#example').DataTable(
     {
-
 "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
 "scrollY":        "500px",
 "scrollCollapse": true
@@ -228,13 +216,43 @@ $('.dataTables_length').addClass('bs-select');
 </script>
 <script>
 $(document).ready(function(){
-  $(document).on('click','.openPopup',function(){
-        var dataURL = $(this).attr('data-href');
+  $(document).on('click','.open',function(){
+      var dataURL = $(this).attr('data-href');
         $('.modal-body').load(dataURL,function(){
             $('#myModal').modal({show:true});
         });
     }); 
 });
+</script>
+<script>
+ $(document).ready(function () {
+$('#dtBasicExample').DataTable();
+$('.dataTables_length').addClass('bs-select');
+});
+</script>
+<script>
+$(document).ready(function(){
+  $(document).on('click','.openPopup',function(){
+        var dataURL = $(this).attr('data-href');
+        $('.modal-body').load(dataURL,function(){
+            $('#Modal').modal({show:true});
+        });
+    }); 
+});
+</script>
+<script>
+$(document).ready(function(){
+    $('.openPopup').on('click',function(){
+        var dataURL = $(this).attr('data-href');
+        $('.modal-body').load(dataURL,function(){
+            $('#Modal').modal({show:true});
+        });
+    }); 
+});
+
+function changeValue(value) {
+  document.getElementById('remind').innerHTML = value;
+}
 </script>
 </body>
 </html>

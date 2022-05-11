@@ -19,6 +19,46 @@ if (!$connection) {
     }
 }
 ?>
+
+<?php 
+ 
+    $sql =
+        "SELECT MONTHNAME(papdailysales.DateSigned) as month,COUNT(papdailysales.ClientID) as pap
+        FROM papdailysales LEFT JOIN papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null
+        GROUP BY month order by EXTRACT(MONTH FROM papdailysales.DateSigned) asc";
+    $result = mysqli_query($connection, $sql);
+    $chart_data = "";
+    while ($row = mysqli_fetch_array($result)) {
+        $Month[] = $row["month"];
+        $Signed[] = $row["pap"];
+    }
+?>
+<?php 
+ 
+ $sql =
+     "SELECT MONTHNAME(DateInstalled) as month,COUNT(ClientID) as installed
+     FROM papinstalled
+     GROUP BY month order by EXTRACT(MONTH FROM DateInstalled) asc";
+ $result = mysqli_query($connection, $sql);
+ $chart_data = "";
+ while ($row = mysqli_fetch_array($result)) {
+     #$Month[] = $row["month"];
+     $installed[] = $row["installed"];
+ }
+?>
+<?php 
+ 
+ $sql =
+     "SELECT MONTHNAME(turnedonpap.DateTurnedOn) as month,COUNT(turnedonpap.ClientID) as pap
+     FROM turnedonpap LEFT JOIN papdailysales on papdailysales.ClientID=turnedonpap.ClientID WHERE turnedonpap.ClientID is not null
+     GROUP BY month order by EXTRACT(MONTH FROM DateTurnedOn) asc";
+ $result = mysqli_query($connection, $sql);
+ $chart_data = "";
+ while ($row = mysqli_fetch_array($result)) {
+     #$Month[] = $row["month"];
+     $turnedon[] = $row["pap"];
+ }
+?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -159,8 +199,12 @@ if (!$connection) {
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
                     </li>
                     <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
-                    <li>
-                        <a href="view-reports.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>View Reports </a>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Maton</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-inbox"></i><a href="view-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="graphical-report.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
+                        </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -328,9 +372,11 @@ if (!$connection) {
                 <!--  Traffic  -->
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class="card">
+                        <div class="card"> <div class="card-header">
+                           <center> <strong class="card-title">Pap Progress</strong></center>
+                        </div>
                             <div class="card-body">
-                                <h4 class="box-title">Pap Progress </h4>
+                                <h4 class="box-title"></h4>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -342,10 +388,12 @@ if (!$connection) {
                             <div class="card-body"></div>
                         </div>
                     </div><!-- /# column -->
-                    <div class="col-lg-4">
+                    <div class="col-lg-4"> <div class="card-header">
+                           <center> <strong class="card-title">Turned on Per Region</strong></center>
+                        </div>
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="mb-3">Clients Per Region</h4>
+                                    <h4 class="mb-3"></h4>
                                     <canvas id="doughutChart"></canvas>
                                 </div>
                             </div>
@@ -430,6 +478,19 @@ if (!$connection) {
                                 </div>
     </div>
     </div></div>
+    <div class="row">
+
+                   <div class="col-lg-12">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Monthly Pap Progress</strong></center>
+                        </div>
+                            <div class="card-body">
+                                <h4 class="mb-3"></h4>
+                                <canvas id="monthly-progress"></canvas>
+                            </div>
+                        </div>
+                    </div><!-- /# column -->
+        </div>
             </div>
             <!-- .animated -->
         </div>
@@ -732,6 +793,54 @@ while ($signed = mysqli_fetch_assoc($result)) {
             responsive: true
         }
     } );
+    </script>
+
+    <script>
+        //Turnon chart
+    var ctx = document.getElementById( "monthly-progress" );
+    ctx.height = 90;
+    var myChart = new Chart( ctx, {
+        type: 'line',
+        data: {
+            labels:<?php echo json_encode($Month)?>,
+            datasets: [
+                {
+                    label: "Signed",
+                    data: <?php echo json_encode($Signed)?>,
+                    borderColor: "#FFB91F",
+                    borderWidth: "2",
+                    backgroundColor: "transparent"
+                            },
+                {
+                    label: "Installed",
+                    data: <?php echo json_encode($installed)?>,
+                    borderColor: "#0CBEAF",
+                    borderWidth: "2",
+                    backgroundColor: "transparent"
+                            },
+                {
+                    label: "Turned On",
+                    data: <?php echo json_encode($turnedon)?>,
+                    borderColor: "#FE2D38",
+                    borderWidth: "2",
+                    backgroundColor: "transparent"
+                            }
+                        ]
+        },
+        options: {
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            }
+
+        }
+    } );
+
     </script>
 </body>
 </html>

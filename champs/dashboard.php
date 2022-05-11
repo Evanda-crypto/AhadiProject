@@ -19,6 +19,19 @@ if (!$connection) {
     }
 }
 ?>
+<?php 
+ 
+ $sql =
+     "SELECT MONTHNAME(papdailysales.DateSigned) as month,COUNT(papdailysales.ClientID) as pap
+     FROM papdailysales LEFT JOIN papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null and papdailysales.ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'
+     GROUP BY month order by EXTRACT(MONTH FROM papdailysales.DateSigned) asc";
+ $result = mysqli_query($connection, $sql);
+ $chart_data = "";
+ while ($row = mysqli_fetch_array($result)) {
+     $Month[] = $row["month"];
+     $Signed[] = $row["pap"];
+ }
+?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -121,6 +134,9 @@ if (!$connection) {
                             <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="monthly-counts.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-calendar"></i>Monthly Counts</a>
+                    </li> 
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>  
@@ -306,9 +322,11 @@ if (!$connection) {
                 <!--  Traffic  -->
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class="card">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Pap Progress</strong></center>
+                        </div>
                             <div class="card-body">
-                                <h4 class="topcorner">Pap Progress </h4>
+                                <h4 class="topcorner"> </h4>
                                 <div class="box-title">More
              <div class="dropdown1">
              <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
@@ -369,130 +387,40 @@ if (!$connection) {
 		 </div>
 		 
 		</div>
-                            
-                       
-                        
-                    </div><!-- /# column -->
+         </div><!-- /# column -->
                     
                     <div class="col-lg-4">
-                            <div class="card">
+                            <div class="card"><div class="card"><div class="card-header"><center> <strong class="card-title">Panel Aps</strong></center></div>
                                 <div class="card-body">
-                                    <h4 class="mb-3">Panel Aps</h4>
+                                    <h4 class="mb-3"></h4>
                                     <canvas id="doughutChart"></canvas>
                                 </div>
                             </div>
                         </div>
                 </div>
+   
+                <div class="col-lg-8">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Monthly Counts</strong></center>
+                        </div>
+                            <div class="card-body">
+                            </div>
+                                    <canvas id="monthly"></canvas>   
+                                    <div class="row m-0 row-group text-center border-top border-light-3">
+		   <div class="col-12 col-lg-4">
+		     <div class="p-3">
+		       <h5 class="mb-0"></h5>
+			   <small class="mb-0"><span> <i class="fa fa-arrow-"></i></span></small>
+		     </div>
+		   </div>
+		   
+		   
+		 </div>
+		 
+		</div>
+         </div><!-- /# column -->
                 <!--  /Traffic -->
                 <div class="clearfix"></div>
-
-               <!--     <div class="row">
-                    <div class="col-lg-12">
-                    <div class="card">
-                    <div class="card-body">
-                                    
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Signed</th>
-                                                    <th>Assigned</th>
-                                                    <th>To Restore</th>
-                                                    <th>Installed</th>
-                                                    <th>Turned On</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                <td class="serial"><?php if (!$connection) {
-          echo "Problem in database connection! Contact administrator!" .
-              mysqli_error();
-      } else {
-          $sql =
-              "SELECT COUNT(papdailysales.ClientID) as signed FROM papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papnotinstalled.ClientID is null and papdailysales.ChampName='" .
-              $_SESSION["FName"] .
-              " " .
-              $_SESSION["LName"] .
-              "'";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["signed"];
-          }
-      } ?></td>
-                                                <td class="serial"><?php if (!$connection) {
-    echo "Problem in database connection! Contact administrator!" .
-        mysqli_error();
-} else {
-    $sql =
-        "SELECT COUNT(techietask.ClientID) as assigned FROM  techietask LEFT JOIN papinstalled ON papinstalled.ClientID=techietask.ClientID left join papdailysales on papdailysales.ClientID=techietask.ClientID WHERE papinstalled.ClientID is null and ChampName='" .
-        $_SESSION["FName"] .
-        " " .
-        $_SESSION["LName"] .
-        "'";
-    $result = mysqli_query($connection, $sql);
-    $chart_data = "";
-    while ($notinstalled = mysqli_fetch_assoc($result)) {
-        echo $notinstalled["assigned"];
-    }
-} ?></td>
-                                                <td class="serial"><?php if (!$connection) {
-    echo "Problem in database connection! Contact administrator!" .
-        mysqli_error();
-} else {
-    $sql =
-        "SELECT COUNT(ClientID) torestore FROM papnotinstalled  WHERE ChampName='" .
-        $_SESSION["FName"] .
-        " " .
-        $_SESSION["LName"] .
-        "'";
-    $result = mysqli_query($connection, $sql);
-    $chart_data = "";
-    while ($torestore = mysqli_fetch_assoc($result)) {
-        echo $torestore["torestore"];
-    }
-} ?></td>
-                                                    </td>
-                                         
-                                                    <td class="serial"><?php if (!$connection) {
-    echo "Problem in database connection! Contact administrator!" .
-        mysqli_error();
-} else {
-    $sql =
-        " SELECT COUNT(papinstalled.ClientID) as installed FROM papinstalled LEFT JOIN turnedonpap ON turnedonpap.ClientID=papinstalled.ClientID LEFT JOIN papdailysales ON papdailysales.ClientID=papinstalled.ClientID WHERE turnedonpap.ClientID is null and papdailysales.ChampName='" .
-        $_SESSION["FName"] .
-        " " .
-        $_SESSION["LName"] .
-        "'";
-    $result = mysqli_query($connection, $sql);
-    $chart_data = "";
-    while ($installed = mysqli_fetch_assoc($result)) {
-        echo $installed["installed"];
-    }
-} ?></td>
-                                                    <td class="serial"><?php if (!$connection) {
-    echo "Problem in database connection! Contact administrator!" .
-        mysqli_error();
-} else {
-    $sql =
-        " SELECT COUNT(turnedonpap.ClientID) as turnedon FROM turnedonpap where ChampName='" .
-        $_SESSION["FName"] .
-        " " .
-        $_SESSION["LName"] .
-        "'";
-    $result = mysqli_query($connection, $sql);
-    $chart_data = "";
-    while ($turnedon = mysqli_fetch_assoc($result)) {
-        echo $turnedon["turnedon"];
-    }
-} ?></td>
-                                                </tr>
-                                                
-                                            </tbody>
-                                        </table>
-                                
-                                </div>
-    </div>
-    </div></div>-->
             </div>
             <!-- .animated -->
         </div>
@@ -797,8 +725,6 @@ if (!$connection) {
     } );
 </script>
 <script>
-    document.getElementById("00").AddEventListener("click", Last7days);
-    function Last7days(){
         //bar chart
     var ctx = document.getElementById( "barChart" );
     ctx.height = 500;;
@@ -1065,10 +991,7 @@ if (!$connection) {
                                 } ]
             }
         }
-    } );
-     
-    }
-    </script>
+</script>
 <script>
     document.getElementById("01").addEventListener("click", last14days);
     function last14days() {
@@ -1553,7 +1476,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 </script>
 
     <script>
-              //doughut chart
+    //doughut chart
     var ctx = document.getElementById( "doughutChart" );
     ctx.height = 200;
     var myChart = new Chart( ctx, {
@@ -1631,5 +1554,36 @@ while ($signed = mysqli_fetch_assoc($result)) {
         }
     } );
     </script>
+
+
+
+    <script>
+   // single bar chart
+    var ctx = document.getElementById( "monthly" );
+    ctx.height = 150;
+    var myChart = new Chart( ctx, {
+        type: 'bar',
+        data: {
+            labels: <?php echo json_encode($Month)?>,
+            datasets: [
+                {
+                    label: "Signed",
+                    data: <?php echo json_encode($Signed)?>,
+                    borderColor: "rgba(0, 194, 146, 0.9)",
+                    borderWidth: "0",
+                    backgroundColor: "#85ce36"
+                            }
+                        ]
+        },
+        options: {
+            scales: {
+                yAxes: [ {
+                    ticks: {
+                        beginAtZero: true
+                    }
+                                } ]
+            }
+        }
+    } );</script>
 </body>
 </html>
