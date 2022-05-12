@@ -54,9 +54,18 @@ include("../../config/config.php");
                         <a href="dashboard.php"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
-
-                    <li>
-                        <a href="all-paps.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>All Paps</a>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>All Paps</a>
+                        <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-table"></i><a href="all-paps.php" style="color:black; font-size: 15px;">All Paps[Last 30 Days]</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-zmm.php" style="color:black; font-size: 15px;">ZMM</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-r&m.php"style="color:black; font-size: 15px;">R&M</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-g44.php" style="color:black; font-size: 15px;">G44</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-g45s.php" style="color:black; font-size: 15px;">G45S</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-g45n.php" style="color:black; font-size: 15px;">G45N</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-kwt.php"style="color:black; font-size: 15px;">KWT</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-lsm.php" style="color:black; font-size: 15px;">LSM</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="not-installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Not Installed </a>

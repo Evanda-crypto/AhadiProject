@@ -153,18 +153,14 @@ tfoot td {
                     <div class="card">
                         <div class="card-header">
                            <center> <strong class="card-title">Work To Pay</strong></center></div>
-                           <div class="table-responsive">
+                           <center>  <div class="table-responsive">
         <table border="0" cellspacing="5" cellpadding="5">
         <tbody><tr>
-            <td>Start date:</td>
-            <td><input type="text" id="min" placeholder="Start Date" style="color:black;" class="form-control" name="min"></td>
-        </tr>
-        <tr>
-            <td>End date:</td>
-            <td><input type="text" id="max" placeholder="End Date" style="color:black;"  class="form-control" name="max"></td>
+            <td><input type="text" id="min" placeholder="Start Date" style="color:black; margin-top:20px" class="form-control" name="min"></td>
+            <td><input type="text" id="max" placeholder="End Date" style="color:black; margin-top:20px"  class="form-control" name="max"></td>
         </tr>
     </tbody></table>
-                        </div>
+                        </div></center>
                         <div class="card-body" id="demo">
                         <table class="table table-striped" id="example">
                                 <thead>

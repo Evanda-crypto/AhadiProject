@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
         $stmt_result = $stmt->get_result();
         if ($stmt_result->num_rows > 0) {
             $data = $stmt_result->fetch_assoc();
-            if ($data["User"] == 1 || $data["User"] == 2) {
+            if ($data["User"] == 1) {
                 if (password_verify($Password, $data["Password"])) {
                     $_SESSION["start"] = time();
                     $_SESSION["Admin"] = $EMAIL;
@@ -24,6 +24,20 @@ if (isset($_POST["submit"])) {
                     $_SESSION["LName"] = $data["LastName"];
                     $_SESSION["ID"] = $data["ID"];
                     header("Location: admin/dashboard.php");
+                } else {
+                    $_SESSION["status"] = "Wrong Password";
+                    header("Location: index.php");
+                }
+            }
+            else if($data["User"] == 2) {
+                if (password_verify($Password, $data["Password"])) {
+                    $_SESSION["start"] = time();
+                    $_SESSION["nats"] = $EMAIL;
+                    $_SESSION["FName"] = $data["FirstName"];
+                    $_SESSION["LName"] = $data["LastName"];
+                    $_SESSION["ID"] = $data["ID"];
+                    $_SESSION["Region"] = $data["Region"];
+                    header("Location: nats/dashboard.php");
                 } else {
                     $_SESSION["status"] = "Wrong Password";
                     header("Location: index.php");

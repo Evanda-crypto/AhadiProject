@@ -74,8 +74,18 @@ include("../../config/config.php");
                     </li>
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
 
-                    <li>
-                        <a href="all-paps.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>All Paps</a>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>All Paps</a>
+                        <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-table"></i><a href="all-paps.php" style="color:black; font-size: 15px;">All Paps[Last 30 Days]</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-zmm.php" style="color:black; font-size: 15px;">ZMM</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-r&m.php"style="color:black; font-size: 15px;">R&M</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-g44.php" style="color:black; font-size: 15px;">G44</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-g45s.php" style="color:black; font-size: 15px;">G45S</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-g45n.php" style="color:black; font-size: 15px;">G45N</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-kwt.php"style="color:black; font-size: 15px;">KWT</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps-lsm.php" style="color:black; font-size: 15px;">LSM</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="not-installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Not Installed </a>
@@ -221,7 +231,7 @@ include("../../config/config.php");
                                 <tbody>
                                 <?php
                         $query  = "SELECT papdailysales.PapStatus,papdailysales.ClientID,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,papdailysales.ChampName,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.ClientAvailability,papdailysales.AptLayout,papdailysales.DateSigned,papdailysales.Note from papdailysales LEFT JOIN 
-                        papnotinstalled ON papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null order by papdailysales.DateSigned Desc";
+                        papnotinstalled ON papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null and papdailysales.DateSigned >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) order by papdailysales.DateSigned Desc";
                         $result  = mysqli_query($connection, $query);
 
                             while ($row = mysqli_fetch_array($result)) {
