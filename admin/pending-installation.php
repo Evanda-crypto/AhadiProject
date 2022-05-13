@@ -45,7 +45,23 @@ include("../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .green {
+  color: green;
+}
 
+.violet {
+  color: violet;
+}
+.blue{
+    color:blue;
+}.orange{
+    color:orange;
+}
+.red{
+    color:red;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
       <!-- Left Panel -->
@@ -184,12 +200,13 @@ include("../config/config.php");
                     <th>Client Contact</th>
                     <th>Date Signed</th>
                     <th>Availability</th>
+                    <th>Pap Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT p.ClientAvailability,p.ClientName,p.ClientContact,p.BuildingName,p.BuildingCode,p.DateSigned,p.Region FROM papdailysales as p left join 
+    $sql="SELECT p.ClientAvailability,p.ClientName,p.ClientContact,p.BuildingName,p.BuildingCode,p.DateSigned,p.Region,p.PapStatus FROM papdailysales as p left join 
     papinstalled as i on p.ClientID=i.ClientID left join papnotinstalled as r on r.ClientID=p.ClientID where i.ClientID is null and r.ClientID is null";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
@@ -202,6 +219,7 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['ClientContact']?></td>
     <td><?php echo $row['DateSigned']?></td>
      <td><?php echo $row['ClientAvailability']?></td>
+     <td class="centered colorText"><?php echo $row['PapStatus']?></td>
 
 </tr>
 <?php } ?>
@@ -247,6 +265,27 @@ $('#example').DataTable({
         "pagingType": "full_numbers"
         });
 });
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent === "Assigned") {
+      cell.classList.toggle('violet');
+    }
+    if (cell.textContent === "Turned On") {
+      cell.classList.toggle('green');
+    }
+    if (cell.textContent === "Signed") {
+      cell.classList.toggle('blue');
+    }
+    if (cell.textContent === "Installed") {
+      cell.classList.toggle('orange');
+    }
+    if (cell.textContent === "Restored") {
+      cell.classList.toggle('red');
+    }
+  })
+})
 </script>
 </body>
 </html>
