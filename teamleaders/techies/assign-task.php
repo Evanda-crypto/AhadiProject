@@ -41,7 +41,23 @@ include("../../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .future {
+  color: green;
+}
 
+.violet {
+  color: violet;
+}
+.tommorrow{
+    color:blue;
+}.orange{
+    color:orange;
+}
+.today{
+    color:red;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
  <!-- Left Panel -->
@@ -282,39 +298,34 @@ include("../../config/config.php");
                                          </tr>
                                   </thead>
                                   <tbody>
-                                  <?php
-    $query=mysqli_query($connection,"SELECT DISTINCT p.ClientID,p.ClientName,p.Apt,p.ClientContact,p.ClientAvailability,p.Note,p.BuildingName,p.BuildingCode,p.ChampName,p.DateSigned from 
-    papdailysales as p LEFT OUTER JOIN techietask as t on t.ClientID=p.ClientID left join papnotinstalled as r on r.ClientID=p.ClientID
-    WHERE t.ClientID is null and r.clientID is null and p.Region='".$_SESSION['Region']."'");
-    while($row=mysqli_fetch_assoc($query)){
-      $id=$row['ClientID'];
-      $cname=$row['ClientName'];
-       $champ=$row['ChampName'];
-      $contact=$row['ClientContact'];
-      $availD=$row['ClientAvailability'];
-      $date=$row['DateSigned'];
-      $bname=$row['BuildingName'];
-      $bcode=$row['BuildingCode'];
-      $note=$row['Note'];
-      $apt=$row['Apt'];
-      
-      echo ' <tr>
-      <td>'.$bname.'</td>
-      <td>'.$bcode.'</td>
-      <td>'.$apt.'</td>
-     <td>'.$champ.'</td>
-      <td>'.$cname.'</td>
-      <td>'.$contact.'</td>
-      <td>'.$date.'</td>
-      <td>'.$availD.'</td>
-      <td>'.$note.'</td>
-      
-      <td>
-        <button class="btn btn-warning"><a href="techie-task.php?client-id='.$id.'" class="text-bold">Assign Task</a></button>
-      </td>
-      </tr>';
-    }
-    ?>
+<?php
+                        $query  = "SELECT DISTINCT p.ClientID,p.ClientName,p.Apt,p.ClientContact,p.ClientAvailability,p.Note,p.BuildingName,p.BuildingCode,p.ChampName,p.DateSigned from 
+                        papdailysales as p LEFT OUTER JOIN techietask as t on t.ClientID=p.ClientID left join papnotinstalled as r on r.ClientID=p.ClientID
+                        WHERE t.ClientID is null and r.clientID is null and p.Region='".$_SESSION['Region']."'";
+                        $result  = mysqli_query($connection, $query);
+
+                            while ($row = mysqli_fetch_array($result)) {
+                            
+                        ?>
+                                <tr>
+                                    <td><?php echo $row['BuildingName']; ?></td>
+                                    <td><?php echo $row['BuildingCode']; ?></td>
+                                    <td><?php echo $row['Apt']; ?></td>
+                                    <td><?php echo $row['ChampName']; ?></td>
+                                    <td><?php echo $row['ClientName']; ?></td>
+                                    <td><?php echo $row['ClientContact']; ?></td>
+                                    <td><?php echo $row['DateSigned']; ?></td>
+                                    <td class="centered colorText"><?php echo $row['ClientAvailability']; ?></td>
+                                    <td><?php echo $row['Note']; ?></td>
+                                    <td>
+                                    <button class="btn btn-warning" ><a href="techie-task.php?client-id=<?php echo $row['ClientID']; ?>" class="text-bold">Assign Task</a></button>
+                                    </td>
+                                </tr>
+                        <?php
+
+                            }
+                    
+                        ?>
                                 </tbody>
                             </table>
                         </div>
@@ -368,6 +379,22 @@ $('#example').DataTable(
 );
 $('.dataTables_length').addClass('bs-select');
 });
+
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent > "<?php echo date("Y-m-d", strtotime("+1 days")); ?>") {
+      cell.classList.toggle('future');
+    }
+    if (cell.textContent === "<?php echo date("Y-m-d", strtotime("+1 days")); ?>") {
+      cell.classList.toggle('tommorrow');
+    }
+    if (cell.textContent === "<?php echo date("Y-m-d"); ?>" || cell.textContent < "<?php echo date("Y-m-d"); ?>") {
+      cell.classList.toggle('today');
+    }
+  })
+})
 </script>
 </body>
 </html>
