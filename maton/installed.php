@@ -45,7 +45,14 @@ include("../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-
+<style>
+    .today {
+  color: green;
+}
+.expired{
+    color:red;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
     <!-- Left Panel -->
@@ -190,7 +197,7 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['BuildingCode']?></td>
     <td><?php echo $row['Region']?></td>
     <td><?php echo $row['Mac']?></td>
-    <td><?php echo $row['DateInstalled']?></td>
+    <td class="centered colorText"><?php echo $row['DateInstalled']?></td>
     <td><?php echo $row['ClientName']?></td>
      <td><?php echo $row['ClientContact']?></td>
     <td><?php echo $row['Floor']?></td>
@@ -241,6 +248,18 @@ $('#example').DataTable({
         
         });
 });
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent < "<?php echo date("Y-m-d"); ?>") {
+      cell.classList.toggle('expired');
+    }
+    if (cell.textContent === "<?php echo date("Y-m-d"); ?>") {
+      cell.classList.toggle('today');
+    }
+  })
+})
 </script>
 </body>
 </html>
