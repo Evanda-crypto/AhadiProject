@@ -5,17 +5,19 @@ include("../config/config.php");
 if (isset($_POST["submit"])) {
     $start = $_POST["start"];
     $end = $_POST["end"];
+    $Region = $_POST["Region"];
     $sql =
-        "SELECT issue,COUNT(issue) as occ
+        "SELECT Region,issue,COUNT(issue) as occ
         FROM reports where occurancedate BETWEEN '" .
         $start .
         "' AND '" .
         $end .
-        "'
+        "' AND Region='".$Region."'
         GROUP BY issue";
     $result = mysqli_query($connection, $sql);
     $chart_data = "";
     while ($row = mysqli_fetch_array($result)) {
+        $all = $row["Region"];
         $issue[] = $row["issue"];
         $occ[] = $row["occ"];
     }
@@ -26,12 +28,12 @@ if (isset($_POST["submit"])) {
     $result = mysqli_query($connection, $sql);
     $chart_data = "";
     while ($row = mysqli_fetch_array($result)) {
+        $all = "All Regions";
         $issue[] = $row["issue"];
         $occ[] = $row["occ"];
     }
 }
 ?>
-
 
 
 <!doctype html>
@@ -167,6 +169,19 @@ if (isset($_POST["submit"])) {
                        <center> <div class="table-responsive">
         <table border="0" cellspacing="5" cellpadding="5">
         <tbody><tr>
+        <td><div class="form-group"><div class="form-group has-success">
+                                            <select data-placeholder="Choose a region..." class="standardSelect form-control" name="Region" tabindex="1" style="color:black; margin-top:35px;">
+                                            <option ><?php echo $all;?></option>
+                                            <option value="G44">G44</option>
+                                            <option value="ZMM">ZMM</option>
+                                            <option value="G45S">G45S</option>
+                                            <option value="G45N">G45N</option>
+                                            <option value="R&M">R&M</option>
+                                            <option value="LSM">LSM</option>
+                                            <option value="KWT">KWT</option> 
+                                            </select>
+                                            </div>
+                                            </div></td>
         <td><input type="date" value="<?php echo date("Y-m-d", strtotime("-6 days")); ?>" style="color:black; margin-top:20px;" class="form-control" name="start"></td>
             <td><input type="date" value="<?php echo date("Y-m-d"); ?>" style="color:black; margin-top:20px;" class="form-control" name="end"></td>
             <td><button type="submit" name="submit" class="btn btn-primary btn-block" style="background-color:#85ce36;margin-top:20px;">Show Graph</button></td>
@@ -203,7 +218,7 @@ data: {
     labels:  <?php echo json_encode($issue)?>,
     datasets: [
         {
-            label: "Report(s)",
+            label: <?php echo json_encode($all)?>,
             data: <?php echo json_encode($occ)?>,
             borderColor: "rgba(0, 194, 146, 0.9)",
             borderWidth: "0",

@@ -22,7 +22,7 @@ if (isset($_POST["submit"])) {
         $count[] = $row["occ"];
     }
 } else {
-    $sql = "SELECT Region,issue,COUNT(issue) as occ
+    $sql = "SELECT issue,COUNT(issue) as occ
         FROM nats_reports where date_reported>= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
         GROUP BY issue";
     $result = mysqli_query($connection, $sql);
