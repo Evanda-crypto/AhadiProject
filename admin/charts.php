@@ -97,7 +97,7 @@ if (!$connection) {
 
 <body>
       <!-- Left Panel -->
-      <aside id="left-panel" class="left-panel">
+    <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -148,14 +148,10 @@ if (!$connection) {
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-inbox"></i><a href="zmm_issues.php" style="color:black; font-size: 15px;">ZMM</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="r&m_issues.php" style="color:black; font-size: 15px;">R&M</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g44_issues.php" style="color:black; font-size: 15px;">G44</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g45s_issues.php" style="color:black; font-size: 15px;">G45S</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g45n_issues.php" style="color:black; font-size: 15px;">G45N</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="kwt_issues.php" style="color:black; font-size: 15px;">KWT</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="lsm_issues.php" style="color:black; font-size: 15px;">LSM</a></li>
-                        </ul></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats_reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats_graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
+                        </ul>
+                    </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Maton</a>
                         <ul class="sub-menu children dropdown-menu">

@@ -167,7 +167,7 @@ include("../config/config.php");
                                 <thead>
                                     <tr>
                                     <th>Date</th>
-                                    <th>Occurance</th>
+                                    <th>Issue</th>
                     <th>Zone(s)</th>
                     <th>Building</th>
                     <th>Duration</th>

@@ -6,10 +6,10 @@ date_default_timezone_set("Africa/Nairobi");
 if (isset($_POST["submit"])) {
     $date = $_POST["date"];
     $Region = $_POST["Region"];
-    $issue1 = $_POST["issue1"];
-    $issue2 = $_POST["issue2"];
-    $issue3 = $_POST["issue3"];
-    $issue4 = $_POST["issue4"];
+    $issue = $_POST["issue"];
+    $startime = $_POST["start"];
+    $endtime = $_POST["end"];
+    $duration = $_POST["duration"];
     $reporter = $_POST["reporter"];
     $comments = $_POST["comments"];
    
@@ -20,8 +20,8 @@ if (isset($_POST["submit"])) {
         die("connection failed : " . $connection->connect_error);
     } else {
         $insert = $connection->query(
-            "INSERT INTO nats_reports (issue1,issue2,issue3,issue4,reporter,Region,comments,date_reported) VALUES 
-            ('$issue1','$issue2','$issue3','$issue4','$reporter','$Region','$comments','$date')"
+            "INSERT INTO nats_reports (issue,starttime,endtime,duration,reporter,Region,comments,date_reported) VALUES 
+            ('$issue','$startime','$endtime','$duration','$reporter','$Region','$comments','$date')"
         );
 
         if ($insert) {

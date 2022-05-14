@@ -48,8 +48,8 @@ include("../config/config.php");
 
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+ <!-- Left Panel -->
+ <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -100,14 +100,10 @@ include("../config/config.php");
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-inbox"></i><a href="zmm_issues.php" style="color:black; font-size: 15px;">ZMM</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="r&m_issues.php" style="color:black; font-size: 15px;">R&M</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g44_issues.php" style="color:black; font-size: 15px;">G44</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g45s_issues.php" style="color:black; font-size: 15px;">G45S</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g45n_issues.php" style="color:black; font-size: 15px;">G45N</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="kwt_issues.php" style="color:black; font-size: 15px;">KWT</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="lsm_issues.php" style="color:black; font-size: 15px;">LSM</a></li>
-                        </ul></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats_reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats_graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
+                        </ul>
+                    </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Maton</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -171,7 +167,7 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">G45S Reports</strong></center>
+                           <center> <strong class="card-title">NATS Reports</strong></center>
                         </div>
                         <div class="card-body"><?php
             if(isset($_SESSION['status'])){
@@ -193,30 +189,31 @@ include("../config/config.php");
                 
             }
             ?>
-                            <table class="table table-bordered table-striped" id="example">
+                             <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
                                     <th>Day</th>
                                     <th>Date</th>
+                                    <th>Region</th>
                                     <th>Issues Reported</th>
-                                    <th>Reported By</th>
                                     <th>Comments</th>
+                                    <th>Reported By</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT dayname(date_reported) as dayn,date_reported,CONCAT('1. ',issue1,'".'<br>'."','2. ',issue2,'".'<br>'."','3. ',issue3,'".'<br>'."','4. ',issue4) as issues,
-    reporter,comments from nats_reports where Region='G45S'";
+    $sql="SELECT dayname(date_reported) as dayn,date_reported,group_concat(DISTINCT issue ,'".'<br>'."' SEPARATOR ' ' ) AS issues,reporter,comments,Region from nats_reports GROUP BY dayn,Region";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
     <td><?php echo $row['dayn']?></td>
     <td><?php echo $row['date_reported']?></td>
+    <td><?php echo $row['Region']?></td>
     <td><?php echo $row['issues']?></td>
-     <td><?php echo $row['reporter']?></td>
      <td><?php echo $row['comments']?></td>
+     <td><?php echo $row['reporter']?></td>
 </tr>
 <?php } ?>
                                 </tbody>

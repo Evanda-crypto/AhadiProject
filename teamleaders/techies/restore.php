@@ -6,9 +6,11 @@ $id = $_GET['clientid'];
 $msg = "";
 if (isset($id)) {
 
+    $sql="update papdailysales set PapStatus='Restored' where ClientID=$id";
+   $restore=mysqli_query($connection,$sql);
     $query = "DELETE FROM  papnotinstalled  WHERE ClientID= '$id'";
     $result = mysqli_query($connection, $query);
-    if ($result) {
+    if ($result && $restore) {
         $msg = '<div class="alert alert-success" role="alert">
         Sucessfully restored
       </div>';

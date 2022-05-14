@@ -53,19 +53,15 @@ date_default_timezone_set("Africa/Nairobi");
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
                         <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-inbox"></i><a href="zmm_issues.php" style="color:black; font-size: 15px;">ZMM</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="r&m_issues.php" style="color:black; font-size: 15px;">R&M</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g44_issues.php" style="color:black; font-size: 15px;">G44</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g45s_issues.php" style="color:black; font-size: 15px;">G45S</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g45n_issues.php" style="color:black; font-size: 15px;">G45N</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="kwt_issues.php" style="color:black; font-size: 15px;">KWT</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="lsm_issues.php" style="color:black; font-size: 15px;">LSM</a></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats-graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
                         </ul>
+                    </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Maton</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-inbox"></i><a href="view-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
-                            <li><i class="fa fa-inbox"></i><a href="graphical-report.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="maton-graph.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
                         </ul>
                     </li>
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
@@ -199,23 +195,45 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Issue 1<span style="color: #FF0000" >*</span></label>
-                                                <input id="diff" name="issue1" type="text" class="form-control cc-number identified visa" placeholder="Issue 1" required>
+                                                <label for="cc-number" class="control-label mb-1">Issues<span style="color: #FF0000" >*</span></label>
+                                                <div class="form-group has-success">
+                                            <select placeholder="Choose a region..." class="standardSelect form-control" name="issue" tabindex="1">
+                                            <option disabled selected >Choose an issue...</option>
+                                            <option value="Fibre Link">Fibre Link</option>
+                                            <option value="Power Issue">Power Issue</option>
+                                            <option value="Sms Code Issues">Sms Code Issues</option>
+                                            <option value="Portal Unreachable">Portal Unreachable</option>
+                                            <option value="Paps Blinking">Paps Blinking</option>
+                                            <option value="Theft Cases">Theft Cases</option>
+                                            <option value="Power Backup Failure">Power Backup Failure</option> 
+                                            <option value="Delayed Feedback">Delayed Feedback</option>
+                                            <option value="No Issues">No Issues</option>
+                                            </select>
+                                            </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">Start Time</label>
+                                                        <input id="start"  placeholder="Start Time" value="00:00"  name="start" type="time" class="form-control cc-exp"  placeholder="Start Time">
+                                                        <span class="help-block"  data-valmsg-replace="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="x_card_code" class="control-label mb-1">End Time</label>
+                                                    <div class="input-group">
+                                                        <input id="end" name="end" value="00:00" type="time" class="form-control cc-cvc"  placeholder="End Time">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Duration</label>
+                                                <input id="diff" name="duration" type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Duration">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Issue 2</label>
-                                                <input id="diff" name="issue2" type="text" class="form-control cc-number identified visa" placeholder="Issue 2(Optional)" >
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Issue 3</label>
-                                                <input id="diff" name="issue3" type="text" class="form-control cc-number identified visa" placeholder="Issue 3(Optional)" >
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Issue 4</label>
-                                                <input id="diff" name="issue4" type="text" class="form-control cc-number identified visa" placeholder="Issue 4(Optional)" >
+                                                <label for="cc-number" class="control-label mb-1">Comments<span style="color: #FF0000" >*</span></label>
+                                                <input id="cc-number" name="comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
@@ -227,11 +245,7 @@ date_default_timezone_set("Africa/Nairobi");
  ]; ?>" maxlength="40"  required placeholder="Reports By">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments<span style="color: #FF0000" >*</span></label>
-                                                <input id="cc-number" name="comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                            </div>
+                                          
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>

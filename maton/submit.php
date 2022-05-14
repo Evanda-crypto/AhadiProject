@@ -19,14 +19,15 @@ if (isset($_POST["submit"])) {
     $bname = $_POST["bname"];
     $time = date("Y-m-d");
     $department = "MATON";
+    $Region = $_POST["Region"];
 
     //checking if connection is not created successfully
     if ($connection->connect_error) {
         die("connection failed : " . $connection->connect_error);
     } else {
         $insert = $connection->query(
-            "INSERT INTO reports (issue,zones,reporter,starttime,endtime,duration,comments,timereported,occurancedate,Department,building) VALUES 
-            ('$occurence','$extractzones','$reporter','$start','$end','$duration','$comments','$time','$date','$department','$bname')"
+            "INSERT INTO reports (issue,zones,reporter,starttime,endtime,duration,comments,timereported,occurancedate,Department,building,Region) VALUES 
+            ('$occurence','$extractzones','$reporter','$start','$end','$duration','$comments','$time','$date','$department','$bname','$Region')"
         );
 
         if ($insert) {

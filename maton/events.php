@@ -173,30 +173,40 @@ date_default_timezone_set("Africa/Nairobi");
                                                 ); ?>" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Start Time</label>
-                                                        <input id="start"  placeholder="Start Time" value="00:00"  name="start" type="time" class="form-control cc-exp"  placeholder="Start Time">
-                                                        <span class="help-block"  data-valmsg-replace="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">End Time</label>
-                                                    <div class="input-group">
-                                                        <input id="end" name="end" value="00:00" type="time" class="form-control cc-cvc"  placeholder="End Time">
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Duration</label>
-                                                <input id="diff" name="duration" type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Duration">
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                                <label for="cc-number" class="control-label mb-1">Issue</label>
+                                                <div class="form-group has-success">
+                                            <select data-placeholder="Choose an issue..." class="standardSelect form-control" name="issue" tabindex="1" required>
+                                            <option disabled selected >Choose an issue...</option>
+                            <optgroup label="Power Issue">
+                              <option  value="Power Issue (Power Outage)">Power Outage</option>  
+                              <option value="Power Issue (KPLC Disconnection)">KPLC Disconnection</option>
+                              <option value="Power Issue (Mgmt Disconnection)">Mgmt Disconnection</option>   
+                              <option value="Power Issue (Power Surge)">Power Surge</option>
+                             <option value="Power Issue (Low Voltage)">Low Voltage </option>
+                             <option value="Power Issue (Faulty Meter)">Faulty Meter</option>  
+                             <option value="Power Issue (Tokens)">Tokens</option>
+                             <option value="Power Issue (Mgmt Maintenance)">Mgmt Maintenance</option>
+                             <option value="Power Issue (Maton Maitenance) ">Maton Maintenance</option>
+                            </optgroup>
+                             <optgroup label="Fibre Issue">
+                             <option  value="Fibre Issue (KPLC Damage)">KPLC Damage</option>  
+                              <option value="Fibre Issue (Fallen Pole)">Fallen Pole</option>
+                              <option value="Fibre Issue (Damaged By Trucks")>Damaged By Trucks</option>   
+                              <option value="Fibre Issue (Unknown Assailants)">Unknown Assailants</option>
+                             <option value="Fibre Issue (Loop)">Loop</option>
+                             <option value="Fibre Issue (Kink)">Kink</option>  
+                             <option value="Fibre Issue (Faulty Module)">Faulty Module</option>
+                             <option value="Fibre Issue (Loose Joint)">Loose Joint</option>
+                             <option value="Fibre Issue (Loosely Patched Pigtails)">Loosely Patched Pigtails</option>
+                             <option value="Fibre Issue (Poor Enclosure Mgnt)">Poor Enclosure Mgnt</option>  
+                             <option value="Fibre Issue (Poor SB Mgnt)">Poor SB Mgnt</option>
+                            </optgroup>
+                            <optgroup label="Other Issues">
+                            <option  value="Other Issues (Switch Theft)">Switch Theft</option>
+                                            </optgroup>
+                                              </select>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Building</label>
-                                                <input id="cc-number" name="bname" type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Building">
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Region & Zone<span style="color: #FF0000" >*</span></label>
@@ -205,6 +215,7 @@ date_default_timezone_set("Africa/Nairobi");
                                                 <select placeholder="Choose a Zone..." multiple class="standardSelect form-control" tabindex="1" name="zone[]" required>
                             <optgroup label="R&M">
                                 <option value=""></option>
+                                <option  value="R&M All Zones">All Zones</option> 
                             <option  value="R&M Zone 1">Zone 1</option>  
                               <option value="R&M Zone 2">Zone 2</option>
                               <option value="R&M Zone 3">Zone 3</option>   
@@ -228,6 +239,7 @@ date_default_timezone_set("Africa/Nairobi");
                              
                             </optgroup>
                             <optgroup label="ZMM">
+                            <option  value="ZMM All Zones">All Zones</option> 
                             <option  value="ZMM Zone 1">Zone 1</option>  
                               <option value="ZMM Zone 2">Zone 2</option>
                               <option value="ZMM Zone 3">Zone 3</option>   
@@ -250,6 +262,7 @@ date_default_timezone_set("Africa/Nairobi");
                              <option value="ZMM Zone 20">Zone 20</option>
                             </optgroup>
                             <optgroup label="G44">
+                            <option  value="G44 All Zones">All Zones</option> 
                             <option  value="G44 Zone 1">Zone 1</option>  
                               <option value="G44 Zone 2">Zone 2</option>
                               <option value="G44 Zone 3">Zone 3</option>   
@@ -272,6 +285,7 @@ date_default_timezone_set("Africa/Nairobi");
                              <option value="G44 Zone 20">Zone 20</option>
                             </optgroup>
                             <optgroup label="G45S">
+                            <option  value="G45S All Zones">All Zones</option> 
                             <option  value="G45S Zone 1">Zone 1</option>  
                               <option value="G45S Zone 2">Zone 2</option>
                               <option value="G45S Zone 3">Zone 3</option>   
@@ -294,6 +308,7 @@ date_default_timezone_set("Africa/Nairobi");
                              <option value="G45S Zone 20">Zone 20</option>
                             </optgroup>
                             <optgroup label="G45N">
+                            <option  value="G45N All Zones">All Zones</option> 
                             <option  value="G45N Zone 1">Zone 1</option>  
                               <option value="G45N Zone 2">Zone 2</option>
                               <option value="G45N Zone 3">Zone 3</option>   
@@ -316,6 +331,7 @@ date_default_timezone_set("Africa/Nairobi");
                              <option value="G45N Zone 20">Zone 20</option>
                             </optgroup>
                             <optgroup label="KWT">
+                            <option  value="KWT All Zones">All Zones</option> 
                             <option  value="KWT Zone 1">Zone 1</option>  
                               <option value="KWT Zone 2">Zone 2</option>
                               <option value="KWT Zone 3">Zone 3</option>   
@@ -338,6 +354,7 @@ date_default_timezone_set("Africa/Nairobi");
                              <option value="KWT Zone 20">Zone 20</option>
                             </optgroup>
                             <optgroup label="LSM">
+                            <option  value="LSM All Zones">All Zones</option> 
                             <option  value="LSM Zone 1">Zone 1</option>  
                               <option value="LSM Zone 2">Zone 2</option>
                               <option value="LSM Zone 3">Zone 3</option>   
@@ -362,18 +379,53 @@ date_default_timezone_set("Africa/Nairobi");
                             </select>
                              </div>
                               </div>
-                                        <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Issue</label>
+                              <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label>
                                                 <div class="form-group has-success">
-                                            <select data-placeholder="Choose an issue..." class="standardSelect form-control" name="issue" tabindex="1" required>
-                                            <option value=""></option>
-                                            <option value="Power Outage">Power Outage</option> 
-                                            <option value="Fiber Link">Fiber Link</option>  
-                                            <option value="Switch Theft">Switch Theft</option>
-                                            <option value="Low Voltage">Low Voltage</option>
-                                              </select>
+                                            <select data-placeholder="Choose a region..." class="standardSelect form-control" name="Region" tabindex="1">
+                                            <option value="<?php echo $_SESSION['Region']?>"><?php echo $_SESSION['Region']?></option>
+                                            <option value="G44">G44</option>
+                                            <option value="ZMM">ZMM</option>
+                                            <option value="G45S">G45S</option>
+                                            <option value="G45N">G45N</option>
+                                            <option value="R&M">R&M</option>
+                                            <option value="LSM">LSM</option>
+                                            <option value="KWT">KWT</option> 
+                                            </select>
                                             </div>
                                             </div>
+                              <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Building</label>
+                                                <input id="cc-number" name="bname" type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Building">
+                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">Start Time</label>
+                                                        <input id="start"  placeholder="Start Time" value="00:00"  name="start" type="time" class="form-control cc-exp"  placeholder="Start Time">
+                                                        <span class="help-block"  data-valmsg-replace="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="x_card_code" class="control-label mb-1">End Time</label>
+                                                    <div class="input-group">
+                                                        <input id="end" name="end" value="00:00" type="time" class="form-control cc-cvc"  placeholder="End Time">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Duration</label>
+                                                <input id="diff" name="duration" type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Duration">
+                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments<span style="color: #FF0000" >*</span></label>
+                                                <input id="cc-number" name="comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
+                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                            </div>
+                                        
                                             <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Reported By<span style="color: #FF0000" >*</span></label>
                                                 <input id="cc-number" name="reporter" type="text" required class="form-control cc-number identified visa" Value="<?php echo $_SESSION[
@@ -383,11 +435,7 @@ date_default_timezone_set("Africa/Nairobi");
  ]; ?>" maxlength="40"  required placeholder="Reports By">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments<span style="color: #FF0000" >*</span></label>
-                                                <input id="cc-number" name="comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                            </div>
+                                            
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>

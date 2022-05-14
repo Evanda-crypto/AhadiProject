@@ -2,7 +2,41 @@
 include("session.php");
 include("../config/config.php");
 
+if (isset($_POST["submit"])) {
+    $start = $_POST["start"];
+    $end = $_POST["end"];
+    $Region = $_POST["Region"];
+    $sql =
+        "SELECT Region,issue,COUNT(issue) as occ
+        FROM nats_reports where date_reported BETWEEN '" .
+        $start .
+        "' AND '" .
+        $end .
+        "' and Region='".$Region."'
+        GROUP BY issue";
+    $result = mysqli_query($connection, $sql);
+    $chart_data = "";
+    while ($row = mysqli_fetch_array($result)) {
+        $all = $row["Region"];
+        $issue[] = $row["issue"];
+        $count[] = $row["occ"];
+    }
+} else {
+    $sql = "SELECT Region,issue,COUNT(issue) as occ
+        FROM nats_reports where date_reported>= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+        GROUP BY issue";
+    $result = mysqli_query($connection, $sql);
+    $chart_data = "";
+    while ($row = mysqli_fetch_array($result)) {
+        $all = "All Regions";
+        $issue[] = $row["issue"];
+        $count[] = $row["occ"];
+    }
+}
 ?>
+
+
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -11,7 +45,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Reports</title>
+    <title>Graphs and Charts</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,31 +59,13 @@ include("../config/config.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../assets/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
-    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
-
-<link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-<!-- Bootstrap core JavaScript-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
 </head>
+
 <body style="background-color:#e1e1e1">
-   <!-- Left Panel -->
-   <aside id="left-panel" class="left-panel">
+ <!-- Left Panel -->
+ <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -100,14 +116,10 @@ include("../config/config.php");
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-inbox"></i><a href="zmm_issues.php" style="color:black; font-size: 15px;">ZMM</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="r&m_issues.php" style="color:black; font-size: 15px;">R&M</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g44_issues.php" style="color:black; font-size: 15px;">G44</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g45s_issues.php" style="color:black; font-size: 15px;">G45S</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="g45n_issues.php" style="color:black; font-size: 15px;">G45N</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="kwt_issues.php" style="color:black; font-size: 15px;">KWT</a></li>
-                            <li><i class="fa fa-inbox"></i><a href="lsm_issues.php" style="color:black; font-size: 15px;">LSM</a></li>
-                        </ul></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats_reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats_graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
+                        </ul>
+                    </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Maton</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -141,10 +153,11 @@ include("../config/config.php");
                         </div>
 
                         <div class="dropdown for-notification">
+
                         </div>
 
                         <div class="dropdown for-message">
-                      
+
                         </div>
                     </div>
 
@@ -162,105 +175,103 @@ include("../config/config.php");
 
                 </div>
             </div>
-        </header><!-- /header -->
-        <!-- Header-->
-
+        </header>
+        <!-- /#header -->
+        <!-- Content -->
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                           <center> <strong class="card-title">LSM Reports</strong></center>
+
+                   <div class="col-lg-12">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Daily Reports[Number of Times Issue was Reported]</strong></center>
+                        </div><form method="POST">
+                       <center> <div class="table-responsive">
+        <table border="0" cellspacing="5" cellpadding="5">
+        <tbody><tr>
+        <td><div class="form-group"><div class="form-group has-success">
+                                            <select data-placeholder="Choose a region..." class="standardSelect form-control" name="Region" tabindex="1" style="color:black; margin-top:35px;">
+                                            <option ><?php echo $all;?></option>
+                                            <option value="G44">G44</option>
+                                            <option value="ZMM">ZMM</option>
+                                            <option value="G45S">G45S</option>
+                                            <option value="G45N">G45N</option>
+                                            <option value="R&M">R&M</option>
+                                            <option value="LSM">LSM</option>
+                                            <option value="KWT">KWT</option> 
+                                            </select>
+                                            </div>
+                                            </div></td>
+        <td><input type="date" value="<?php echo date("Y-m-d", strtotime("-6 days")); ?>" style="color:black; margin-top:20px;" class="form-control" name="start"></td>
+            <td><input type="date" value="<?php echo date("Y-m-d"); ?>" style="color:black; margin-top:20px;" class="form-control" name="end"></td>
+            <td><button type="submit" name="submit" class="btn btn-primary btn-block" style="background-color:#85ce36;margin-top:20px;">Show Graph</button></td>
+        </tr>
+    </tbody></table></div></center></form>
+                            <div class="card-body">
+                                <h4 class="mb-3"></h4>
+                                <canvas id="reports"></canvas>
+                            </div>
                         </div>
-                        <div class="card-body"><?php
-            if(isset($_SESSION['status'])){
-                ?>
-               <center><span> <div class="alert alert-danger" role="alert">
-                   <?php echo $_SESSION['status'];
-                unset($_SESSION['status']);?>
-                 </div></span></center>
-                <?php
-                
-            }
-            elseif(isset($_SESSION['success'])){
-                ?>
-                <center><span><div class="alert alert-success" role="alert">
-                   <?php echo $_SESSION['success'];
-                unset($_SESSION['success']);?>
-                 </div></span></center>
-                <?php
-                
-            }
-            ?>
-                            <table class="table table-bordered table-striped" id="example">
-                                <thead>
-                                    <tr>
-                                    <th>Day</th>
-                                    <th>Date</th>
-                                    <th>Issues Reported</th>
-                                    <th>Reported By</th>
-                                    <th>Comments</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-    
-    $sql="SELECT dayname(date_reported) as dayn,date_reported,CONCAT('1. ',issue1,'".'<br>'."','2. ',issue2,'".'<br>'."','3. ',issue3,'".'<br>'."','4. ',issue4) as issues,
-    reporter,comments from nats_reports where Region='LSM'";
-$result=$connection->query($sql);
-while($row=$result->fetch_array()){
-  ?>
-  <tr>
-    <td><?php echo $row['dayn']?></td>
-    <td><?php echo $row['date_reported']?></td>
-    <td><?php echo $row['issues']?></td>
-     <td><?php echo $row['reporter']?></td>
-     <td><?php echo $row['comments']?></td>
-</tr>
-<?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                    </div><!-- /# column -->
+                              </div><!--/row-->
+        <!-- /.content -->
+        <div class="clearfix"></div>
+    </div>
+    <!-- /#right-panel -->
 
-</div><!-- .content -->
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <!--  Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+    <script>
 
-<div class="clearfix"></div>
-
-</div><!-- /#right-panel -->
-
-<!-- Right Panel -->
-
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
-
-<script type="text/javascript">
-$( document ).ready(function() {
-$('#example').DataTable({
-		 "processing": true,
-		 "dom": 'lBfrtip',
-		 "buttons": [
-            {
-                extend: 'collection',
-                text: 'Export',
-                buttons: [
-                    'excel',
-                    'csv'
+// single bar chart
+var ctx = document.getElementById( "reports" );
+ctx.height = 90;
+var myChart = new Chart( ctx, {
+type: 'bar',
+data: {
+    labels:  <?php echo json_encode($issue)?>,
+    datasets: [
+        {
+            label: <?php echo json_encode($all)?>,
+            data: <?php echo json_encode($count)?>,
+            borderColor: "rgba(0, 194, 146, 0.9)",
+            borderWidth: "0",
+            backgroundColor: [  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
+  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
+  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
+                '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
+  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
+  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
+  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF']
+                    }
                 ]
+},
+options: {
+    scales: {
+        yAxes: [ {
+            ticks: {
+                beginAtZero: true
             }
-        ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true
-        
-        });
-});
+                        } ]
+    }
+}
+} );
 </script>
+
+   
+    <!--Flot Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+    
 </body>
+
 </html>

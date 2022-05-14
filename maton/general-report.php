@@ -167,7 +167,7 @@ include("../config/config.php");
                                 <thead>
                                     <tr>
                                     <th>Date</th>
-                                    <th>Occurance</th>
+                                    <th>Issue(s)</th>
                                     <th>Zone(s) affected</th>
                                     <th>Buildings</th>
                                     <th>Reported By</th>
@@ -178,9 +178,9 @@ include("../config/config.php");
                                 <?php
     
     $sql="SELECT issue, occurancedate, 
-    group_concat( zones ) AS affectedzones,
-    group_concat( building ) AS buildings,
-    group_concat( reporter ) AS reporter,COUNT(issue) as occ
+    group_concat( DISTINCT zones ,'".'<br>'."' SEPARATOR ' ' ) AS affectedzones,
+    group_concat( DISTINCT building ,'".'<br>'."' SEPARATOR ' ' ) AS buildings,
+    group_concat( DISTINCT reporter ,'".'<br>'."' SEPARATOR ' ' ) AS reporter,COUNT(issue) as occ
 FROM reports
 GROUP BY issue,occurancedate ORDER BY occurancedate ASC";
 $result=$connection->query($sql);
