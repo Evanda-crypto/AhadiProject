@@ -8,7 +8,7 @@ if(!empty($_GET['id'])){
     } 
      
     // Get content from the database 
-    $query = $connection->query("SELECT papdailysales.ChampName,techietask.ClientName,techietask.ClientID,techietask.ClientContact,techietask.ClientAvailability,papdailysales.BuildingName,papdailysales.Region,techietask.Date,Token_teams.Team_ID,
+    $query = $connection->query("SELECT papdailysales.Note,papdailysales.ChampName,techietask.ClientName,techietask.ClientID,techietask.ClientContact,techietask.ClientAvailability,papdailysales.BuildingName,papdailysales.Region,techietask.Date,Token_teams.Team_ID,
     papdailysales.BuildingCode,papdailysales.Floor,papdailysales.Apt from papdailysales LEFT JOIN 
     techietask on techietask.ClientID=papdailysales.ClientID LEFT JOIN Token_teams ON Token_teams.Team_ID=techietask.TeamID  LEFT JOIN papinstalled ON papinstalled.ClientID=papdailysales.ClientID WHERE techietask.ClientID is not null AND papinstalled.ClientID is null and Token_teams.Team_ID='" .
                                           $_SESSION["TeamID"] .
@@ -47,6 +47,10 @@ if(!empty($_GET['id'])){
         echo "<tr>";
         echo "<td>Door No</td>";
         echo "<td>".$cmsData['Apt']."</td>";
+        echo "</tr>";
+        echo"</tr>";
+        echo "<td>Champs comment</td>";
+        echo "<td>".$cmsData['Note']."</td>";
         echo "</tr>";
         echo"</tr>";
         echo "</table>";
