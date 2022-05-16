@@ -173,11 +173,12 @@ include("../config/config.php");
                             <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th>Date Installed</th>
+                                   
                                     <th>Building Name</th>
                     <th>Building Code</th>
                     <th>Region</th>
                     <th>Mac Address</th>
+                    <th>Date Installed</th>
                     <th>Client Name</th>
                     <th>Contact</th>
                    <th>Floor</th>
@@ -193,11 +194,12 @@ $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
-  <td class="centered colorText"><?php echo $row['DateInstalled']?></td>
+ 
     <td><?php echo $row['BuildingName']?></td>
     <td><?php echo $row['BuildingCode']?></td>
     <td><?php echo $row['Region']?></td>
     <td><?php echo $row['Mac']?></td>
+    <td class="centered colorText"><?php echo $row['DateInstalled']?></td>
     <td><?php echo $row['ClientName']?></td>
      <td><?php echo $row['ClientContact']?></td>
     <td><?php echo $row['Floor']?></td>
