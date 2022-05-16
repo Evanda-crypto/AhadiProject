@@ -126,7 +126,14 @@ include("../config/config.php");
                                         <tr>
                                           <th scope="col">B Name</th>
                                           <th scope="col">B Code</th>
+                                          <th scope="col">Status</th>
                                           <th scope="col">Region</th>
+                                          <th scope="col">Mtr No</th>
+                                          <th scope="col">Champs(Sales)</th>
+                                          <th scope="col">IAP</th>
+                                          <th scope="col">OAP</th>
+                                          <th scope="col">Shops</th>
+                                          <th scope="col">Apt</th>
                                           <th scope="col">Change Status</th>
                                       </tr>
                                   </thead>
@@ -140,7 +147,14 @@ include("../config/config.php");
       <tr>
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['BuildingName']?></a></td>
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['BuildingCode']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['BuildingStatus']?></a></td>
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['Region']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['MtrNo']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['ChampSales']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['IAP']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['OAP']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['Shops']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['Apt']?></a></td>
         <td>
        <button class="btn btn-warning"><a href="change-status.php?id=<?php echo $row['ID']; ?>">Edit</i></a></button>
     </td>

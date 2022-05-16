@@ -25,8 +25,8 @@ if(!empty($_GET['id'])){
         echo "<td>".$cmsData['BuildingStatus']."</td>";
         echo "</tr>";
         echo "<tr>";
-        echo "<td>Floors</td>";
-        echo "<td>".$cmsData['Floors']."</td>";
+        echo "<td>Techies</td>";
+        echo "<td>".$cmsData['Techies']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Region</td>";
