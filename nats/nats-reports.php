@@ -184,7 +184,7 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT dayname(date_reported) as dayn,date_reported,group_concat(DISTINCT issue ,'".'<br>'."' SEPARATOR ' ' ) AS issues,reporter,comments,Region from nats_reports GROUP BY dayn,Region";
+    $sql="SELECT Region,dayname(date_reported) as dayn,date_reported,group_concat(DISTINCT issue ,'".'<br>'."' SEPARATOR ' ' ) AS issues,reporter,comments,Region from nats_reports GROUP BY dayn,Region";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
