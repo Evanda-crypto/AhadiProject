@@ -19,6 +19,19 @@ if (!$connection) {
     }
 }
 ?>
+<?php 
+ 
+ $sql =
+     "SELECT EXTRACT(MONTH FROM papdailysales.DateSigned),MONTHNAME(papdailysales.DateSigned) as month,COUNT(papdailysales.ClientID) as pap
+     FROM papdailysales LEFT JOIN papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null
+     GROUP BY month,EXTRACT(MONTH FROM papdailysales.DateSigned) order by EXTRACT(MONTH FROM papdailysales.DateSigned) asc";
+ $result = mysqli_query($connection, $sql);
+ $chart_data = "";
+ while ($row = mysqli_fetch_array($result)) {
+     $Month[] = $row["month"];
+     $Signed[] = $row["pap"];
+ }
+?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -405,6 +418,19 @@ if (!$connection) {
                                 </tbody>
                             </table>
                     </div></div></div></div>
+                    <div class="row">
+
+<div class="col-lg-12">
+     <div class="card"><div class="card-header">
+        <center> <strong class="card-title">Monthly Pap Progress</strong></center>
+     </div>
+         <div class="card-body">
+             <h4 class="mb-3"></h4>
+             <canvas id="monthly-progress"></canvas>
+         </div>
+     </div>
+ </div><!-- /# column -->
+</div>
                 </div><!-- .animated -->
         </div>
         <!-- /.content -->
@@ -783,5 +809,38 @@ while ($signed = mysqli_fetch_assoc($result)) {
     } );
 
 </script>
+<script>
+        //Turnon chart
+    var ctx = document.getElementById( "monthly-progress" );
+    ctx.height = 90;
+    var myChart = new Chart( ctx, {
+        type: 'line',
+        data: {
+            labels:<?php echo json_encode($Month)?>,
+            datasets: [
+                {
+                    label: "Signed",
+                    data: <?php echo json_encode($Signed)?>,
+                    borderColor: "#85ce36",
+                    borderWidth: "2",
+                    backgroundColor: "transparent"
+                            }
+                        ]
+        },
+        options: {
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            }
+
+        }
+    } );
+
+    </script>
 </body>
 </html>
