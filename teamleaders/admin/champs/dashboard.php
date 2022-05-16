@@ -375,12 +375,13 @@ if (!$connection) {
                                     <tr>
                                     <th>No</th>
                     <th>Champ</th>
+                    <th>Region</th>
                     <th>Pap Signed Today</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-                      $query  = "SELECT ChampName,COUNT(ChampName) as signed from papdailysales WHERE DateSigned=CURRENT_DATE() GROUP BY ChampName order by signed DESC";
+                      $query  = "SELECT Region,ChampName,COUNT(ChampName) as signed from papdailysales WHERE DateSigned=CURRENT_DATE() GROUP BY ChampName,Region order by signed DESC";
                         $result  = mysqli_query($connection, $query);
 
                         $num_rows  = mysqli_num_rows($result);
@@ -393,6 +394,7 @@ if (!$connection) {
                                 <tr>
                                     <td><?php echo $num; ?></td>
                                     <td><?php echo $row['ChampName']; ?></td>
+                                    <td><?php echo $row['Region']; ?></td>
                                     <td><?php echo $row['signed']; ?></td>
                                 </tr>
                         <?php
