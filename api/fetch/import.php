@@ -1,11 +1,12 @@
 <?php
 include "../../config/config.php";
 //read the json file contents
-$jsonurl = "http://localhost/project/api/send/turned-on.php";
+$jsonurl = "http://app.sasakonnect.net/13000/api/send/test.php";
 $json = file_get_contents($jsonurl);
 
 //convert json object to php associative array
 $data = json_decode($json, true);
+
 
 foreach ($data as $dataarray) {
     //get the employee details
