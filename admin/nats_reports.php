@@ -189,13 +189,14 @@ include("../config/config.php");
                 
             }
             ?>
-                            <table class="table table-bordered table-striped" id="example">
+                             <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
                                     <th>Day</th>
                                     <th>Date</th>
                                     <th>Region</th>
                                     <th>Issues Reported</th>
+                                    <th>Duration</th>
                                     <th>Comments</th>
                                     <th>Reported By</th>
                                     </tr>
@@ -207,6 +208,7 @@ include("../config/config.php");
     group_concat(DISTINCT date_reported ,'".'<br>'."' SEPARATOR ' ' ) AS date_reported,
     group_concat(DISTINCT issue ,'".'<br>'."' SEPARATOR ' ' ) AS issues,
     group_concat(DISTINCT reporter ,'".'<br>'."' SEPARATOR ' ' ) AS reporter,
+    group_concat(Duration ,'".'<br>'."' SEPARATOR ' ' ) AS duration,
     group_concat(DISTINCT comments ,'".'<br>'."' SEPARATOR ' ' ) AS comments from nats_reports GROUP BY dayn,Region,date_reported";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
@@ -216,6 +218,7 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['date_reported']?></td>
     <td><?php echo $row['Region']?></td>
     <td><?php echo $row['issues']?></td>
+    <td><?php echo $row['duration']?></td>
      <td><?php echo $row['comments']?></td>
      <td><?php echo $row['reporter']?></td>
 </tr>
