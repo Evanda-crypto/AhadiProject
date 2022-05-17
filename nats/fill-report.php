@@ -207,7 +207,11 @@ date_default_timezone_set("Africa/Nairobi");
                                             <option value="Theft Cases">Theft Cases</option>
                                             <option value="Power Backup Failure">Power Backup Failure</option> 
                                             <option value="Delayed Feedback">Delayed Feedback</option>
+                                            <option value="MPESA API Failure">MPESA API Failure</option> 
+                                            <option value="Core Device Failure">Core Device Failure</option>
+                                            <option value="Public IP Issue">Public IP Issue</option>
                                             <option value="No Issues">No Issues</option>
+                                            
                                             </select>
                                             </div>
                                             </div>
@@ -233,7 +237,7 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
                                             <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Comments<span style="color: #FF0000" >*</span></label>
-                                                <input id="cc-number" name="comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Comments">
+                                                <input id="cc-number" name="comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Comments" required>
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
