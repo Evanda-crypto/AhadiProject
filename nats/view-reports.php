@@ -63,7 +63,8 @@ include("../config/config.php");
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-inbox"></i><a href="nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                         <li><i class="fa fa-inbox"></i><a href="nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="compiled_nats-reports.php" style="color:black; font-size: 15px;">Compiled Reports </a></li>
                             <li><i class="fa fa-inbox"></i><a href="nats-graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
                         </ul>
                     </li>
@@ -170,12 +171,13 @@ include("../config/config.php");
                 
             }
             ?>
-                            <table class="table table-bordered table-striped" id="example">
+                               <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
                                     <th>Date</th>
                                     <th>Issue(s)</th>
                                     <th>Zone(s) affected</th>
+                                    <th>Duration</th>
                                     <th>Buildings</th>
                                     <th>Reported By</th>
                                     <th>Count</th>
@@ -187,6 +189,7 @@ include("../config/config.php");
     $sql="SELECT issue, occurancedate, 
     group_concat( DISTINCT zones ,'".'<br>'."' SEPARATOR ' ' ) AS affectedzones,
     group_concat( DISTINCT building ,'".'<br>'."' SEPARATOR ' ' ) AS buildings,
+    group_concat( duration ,'".'<br>'."' SEPARATOR ' ' ) AS duration,
     group_concat( DISTINCT reporter ,'".'<br>'."' SEPARATOR ' ' ) AS reporter,COUNT(issue) as occ
 FROM reports
 GROUP BY issue,occurancedate ORDER BY occurancedate ASC";
@@ -197,6 +200,7 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['occurancedate']?></td>
     <td><?php echo $row['issue']?></td>
     <td><?php echo $row['affectedzones']?></td>
+    <td><?php echo $row['duration']?></td>
     <td><?php echo $row['buildings']?></td>
      <td><?php echo $row['reporter']?></td>
      <td><?php echo $row['occ']?></td>

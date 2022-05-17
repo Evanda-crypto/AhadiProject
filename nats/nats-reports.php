@@ -63,7 +63,8 @@ include("../config/config.php");
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-inbox"></i><a href="nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                        <li><i class="fa fa-inbox"></i><a href="nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="compiled_nats-reports.php" style="color:black; font-size: 15px;">Compiled Reports </a></li>
                             <li><i class="fa fa-inbox"></i><a href="nats-graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
                         </ul>
                     </li>
@@ -185,12 +186,7 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT Region,dayname(date_reported) as dayn,
-    group_concat(DISTINCT date_reported ,'".'<br>'."' SEPARATOR ' ' ) AS date_reported,
-    group_concat(DISTINCT issue ,'".'<br>'."' SEPARATOR ' ' ) AS issues,
-    group_concat(DISTINCT reporter ,'".'<br>'."' SEPARATOR ' ' ) AS reporter,
-    group_concat(Duration ,'".'<br>'."' SEPARATOR ' ' ) AS duration,
-    group_concat(DISTINCT comments ,'".'<br>'."' SEPARATOR ' ' ) AS comments from nats_reports GROUP BY dayn,Region,date_reported";
+    $sql="SELECT DAYNAME(date_reported) as dayn,date_reported,Region,issue,duration,comments,reporter from nats_reports";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
@@ -198,7 +194,7 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['dayn']?></td>
     <td><?php echo $row['date_reported']?></td>
     <td><?php echo $row['Region']?></td>
-    <td><?php echo $row['issues']?></td>
+    <td><?php echo $row['issue']?></td>
     <td><?php echo $row['duration']?></td>
      <td><?php echo $row['comments']?></td>
      <td><?php echo $row['reporter']?></td>

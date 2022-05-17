@@ -1,49 +1,6 @@
 <?php
 include("session.php");
 include("../config/config.php");
-?>
-<?php
-$id=$_SESSION['ID'];
-if (isset($_POST["submit"])) {
-    $Password = trim($_POST["password"]);
-    $FirstName = trim($_POST['FName']);
-    $LastName = trim($_POST['LName']);
-    $Email = trim($_POST['email']);
-    $newpass = trim($_POST['newpass']);
-
-    $hashpass= password_hash($newpass,PASSWORD_DEFAULT);
-
-    if (!$connection) {
-        echo "<script>alert('There is no connection at this time.Please try again later.');</script>";
-        echo '<script>window.location.href="login.php";</script>';
-    }
-    else{
-        $stmt = $connection->prepare("SELECT * from Users where ID= ?");
-        $stmt->bind_param("s", $id);
-        $stmt->execute();
-        $stmt_result = $stmt->get_result();
-        if ($stmt_result->num_rows > 0) {
-            $data = $stmt_result->fetch_assoc();
-            if (password_verify($Password, $data["Password"])) {
-                $sql="update Users set FirstName='$FirstName',LastName='$LastName',Email='$Email',Password='$hashpass' where ID=$id";
-                $result=mysqli_query($connection,$sql);
-                if ($result) {
-                  echo '<script>alert("Password reset Succesfull")</script>';
-                    echo '<script>window.location.href="../config/logout.php";</script>';
-                } else {
-                  echo '<script>alert("An Error occured please retry again!")</script>';
-                    echo '<script>window.location.href="profile.php";</script>';
-                }
-            }
-            else{
-                echo "<script>alert('Current password is wrong');</script>";
-                echo '<script>window.location.href="profile.php";</script>';
-            }
-        }
-    }
-    
-}
-
 
 ?>
 <!doctype html>
@@ -54,7 +11,7 @@ if (isset($_POST["submit"])) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Profile</title>
+    <title>Compiled Reports</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -73,10 +30,26 @@ if (isset($_POST["submit"])) {
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
+<link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<!-- Bootstrap core JavaScript-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
 </head>
 <body style="background-color:#e1e1e1">
-  <!-- Left Panel -->
-  <aside id="left-panel" class="left-panel">
+ <!-- Left Panel -->
+ <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -130,7 +103,7 @@ if (isset($_POST["submit"])) {
         <!-- Header-->
         <header id="header" class="header" style="height: 65px;">
             <div class="top-left">
-                <div class="navbar-header" style="height: 65px;">
+                <div class="navbar-header">
                 <img src="../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -172,66 +145,75 @@ if (isset($_POST["submit"])) {
 
         <div class="content">
             <div class="animated fadeIn">
-
-
                 <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-header"></div>
-                        <div class="round-img">
-                                                    <a href="#"><center><img class="rounded-circle" src="../images/avatar/profile.png" alt=""></center></a>
-                                                </div>
-                        <div class="card-body card-block">
-                            <form action="" method="post" class="" autocomplete="off">
-                            <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                        <input type="text" id="email" name="id" value="<?php echo $_SESSION['ID']?>" placeholder="ID" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                        <input type="text" id="username" name="FName" value="<?php echo $_SESSION['FName']?>" placeholder="First Name" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                        <input type="text" id="username" name="LName" placeholder="Last Name" value="<?php echo $_SESSION['LName']?>" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                        <input type="email" id="email" name="email" placeholder="Email" value="<?php echo $_SESSION['nats']?>" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                        <input type="password" id="password" name="password" placeholder="Current Password" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                        <input type="password" id="password" name="newpass" placeholder="New Password" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-actions form-group"><button type="submit" name="submit" class="btn btn-warning btn-sm">Change Pass</button></div>
-                            </form>
+                        <div class="card-header">
+                           <center> <strong class="card-title">NATS Reports</strong></center>
+                        </div>
+                        <div class="card-body"><?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
+                            <table class="table table-bordered table-striped" id="example">
+                                <thead>
+                                    <tr>
+                                    <th>Day</th>
+                                    <th>Date</th>
+                                    <th>Region</th>
+                                    <th>Issues Reported</th>
+                                    <th>Duration</th>
+                                    <th>Comments</th>
+                                    <th>Reported By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+    
+    $sql="SELECT Region,dayname(date_reported) as dayn,
+    group_concat(DISTINCT date_reported ,'".'<br>'."' SEPARATOR ' ' ) AS date_reported,
+    group_concat(DISTINCT issue ,'".'<br>'."' SEPARATOR ' ' ) AS issues,
+    group_concat(DISTINCT reporter ,'".'<br>'."' SEPARATOR ' ' ) AS reporter,
+    group_concat(Duration ,'".'<br>'."' SEPARATOR ' ' ) AS duration,
+    group_concat(DISTINCT comments ,'".'<br>'."' SEPARATOR ' ' ) AS comments from nats_reports GROUP BY dayn,Region,date_reported";
+$result=$connection->query($sql);
+while($row=$result->fetch_array()){
+  ?>
+  <tr>
+    <td><?php echo $row['dayn']?></td>
+    <td><?php echo $row['date_reported']?></td>
+    <td><?php echo $row['Region']?></td>
+    <td><?php echo $row['issues']?></td>
+    <td><?php echo $row['duration']?></td>
+     <td><?php echo $row['comments']?></td>
+     <td><?php echo $row['reporter']?></td>
+</tr>
+<?php } ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-</div>
-            </div>
 
+</div><!-- .content -->
 
-        </div><!-- .animated -->
-    </div><!-- .content -->
-
-    <div class="clearfix"></div>
+<div class="clearfix"></div>
 
 </div><!-- /#right-panel -->
 
@@ -244,6 +226,28 @@ if (isset($_POST["submit"])) {
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
 
-
+<script type="text/javascript">
+$( document ).ready(function() {
+$('#example').DataTable({
+    
+		 "processing": true,
+		 "dom": 'lBfrtip',
+		 "buttons": [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: [
+                    'excel',
+                    'csv'
+                ]
+            }
+        ],
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "scrollY":        "700px",
+        "scrollCollapse": true
+        
+        });
+});
+</script>
 </body>
 </html>
