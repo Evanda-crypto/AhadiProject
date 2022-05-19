@@ -10,16 +10,15 @@ if ($bcode !== "") {
 	
 	// Get corresponding first name and
 	// last name for that user id	
-	$query = mysqli_query($connection, "SELECT Region,
-	BuildingName FROM building WHERE BuildingCode='$bcode'");
+	$query = mysqli_query($connection, "SELECT region,bname FROM buildings WHERE bcode='$bcode'");
 
 	$row = mysqli_fetch_array($query);
 
 	// Get the first name
-	$Bname = $row["BuildingName"];
+	$Bname = $row["bname"];
 
 	// Get the first name
-	$Reg = $row["Region"];
+	$Reg = $row["region"];
 }
 
 // Store it in a array

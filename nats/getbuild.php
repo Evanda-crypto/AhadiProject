@@ -7,7 +7,7 @@ if(!empty($_GET['id'])){
     } 
      
     // Get content from the database 
-    $query = $connection->query("SELECT bname,bcode,bstatus,region,champs_signed FROM buildings WHERE id =$id"); 
+    $query = $connection->query("SELECT * FROM buildings WHERE id=$id"); 
      
     if($query->num_rows > 0){ 
         $cmsData = $query->fetch_assoc(); 
@@ -25,12 +25,40 @@ if(!empty($_GET['id'])){
         echo "<td>".$cmsData['bstatus']."</td>";
         echo "</tr>";
         echo "<tr>";
+        echo "<td>Techies</td>";
+        echo "<td>".$cmsData['techies']."</td>";
+        echo "</tr>";
+        echo "<tr>";
         echo "<td>Region</td>";
         echo "<td>".$cmsData['region']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Signed By</td>";
-        echo "<td>".$cmsData['champs_signed']."</td>";
+        echo "<td>".$cmsData['champs_sales']."</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>Sales By</td>";
+        echo "<td>".$cmsData['champs_sales']."</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>Date Signed</td>";
+        echo "<td>".$cmsData['date_signed']."</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>Date Fully Installed</td>";
+        echo "<td>".$cmsData['date_fully_installed']."</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>Date Turned On</td>";
+        echo "<td>".$cmsData['date_turned_on']."</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>IAP</td>";
+        echo "<td>".$cmsData['iap']."</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>OAP</td>";
+        echo "<td>".$cmsData['oap']."</td>";
         echo "</tr>";
         echo "</table>";
     }else{ 

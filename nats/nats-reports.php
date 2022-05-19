@@ -56,6 +56,19 @@ include("../config/config.php");
                     <li class="active">
                         <a href="dashboard.php"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
+                    <li class="menu-title" >DOCUMENTATION</li><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>KCIS</a>
+                        <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon ti-list"></i><a href="new_building.php" style="color:black; font-size: 15px;">New Building Report</a></li>
+                            <li><i class="fa fa-table"></i><a href="r&m.php" style="color:black; font-size: 15px;">R&M</a></li>
+                            <li><i class="fa fa-table"></i><a href="zmm.php" style="color:black; font-size: 15px;">ZMM</a></li>
+                            <li><i class="fa fa-table"></i><a href="g44.php" style="color:black; font-size: 15px;">G44</a></li>
+                            <li><i class="fa fa-table"></i><a href="g45s.php" style="color:black; font-size: 15px;">G45S</a></li>
+                            <li><i class="fa fa-table"></i><a href="g45n.php" style="color:black; font-size: 15px;">G45N</a></li>
+                            <li><i class="fa fa-table"></i><a href="kwt.php" style="color:black; font-size: 15px;">KWT</a></li>
+                            <li><i class="fa fa-table"></i><a href="lsm.php" style="color:black; font-size: 15px;">LSM</a></li></ul>
+                    </li>
                     <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
                     <li>
                         <a href="fill-report.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-list"></i>Fill Report </a>
@@ -181,12 +194,13 @@ include("../config/config.php");
                                     <th>Duration</th>
                                     <th>Comments</th>
                                     <th>Reported By</th>
+                                    <th>More</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT DAYNAME(date_reported) as dayn,date_reported,Region,issue,duration,comments,reporter from nats_reports";
+    $sql="SELECT DAYNAME(date_reported) as dayn,date_reported,Region,issue,duration,comments,reporter,id from nats_reports";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
@@ -198,6 +212,9 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['duration']?></td>
      <td><?php echo $row['comments']?></td>
      <td><?php echo $row['reporter']?></td>
+     <td>
+        <button class="btn btn-danger"><a href="delete_issue.php?id=<?php echo $row['id']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['issue']; ?> reported by <?php  echo $row['reporter']; ?> from Reports?')">Delete</a></button>
+        </td>
 </tr>
 <?php } ?>
                                 </tbody>

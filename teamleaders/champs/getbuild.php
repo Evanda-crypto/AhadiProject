@@ -7,58 +7,58 @@ if(!empty($_GET['id'])){
     } 
      
     // Get content from the database 
-    $query = $connection->query("SELECT * FROM building WHERE ID =$id"); 
+    $query = $connection->query("SELECT * FROM buildings WHERE id =$id"); 
      
     if($query->num_rows > 0){ 
         $cmsData = $query->fetch_assoc(); 
         echo "<table class='table table-striped'>";
         echo "<tr>";
         echo "<td>Building Name</td>";
-        echo "<td>".$cmsData['BuildingName']."</td>";
+        echo "<td>".$cmsData['bname']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Building Code</td>";
-        echo "<td>".$cmsData['BuildingCode']."</td>";
+        echo "<td>".$cmsData['bcode']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Building Status</td>";
-        echo "<td>".$cmsData['BuildingStatus']."</td>";
+        echo "<td>".$cmsData['bstatus']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Floors</td>";
-        echo "<td>".$cmsData['Floors']."</td>";
+        echo "<td>".$cmsData['floors']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Region</td>";
-        echo "<td>".$cmsData['Region']."</td>";
+        echo "<td>".$cmsData['region']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Signed By</td>";
-        echo "<td>".$cmsData['ChampSigned']."</td>";
+        echo "<td>".$cmsData['champs_signed']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Sales By</td>";
-        echo "<td>".$cmsData['ChampSales']."</td>";
+        echo "<td>".$cmsData['champs_sales']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Date Signed</td>";
-        echo "<td>".$cmsData['DateSigned']."</td>";
+        echo "<td>".$cmsData['date_signed']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Date Fully Installed</td>";
-        echo "<td>".$cmsData['DateFullyInstalled']."</td>";
+        echo "<td>".$cmsData['date_fully_installed']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Date Turned On</td>";
-        echo "<td>".$cmsData['DateTurnedOn']."</td>";
+        echo "<td>".$cmsData['date_turned_on']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>IAP</td>";
-        echo "<td>".$cmsData['IAP']."</td>";
+        echo "<td>".$cmsData['iap']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>OAP</td>";
-        echo "<td>".$cmsData['OAP']."</td>";
+        echo "<td>".$cmsData['oap']."</td>";
         echo "</tr>";
         echo "</table>";
     }else{ 

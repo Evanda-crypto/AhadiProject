@@ -170,7 +170,7 @@ include("../../config/config.php");
                         <div class="card">
                             <div class="card-header">
                             <center><strong class="card-title">Buildings[<?php
-         $query="SELECT COUNT(*) as buildings FROM building WHERE BuildingStatus='6. IAP In Service' OR BuildingStatus='4. Fully Installed' OR BuildingStatus='7. PAP In Service'";
+         $query="SELECT COUNT(*) as buildings FROM buildings WHERE bstatus='6. IAP In Service' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['buildings'];
@@ -189,14 +189,14 @@ include("../../config/config.php");
                                   <tbody>
                                   <?php
     
-    $sql="SELECT * from building WHERE BuildingStatus='6. IAP In Service' OR BuildingStatus='4. Fully Installed' OR BuildingStatus='7. PAP In Service' order by DateTurnedOn Desc";
+    $sql="SELECT bname,bcode,region,id from buildings WHERE bstatus='6. IAP In Service' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service'";
     $result=$connection->query($sql);
     while($row=$result->fetch_array()){
       ?>
       <tr>
-        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['BuildingName']?></a></td>
-        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['BuildingCode']?></a></td>
-        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['ID']; ?>" class="openPopup"><?php echo $row['Region']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['bname']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['bcode']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['region']?></a></td>
     </tr>
     <?php } ?>
                                 </tbody>

@@ -40,7 +40,7 @@ if(isset($_POST["submit"])){
                     }
                     else{
                         $stmt = $connection->prepare(
-                            "select * from building  where BuildingCode= ?"
+                            "select * from buildings  where bcode= ?"
                         );
                         $stmt->bind_param("s", $BuildingCode);
                         $stmt->execute();

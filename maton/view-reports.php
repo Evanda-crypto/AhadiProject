@@ -173,12 +173,13 @@ include("../config/config.php");
                     <th>Duration</th>
                     <th>Reported By</th>
                     <th>Comments</th>
+                    <th>More</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT zones,issue,starttime,endtime,duration,reporter,occurancedate,comments,building from reports where Department='MATON'";
+    $sql="SELECT zones,issue,starttime,endtime,duration,reporter,occurancedate,comments,building,id from reports where Department='MATON'";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
@@ -190,6 +191,9 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['duration']?></td>
      <td><?php echo $row['reporter']?></td>
      <td><?php echo $row['comments']?></td>
+     <td>
+        <button class="btn btn-danger"><a href="delete_issue.php?id=<?php echo $row['id']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['issue']; ?> reported by <?php  echo $row['reporter']; ?> from Reports?')">Delete</a></button>
+        </td>
 </tr>
 <?php } ?>
                                 </tbody>

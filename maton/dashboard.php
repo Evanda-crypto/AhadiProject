@@ -21,6 +21,19 @@ if (!$connection) {
     }
 }
 ?>
+<?php 
+ 
+ $sql =
+     "SELECT EXTRACT(MONTH FROM turnedonpap.DateTurnedOn),MONTHNAME(turnedonpap.DateTurnedOn) as month,COUNT(turnedonpap.ClientID) as pap
+     FROM turnedonpap LEFT JOIN papdailysales on papdailysales.ClientID=turnedonpap.ClientID WHERE turnedonpap.ClientID is not null
+     GROUP BY EXTRACT(MONTH FROM turnedonpap.DateTurnedOn),month order by EXTRACT(MONTH FROM turnedonpap.DateTurnedOn) asc";
+ $result = mysqli_query($connection, $sql);
+ $chart_data = "";
+ while ($row = mysqli_fetch_array($result)) {
+     $Month[] = $row["month"];
+     $turnedon[] = $row["pap"];
+ }
+?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -319,6 +332,19 @@ if (!$connection) {
                 </div>
                 <!--  /Traffic -->
                 <div class="clearfix"></div>
+                <div class="row">
+
+                   <div class="col-lg-12">
+                        <div class="card"><div class="card-header">
+                           <center> <strong class="card-title">Monthly Pap Progress</strong></center>
+                        </div>
+                            <div class="card-body">
+                                <h4 class="mb-3"></h4>
+                                <canvas id="monthly-progress"></canvas>
+                            </div>
+                        </div>
+                    </div><!-- /# column -->
+        </div>
             </div>
             <!-- .animated -->
         </div>
@@ -545,6 +571,39 @@ while ($signed = mysqli_fetch_assoc($result)) {
             responsive: true
         }
     } );
+    </script>
+    <script>
+        //Turnon chart
+    var ctx = document.getElementById( "monthly-progress" );
+    ctx.height = 90;
+    var myChart = new Chart( ctx, {
+        type: 'line',
+        data: {
+            labels:<?php echo json_encode($Month)?>,
+            datasets: [
+                {
+                    label: "Turned On",
+                    data: <?php echo json_encode($turnedon)?>,
+                    borderColor: "#85ce36",
+                    borderWidth: "2",
+                    backgroundColor: "transparent"
+                            }
+                        ]
+        },
+        options: {
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            }
+
+        }
+    } );
+
     </script>
 </body>
 </html>

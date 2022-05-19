@@ -45,7 +45,7 @@ if (isset($_POST["submit"])) {
                     header("Location: residential.php");
         } else {
             $stmt = $connection->prepare(
-                "select * from building  where BuildingCode= ?"
+                "select * from buildings  where bcode= ?"
             );
             $stmt->bind_param("s", $BuildingCode);
             $stmt->execute();
