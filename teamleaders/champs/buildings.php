@@ -58,7 +58,7 @@ include("../../config/config.php");
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>All Paps</a>
                         <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-table"></i><a href="all-paps.php" style="color:black; font-size: 15px;">All Paps[Last 30 Days]</a></li>
+                        <li><i class="fa fa-table"></i><a href="all-paps.php" style="color:black; font-size: 15px;">All Paps</a></li>
                             <li><i class="fa fa-table"></i><a href="all-paps-zmm.php" style="color:black; font-size: 15px;">ZMM</a></li>
                             <li><i class="fa fa-table"></i><a href="all-paps-r&m.php"style="color:black; font-size: 15px;">R&M</a></li>
                             <li><i class="fa fa-table"></i><a href="all-paps-g44.php" style="color:black; font-size: 15px;">G44</a></li>
@@ -86,6 +86,12 @@ include("../../config/config.php");
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>     
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
+                    <li>
+                        <a href="view-champs.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>View Champs</a>
+                    </li>
+                    <li>
+                        <a href="change-champ.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Change Pap Ownership</a>
+                    </li>
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
                     </li>
@@ -184,12 +190,14 @@ include("../../config/config.php");
                                           <th scope="col">B Name</th>
                                           <th scope="col">B Code</th>
                                           <th scope="col">Region</th>
+                                          <th scope="col">Champ(s)[Signed]</th>
+                                          <th scope="col">Champ(s)[Sales]</th>
                                       </tr>
                                   </thead>
                                   <tbody>
                                   <?php
     
-    $sql="SELECT bname,bcode,region,id from buildings WHERE bstatus='6. IAP In Service' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service'";
+    $sql="SELECT bname,bcode,region,id,champs_signed,champs_sales from buildings WHERE bstatus='6. IAP In Service' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service'";
     $result=$connection->query($sql);
     while($row=$result->fetch_array()){
       ?>
@@ -197,6 +205,8 @@ include("../../config/config.php");
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['bname']?></a></td>
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['bcode']?></a></td>
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['region']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['champs_signed']?></a></td>
+        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['champs_sales']?></a></td>
     </tr>
     <?php } ?>
                                 </tbody>

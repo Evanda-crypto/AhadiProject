@@ -21,18 +21,25 @@
                 <?php
             if(isset($_SESSION['status'])){
                 ?>
-               <center><span> <div class="alert alert-danger" role="alert">
+               <center><strong><span> <div class="alert alert-danger" role="alert">
                    <?php echo $_SESSION['status'];
                 unset($_SESSION['status']);?>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></strong>
+  </button>
                  </div></span></center>
+                 
                 <?php
                 
             }
             elseif(isset($_SESSION['success'])){
                 ?>
-                <center><span><div class="alert alert-success" role="alert">
+                <center><strong><span><div class="alert alert-success" role="alert">
                    <?php echo $_SESSION['success'];
                 unset($_SESSION['success']);?>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></strong>
+  </button>
                  </div></span></center>
                 <?php
                 
@@ -43,17 +50,17 @@
 		 	         </div>
                     <form action="login.php" method="post">
  
-                        <label for="inputPassword">Username<span style="color: #FF0000" >*</span></label>
+                        <strong><label for="inputPassword">Username<span style="color: #FF0000" >*</span></label></strong>
                         <div class="form-label-group">
-                            <input type="text"  name="Username" class="form-control" placeholder="Username" required autofocus style="background-color:#E1E1E1;height:50px;">
+                            <input type="text"  name="Username" class="form-control" placeholder="Username" autofocus style="background-color:#E1E1E1;height:50px;" required>
                         </div><br/>
-                        <label for="inputPassword">Password <span style="color: #FF0000">*</span></label>
+                        <strong><label for="inputPassword">Password <span style="color: #FF0000">*</span></label></strong>
                         <div class="form-label-group">
                         <input type="password" name="Password" class="form-control" placeholder="Password" required style="background-color:#E1E1E1;height:50px;">
                         </div> <br/>
                         <div class="form-label-group">
                         </div> <br/>
-                        <button type="submit" name="submit" class="btn btn-primary btn-block" style="background-color:#FF0000;">Login</button><br></br>
+                        <strong><button type="submit" name="submit" class="btn btn-primary btn-block" style="background-color:#FF0000;">LOGIN</button><br></br></strong>
                         <div class="register-link m-t-10 text-center">
                             <p> <a href="forgot-pass/index.php">Forgot Password</a></p>
                         </div>

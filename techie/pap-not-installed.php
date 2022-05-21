@@ -250,37 +250,37 @@ if (isset($_POST["submit"])) {
                                         <hr>
                                         <form  method="post" enctype="multipart/form-data" autocomplete="off">
                                         <div class="form-group">
-                                        <label for="x_card_code" class="control-label mb-1">Client ID</label>
+                                        <strong><label for="x_card_code" class="control-label mb-1">Client ID</label></strong>
                                         <div class="input-group">
                                         <input id="bname" name="ClientID" type="text" class="form-control cc-cvc" value="<?php echo $clientid?>"   placeholder="Client ID" readonly>
                                         </div>
                                         <div class="form-group">
-                                        <label for="x_card_code" class="control-label mb-1">Team ID</label>
+                                        <strong><label for="x_card_code" class="control-label mb-1">Team ID</label></strong>
                                         <div class="input-group">
                                         <input id="bname" name="teamid" type="text" class="form-control cc-cvc" value="<?php echo $teamid?>"   placeholder="Team ID" readonly>
                                         </div>
                                         <div class="form-group">
-                                          <label for="cc-number" class="control-label mb-1">Building Name</label>
+                                        <strong><label for="cc-number" class="control-label mb-1">Building Name</label></strong>
                                           <input id="cc-number" name="bname" type="text" class="form-control cc-number identified visa" maxlength="40" value="<?php echo $bname?>"  required placeholder="BuildingName" readonly>
                                            <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Building Code</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Building Code</label></strong>
                                                 <input id="cc-number" name="bcode" type="text" class="form-control cc-number identified visa" maxlength="40" value="<?php echo $bcode?>"  required placeholder="Building code" readonly>
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                         <div class="form-group">
-                                        <label for="x_card_code" class="control-label mb-1">Region</label>
+                                        <strong><label for="x_card_code" class="control-label mb-1">Region</label></strong>
                                         <div class="input-group">
                                         <input id="bname" name="region" type="text" class="form-control cc-cvc" value="<?php echo $reg?>"  placeholder="Region" readonly>
                                         </div>
                                             <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Availability<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-name" class="control-label mb-1">Availability<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="avail" name="Date" type="date" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Reason<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Reason<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
                                             <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="note" tabindex="1" required>
                                             <option value="" disabled selected>Select Reason</option>
@@ -298,12 +298,12 @@ if (isset($_POST["submit"])) {
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label></strong>
                                                 <input id="cc-number" name="message" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
-                                                    <span id="payment-button-amount">Submit</span>
+                                                <strong><span id="payment-button-amount">Submit</span></strong>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button>
                                             </div>

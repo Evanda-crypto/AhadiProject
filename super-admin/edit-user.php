@@ -12,6 +12,7 @@ $email=$row['Email'];
 $dpt=$row['Department'];
 $reg=$row['Region'];
 $reg1=$row['Region1'];
+$User=$row['User'];
 
 if(isset($_POST['submit'])){
 $FirstName = $_POST['FName'];
@@ -20,6 +21,7 @@ $Email = $_POST['Email'];
 $Department = $_POST['Department'];
 $Region = $_POST['Region'];
 $Region1 = $_POST['Region1'];
+$user = $_POST['user'];
 
 //checking if connection is not created successfully
 if($connection->connect_error){
@@ -27,7 +29,7 @@ if($connection->connect_error){
 }
 else
 {
-  $sql="update Users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',Department='$Department',Region='$Region',Region1='$Region1' where ID=$id";
+  $sql="update Users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',Department='$Department',Region='$Region',Region1='$Region1',User='$user' where ID=$id";
   
   $result=mysqli_query($connection,$sql);
   if ($result) {
@@ -229,6 +231,23 @@ else
                                             </div>
                                             </div>
                                             <div>
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">User</label>
+                                                <div class="form-group has-success">
+                                            <select data-placeholder="Choose a user..." class="standardSelect form-control" name="user" tabindex="1" required>
+                                            <option value="<?php echo $User?>"><?php echo $User?></option>
+                                            <option value="0">AdminMain(user 0)</option>
+                                                <option value="1">Executive(user 1)</option>
+                                                  <option value="2">Nats(user 2)</option>
+                                               <option value="3">Maton(user 3)</option>
+                                              <option value="4">SalesTL(user 4)</option>
+                                              <option value="5">Techie TL(user 5)</option>
+                                               <option value="6">Champ(user 6)</option>
+                                              <option value="7">Overall Techie TL (user 7)</option>
+                                              <option value="8">Overall champs TL (user 8)</option>
+                                              </select>
+                                            </div>
+                                            </div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>

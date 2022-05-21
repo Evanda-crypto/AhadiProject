@@ -1,7 +1,7 @@
 <?php
 
 // Get the user id
-$bcode = $_REQUEST['bcode'];
+$bcode = trim($_REQUEST['bcode']);
 
 // Database connection
 include("../config/config.php");

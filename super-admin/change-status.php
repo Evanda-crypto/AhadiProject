@@ -3,13 +3,13 @@ include("session.php");
 include("../config/config.php");
 $id=$_GET['id'];
 
-$sql="select * from building where ID=$id";
+$sql="select * from buildings where ID=$id";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
-$bname=$row['BuildingName'];
-$bcode=$row['BuildingCode'];
-$region=$row['Region'];
-$status=$row['BuildingStatus'];
+$bname=$row['bname'];
+$bcode=$row['bcode'];
+$region=$row['region'];
+$status=$row['bstatus'];
 
 
 if(isset($_POST['submit'])){
@@ -24,7 +24,7 @@ if($connection->connect_error){
 }
 else
 {
-  $sql="UPDATE building set BuildingName='$Bname',BuildingCode='$Bcode',BuildingStatus='$Status' where ID=$id";
+  $sql="UPDATE buildings set bname='$Bname',bcode='$Bcode',bstatus='$Status' where ID=$id";
   
   $result=mysqli_query($connection,$sql);
   if ($result) {

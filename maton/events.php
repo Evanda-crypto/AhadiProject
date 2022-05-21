@@ -192,7 +192,7 @@ date_default_timezone_set("Africa/Nairobi");
                              <optgroup label="Fibre Issue">
                              <option  value="Fibre Issue (KPLC Damage)">KPLC Damage</option>  
                               <option value="Fibre Issue (Fallen Pole)">Fallen Pole</option>
-                              <option value="Fibre Issue (Damaged By Trucks")>Damaged By Trucks</option>   
+                              <option value="Fibre Issue (Damaged By Trucks)">Damaged By Trucks</option>   
                               <option value="Fibre Issue (Unknown Assailants)">Unknown Assailants</option>
                              <option value="Fibre Issue (Loop)">Loop</option>
                              <option value="Fibre Issue (Kink)">Kink</option>  
@@ -202,8 +202,20 @@ date_default_timezone_set("Africa/Nairobi");
                              <option value="Fibre Issue (Poor Enclosure Mgnt)">Poor Enclosure Mgnt</option>  
                              <option value="Fibre Issue (Poor SB Mgnt)">Poor SB Mgnt</option>
                             </optgroup>
+                            <optgroup label="Replacement">
+                             <option  value="Replacement (Panel AP">Panel AP</option>  
+                              <option value="Replacement (Power Cable)">Power Cable</option>
+                              <option value="Replacement (Interlinking)">Interlinking</option>   
+                              <option value="Replacement (Switch)">Switch</option>
+                             <option value="Replacement (Cabinet)">Cabinet</option>
+                             <option value="Replacement (Extension)">Extension</option>  
+                             <option value="Replacement (Adapter)">Adapter</option>
+                            </optgroup>
                             <optgroup label="Other Issues">
                             <option  value="Other Issues (Switch Theft)">Switch Theft</option>
+                            <option  value="Other Issues (Panel Retrieval)">Panel Retrieval</option>
+                            <option  value="Other Issues (Offline AP)">Offline AP</option>
+                            <option  value="Other Issues (Faulty AP)">Faulty AP</option>
                                             </optgroup>
                                               </select>
                                             </div>

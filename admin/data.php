@@ -9,4 +9,4 @@ $rows=array();
 while($row=mysqli_fetch_array($result)){
     $rows[]=$row;
 }
-echo json_encode($rows);
+echo json_encode($rows, JSON_PRETTY_PRINT);

@@ -194,7 +194,7 @@ include("../config/config.php");
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['shops']?></a></td>
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['apt']?></a></td>
         <td>
-       <button class="btn btn-warning"><a href="change-status.php?id=<?php echo $row['id']; ?>">Edit</i></a></button>
+       <button class="btn btn-warning"><a href="updates/g44.php?id=<?php echo $row['id']; ?>">Edit</i></a></button>
     </td>
     </tr>
     <?php } ?>

@@ -163,36 +163,36 @@ include("session.php");
             }
             ?>
                                         <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">DateSigned<span style="color: #FF0000" >*</span></label>
+        <strong><label for="cc-name" class="control-label mb-1">DateSigned<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="datesigned" name="DateSigned" type="date" class="form-control cc-name valid" data-val="true" value="<?php echo date("Y-m-d"); ?>" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Champ</label>
+                                            <strong>  <label for="cc-name" class="control-label mb-1">Champ</label></strong>
                                                 <input id="" name="ChampName" type="text" class="form-control cc-name valid" data-val="true" value="<?php echo $_SESSION["FName"]; ?> <?php echo $_SESSION["LName"]; ?>" name="ChampName" placeholder="Champ" readonly data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                         <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Building Code<span style="color: #FF0000" >*</span></label>
-                                                        <input id="bcode" onkeyup="GetDetail(this.value)" placeholder="Search in 'BUILDING' to copy the EXACT building code here" required name="BuildingCode" pattern="[A-Z]{5}[0-9]{5}" type="text" class="form-control cc-exp"   placeholder="Building Name" required>
+                                                    <strong><label for="cc-exp" class="control-label mb-1">Building Code<span style="color: #FF0000" >*</span></label></strong>
+                                                        <input id="bcode" onkeyup="GetDetail(this.value)" placeholder="Search in 'BUILDING' to copy the EXACT building code here" name="BuildingCode" pattern="[A-Z]{5}[0-9]{5}" type="text" class="form-control cc-exp"   placeholder="Building Name" required>
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">Building Name<span style="color: #FF0000" >*</span></label>
+                                                <strong><label for="x_card_code" class="control-label mb-1">Building Name<span style="color: #FF0000" >*</span></label></strong>
                                                     <div class="input-group">
                                                         <input id="bname" name="Buildingname" type="text" class="form-control cc-cvc"  placeholder="Building Name" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-payment" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label>
+                                            <strong> <label for="cc-payment" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="region" name="Region" placeholder="Region"  type="text" class="form-control" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Floor<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Floor<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
                                             <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="floor" tabindex="1" required>
                                             <option value="" disabled selected>'0' is ground; '-' is Basement</option>
@@ -210,11 +210,11 @@ include("session.php");
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">APT#<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-number" class="control-label mb-1">APT#<span style="color: #FF0000" >*</span></label></strong>
                                             <input id="cc-number" name="Apt" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">APT Layout<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-number" class="control-label mb-1">APT Layout<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
                                             <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="aptlayout" tabindex="1" required>
                                             <option disabled selected> Apartment Layout</option>
@@ -231,14 +231,14 @@ include("session.php");
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">First Name<span style="color: #FF0000" >*</span></label>
+                                                    <strong><label for="cc-exp" class="control-label mb-1">First Name<span style="color: #FF0000" >*</span></label></strong>
                                                         <input id="cc-exp" name="ClientName" type="text" required class="form-control cc-exp"  data-val="true" placeholder="First Name"
                                                             autocomplete="cc-exp">
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">Family Name</label>
+                                                <strong><label for="x_card_code" class="control-label mb-1">Family Name</label></strong>
                                                     <div class="input-group">
                                                         <input id="x_card_code" name="FamilyName" type="text" class="form-control cc-cvc"  data-val="true" placeholder="Family Name"
                                                             data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
@@ -246,14 +246,14 @@ include("session.php");
                                                 </div>
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Availability<span style="color: #FF0000" >*</span></label>
+                                            <strong> <label for="cc-name" class="control-label mb-1">Availability<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="cc-name" name="Day" type="date" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Phone Main<span style="color: #FF0000" >*</span></label>
+                                                    <strong><label for="cc-exp" class="control-label mb-1">Phone Main<span style="color: #FF0000" >*</span></label></strong>
                                                         <input  name="ClientContact" type="tel" pattern="[0-9]{10}" id="phone" name="ClientContact" placeholder="Phone Main 07XXXXXXXX" required class="form-control cc-exp" 
                                                             data-val-cc-exp="Please enter a valid month and year" 
                                                             autocomplete="cc-exp">
@@ -261,7 +261,7 @@ include("session.php");
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">Phone Alt<span style="color: #FF0000" >*</span></label>
+                                                <strong><label for="x_card_code" class="control-label mb-1">Phone Alt<span style="color: #FF0000" >*</span></label></strong>
                                                     <div class="input-group">
                                                         <input id="x_card_code" name="altcontact" type="tel" pattern="[0-9]{10}" class="form-control cc-cvc" placeholder="Phone Alt 07XXXXXXXX"  data-val="true" 
                                                             data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
@@ -269,15 +269,15 @@ include("session.php");
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">WhatsApp</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">WhatsApp</label></strong>
                                             <input id="cc-number" name="WhatsApp" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
                                             </div>
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1"> Client's Email</label>
+                                            <strong><label for="cc-number" class="control-label mb-1"> Client's Email</label></strong>
                                             <input id="cc-number" name="email" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Gender<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Gender<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
                                             <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="gender" tabindex="1" required>
                                             <option disabled selected> Select Gender</option>
@@ -288,7 +288,7 @@ include("session.php");
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Age<span style="color: #FF0000" >*</span></label>
+                                            <strong> <label for="cc-number" class="control-label mb-1">Age<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
                                             <select  class="standardSelect form-control" name="age" tabindex="1" required>
                                             <option disabled selected> Select Age</option>
@@ -302,41 +302,46 @@ include("session.php");
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Current ISP Package</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Current ISP Package</label></strong>
                                             <input id="cc-number" name="package" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
                                             </div>
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Occupation</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Occupation</label></strong>
                                             <input id="cc-number" name="occupation" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
                                             </div>
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Birthday</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Birthday</label></strong>
                                             <input id="min" name="Birthday" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Birthday"> 
                                             </div>
+                                            <div class="row">
+                                                <div class="col-6">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Household Size</label>
+                                            <strong> <label for="cc-number" class="control-label mb-1">Household Size</label></strong>
                                             <input class="form-control cc-number identified visa" data-val="true" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Householdsize" placeholder="Enter total number of peolpe living in the apartment"> 
-                                            </div>
+                                            </div></div>
+                                            <div class="col-6">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Children</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Children</label></strong>
                                             <input class="form-control cc-number identified visa" data-val="true" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Children" placeholder="<=12"> 
-                                            </div>
+                                            </div></div></div>
+                                            <div class="row">
+                                                <div class="col-6">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Teengers</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Teengers</label></strong>
                                             <input class="form-control cc-number identified visa" data-val="true" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Teenagers" placeholder="13-18"> 
-                                            </div>
+                                            </div></div>
+                                            <div class="col-6">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Adults</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Adults</label></strong>
                                             <input class="form-control cc-number identified visa" data-val="true" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Adults" placeholder="<=13"> 
-                                            </div>
-                                            <div>
+                                            </div></div></div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="cc-number" name="Note" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
-                                                    <span id="payment-button-amount">Submit</span>
+                                                <strong><span id="payment-button-amount">Submit</span></strong>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button>
                                             </div>

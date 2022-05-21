@@ -25,7 +25,7 @@ if($connection->connect_error){
 }
 else
 {
-    $sql="update papdailysales set ClientID=$id,ClientAvailability='$avail',PapStatus='Restored' where ClientID=$id";
+    $sql="update papdailysales set ClientID=$id,ClientAvailability='$avail',PapStatus='Restored',Note='$message' where ClientID=$id";
    $result=mysqli_query($connection,$sql);
     $query = "DELETE FROM  papnotinstalled  WHERE ClientID= '$id'";
     $restored = mysqli_query($connection, $query);

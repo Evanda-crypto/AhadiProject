@@ -204,27 +204,27 @@ $split=$row['split'];
                                         
                                         <form  method="post" enctype="multipart/form-data" autocomplete="off" action="pic.php">
                                         <div class="form-group">
-                                        <label for="x_card_code" class="control-label mb-1">Client ID</label>
+                                        <strong><label for="x_card_code" class="control-label mb-1">Client ID</label></strong>
                                         <div class="input-group">
                                         <input id="bname" name="ClientID" type="text" class="form-control cc-cvc" value="<?php echo $clientid?>"   placeholder="Client ID" readonly>
                                         </div>
                                         <div class="form-group">
-                                        <label for="x_card_code" class="control-label mb-1">Team ID</label>
+                                        <strong><label for="x_card_code" class="control-label mb-1">Team ID</label></strong>
                                         <div class="input-group">
                                         <input id="bname" name="teamid" type="text" class="form-control cc-cvc" value="<?php echo $teamid?>"   placeholder="Team ID" readonly>
                                         </div>
                                         <div class="form-group">
-                                        <label for="x_card_code" class="control-label mb-1">Split</label>
+                                        <strong><label for="x_card_code" class="control-label mb-1">Split</label></strong>
                                         <div class="input-group">
                                         <input  name="split" type="text" class="form-control cc-cvc" value="<?php echo $split?>"   placeholder="Split" readonly>
                                         </div>
                                         <div class="form-group">
-                                        <label for="x_card_code" class="control-label mb-1">Region</label>
+                                        <strong><label for="x_card_code" class="control-label mb-1">Region</label></strong>
                                         <div class="input-group">
                                         <input id="bname" name="region" type="text" class="form-control cc-cvc" value="<?php echo $reg?>"  placeholder="Region" readonly>
                                         </div>
                                         <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Floor</label>
+                                        <strong><label for="cc-number" class="control-label mb-1">Floor</label></strong>
                                                 <div class="form-group has-success">
                                             <select data-placeholder="Choose a Floor..." class="standardSelect form-control" name="floor" tabindex="1">
                                             <option value="<?php echo $floor?>"><?php echo $floor?></option>
@@ -242,7 +242,7 @@ $split=$row['split'];
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">APT Layout</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">APT Layout</label></strong>
                                                 <div class="form-group has-success">
                                             <select data-placeholder="Choose a Layout..." class="standardSelect form-control" name="layout" tabindex="1">
                                             <option value="<?php echo $layout?>"><?php echo $layout?></option>
@@ -257,12 +257,12 @@ $split=$row['split'];
                                             </div>
                                             </div>
                                         <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">MAC Address<span style="color: #FF0000" >*</span></label>
+                                        <strong><label for="cc-number" class="control-label mb-1">MAC Address<span style="color: #FF0000" >*</span></label></strong>
                                             <input id="cc-number" pattern="[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}"
                                              name="macaddress" style="text-transform: uppercase" type="text" class="form-control cc-number identified visa"  data-val="true" required placeholder="Format AB-CD-EF-GH-IJ-KL" > 
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Date Installed<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-name" class="control-label mb-1">Date Installed<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="dateinstalled" name="dateinstalled" type="date" class="form-control cc-name valid" data-val="true" value="<?php echo date("Y-m-d"); ?>" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
@@ -271,12 +271,12 @@ $split=$row['split'];
                                             <input id="cc-number" name="image" type="file" class="form-control cc-number identified visa" > 
                                             </div>-->
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="cc-number" name="note" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
-                                                    <span id="payment-button-amount">Submit</span>
+                                                <strong><span id="payment-button-amount">Submit</span></strong>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button>
                                             </div>
