@@ -8,10 +8,7 @@ if(isset($_POST["submit"])){
     $sql="UPDATE papdailysales set ChampName='$champ' WHERE ClientContact IN ($contacts)";
     $result=mysqli_query($connection,$sql);
 
-    $query="UPDATE turnedonpap set ChampName='$champ' WHERE ClientContact IN ($contacts)";
-    $updated=mysqli_query($connection,$query);
-
-    if($result && $updated){
+    if($result){
     $_SESSION["success"] = "Successfully Changed";
     header("Location: change-champ.php");
     }else{
