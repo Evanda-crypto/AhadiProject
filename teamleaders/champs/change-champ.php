@@ -203,7 +203,7 @@ include("session.php");
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Client Contact(s)</label>
                                         <div class="input-group">
-                                        <input id="bname" name="contacts" type="text" class="form-control cc-cvc"   placeholder="Enter Client Contacts Separated By Commas ','" required>
+                                        <textarea id="bname" name="contacts" type="text" class="form-control cc-cvc"   placeholder="Enter Client Contacts Separated By Commas ','" required rows="2"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="cc-number" class="control-label mb-1">Champ Code<span style="color: #FF0000" >*</span></label>
