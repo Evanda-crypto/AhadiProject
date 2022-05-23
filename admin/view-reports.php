@@ -26,19 +26,23 @@ include("../config/config.php");
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../assets/css/style.css">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet"/>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 
-    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
+
+
+<link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-<!-- Bootstrap core JavaScript-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -169,7 +173,7 @@ include("../config/config.php");
                         <div class="card-header">
                            <center> <strong class="card-title">Reports</strong></center>
                         </div>
-                        <div class="card-body"><?php
+                        <?php
             if(isset($_SESSION['status'])){
                 ?>
                <center><span> <div class="alert alert-danger" role="alert">
@@ -189,6 +193,15 @@ include("../config/config.php");
                 
             }
             ?>
+                        <div class="card-body" id="demo"><center>   <div class="table-responsive">
+            <table border="0" cellspacing="5" cellpadding="5">
+            <tbody><tr>
+               
+                <td><input type="text" id="min" placeholder="Start Date" style="color:black; margin-top:20px" class="form-control" name="min"></td>
+                <td><input type="text" id="max" placeholder="End Date" style="color:black;margin-top:20px"  class="form-control" name="max"></td>
+            </tr>
+        </tbody></table>
+                            </div></center>
                                <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
@@ -246,10 +259,58 @@ while($row=$result->fetch_array()){
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
 
-<script type="text/javascript">
-$( document ).ready(function() {
-$('#example').DataTable({
-		 "processing": true,
+<script>
+      
+      $.fn.dataTable.Api.register( 'column().data().sum()', function () {
+    return this.reduce( function (a, b) {
+        var x = parseFloat( a ) || 0;
+        var y = parseFloat( b ) || 0;
+        return x + y;
+    } );
+} );
+ 
+var minDate, maxDate;
+ 
+ // Custom filtering function which will search data in column four between two values
+ $.fn.dataTable.ext.search.push(
+     function( settings, data, dataIndex ) {
+         var min = minDate.val();
+         var max = maxDate.val();
+         var date = new Date( data[0] );
+  
+         if (
+             ( min === null && max === null ) ||
+             ( min === null && date <= max ) ||
+             ( min <= date   && max === null ) ||
+             ( min <= date   && date <= max )
+         ) {
+             return true;
+         }
+         return false;
+     }
+ );
+  
+/* Init the table and fire off a call to get the hidden nodes. */
+$(document).ready(function() {
+    // Create date inputs
+    minDate = new DateTime($('#min'), {
+         format: 'MMMM Do YYYY'
+     });
+     maxDate = new DateTime($('#max'), {
+         format: 'MMMM Do YYYY'
+     });
+
+     // Refilter the table
+     $('#min, #max').on('change', function () {
+         table.draw();
+     });
+    var table = $('#example').DataTable(
+        {
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "scrollY":        "700px",
+        "scrollCollapse": true,
+        "pagingType": "full_numbers",
+        "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
             {
@@ -260,13 +321,10 @@ $('#example').DataTable({
                     'csv'
                 ]
             }
-        ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true
-        
-        });
-});
-</script>
+        ]
+        }
+    );
+} );
+  </script>
 </body>
 </html>
