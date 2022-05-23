@@ -191,6 +191,9 @@ include("../config/config.php");
                                     <th>Date</th>
                                     <th>Region</th>
                                     <th>Issues Reported</th>
+                                    <th>Zone(s) Affected</th>
+                                    <th>Cluster</th>
+                                    <th>No of Buildings</th>
                                     <th>Duration</th>
                                     <th>Comments</th>
                                     <th>Reported By</th>
@@ -200,7 +203,7 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT DAYNAME(date_reported) as dayn,date_reported,Region,issue,duration,comments,reporter,id from nats_reports";
+    $sql="SELECT DAYNAME(date_reported) as dayn,date_reported,Region,issue,duration,comments,reporter,id,zones,cluster_name,buildings from nats_reports";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
@@ -209,6 +212,9 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['date_reported']?></td>
     <td><?php echo $row['Region']?></td>
     <td><?php echo $row['issue']?></td>
+    <td><?php echo $row['zones']?></td>
+    <td><?php echo $row['cluster_name']?></td>
+    <td><?php echo $row['buildings']?></td>
     <td><?php echo $row['duration']?></td>
      <td><?php echo $row['comments']?></td>
      <td><?php echo $row['reporter']?></td>

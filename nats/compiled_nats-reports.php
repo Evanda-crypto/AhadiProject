@@ -190,6 +190,9 @@ include("../config/config.php");
                                     <th>Day</th>
                                     <th>Date</th>
                                     <th>Region</th>
+                                    <th>Zones Affected</th>
+                                    <th>Clusters</th>
+                                    <th>Buildings</th>
                                     <th>Issues Reported</th>
                                     <th>Duration</th>
                                     <th>Comments</th>
@@ -200,6 +203,9 @@ include("../config/config.php");
                                 <?php
     
     $sql="SELECT Region,dayname(date_reported) as dayn,
+    group_concat(buildings ,'".'<br>'."' SEPARATOR ' ' ) AS buildings,
+    group_concat( DISTINCT cluster_name ,'".'<br>'."' SEPARATOR ' ' ) AS clusters,
+    group_concat( DISTINCT zones ,'".'<br>'."' SEPARATOR ' ' ) AS affectedzones,
     group_concat(DISTINCT date_reported ,'".'<br>'."' SEPARATOR ' ' ) AS date_reported,
     group_concat(DISTINCT issue ,'".'<br>'."' SEPARATOR ' ' ) AS issues,
     group_concat(DISTINCT reporter ,'".'<br>'."' SEPARATOR ' ' ) AS reporter,
@@ -212,6 +218,9 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['dayn']?></td>
     <td><?php echo $row['date_reported']?></td>
     <td><?php echo $row['Region']?></td>
+    <td><?php echo $row['affectedzones']?></td>
+    <td><?php echo $row['clusters']?></td>
+    <td><?php echo $row['buildings']?></td>
     <td><?php echo $row['issues']?></td>
     <td><?php echo $row['duration']?></td>
      <td><?php echo $row['comments']?></td>

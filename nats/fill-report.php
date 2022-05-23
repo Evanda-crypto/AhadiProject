@@ -178,14 +178,14 @@ date_default_timezone_set("Africa/Nairobi");
                                         <form  method="post" autocomplete="off" action="submit.php">
                                   
                                         <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Date <span style="color: #FF0000" >*</span></label>
+                                        <strong><label for="cc-name" class="control-label mb-1">Date <span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="dateinstalled" name="date" type="date" class="form-control cc-name valid" data-val="true" value="<?php echo date(
                                                     "Y-m-d"
                                                 ); ?>" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
                                             <select data-placeholder="Choose a region..." class="standardSelect form-control" name="Region" tabindex="1">
                                             <option value="<?php echo $_SESSION['Region']?>"><?php echo $_SESSION['Region']?></option>
@@ -199,8 +199,318 @@ date_default_timezone_set("Africa/Nairobi");
                                             </select>
                                             </div>
                                             </div>
+                                            
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Issues<span style="color: #FF0000" >*</span></label>
+                                            <strong> <label for="cc-number" class="control-label mb-1">Region & Zone<span style="color: #FF0000" >*</span></label></strong>
+                                                <div class="form-group has-success">
+                                            
+                                                <select placeholder="Choose a Zone..." multiple class="standardSelect form-control" tabindex="1" name="zone[]" required>
+                            <optgroup label="R&M">
+                                <option value=""></option>
+                                <option  value="R&M All Zones">All Zones</option> 
+                            <option  value="R&M Zone 1">Zone 1</option>  
+                              <option value="R&M Zone 2">Zone 2</option>
+                              <option value="R&M Zone 3">Zone 3</option>   
+                              <option value="R&M Zone 4">Zone 4</option>
+                             <option value="R&M Zone 5">Zone 5</option>
+                             <option value="R&M Zone 6">Zone 6</option>  
+                             <option value="R&M Zone 7">Zone 7</option>
+                             <option  value="R&M Zone 8">Zone 8</option>  
+                              <option value="R&M Zone 9">Zone 9</option>
+                              <option value="R&M Zone 10">Zone 10</option>   
+                              <option value="R&M Zone 11">Zone 11</option>
+                             <option value="R&M Zone 12">Zone 12</option>
+                             <option value="R&M Zone 13">Zone 13</option>  
+                             <option value="R&M Zone 14">Zone 14</option>
+                             <option  value="R&M Zone 15">Zone 15</option>  
+                              <option value="R&M Zone 16">Zone 16</option>
+                              <option value="R&M Zone 17">Zone 17</option>   
+                              <option value="R&M Zone 18">Zone 18</option>
+                             <option value="R&M Zone 19">Zone 19</option>
+                             <option value="R&M Zone 20">Zone 20</option>  
+                             <option  value="R&M Zone 21">Zone 21</option>  
+                              <option value="R&M Zone 22">Zone 22</option>
+                              <option value="R&M Zone 23">Zone 23</option>   
+                              <option value="R&M Zone 24">Zone 24</option>
+                             <option value="R&M Zone 25">Zone 25</option>
+                             <option value="R&M Zone 26">Zone 26</option>  
+                             <option value="R&M Zone 27">Zone 27</option>
+                             <option  value="R&M Zone 28">Zone 28</option>  
+                              <option value="R&M Zone 29">Zone 29</option>
+                              <option value="R&M Zone 30">Zone 30</option>   
+                              <option value="R&M Zone 31">Zone 31</option>
+                             <option value="R&M Zone 32">Zone 32</option>
+                             <option value="R&M Zone 33">Zone 33</option>  
+                             <option value="R&M Zone 34">Zone 34</option>
+                             <option  value="R&M Zone 35">Zone 35</option>  
+                              <option value="R&M Zone 36">Zone 36</option>
+                              <option value="R&M Zone 37">Zone 37</option>   
+                              <option value="R&M Zone 38">Zone 38</option>
+                             <option value="R&M Zone 39">Zone 39</option>
+                             <option value="R&M Zone 40">Zone 40</option>
+                            </optgroup>
+                            <optgroup label="ZMM">
+                            <option  value="ZMM All Zones">All Zones</option> 
+                            <option  value="ZMM Zone 1">Zone 1</option>  
+                              <option value="ZMM Zone 2">Zone 2</option>
+                              <option value="ZMM Zone 3">Zone 3</option>   
+                              <option value="ZMM Zone 4">Zone 4</option>
+                             <option value="ZMM Zone 5">Zone 5</option>
+                             <option value="ZMM Zone 6">Zone 6</option>  
+                             <option value="ZMM Zone 7">Zone 7</option>
+                             <option  value="ZMM Zone 8">Zone 8</option>  
+                              <option value="ZMM Zone 9">Zone 9</option>
+                              <option value="ZMM Zone 10">Zone 10</option>   
+                              <option value="ZMM Zone 11">Zone 11</option>
+                             <option value="ZMM Zone 12">Zone 12</option>
+                             <option value="ZMM Zone 13">Zone 13</option>  
+                             <option value="ZMM Zone 14">Zone 14</option>
+                             <option  value="ZMM Zone 15">Zone 15</option>  
+                              <option value="ZMM Zone 16">Zone 16</option>
+                              <option value="ZMM Zone 17">Zone 17</option>   
+                              <option value="ZMM Zone 18">Zone 18</option>
+                             <option value="ZMM Zone 19">Zone 19</option>
+                             <option value="ZMM Zone 20">Zone 20</option>
+                             <option  value="ZMM Zone 21">Zone 21</option>  
+                              <option value="ZMM Zone 22">Zone 22</option>
+                              <option value="ZMM Zone 23">Zone 23</option>   
+                              <option value="ZMM Zone 24">Zone 24</option>
+                             <option value="ZMM Zone 25">Zone 25</option>
+                             <option value="ZMM Zone 26">Zone 26</option>  
+                             <option value="ZMM Zone 27">Zone 27</option>
+                             <option  value="ZMM Zone 28">Zone 28</option>  
+                              <option value="ZMM Zone 29">Zone 29</option>
+                              <option value="ZMM Zone 30">Zone 30</option>   
+                              <option value="ZMM Zone 31">Zone 31</option>
+                             <option value="ZMM Zone 32">Zone 32</option>
+                             <option value="ZMM Zone 33">Zone 33</option>  
+                             <option value="ZMM Zone 34">Zone 34</option>
+                             <option  value="ZMM Zone 35">Zone 35</option>  
+                              <option value="ZMM Zone 36">Zone 36</option>
+                              <option value="ZMM Zone 37">Zone 37</option>   
+                              <option value="ZMM Zone 38">Zone 38</option>
+                             <option value="ZMM Zone 39">Zone 39</option>
+                             <option value="ZMM Zone 40">Zone 40</option>
+                            </optgroup>
+                            <optgroup label="G44">
+                            <option  value="G44 All Zones">All Zones</option> 
+                            <option  value="G44 Zone 1">Zone 1</option>  
+                              <option value="G44 Zone 2">Zone 2</option>
+                              <option value="G44 Zone 3">Zone 3</option>   
+                              <option value="G44 Zone 4">Zone 4</option>
+                             <option value="G44 Zone 5">Zone 5</option>
+                             <option value="G44 Zone 6">Zone 6</option>  
+                             <option value="G44 Zone 7">Zone 7</option>
+                             <option  value="G44 Zone 8">Zone 8</option>  
+                              <option value="G44 Zone 9">Zone 9</option>
+                              <option value="G44 Zone 10">Zone 10</option>   
+                              <option value="G44 Zone 11">Zone 11</option>
+                             <option value="G44 Zone 12">Zone 12</option>
+                             <option value="G44 Zone 13">Zone 13</option>  
+                             <option value="G44 Zone 14">Zone 14</option>
+                             <option  value="G44 Zone 15">Zone 15</option>  
+                              <option value="G44 Zone 16">Zone 16</option>
+                              <option value="G44 Zone 17">Zone 17</option>   
+                              <option value="G44 Zone 18">Zone 18</option>
+                             <option value="G44 Zone 19">Zone 19</option>
+                             <option value="G44 Zone 20">Zone 20</option>
+                             <option  value="G44 Zone 21">Zone 21</option>  
+                              <option value="G44 Zone 22">Zone 22</option>
+                              <option value="G44 Zone 23">Zone 23</option>   
+                              <option value="G44 Zone 24">Zone 24</option>
+                             <option value="G44 Zone 25">Zone 25</option>
+                             <option value="G44 Zone 26">Zone 26</option>  
+                             <option value="G44 Zone 27">Zone 27</option>
+                             <option  value="G44 Zone 28">Zone 28</option>  
+                              <option value="G44 Zone 29">Zone 29</option>
+                              <option value="G44 Zone 30">Zone 30</option>   
+                              <option value="G44 Zone 31">Zone 31</option>
+                             <option value="G44 Zone 32">Zone 32</option>
+                             <option value="G44 Zone 33">Zone 33</option>  
+                             <option value="G44 Zone 34">Zone 34</option>
+                             <option  value="G44 Zone 35">Zone 35</option>  
+                              <option value="G44 Zone 36">Zone 36</option>
+                              <option value="G44 Zone 37">Zone 37</option>   
+                              <option value="G44 Zone 38">Zone 38</option>
+                             <option value="G44 Zone 39">Zone 39</option>
+                             <option value="G44 Zone 40">Zone 40</option>
+                            </optgroup>
+                            <optgroup label="G45S">
+                            <option  value="G45S All Zones">All Zones</option> 
+                            <option  value="G45S Zone 1">Zone 1</option>  
+                              <option value="G45S Zone 2">Zone 2</option>
+                              <option value="G45S Zone 3">Zone 3</option>   
+                              <option value="G45S Zone 4">Zone 4</option>
+                             <option value="G45S Zone 5">Zone 5</option>
+                             <option value="G45S Zone 6">Zone 6</option>  
+                             <option value="G45S Zone 7">Zone 7</option>
+                             <option  value="G45S Zone 8">Zone 8</option>  
+                              <option value="G45S Zone 9">Zone 9</option>
+                              <option value="G45S Zone 10">Zone 10</option>   
+                              <option value="G45S Zone 11">Zone 11</option>
+                             <option value="G45S Zone 12">Zone 12</option>
+                             <option value="G45S Zone 13">Zone 13</option>  
+                             <option value="G45S Zone 14">Zone 14</option>
+                             <option  value="G45S Zone 15">Zone 15</option>  
+                              <option value="G45S Zone 16">Zone 16</option>
+                              <option value="G45S Zone 17">Zone 17</option>   
+                              <option value="G45S Zone 18">Zone 18</option>
+                             <option value="G45S Zone 19">Zone 19</option>
+                             <option value="G45S Zone 20">Zone 20</option>
+                             <option  value="G45S Zone 21">Zone 21</option>  
+                              <option value="G45S Zone 22">Zone 22</option>
+                              <option value="G45S Zone 23">Zone 23</option>   
+                              <option value="G45S Zone 24">Zone 24</option>
+                             <option value="G45S Zone 25">Zone 25</option>
+                             <option value="G45S Zone 26">Zone 26</option>  
+                             <option value="G45S Zone 27">Zone 27</option>
+                             <option  value="G45S Zone 28">Zone 28</option>  
+                              <option value="G45S Zone 29">Zone 29</option>
+                              <option value="G45S Zone 30">Zone 30</option>   
+                              <option value="G45S Zone 31">Zone 31</option>
+                             <option value="G45S Zone 32">Zone 32</option>
+                             <option value="G45S Zone 33">Zone 33</option>  
+                             <option value="G45S Zone 34">Zone 34</option>
+                             <option  value="G45S Zone 35">Zone 35</option>  
+                              <option value="G45S Zone 36">Zone 36</option>
+                              <option value="G45S Zone 37">Zone 37</option>   
+                              <option value="G45S Zone 38">Zone 38</option>
+                             <option value="G45S Zone 39">Zone 39</option>
+                             <option value="G45S Zone 40">Zone 40</option>
+                            </optgroup>
+                            <optgroup label="G45N">
+                            <option  value="G45N All Zones">All Zones</option>   
+                              <option value="G45N Zone 16">Zone 16</option>
+                              <option value="G45N Zone 17">Zone 17</option>   
+                              <option value="G45N Zone 18">Zone 18</option>
+                             <option value="G45N Zone 19">Zone 19</option>
+                             <option value="G45N Zone 20">Zone 20</option>
+                             <option  value="G45N Zone 21">Zone 21</option>  
+                              <option value="G45N Zone 22">Zone 22</option>
+                              <option value="G45N Zone 23">Zone 23</option>   
+                              <option value="G45N Zone 24">Zone 24</option>
+                             <option value="G45N Zone 25">Zone 25</option>
+                             <option value="G45N Zone 26">Zone 26</option>  
+                             <option value="G45N Zone 27">Zone 27</option>
+                             <option  value="G45N Zone 28">Zone 28</option>  
+                              <option value="G45N Zone 29">Zone 29</option>
+                              <option value="G45N Zone 30">Zone 30</option>   
+                              <option value="G45N Zone 31">Zone 31</option>
+                             <option value="G45N Zone 32">Zone 32</option>
+                             <option value="G45N Zone 33">Zone 33</option>  
+                             <option value="G45N Zone 34">Zone 34</option>
+                             <option  value="G45N Zone 35">Zone 35</option>  
+                              <option value="G45N Zone 36">Zone 36</option>
+                              <option value="G45N Zone 37">Zone 37</option>   
+                              <option value="G45N Zone 38">Zone 38</option>
+                             <option value="G45N Zone 39">Zone 39</option>
+                             <option value="G45N Zone 40">Zone 40</option>
+                             <option  value="G45N Zone 41">Zone 41</option>  
+                              <option value="G45N Zone 42">Zone 42</option>
+                              <option value="G45N Zone 43">Zone 43</option>   
+                              <option value="G45N Zone 44">Zone 44</option>
+                             <option value="G45N Zone 45">Zone 45</option>
+                             <option value="G45N Zone 46">Zone 46</option>  
+                             <option value="G45N Zone 47">Zone 47</option>
+                             <option  value="G45N Zone 48">Zone 48</option>  
+                              <option value="G45N Zone 49">Zone 49</option>
+                              <option value="G45N Zone 50">Zone 50</option>   
+                              <option value="G45N Zone 51">Zone 51</option>
+                             <option value="G45N Zone 52">Zone 52</option>
+                             <option value="G45N Zone 53">Zone 53</option>  
+                             <option value="G45N Zone 54">Zone 54</option>
+                            </optgroup>
+                            <optgroup label="KWT">
+                            <option  value="KWT All Zones">All Zones</option> 
+                            <option  value="KWT Zone 1">Zone 1</option>  
+                              <option value="KWT Zone 2">Zone 2</option>
+                              <option value="KWT Zone 3">Zone 3</option>   
+                              <option value="KWT Zone 4">Zone 4</option>
+                             <option value="KWT Zone 5">Zone 5</option>
+                             <option value="KWT Zone 6">Zone 6</option>  
+                             <option value="KWT Zone 7">Zone 7</option>
+                             <option  value="KWT Zone 8">Zone 8</option>  
+                              <option value="KWT Zone 9">Zone 9</option>
+                              <option value="KWT Zone 10">Zone 10</option>   
+                              <option value="KWT Zone 11">Zone 11</option>
+                             <option value="KWT Zone 12">Zone 12</option>
+                             <option value="KWT Zone 13">Zone 13</option>  
+                             <option value="KWT Zone 14">Zone 14</option>
+                             <option  value="KWT Zone 15">Zone 15</option>  
+                              <option value="KWT Zone 16">Zone 16</option>
+                              <option value="KWT Zone 17">Zone 17</option>   
+                              <option value="KWT Zone 18">Zone 18</option>
+                             <option value="KWT Zone 19">Zone 19</option>
+                             <option value="KWT Zone 20">Zone 20</option>
+                             <option  value="KWT Zone 21">Zone 21</option>  
+                              <option value="KWT Zone 22">Zone 22</option>
+                              <option value="KWT Zone 23">Zone 23</option>   
+                              <option value="KWT Zone 24">Zone 24</option>
+                             <option value="KWT Zone 25">Zone 25</option>
+                             <option value="KWT Zone 26">Zone 26</option>  
+                             <option value="KWT Zone 27">Zone 27</option>
+                             <option  value="KWT Zone 28">Zone 28</option>  
+                              <option value="KWT Zone 29">Zone 29</option>
+                              <option value="KWT Zone 30">Zone 30</option>   
+                              <option value="KWT Zone 31">Zone 31</option>
+                             <option value="KWT Zone 32">Zone 32</option>
+                             <option value="KWT Zone 33">Zone 33</option>  
+                             <option value="KWT Zone 34">Zone 34</option>
+                             <option  value="KWT Zone 35">Zone 35</option>  
+                              <option value="KWT Zone 36">Zone 36</option>
+                              <option value="KWT Zone 37">Zone 37</option>   
+                              <option value="KWT Zone 38">Zone 38</option>
+                             <option value="KWT Zone 39">Zone 39</option>
+                             <option value="KWT Zone 40">Zone 40</option>
+                            </optgroup>
+                            <optgroup label="LSM">
+                            <option  value="LSM All Zones">All Zones</option> 
+                            <option  value="LSM Zone 1">Zone 1</option>  
+                              <option value="LSM Zone 2">Zone 2</option>
+                              <option value="LSM Zone 3">Zone 3</option>   
+                              <option value="LSM Zone 4">Zone 4</option>
+                             <option value="LSM Zone 5">Zone 5</option>
+                             <option value="LSM Zone 6">Zone 6</option>  
+                             <option value="LSM Zone 7">Zone 7</option>
+                             <option  value="LSM Zone 8">Zone 8</option>  
+                              <option value="LSM Zone 9">Zone 9</option>
+                              <option value="LSM Zone 10">Zone 10</option>   
+                              <option value="LSM Zone 11">Zone 11</option>
+                             <option value="LSM Zone 12">Zone 12</option>
+                             <option value="LSM Zone 13">Zone 13</option>  
+                             <option value="LSM Zone 14">Zone 14</option>
+                             <option  value="LSM Zone 15">Zone 15</option>  
+                              <option value="LSM Zone 16">Zone 16</option>
+                              <option value="LSM Zone 17">Zone 17</option>   
+                              <option value="LSM Zone 18">Zone 18</option>
+                             <option value="LSM Zone 19">Zone 19</option>
+                             <option value="LSM Zone 20">Zone 20</option>
+                             <option  value="LSM Zone 21">Zone 21</option>  
+                              <option value="LSM Zone 22">Zone 22</option>
+                              <option value="LSM Zone 23">Zone 23</option>   
+                              <option value="LSM Zone 24">Zone 24</option>
+                             <option value="LSM Zone 25">Zone 25</option>
+                             <option value="LSM Zone 26">Zone 26</option>  
+                             <option value="LSM Zone 27">Zone 27</option>
+                             <option  value="LSM Zone 28">Zone 28</option>  
+                              <option value="LSM Zone 29">Zone 29</option>
+                              <option value="LSM Zone 30">Zone 30</option>   
+                              <option value="LSM Zone 31">Zone 31</option>
+                             <option value="LSM Zone 32">Zone 32</option>
+                             <option value="LSM Zone 33">Zone 33</option>  
+                             <option value="LSM Zone 34">Zone 34</option>
+                             <option  value="LSM Zone 35">Zone 35</option>  
+                              <option value="LSM Zone 36">Zone 36</option>
+                              <option value="LSM Zone 37">Zone 37</option>   
+                              <option value="LSM Zone 38">Zone 38</option>
+                             <option value="LSM Zone 39">Zone 39</option>
+                             <option value="LSM Zone 40">Zone 40</option>
+                            </optgroup>
+                            </select>
+                             </div>
+                              </div>
+                              <div class="form-group">
+                                                <strong><label for="cc-number" class="control-label mb-1">Issues<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
                                             <select placeholder="Choose a region..." class="standardSelect form-control" name="issue" tabindex="1">
                                             <option disabled selected >Choose an issue...</option>
@@ -215,38 +525,49 @@ date_default_timezone_set("Africa/Nairobi");
                                             <option value="MPESA API Failure">MPESA API Failure</option> 
                                             <option value="Core Device Failure">Core Device Failure</option>
                                             <option value="Public IP Issue">Public IP Issue</option>
+                                            <option value="speed Issue">Speed Issue</option>
                                             <option value="No Issues">No Issues</option>
                                             
                                             </select>
                                             </div>
                                             </div>
+                                            <strong><div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Cluster(s)</label></strong>
+                                                <input id="buildings" name="cluster" type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Cluster Name">
+                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="form-group">
+                                            <strong><label for="cc-number" class="control-label mb-1">No of Buildings Affected</label></strong>
+                                                <input id="buildings" name="buildings" type="number" class="form-control cc-number identified visa" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" maxlength="40" placeholder="No of Buildings Affected">
+                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Start Time</label>
+                                                    <strong><label for="cc-exp" class="control-label mb-1">Start Time</label></strong>
                                                         <input id="start"  placeholder="Start Time" value="00:00"  name="start" type="time" class="form-control cc-exp"  placeholder="Start Time">
                                                         <span class="help-block"  data-valmsg-replace="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">End Time</label>
+                                                <strong><label for="x_card_code" class="control-label mb-1">End Time</label></strong>
                                                     <div class="input-group">
                                                         <input id="end" name="end" value="00:00" type="time" class="form-control cc-cvc"  placeholder="End Time">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Duration</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Duration</label></strong>
                                                 <input id="diff" name="duration" type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Duration">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Comments<span style="color: #FF0000" >*</span></label>
+                                            <strong> <label for="cc-number" class="control-label mb-1">Comments<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="cc-number" name="comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Comments" required>
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Reported By<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Reported By<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="cc-number" name="reporter" type="text" required class="form-control cc-number identified visa" Value="<?php echo $_SESSION[
                                                     "FName"
                                                 ]; ?> <?php echo $_SESSION[

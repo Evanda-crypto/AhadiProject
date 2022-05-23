@@ -4,6 +4,11 @@ include "../config/config.php";
 date_default_timezone_set("Africa/Nairobi");
 
 if (isset($_POST["submit"])) {
+
+    if(isset($_POST["zone"])){
+        $zones = $_POST["zone"];
+        $extractzones = implode(",", $zones);
+        if($extractzones){
     $date = $_POST["date"];
     $Region = $_POST["Region"];
     $issue = $_POST["issue"];
@@ -12,6 +17,8 @@ if (isset($_POST["submit"])) {
     $duration = $_POST["duration"];
     $reporter = $_POST["reporter"];
     $comments = $_POST["comments"];
+    $cluster = $_POST["cluster"];
+    $buildings = $_POST["buildings"];
    
 
 
@@ -20,8 +27,8 @@ if (isset($_POST["submit"])) {
         die("connection failed : " . $connection->connect_error);
     } else {
         $insert = $connection->query(
-            "INSERT INTO nats_reports (issue,starttime,endtime,duration,reporter,Region,comments,date_reported) VALUES 
-            ('$issue','$startime','$endtime','$duration','$reporter','$Region','$comments','$date')"
+            "INSERT INTO nats_reports (issue,starttime,endtime,duration,reporter,Region,comments,date_reported,buildings,zones,cluster_name) VALUES 
+            ('$issue','$startime','$endtime','$duration','$reporter','$Region','$comments','$date','$buildings','$extractzones','$cluster')"
         );
 
         if ($insert) {
@@ -32,6 +39,14 @@ if (isset($_POST["submit"])) {
             header("Location: fill-report.php");
         }
     }
+}else{
+    $_SESSION["status"] = "zones not extracted";
+    header("Location: fill-report.php");
+}
+}else {
+    $_SESSION["status"] = "Please select Zone(s) affected";
+    header("Location: fill-report.php");
+}
 
 
 }
