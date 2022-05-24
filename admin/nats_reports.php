@@ -204,8 +204,8 @@ include("../config/config.php");
                         <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th>Day</th>
                                     <th>Date</th>
+                                    <th>Day</th>
                                     <th>Region</th>
                                     <th>Zones Affected</th>
                                     <th>Clusters</th>
@@ -232,8 +232,8 @@ $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
-    <td><?php echo $row['dayn']?></td>
     <td><?php echo $row['date_reported']?></td>
+    <td><?php echo $row['dayn']?></td>
     <td><?php echo $row['Region']?></td>
     <td><?php echo $row['affectedzones']?></td>
     <td><?php echo $row['clusters']?></td>
