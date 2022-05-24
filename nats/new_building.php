@@ -60,13 +60,14 @@ date_default_timezone_set("Africa/Nairobi");
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>KCIS</a>
                         <ul class="sub-menu children dropdown-menu">
                         <li><i class="menu-icon ti-list"></i><a href="new_building.php" style="color:black; font-size: 15px;">New Building Report</a></li>
-                            <li><i class="fa fa-table"></i><a href="r&m.php" style="color:black; font-size: 15px;">R&M</a></li>
+                        <li><i class="fa fa-table"></i><a href="r&m.php" style="color:black; font-size: 15px;">R&M</a></li>
                             <li><i class="fa fa-table"></i><a href="zmm.php" style="color:black; font-size: 15px;">ZMM</a></li>
                             <li><i class="fa fa-table"></i><a href="g44.php" style="color:black; font-size: 15px;">G44</a></li>
                             <li><i class="fa fa-table"></i><a href="g45s.php" style="color:black; font-size: 15px;">G45S</a></li>
                             <li><i class="fa fa-table"></i><a href="g45n.php" style="color:black; font-size: 15px;">G45N</a></li>
                             <li><i class="fa fa-table"></i><a href="kwt.php" style="color:black; font-size: 15px;">KWT</a></li>
-                            <li><i class="fa fa-table"></i><a href="lsm.php" style="color:black; font-size: 15px;">LSM</a></li> </ul>
+                            <li><i class="fa fa-table"></i><a href="lsm.php" style="color:black; font-size: 15px;">LSM</a></li>
+                            <li><i class="fa fa-table"></i><a href="htr.php" style="color:black; font-size: 15px;">HTR</a></li></ul>
                     </li>
                     <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
                     <li>
@@ -252,12 +253,12 @@ date_default_timezone_set("Africa/Nairobi");
                                            <div class="col-6">
                                             <div class="form-group">
                                             <strong> <label for="cc-payment" class="control-label mb-1">Date Signed</label></strong>
-                                                <input id="date1" name="datesigned"  type="text"   class="form-control"  aria-required="true" aria-invalid="false" placeholder="Date Signed">
+                                                <input id="date1" name="datesigned"  type="date"   class="form-control"  aria-required="true" aria-invalid="false" placeholder="Date Signed">
                                             </div></div>
                                             <div class="col-6">
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">Date Cabled</label></strong>
-                                                <input id="date2" name="datecabled" type="text" class="form-control cc-name valid"    data-val="true" placeholder="Date Cabled"
+                                                <input id="date2" name="datecabled" type="date" class="form-control cc-name valid"    data-val="true" placeholder="Date Cabled"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div></div>
@@ -265,18 +266,18 @@ date_default_timezone_set("Africa/Nairobi");
                                            <div class="col-6">
                                             <div class="form-group">
                                             <strong><label for="cc-payment" class="control-label mb-1">Date Fully Installed</label></strong>
-                                                <input id="date3" name="datefullyinstalled"  type="text"   class="form-control"  aria-required="true" aria-invalid="false" placeholder="Date Fully Installed">
+                                                <input id="date3" name="datefullyinstalled"  type="date"   class="form-control"  aria-required="true" aria-invalid="false" placeholder="Date Fully Installed">
                                             </div></div>
                                             <div class="col-6">
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">Date Accepted</label></strong>
-                                                <input id="date4" name="dateaccepted" type="text" class="form-control cc-name valid"   data-val="true" placeholder="Date Accepted"
+                                                <input id="date4" name="dateaccepted" type="date" class="form-control cc-name valid"   data-val="true" placeholder="Date Accepted"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div></div>
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">Date turnedon</label></strong>
-                                                <input id="date5" name="dateturnedon" type="text" class="form-control cc-name valid"   data-val="true" placeholder="Date turnedon"
+                                                <input id="date5" name="dateturnedon" type="date" class="form-control cc-name valid"   data-val="true" placeholder="Date turnedon"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
@@ -369,95 +370,5 @@ date_default_timezone_set("Africa/Nairobi");
         });
     });
 </script>
-<script type="text/javascript">
-$( document ).ready(function() {
-$('#example').DataTable({
-		 "processing": true,
-		 "dom": 'lBfrtip',
-		 "buttons": [
-            {
-                extend: 'collection',
-                text: 'Export',
-                buttons: [
-                    'excel',
-                    'csv'
-                ]
-            }
-        ]
-        });
-});
-</script>
-<script>
- $(document).ready(function() {
-     // Create date inputs
-     minDate = new DateTime($('#date1'), {
-         format: 'MMMM Do YYYY'
-     });
-     maxDate = new DateTime($('#max'), {
-         format: 'MMMM Do YYYY'
-     });
- });
- 
-  </script>
-  <script>
- $(document).ready(function() {
-     // Create date inputs
-     minDate = new DateTime($('#date2'), {
-         format: 'MMMM Do YYYY'
-     });
-     maxDate = new DateTime($('#max'), {
-         format: 'MMMM Do YYYY'
-     });
- });
- 
-  </script>
-  <script>
- $(document).ready(function() {
-     // Create date inputs
-     minDate = new DateTime($('#date3'), {
-         format: 'MMMM Do YYYY'
-     });
-     maxDate = new DateTime($('#max'), {
-         format: 'MMMM Do YYYY'
-     });
- });
- 
-  </script>
-  <script>
- $(document).ready(function() {
-     // Create date inputs
-     minDate = new DateTime($('#date4'), {
-         format: 'MMMM Do YYYY'
-     });
-     maxDate = new DateTime($('#max'), {
-         format: 'MMMM Do YYYY'
-     });
- });
- 
-  </script>
-  <script>
- $(document).ready(function() {
-     // Create date inputs
-     minDate = new DateTime($('#date5'), {
-         format: 'MMMM Do YYYY'
-     });
-     maxDate = new DateTime($('#max'), {
-         format: 'MMMM Do YYYY'
-     });
- });
- 
-  </script>
-  <script>
- $(document).ready(function() {
-     // Create date inputs
-     minDate = new DateTime($('#date'), {
-         format: 'MMMM Do YYYY'
-     });
-     maxDate = new DateTime($('#max'), {
-         format: 'MMMM Do YYYY'
-     });
- });
- 
-  </script>
 </body>
 </html>

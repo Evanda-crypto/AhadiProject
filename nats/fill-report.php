@@ -42,13 +42,14 @@ date_default_timezone_set("Africa/Nairobi");
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>KCIS</a>
                         <ul class="sub-menu children dropdown-menu">
                         <li><i class="menu-icon ti-list"></i><a href="new_building.php" style="color:black; font-size: 15px;">New Building Report</a></li>
-                            <li><i class="fa fa-table"></i><a href="r&m.php" style="color:black; font-size: 15px;">R&M</a></li>
+                        <li><i class="fa fa-table"></i><a href="r&m.php" style="color:black; font-size: 15px;">R&M</a></li>
                             <li><i class="fa fa-table"></i><a href="zmm.php" style="color:black; font-size: 15px;">ZMM</a></li>
                             <li><i class="fa fa-table"></i><a href="g44.php" style="color:black; font-size: 15px;">G44</a></li>
                             <li><i class="fa fa-table"></i><a href="g45s.php" style="color:black; font-size: 15px;">G45S</a></li>
                             <li><i class="fa fa-table"></i><a href="g45n.php" style="color:black; font-size: 15px;">G45N</a></li>
                             <li><i class="fa fa-table"></i><a href="kwt.php" style="color:black; font-size: 15px;">KWT</a></li>
-                            <li><i class="fa fa-table"></i><a href="lsm.php" style="color:black; font-size: 15px;">LSM</a></li> </ul>
+                            <li><i class="fa fa-table"></i><a href="lsm.php" style="color:black; font-size: 15px;">LSM</a></li>
+                            <li><i class="fa fa-table"></i><a href="htr.php" style="color:black; font-size: 15px;">HTR</a></li></ul>
                     </li>
                     <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
                     <li>
@@ -516,7 +517,7 @@ date_default_timezone_set("Africa/Nairobi");
                                             <option disabled selected >Choose an issue...</option>
                                             <option value="Fibre Link">Fibre Link</option>
                                             <option value="Power Issue">Power Issue</option>
-                                            <option value="Sms Code Issues">Sms Code Issues</option>
+                                            <option value="Sms Code Issue">Sms Code Issue</option>
                                             <option value="Portal Unreachable">Portal Unreachable</option>
                                             <option value="Paps Blinking">Paps Blinking</option>
                                             <option value="Theft Cases">Theft Cases</option>
@@ -525,7 +526,7 @@ date_default_timezone_set("Africa/Nairobi");
                                             <option value="MPESA API Failure">MPESA API Failure</option> 
                                             <option value="Core Device Failure">Core Device Failure</option>
                                             <option value="Public IP Issue">Public IP Issue</option>
-                                            <option value="speed Issue">Speed Issue</option>
+                                            <option value="Speed Issue">Speed Issue</option>
                                             <option value="No Issues">No Issues</option>
                                             
                                             </select>
@@ -563,7 +564,7 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
                                             <div class="form-group">
                                             <strong> <label for="cc-number" class="control-label mb-1">Comments<span style="color: #FF0000" >*</span></label></strong>
-                                                <input id="cc-number" name="comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Comments" required>
+                                                <input id="cc-number" name="comments" type="text" class="form-control cc-number identified visa" required placeholder="Comments" required>
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
