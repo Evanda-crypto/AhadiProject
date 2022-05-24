@@ -202,7 +202,7 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
                                             
                                             <div class="form-group">
-                                            <strong> <label for="cc-number" class="control-label mb-1">Region & Zone<span style="color: #FF0000" >*</span></label></strong>
+                                            <strong> <label for="cc-number" class="control-label mb-1">Zone<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
                                             
                                                 <select placeholder="Choose a Zone..." multiple class="standardSelect form-control" tabindex="1" name="zone[]" required>
