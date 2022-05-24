@@ -182,13 +182,14 @@ include("../config/config.php");
                      <th>Region</th>
                      <th>Techies</th>
                     <th>Reason</th>
+                    <th>Comments</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                
  <?php
  $query =
-     "SELECT papnotinstalled.ClientID,papnotinstalled.ClientName,papnotinstalled.BuildingName,papnotinstalled.BuildingCode,papnotinstalled.Region,papnotinstalled.Floor,papnotinstalled.DateSigned,papnotinstalled.Reason,papnotinstalled.Contact,papnotinstalled.ChampName,CONCAT(papnotinstalled.Techie1,'/',papnotinstalled.Techie2) as techies from papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID where trash.ClientID is null  order by DateSigned Desc";
+     "SELECT papnotinstalled.ClientID,papnotinstalled.ClientName,papnotinstalled.BuildingName,papnotinstalled.BuildingCode,papnotinstalled.Region,papnotinstalled.Floor,papnotinstalled.DateSigned,papnotinstalled.Reason,papnotinstalled.Contact,papnotinstalled.ChampName,CONCAT(papnotinstalled.Techie1,'/',papnotinstalled.Techie2) as techies,papnotinstalled.Note from papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID where trash.ClientID is null  order by DateSigned Desc";
  $result = mysqli_query($connection, $query);
  while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
@@ -200,6 +201,7 @@ include("../config/config.php");
                                     <td><?php echo $row["Region"]; ?></td>
                                     <td><?php echo $row["techies"]; ?></td>
                                     <td><?php echo $row["Reason"]; ?></td>
+                                    <td><?php echo $row["Note"]; ?></td>
                                 </tr>
                         <?php }
  ?>
