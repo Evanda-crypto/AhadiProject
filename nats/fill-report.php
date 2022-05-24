@@ -176,7 +176,7 @@ date_default_timezone_set("Africa/Nairobi");
                 
             }
             ?>
-                                        <form  method="post" autocomplete="off" action="submit.php">
+                       <form  method="post" autocomplete="off" action="submit.php">
                                   
                                         <div class="form-group has-success">
                                         <strong><label for="cc-name" class="control-label mb-1">Date <span style="color: #FF0000" >*</span></label></strong>

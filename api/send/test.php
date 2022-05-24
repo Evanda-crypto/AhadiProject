@@ -1,13 +1,43 @@
 <?php
-include("../../config/config.php");
-
-$sql=mysqli_query($connection,"SELECT turnedonpap.ClientID,papdailysales.BuildingName,upper(papdailysales.BuildingCode) as bcode,upper(papdailysales.Region) as reg,papdailysales.ChampName,turnedonpap.ClientName,turnedonpap.ClientContact,Upper(turnedonpap.MacAddress) as Mac,turnedonpap.PapStatus,turnedonpap.DateTurnedOn, CASE WHEN LENGTH(papdailysales.BuildingCode)>11 THEN CONCAT(papdailysales.BuildingCode,'-',(row_number() over(partition by papdailysales.BuildingCode)),'P')
-WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) <=9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,'0',(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
-WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) >9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
-end as papcode from papdailysales LEFT JOIN turnedonpap ON turnedonpap.ClientID=papdailysales.ClientID WHERE DateTurnedOn >= DATE_SUB(CURDATE(), INTERVAL 70 DAY) order by turnedonpap.DateTurnedOn Desc");
-
-$result=mysqli_fetch_all($sql,MYSQLI_ASSOC);
-
-exit(json_encode($result));
-
+header("Content-Type:application/json");
+if (isset($_GET['id']) && $_GET['id']!="") 
+{
+    include ("../../config/config.php");
+$id = $_GET['id'];
+$result = mysqli_query($connection,
+       "SELECT * FROM `users` WHERE id=$id");
+if(mysqli_num_rows($result)>0)
+       {
+    $row = mysqli_fetch_array($result);
+    $fname = $row['FirstName'];
+    $lname = $row['LastName'];
+    $Email = $row['Email'];
+    $User = $row['User'];
+    $Region = $row['Region'];
+    $Password = $row['Password'];
+    $hashpass= password_hash($Email, PASSWORD_DEFAULT);
+    response($id, $fname, $lname, $hashpass,$User,$Region,$Password);
+    mysqli_close($connection);
+}
+else
+{
+     response(NULL, NULL, 200,"No Record Found");
+}
+}
+else
+{
+response(NULL, NULL, 400,"Request is invalid");
+}
+function response($id,$fname,$lname, $hashpass,$User,$Region,$Password)
+{
+$response['id'] = $id;
+$response['FirstName'] = $fname;
+$response['LastName'] = $lname;
+$response['Email'] = $hashpass;
+$response['User'] = $User;
+$response['Region'] = $Region;
+$response['Password'] = $Password;
+$json_response = json_encode($response);
+echo $json_response;
+}
 ?>
