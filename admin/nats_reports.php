@@ -282,7 +282,7 @@ var minDate, maxDate;
      function( settings, data, dataIndex ) {
          var min = minDate.val();
          var max = maxDate.val();
-         var date = new Date( data[1] );
+         var date = new Date( data[0] );
   
          if (
              ( min === null && max === null ) ||
