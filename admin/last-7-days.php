@@ -199,10 +199,10 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT turnedonpap.ClientID,papdailysales.BuildingName,upper(papdailysales.BuildingCode) as bcode,upper(papdailysales.Region) as reg,papdailysales.ChampName,papdailysales.ClientName,papdailysales.ClientContact,Upper(turnedonpap.MacAddress) as Mac,turnedonpap.DateTurnedOn, CASE WHEN LENGTH(papdailysales.BuildingCode)>11 THEN CONCAT(papdailysales.BuildingCode,'-',(row_number() over(partition by papdailysales.BuildingCode)),'P')
-    WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) <=9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,'0',(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
-    WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) >9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
-    end as papcode from papdailysales LEFT JOIN turnedonpap ON turnedonpap.ClientID=papdailysales.ClientID where turnedonpap.ClientID is not null and turnedonpap.DateTurnedOn>= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+    $sql="SELECT t.ClientID,p.BuildingName,upper(p.BuildingCode) as bcode,upper(p.Region) as reg,p.ChampName,p.ClientName,p.ClientContact,Upper(t.MacAddress) as Mac,t.DateTurnedOn, CASE WHEN LENGTH(p.BuildingCode)>11 THEN CONCAT(p.BuildingCode,'-',(row_number() over(partition by p.BuildingCode)),'P')
+    WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) <=9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,'0',(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
+    WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) >9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
+    end as papcode from papdailysales as p LEFT JOIN turnedonpap as t ON t.ClientID=p.ClientID where t.ClientID is not null and t.DateTurnedOn>= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
