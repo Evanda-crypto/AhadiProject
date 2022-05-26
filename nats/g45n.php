@@ -41,7 +41,26 @@ include("../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .green {
+  color: green;
+}
 
+.violet {
+  color: violet;
+}
+.blue{
+    color:blue;
+}.orange{
+    color:orange;
+}
+.red{
+    color:red;
+}
+.purple{
+    color:purple;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
    <!-- Left Panel -->
@@ -290,6 +309,29 @@ $(document).ready(function(){
         });
     }); 
 });
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent === "2. Signed") {
+      cell.classList.toggle('violet');
+    }
+    if (cell.textContent === "7. PAP In Service") {
+      cell.classList.toggle('green');
+    }
+    if (cell.textContent === "6. IAP In Service") {
+      cell.classList.toggle('blue');
+    }
+    if (cell.textContent === "8. PAP>10") {
+      cell.classList.toggle('orange');
+    }
+    if (cell.textContent === "4. Fully Installed") {
+      cell.classList.toggle('red');
+    }
+    if (cell.textContent === "3. Cabled") {
+      cell.classList.toggle('purple');
+    }
+  })
+})
 </script>
     
 </body>
