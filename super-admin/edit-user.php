@@ -108,6 +108,9 @@ else
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Buildings </a>
                     </li>
+                    <li>
+                        <a href="completedtasks.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Completed Tasks </a>
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
