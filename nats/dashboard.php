@@ -276,7 +276,7 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT count(*) as clients from papdailysales as p left join papnotinstalled as r on p.ClientID=r.ClientID where r.ClientID is null";
+                      "SELECT (SELECT count(*) from papdailysales as p left join papnotinstalled as r on p.ClientID=r.ClientID where r.ClientID is null)+(SELECT COUNT(*) as cccs from old) as clients";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
                       echo $row["clients"] . "<br><br>";
@@ -351,7 +351,7 @@ if (!$connection) {
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
-                  $query = "SELECT count(*) as turnedon from turnedonpap";
+                  $query = "SELECT ((SELECT count(*) from turnedonpap) + (SELECT COUNT(*) from old)) AS turnedon";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
                       echo $row["turnedon"] . "<br><br>";
