@@ -11,11 +11,12 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Gallery</title>
+    <title>Signed G45S</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -45,7 +46,23 @@ include("../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .green {
+  color: green;
+}
 
+.violet {
+  color: violet;
+}
+.blue{
+    color:blue;
+}.orange{
+    color:orange;
+}
+.red{
+    color:red;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
     <!-- Left Panel -->
@@ -69,26 +86,39 @@ include("../config/config.php");
                     <li>
                         <a href="installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Installed </a>
                     </li>
-                    <li>
-                        <a href="turnedon.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
-                    </li>
-                    <li class="menu-title">ACCOUNTS</li><!-- /.menu-title -->
-
-                    <li>
-                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-themify-favicon-alt"></i>Add Teamleader </a>
-                    </li>
-                    <li>
-                        <a href="view-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-eye"></i>View Teamleader </a>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Turned On</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-table"></i><a href="turnedontoday.php" style="color:black; font-size: 15px;">Today</a></li>
+                            <li><i class="fa fa-table"></i><a href="last-7-days.php"style="color:black; font-size: 15px;">Last 7 Days</a></li>
+                            <li><i class="fa fa-table"></i><a href="last-30-days.php" style="color:black; font-size: 15px;">Last 30 Days</a></li>
+                            <li><i class="fa fa-table"></i><a href="turnedon.php" style="color:black; font-size: 15px;">All Records</a></li>
+                        </ul>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                     <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
                     </li>
                     <li>
-                        <a href="gallery.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-gallery"></i>Gallery </a>
+                        <a href="completed-tasks.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-money"></i>Completed Tasks </a>
                     </li>
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
+                    </li>
+                    <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-inbox"></i><a href="nats_reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats_graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Maton</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-inbox"></i><a href="view-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="graphical-report.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
+                        </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -98,10 +128,10 @@ include("../config/config.php");
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
         <!-- Header-->
-        <header id="header" class="header">
+        <header id="header" class="header" style="height: 60px;">
             <div class="top-left">
                 <div class="navbar-header">
-                <img src="../images/picture1.png" style="width: 120px; height: 70px;" class="logo-icon" alt="logo icon">
+                <img src="../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -116,10 +146,11 @@ include("../config/config.php");
                         </div>
 
                         <div class="dropdown for-notification">
+                     
                         </div>
 
                         <div class="dropdown for-message">
-                      
+                         
                         </div>
                     </div>
 
@@ -146,40 +177,72 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Gallery</strong></center>
+                           <center> <strong class="card-title">Signed [G45S]</strong></center>
                         </div>
                         <div class="card-body">
+                        <?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th>Client ID</th>
-                    <th>Team ID</th>
-                    <th>Techie 1</th>
-                    <th>Techie 2</th>
-                    <th>Mac Address</th>
-                    <th>Date Installed</th>
-                    <th>Image</th>
+                     <th>Building Name</th>
+                     <th>Building Code</th>
+                     <th>Champ</th>
+                     <th>Client Name</th>
+                     <th>Client Contact</th>
+                     <th>Date Signed</th>
+                     <th>Availability</th>
+                     <th>Champs Comment</th>
+                     <th>Pap Status</th>
+                     <th>More</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
+                        $query  = "SELECT p.PapStatus,p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note from papdailysales AS p 
+                        LEFT JOIN papnotinstalled AS r ON r.ClientID=p.ClientID WHERE r.ClientID is null and p.Region='G45S' order by p.ClientID Desc";
+                        $result  = mysqli_query($connection, $query);
 
-$records = mysqli_query($connection,"SELECT  papinstalled.Image,papinstalled.ClientID,papinstalled.Team_ID,Token_teams.Techie1,Token_teams.Techie2,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled from papinstalled join Token_teams on papinstalled.Team_ID=Token_teams.Team_ID where papinstalled.DateInstalled=CURDATE() order by DateInstalled asc"); // fetch data from database
+                            while ($row = mysqli_fetch_array($result)) {
+                            
+                        ?>
+                                <tr>
+                                    <td><?php echo $row['BuildingName']; ?></td>
+                                    <td><?php echo $row['BuildingCode']; ?></td>
+                                    <td><?php echo $row['ChampName']; ?></td>
+                                    <td><?php echo $row['ClientName']; ?></td>
+                                    <td><?php echo $row['ClientContact']; ?></td>
+                                    <td><?php echo $row['DateSigned']; ?></td>
+                                    <td><?php echo $row['ClientAvailability']; ?></td>
+                                    <td><?php echo $row['Note']; ?></td>
+                                    <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>
+                                    <td>
+                                    <button class="btn btn-warning" ><a href="edit-records.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
+                                    </td>
+                                </tr>
+                        <?php
 
-while($data = mysqli_fetch_array($records))
-{
-?>
-  <tr>
-    <td><?php echo $data['ClientID']; ?></td>
-    <td><?php echo $data['Team_ID']; ?></td>
-    <td><?php echo $data['Techie1']; ?></td>
-    <td><?php echo $data['Techie2']; ?></td>
-    <td><?php echo $data['Mac']; ?></td>
-    <td><?php echo $data['DateInstalled']; ?></td>
-    <td><a target="_self" href="image-view.php?clientid=<?php echo $data['ClientID']; ?>"><img id="myImg" alt="<?php echo $data['Mac']?>" src="../images/papimages/png;charset=utf8;base64,<?php echo base64_encode($data['Image']); ?>"  width="200" height="100" /></a></td>
-<?php
-}
-?>
+                            }
+                    
+                        ?>
                                 </tbody>
                             </table>
                         </div>
@@ -215,9 +278,35 @@ $('#example').DataTable({
                     'csv'
                 ]
             }
-        ]
+        ],
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "scrollY":        "700px",
+        "scrollCollapse": true,
+        "pagingType": "full_numbers"
         });
+        
 });
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent === "Assigned") {
+      cell.classList.toggle('violet');
+    }
+    if (cell.textContent === "Turned On") {
+      cell.classList.toggle('green');
+    }
+    if (cell.textContent === "Signed") {
+      cell.classList.toggle('blue');
+    }
+    if (cell.textContent === "Installed") {
+      cell.classList.toggle('orange');
+    }
+    if (cell.textContent === "Restored") {
+      cell.classList.toggle('red');
+    }
+  })
+})
 </script>
 </body>
 </html>

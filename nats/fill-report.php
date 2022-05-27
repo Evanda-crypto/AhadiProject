@@ -321,7 +321,7 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
                                             <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">No of Buildings Affected</label></strong>
-                                                <input id="buildings" name="buildings" type="number" class="form-control cc-number identified visa" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" maxlength="40" placeholder="No of Buildings Affected">
+                                                <input id="buildings" name="buildings" type="number" class="form-control cc-number identified visa" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" maxlength="40" placeholder="No of Buildings Affected">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="row">

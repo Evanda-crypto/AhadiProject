@@ -94,14 +94,6 @@ if (isset($_POST["submit"])) {
                             <li><i class="fa fa-table"></i><a href="turnedon.php" style="color:black; font-size: 15px;">All Records</a></li>
                         </ul>
                     </li>
-                    <li class="menu-title">ACCOUNTS</li><!-- /.menu-title -->
-
-                    <li>
-                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-themify-favicon-alt"></i>Add Teamleader </a>
-                    </li>
-                    <li>
-                        <a href="view-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-eye"></i>View Teamleader </a>
-                    </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                     <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>

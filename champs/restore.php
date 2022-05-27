@@ -204,7 +204,7 @@ else
                                             </div>
                                             <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Reason</label>
-                                                <input id="cc-number" name="message" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number">
+                                                <input id="cc-number" name="message" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number" required>
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
        

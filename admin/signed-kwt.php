@@ -2,43 +2,6 @@
 include("session.php");
 include("../config/config.php");
 
-$id = $_GET["id"];
-
-$sql="SELECT * from Users where ID=$id";
-$result=mysqli_query($connection,$sql);
-$row=mysqli_fetch_assoc($result);
-$fname=$row['FirstName'];
-$lname=$row['LastName'];
-$email=$row['Email'];
-$user=$row['User'];
-$reg=$row['Region'];
-
-if(isset($_POST['submit'])){
-$FirstName = $_POST['Fname'];
-$LastName = $_POST['Lname'];
-$Email = $_POST['email'];
-$User = $_POST['User'];
-$Region = $_POST['Region'];
-
-//checking if connection is not created successfully
-if($connection->connect_error){
-    die('connection failed : '.$connection->connect_error);
-}
-else
-{
-  $sql="update Users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',User='$User',Region='$Region' where ID=$id";
-  
-  $result=mysqli_query($connection,$sql);
-  if ($result) {
-    echo '<script>alert("Update Successfull!")</script>';
-      echo '<script>window.location.href="view-tl.php";</script>';
-  } else {
-    echo '<script>alert("Not submitted try again!")</script>';
-      echo '<script>window.location.href="edit-tl.php";</script>';
-  }
-   
-}
-}
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -48,7 +11,7 @@ else
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Edit Tl</title>
+    <title>Signed KWT</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -67,7 +30,7 @@ else
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-    
+
     <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -83,7 +46,23 @@ else
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .green {
+  color: green;
+}
 
+.violet {
+  color: violet;
+}
+.blue{
+    color:blue;
+}.orange{
+    color:orange;
+}
+.red{
+    color:red;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
     <!-- Left Panel -->
@@ -115,14 +94,6 @@ else
                             <li><i class="fa fa-table"></i><a href="last-30-days.php" style="color:black; font-size: 15px;">Last 30 Days</a></li>
                             <li><i class="fa fa-table"></i><a href="turnedon.php" style="color:black; font-size: 15px;">All Records</a></li>
                         </ul>
-                    </li>
-                    <li class="menu-title">ACCOUNTS</li><!-- /.menu-title -->
-
-                    <li>
-                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-themify-favicon-alt"></i>Add Teamleader </a>
-                    </li>
-                    <li>
-                        <a href="view-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-eye"></i>View Teamleader </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                     <li>
@@ -157,7 +128,7 @@ else
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
         <!-- Header-->
-        <header id="header" class="header" style="height: 65px;">
+        <header id="header" class="header" style="height: 60px;">
             <div class="top-left">
                 <div class="navbar-header">
                 <img src="../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">
@@ -175,10 +146,11 @@ else
                         </div>
 
                         <div class="dropdown for-notification">
+                     
                         </div>
 
                         <div class="dropdown for-message">
-                      
+                         
                         </div>
                     </div>
 
@@ -201,131 +173,85 @@ else
 
         <div class="content">
             <div class="animated fadeIn">
-
-
                 <div class="row">
-                <div class="col-lg-3">
-                                <div class="card">
-                                    <div class="card-header"></div>
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <h3 class="text-center title-2">Edit Tl Details</h3>
-                                        </div>
-                                        <hr>
-                                        <form method="POST" action="">
-                                        <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">First Name</label>
-                                                        <input id="cc-exp" name="Fname" type="text" class="form-control cc-exp" value="<?php echo $fname; ?>" data-val="true" placeholder="First Name"
-                                                            data-val-cc-exp="Please enter a valid month and year" placeholder="MM / YY"
-                                                            autocomplete="cc-exp">
-                                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">Last Name</label>
-                                                    <div class="input-group">
-                                                        <input id="x_card_code" name="Lname" type="text" class="form-control cc-cvc" value="<?php echo $lname; ?>" data-val="true" placeholder="Last Name"
-                                                            data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
-
-                                                    </div>
-                                                </div>
-                                        </div>
-                                            <div class="form-group">
-                                                <label for="cc-payment" class="control-label mb-1">Email</label>
-                                                <input id="cc-pament" name="email"  type="email"  value="<?php echo $email; ?>" class="form-control" aria-required="true" aria-invalid="false" placeholder="Email">
-                                            </div>
-                                            <div class="form-group has-success">
-                                            <label for="cc-payment" class="control-label mb-1">User</label>
-                                            <select data-placeholder="Choose  User..." class="standardSelect form-control" name="User" tabindex="1">
-                                            <option value="<?php echo $user?>">User <?php echo $user?></option>
-                                                <option value="1">Executive(user 1)</option>
-                                                  <option value="2">Nats(user 2)</option>
-                                               <option value="3">Maton(user 3)</option>
-                                              <option value="4">SalesTL(user 4)</option>
-                                              <option value="5">Techie TL(user 5)</option>
-                                               <option value="6">Champ(user 6)</option>
-                                              <option value="7">Overall Tl(user 7)</option>
-                                            </select>
-                                            </div>
-                                            <div class="form-group has-success">
-                                            <label for="cc-payment" class="control-label mb-1">Region</label>
-                                            <select class="standardSelect form-control" name="Region" tabindex="1">
-                                            <option value="<?php echo $reg?>" ><?php echo $reg?></option>
-                                           <option value="G44">G44</option>
-                                           <option value="ZMM">ZMM</option>
-                                           <option value="G45S">G45S</option>
-                                           <option value="G45N">G45N</option>
-                                           <option value="R&M">R&M</option>
-                                           <option value="LSM">LSM</option>
-                                           <option value="KWT">KWT</option>
-                                              </select>
-                                            </div>
-                                            <div>
-                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
-                                                    <span id="payment-button-amount">Submit</span>
-                                                    <span id="payment-button-sending" style="display:none;">Sending…</span>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div><!--/.col-->
-
-                   <div class="col-lg-9">
-              <div class="card"><div class="card-body">
-              <div class="card-header">
-                           <center> <strong class="card-title">List Of Teamleaders</strong></center>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                           <center> <strong class="card-title">Signed [KWT]</strong></center>
                         </div>
-                        <div class="table-responsive">
-                                    <table class="table table-borderless table-striped table-earning" id="example">
-                                        <thead>
-                                            <tr>
-                                            <th scope="col">No</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Region</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                        $query  = "SELECT * FROM Users where User=4 OR User=5";
+                        <div class="card-body">
+                        <?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
+                            <table class="table table-striped" id="example">
+                                <thead>
+                                    <tr>
+                     <th>Building Name</th>
+                     <th>Building Code</th>
+                     <th>Champ</th>
+                     <th>Client Name</th>
+                     <th>Client Contact</th>
+                     <th>Date Signed</th>
+                     <th>Availability</th>
+                     <th>Champs Comment</th>
+                     <th>Pap Status</th>
+                     <th>More</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                        $query  = "SELECT p.PapStatus,p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note from papdailysales AS p 
+                        LEFT JOIN papnotinstalled AS r ON r.ClientID=p.ClientID WHERE r.ClientID is null and p.Region='KWT' order by p.ClientID Desc";
                         $result  = mysqli_query($connection, $query);
 
-                        $num_rows  = mysqli_num_rows($result);
-
-                        $num = 0;
-                        if ($num_rows > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $num++;
+                            while ($row = mysqli_fetch_array($result)) {
+                            
                         ?>
                                 <tr>
-                                    <td><?php echo $num; ?></td>
-                                    <td><?php echo $row['FirstName']; ?></td>
-                                    <td><?php echo $row['LastName']; ?></td>
-                                    <td><?php echo $row['Email']; ?></td>
-                                    <td><?php echo $row['Department']; ?></td>
-                                    <td><?php echo $row['Region']; ?></td>
-
-
+                                    <td><?php echo $row['BuildingName']; ?></td>
+                                    <td><?php echo $row['BuildingCode']; ?></td>
+                                    <td><?php echo $row['ChampName']; ?></td>
+                                    <td><?php echo $row['ClientName']; ?></td>
+                                    <td><?php echo $row['ClientContact']; ?></td>
+                                    <td><?php echo $row['DateSigned']; ?></td>
+                                    <td><?php echo $row['ClientAvailability']; ?></td>
+                                    <td><?php echo $row['Note']; ?></td>
+                                    <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>
+                                    <td>
+                                    <button class="btn btn-warning" ><a href="edit-records.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
+                                    </td>
                                 </tr>
                         <?php
 
                             }
-                        }
+                    
                         ?>
-                                    </tbody>
-                                    </table>
-                                </div>
-              </div></div>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
+                </div>
 
-    <div class="clearfix"></div>
+</div><!-- .content -->
+
+<div class="clearfix"></div>
 
 </div><!-- /#right-panel -->
 
@@ -352,18 +278,35 @@ $('#example').DataTable({
                     'csv'
                 ]
             }
-        ]
+        ],
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "scrollY":        "700px",
+        "scrollCollapse": true,
+        "pagingType": "full_numbers"
         });
+        
 });
-</script>
-<script>
-    jQuery(document).ready(function() {
-        jQuery(".standardSelect").chosen({
-            disable_search_threshold: 10,
-            no_results_text: "Oops, nothing found!",
-            width: "100%"
-        });
-    });
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent === "Assigned") {
+      cell.classList.toggle('violet');
+    }
+    if (cell.textContent === "Turned On") {
+      cell.classList.toggle('green');
+    }
+    if (cell.textContent === "Signed") {
+      cell.classList.toggle('blue');
+    }
+    if (cell.textContent === "Installed") {
+      cell.classList.toggle('orange');
+    }
+    if (cell.textContent === "Restored") {
+      cell.classList.toggle('red');
+    }
+  })
+})
 </script>
 </body>
 </html>

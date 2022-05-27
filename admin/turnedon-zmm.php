@@ -11,12 +11,11 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Restituted</title>
+    <title>Turnedon ZMM</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-
+    <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+  <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
@@ -26,30 +25,50 @@ include("../config/config.php");
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../assets/css/style.css">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet"/>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 
-    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
+
+
+<link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-<!-- Bootstrap core JavaScript-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .green {
+  color: green;
+}
 
+.violet {
+  color: violet;
+}
+.blue{
+    color:blue;
+}.orange{
+    color:orange;
+}
+.red{
+    color:red;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
-   <!-- Left Panel -->
-   <aside id="left-panel" class="left-panel">
+  <!-- Left Panel -->
+  <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -129,11 +148,11 @@ include("../config/config.php");
                         </div>
 
                         <div class="dropdown for-notification">
-                           
+                     
                         </div>
 
                         <div class="dropdown for-message">
-                           
+                          
                         </div>
                     </div>
 
@@ -160,43 +179,64 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Restituted</strong></center>
+                           <center> <strong class="card-title">Turned On[ZMM]</strong></center>
                         </div>
-                        <div class="card-body">
+                        <center> <div class="table-responsive">
+        <table border="0" cellspacing="5" cellpadding="5">
+        <tbody><tr>
+            <td><input type="text" id="min" placeholder="Start Date" style="color:black; margin-top:20px" class="form-control" name="min"></td>
+            <td><input type="text" id="max" placeholder="End Date" style="color:black;margin-top:20px"  class="form-control" name="max"></td>
+        </tr>
+    </tbody></table>
+                        </div></center>
+                        <div class="card-body" id="demo">
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                     <th>Client Name</th>
-                     <th>Contact</th>
-                     <th>Building Name</th>
-                     <th>BuildingCode</th>
-                     <th>ChampName</th>
-                     <th>Region</th>
-                     <th>Techies</th>
-                    <th>Reason</th>
-                    <th>Comments</th>
+                                    <th class="th-sm">PAP Code
+                  </th>
+                   <th class="th-sm">Building Name
+                   </th>
+                   <th class="th-sm">Building Code
+                   </th>
+                   <th class="th-sm">Champ Name
+                   </th>
+                   <th class="th-sm">Client Name
+                   </th>
+                   <th class="th-sm">Client Contact
+                   </th>
+                   <th class="th-sm">MAC Address
+                   </th>
+                   <th class="th-sm">Date Turned On
+                   </th>
+                   <th class="th-sm">More
+                   </th>  
                                     </tr>
                                 </thead>
                                 <tbody>
-                               
- <?php
- $query =
-     "SELECT papnotinstalled.ClientID,papnotinstalled.ClientName,papnotinstalled.BuildingName,papnotinstalled.BuildingCode,papnotinstalled.Region,papnotinstalled.Floor,papnotinstalled.DateSigned,papnotinstalled.Reason,papnotinstalled.Contact,papnotinstalled.ChampName,CONCAT(papnotinstalled.Techie1,'/',papnotinstalled.Techie2) as techies,papnotinstalled.Note from papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID where trash.ClientID is null  order by DateSigned Desc";
- $result = mysqli_query($connection, $query);
- while ($row = mysqli_fetch_assoc($result)) { ?>
-                                <tr>
-                                    <td><?php echo $row["ClientName"]; ?></td>
-                                    <td><?php echo $row["Contact"]; ?></td>
-                                    <td><?php echo $row["BuildingName"]; ?></td>
-                                    <td><?php echo $row["BuildingCode"]; ?></td>
-                                    <td><?php echo $row["ChampName"]; ?></td>
-                                    <td><?php echo $row["Region"]; ?></td>
-                                    <td><?php echo $row["techies"]; ?></td>
-                                    <td><?php echo $row["Reason"]; ?></td>
-                                    <td><?php echo $row["Note"]; ?></td>
-                                </tr>
-                        <?php }
- ?>
+                                <?php
+    
+    $sql="SELECT t.ClientID,p.BuildingName,upper(p.BuildingCode) as bcode,upper(p.Region) as reg,p.ChampName,p.ClientName,p.ClientContact,Upper(t.MacAddress) as Mac,t.DateTurnedOn, CASE WHEN LENGTH(p.BuildingCode)>10 THEN CONCAT(p.BuildingCode,'-',(row_number() over(partition by p.BuildingCode)),'P')
+    WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) <=9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,'0',(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
+    WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) >9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
+    end as papcode from papdailysales as p LEFT JOIN turnedonpap as t ON t.ClientID=p.ClientID where t.ClientID is not null and p.Region='ZMM' UNION SELECT ClientID,BuildingName,BuildingCode,Region,ChampName,ClientName,ClientContact,MacAddress,DateTurnedOn,papcode from old where Region='ZMM'";
+$result=$connection->query($sql);
+while($row=$result->fetch_array()){
+  ?>
+  <tr>
+    <td><?php echo $row['papcode']?></td>
+    <td><?php echo $row['BuildingName']?></td>
+    <td><?php echo $row['bcode']?></td>
+    <td><?php echo $row['ChampName']?></td>
+    <td><?php echo $row['ClientName']?></td>
+    <td><?php echo $row['ClientContact']?></td>
+    <td><?php echo $row['Mac']?></td>
+    <td><?php echo $row['DateTurnedOn']?></td>
+    <td>
+    <button class="btn btn-warning" ><a href="edit-turnedon.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
+    </td>
+</tr>
+<?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -218,10 +258,59 @@ include("../config/config.php");
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
 
-<script type="text/javascript">
-$( document ).ready(function() {
-$('#example').DataTable({
-		 "processing": true,
+
+<script>
+      
+      $.fn.dataTable.Api.register( 'column().data().sum()', function () {
+    return this.reduce( function (a, b) {
+        var x = parseFloat( a ) || 0;
+        var y = parseFloat( b ) || 0;
+        return x + y;
+    } );
+} );
+ 
+var minDate, maxDate;
+ 
+ // Custom filtering function which will search data in column four between two values
+ $.fn.dataTable.ext.search.push(
+     function( settings, data, dataIndex ) {
+         var min = minDate.val();
+         var max = maxDate.val();
+         var date = new Date( data[8] );
+  
+         if (
+             ( min === null && max === null ) ||
+             ( min === null && date <= max ) ||
+             ( min <= date   && max === null ) ||
+             ( min <= date   && date <= max )
+         ) {
+             return true;
+         }
+         return false;
+     }
+ );
+  
+/* Init the table and fire off a call to get the hidden nodes. */
+$(document).ready(function() {
+    // Create date inputs
+    minDate = new DateTime($('#min'), {
+         format: 'MMMM Do YYYY'
+     });
+     maxDate = new DateTime($('#max'), {
+         format: 'MMMM Do YYYY'
+     });
+
+     // Refilter the table
+     $('#min, #max').on('change', function () {
+         table.draw();
+     });
+    var table = $('#example').DataTable(
+        {
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "scrollY":        "700px",
+        "scrollCollapse": true,
+        "pagingType": "full_numbers",
+        "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
             {
@@ -232,13 +321,24 @@ $('#example').DataTable({
                     'csv'
                 ]
             }
-        ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true,
-        "pagingType": "full_numbers"
-        });
-});
+        ]
+        }
+    );
+} );
+
+
 </script>
+<!--<script type='text/javascript'>
+    $(document).ready(function(){
+       //Iterate through each of the rows
+        $('tr').each(function(){
+          //Check the value of the last <td> element in the row (trimmed to ignore white-space)
+          if($(this).find('td:eq(8)').text().trim() < "2022-01-01"){
+              //Set the row to green
+              $(this).css('background','green');
+          }
+        });
+    });
+</script>-->
 </body>
 </html>

@@ -128,7 +128,10 @@ if (!$connection) {
                         <a href="create-team.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Create New Team </a>
                     </li>
                     <li>
-                        <a href="assign-task.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Assign Task </a>
+                        <a href="assign-task.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Assign Task [Signed] </a>
+                    </li>
+                    <li>
+                        <a href="restored.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Assign Task [Restored] </a>
                     </li>
                     <li>
                         <a href="reasign-task.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Reasign Task</a>
@@ -136,9 +139,9 @@ if (!$connection) {
                     <li>
                         <a href="reminders.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Reminders</a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="rejected-meters.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Rejected Meters</a>
-                    </li>
+                    </li>-->
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
 
                     <li>
@@ -314,7 +317,7 @@ if (!$connection) {
                  <div class="row">
 
 
-                    <div class="col-lg-3 col-md-6"><a href="assign-task.php">
+                    <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
@@ -324,19 +327,34 @@ if (!$connection) {
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
-                                             $query="SELECT COUNT(papdailysales.ClientID) AS pending from papdailysales LEFT OUTER JOIN techietask on techietask.ClientID=papdailysales.ClientID left join  papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID
-                                             WHERE techietask.ClientID is null and papnotinstalled.ClientID is null and papdailysales.Region='".$_SESSION['Region']."'";
+                                             $query="SELECT ((SELECT COUNT(*) from 
+                                             papdailysales as p
+                                             WHERE p.PapStatus='Signed' and p.Region='".$_SESSION['Region']."')+(SELECT COUNT(*) from 
+         papdailysales as p
+         WHERE p.PapStatus='Restored' and p.Region='".$_SESSION['Region']."')) as pending";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['pending'];
                                               }
                                               ?></span></div>
-                                            <div class="stat-heading">Pending Istallation[<?php echo $_SESSION['Region']?>]</div>
+                                               <div class="dropdown show">
+                                <a class="" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Pending Installation
+                                </a>
+
+                                <div class="dropdown-menu bg-flat-color-1" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item " href="assign-task.php">Newly Signed</a>
+                                    <a class="dropdown-item" href="restored.php">Restored</a>
+                                </div>
+
+                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div></a>
+                        </div>
                     </div>
                     <div class="col-lg-3 col-md-6"><a href="installed.php">
                         <div class="card">

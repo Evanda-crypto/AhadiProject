@@ -11,11 +11,12 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Restituted</title>
+    <title>Signed LSM</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -45,11 +46,27 @@ include("../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .green {
+  color: green;
+}
 
+.violet {
+  color: violet;
+}
+.blue{
+    color:blue;
+}.orange{
+    color:orange;
+}
+.red{
+    color:red;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
-   <!-- Left Panel -->
-   <aside id="left-panel" class="left-panel">
+    <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -111,7 +128,7 @@ include("../config/config.php");
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
         <!-- Header-->
-        <header id="header" class="header" style="height: 65px;">
+        <header id="header" class="header" style="height: 60px;">
             <div class="top-left">
                 <div class="navbar-header">
                 <img src="../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">
@@ -129,11 +146,11 @@ include("../config/config.php");
                         </div>
 
                         <div class="dropdown for-notification">
-                           
+                     
                         </div>
 
                         <div class="dropdown for-message">
-                           
+                         
                         </div>
                     </div>
 
@@ -160,43 +177,72 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Restituted</strong></center>
+                           <center> <strong class="card-title">Signed [LSM]</strong></center>
                         </div>
                         <div class="card-body">
+                        <?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                     <th>Client Name</th>
-                     <th>Contact</th>
                      <th>Building Name</th>
-                     <th>BuildingCode</th>
-                     <th>ChampName</th>
-                     <th>Region</th>
-                     <th>Techies</th>
-                    <th>Reason</th>
-                    <th>Comments</th>
+                     <th>Building Code</th>
+                     <th>Champ</th>
+                     <th>Client Name</th>
+                     <th>Client Contact</th>
+                     <th>Date Signed</th>
+                     <th>Availability</th>
+                     <th>Champs Comment</th>
+                     <th>Pap Status</th>
+                     <th>More</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                               
- <?php
- $query =
-     "SELECT papnotinstalled.ClientID,papnotinstalled.ClientName,papnotinstalled.BuildingName,papnotinstalled.BuildingCode,papnotinstalled.Region,papnotinstalled.Floor,papnotinstalled.DateSigned,papnotinstalled.Reason,papnotinstalled.Contact,papnotinstalled.ChampName,CONCAT(papnotinstalled.Techie1,'/',papnotinstalled.Techie2) as techies,papnotinstalled.Note from papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID where trash.ClientID is null  order by DateSigned Desc";
- $result = mysqli_query($connection, $query);
- while ($row = mysqli_fetch_assoc($result)) { ?>
+                                <?php
+                        $query  = "SELECT p.PapStatus,p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note from papdailysales AS p 
+                        LEFT JOIN papnotinstalled AS r ON r.ClientID=p.ClientID WHERE r.ClientID is null and p.Region='LSM' order by p.ClientID Desc";
+                        $result  = mysqli_query($connection, $query);
+
+                            while ($row = mysqli_fetch_array($result)) {
+                            
+                        ?>
                                 <tr>
-                                    <td><?php echo $row["ClientName"]; ?></td>
-                                    <td><?php echo $row["Contact"]; ?></td>
-                                    <td><?php echo $row["BuildingName"]; ?></td>
-                                    <td><?php echo $row["BuildingCode"]; ?></td>
-                                    <td><?php echo $row["ChampName"]; ?></td>
-                                    <td><?php echo $row["Region"]; ?></td>
-                                    <td><?php echo $row["techies"]; ?></td>
-                                    <td><?php echo $row["Reason"]; ?></td>
-                                    <td><?php echo $row["Note"]; ?></td>
+                                    <td><?php echo $row['BuildingName']; ?></td>
+                                    <td><?php echo $row['BuildingCode']; ?></td>
+                                    <td><?php echo $row['ChampName']; ?></td>
+                                    <td><?php echo $row['ClientName']; ?></td>
+                                    <td><?php echo $row['ClientContact']; ?></td>
+                                    <td><?php echo $row['DateSigned']; ?></td>
+                                    <td><?php echo $row['ClientAvailability']; ?></td>
+                                    <td><?php echo $row['Note']; ?></td>
+                                    <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>
+                                    <td>
+                                    <button class="btn btn-warning" ><a href="edit-records.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
+                                    </td>
                                 </tr>
-                        <?php }
- ?>
+                        <?php
+
+                            }
+                    
+                        ?>
                                 </tbody>
                             </table>
                         </div>
@@ -238,7 +284,29 @@ $('#example').DataTable({
         "scrollCollapse": true,
         "pagingType": "full_numbers"
         });
+        
 });
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent === "Assigned") {
+      cell.classList.toggle('violet');
+    }
+    if (cell.textContent === "Turned On") {
+      cell.classList.toggle('green');
+    }
+    if (cell.textContent === "Signed") {
+      cell.classList.toggle('blue');
+    }
+    if (cell.textContent === "Installed") {
+      cell.classList.toggle('orange');
+    }
+    if (cell.textContent === "Restored") {
+      cell.classList.toggle('red');
+    }
+  })
+})
 </script>
 </body>
 </html>

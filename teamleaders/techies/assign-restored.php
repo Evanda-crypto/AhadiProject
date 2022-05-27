@@ -1,50 +1,61 @@
 <?php
 include("session.php");
 include("../../config/config.php");
-?>
-<?php
-$id=$_SESSION['ID'];
-if (isset($_POST["submit"])) {
-    $Password = trim($_POST["password"]);
-    $FirstName = trim($_POST['FName']);
-    $LastName = trim($_POST['LName']);
-    $Email = trim($_POST['email']);
-    $newpass = trim($_POST['newpass']);
 
-    $hashpass= password_hash($newpass,PASSWORD_DEFAULT);
+$id=$_GET['client-id'];
 
-    if (!$connection) {
-        echo "<script>alert('There is no connection at this time.Please try again later.');</script>";
-        echo '<script>window.location.href="login.php";</script>';
+$sql="select * from papdailysales where ClientID=$id";
+$result=mysqli_query($connection,$sql);
+$row=mysqli_fetch_assoc($result);
+$id=$row['ClientID'];
+$cname=$row['ClientName'];
+$contact=$row['ClientContact'];
+$availD=$row['ClientAvailability'];
+$reg=$row['Region'];
+$bname=$row['BuildingName'];
+$bcode=$row['BuildingCode'];
+
+if(isset($_POST['submit'])){
+    $TeamID = $_POST['teamid'];
+    $ClientID = $_POST['ClientID'];
+    $ClientName = $_POST['cname'];
+    $ClientContact = $_POST['contact'];
+    $ClientAvailability = $_POST['availD'];
+    $Region = $_POST['reg'];
+    $BuildingName = $_POST['bname'];
+    $BuildingCode = $_POST['bcode'];
+    $Date = date('Y-m-d');
+    $split = $_POST['members'];
+
+    if($connection->connect_error){
+        die('connection failed : '.$connection->connect_error);
+    }
+    else
+    {    
+      $stmt= $connection->prepare("select * from Token_teams where Team_ID= ? and Region= ?");
+    $stmt->bind_param("ss",$TeamID,$Region);
+    $stmt->execute();
+    $stmt_result= $stmt->get_result();
+    if($stmt_result->num_rows>0){
+      $sql="UPDATE papdailysales set ClientID=$id,PapStatus='Assigned' where ClientID=$id";
+      $result=mysqli_query($connection,$sql);
+      $query="DELETE from reminders where ClientID=$id";
+      $result=mysqli_query($connection,$query);
+        $stmt= $connection->prepare("INSERT INTO techietask (TeamID,ClientID,ClientName,ClientContact,ClientAvailability,Region,BuildingName,BuildingCode,Date,split)
+        values(?,?,?,?,?,?,?,?,?,?)");
+        //values from the fields
+        $stmt->bind_param("ssssssssss",$TeamID,$ClientID,$ClientName,$ClientContact,$ClientAvailability,$Region,$BuildingName,$BuildingCode,$Date,$split);
+        $stmt->execute();
+        $_SESSION["success"] = "Task successfully assigned";
+        header("Location: restored.php");
+        $stmt->close();
     }
     else{
-        $stmt = $connection->prepare("SELECT * from Users where ID= ?");
-        $stmt->bind_param("s", $id);
-        $stmt->execute();
-        $stmt_result = $stmt->get_result();
-        if ($stmt_result->num_rows > 0) {
-            $data = $stmt_result->fetch_assoc();
-            if (password_verify($Password, $data["PASSWORD"])) {
-                $sql="update Users set FirstName='$FirstName',LastName='$LastName',Email='$Email',Password='$hashpass' where ID=$id";
-                $result=mysqli_query($connection,$sql);
-                if ($result) {
-                  echo '<script>alert("Password reset Succesfull")</script>';
-                    echo '<script>window.location.href="../../config/logout.php";</script>';
-                } else {
-                  echo '<script>alert("An Error occured please retry again!")</script>';
-                    echo '<script>window.location.href="profile.php";</script>';
-                }
-            }
-            else{
-                echo "<script>alert('Current password is wrong');</script>";
-                echo '<script>window.location.href="profile.php";</script>';
-            }
-        }
+        $_SESSION["status"] = "Team does not exist";
+        header("Location: restored.php");
     }
-    
+    }
 }
-
-
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -54,11 +65,12 @@ if (isset($_POST["submit"])) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Profile</title>
+    <title>New Task</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -72,11 +84,28 @@ if (isset($_POST["submit"])) {
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
+<link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<!-- Bootstrap core JavaScript-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 
 </head>
 <body style="background-color:#e1e1e1">
     <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -131,7 +160,7 @@ if (isset($_POST["submit"])) {
         <!-- Header-->
         <header id="header" class="header" style="height: 65px;">
             <div class="top-left">
-                <div class="navbar-header">
+                <div class="navbar-header" style="height: 60px;">
                 <img src="../../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -269,65 +298,120 @@ if (isset($_POST["submit"])) {
             </div>
         </header>
         <!-- /#header -->
+        <!-- Header-->
 
         <div class="content">
             <div class="animated fadeIn">
 
 
                 <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header"></div>
-                        <div class="round-img">
-                                                    <a href="#"><center><img class="rounded-circle" src="../../images/avatar/profile.png" alt=""></center></a>
-                                                </div>
-                        <div class="card-body card-block">
-                            <form action="" method="post" class="" autocomplete="off">
-                            <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                        <input type="text" id="email" name="id" value="<?php echo $_SESSION['ID']?>" placeholder="ID" class="form-control" readonly>
+                <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-header"></div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="text-center title-2">New Task</h3>
+                                        </div>
+                                        <hr>
+                                        <form method="POST" action="" autocomplete="off">
+                                                    <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">Team ID</label>
+                                                        <input id="teamid" name="teamid" type="tel" class="form-control cc-exp" onkeyup="GetDetail(this.value)" value="<?php echo $_SESSION['Region']?>-"data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Team ID">
+                                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">Members</label>
+                                                        <input id="members" name="members" type="number" class="form-control cc-exp" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;" required placeholder="Enter number of team members 2-3">
+                                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                    </div>
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Client ID</label>
+                                                <input id="cc-pament" name="ClientID"  type="text" value="<?php echo $id?>" readonly class="form-control" aria-required="true" aria-invalid="false" placeholder="Client ID">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Building Name</label>
+                                                <input id="cc-pament" name="bname"  type="text" value="<?php echo $bname?>" readonly class="form-control" aria-required="true" aria-invalid="false" placeholder="Team ID">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="cc-name" class="control-label mb-1">Building Code</label>
+                                                <input id="cc-name" name="bcode" type="text" class="form-control cc-name valid"  data-val="true" placeholder="Building Code" value="<?php echo $bcode?>" readonly
+                                                    autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="cc-name" class="control-label mb-1">Region</label>
+                                                <input id="cc-name" name="reg" type="text" class="form-control cc-name valid"  data-val="true" placeholder="Region"
+                                                    autocomplete="cc-name" readonly aria-required="true" aria-invalid="false" value="<?php echo $reg?>"aria-describedby="cc-name-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="cc-name" class="control-label mb-1">Client Name</label>
+                                                <input id="cc-name" name="cname" type="text" class="form-control cc-name valid" readonly  data-val="true" placeholder="Client Name"
+                                                    autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" value="<?php echo $cname?>" aria-describedby="cc-name-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="cc-name" class="control-label mb-1">Contact </label>
+                                                <input id="cc-name" name="contact" type="text" class="form-control cc-name valid" readonly  data-val="true" value="<?php echo $contact?>" placeholder="Contact"
+                                                    autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="cc-name" class="control-label mb-1">Availability </label>
+                                                <input id="cc-name" name="availD" type="text" value="<?php echo $availD?>" class="form-control cc-name valid" readonly data-val="true" placeholder="Availability"
+                                                    autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                            </div>      
+                                            <div>
+                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
+                                                    <span id="payment-button-amount">Submit</span>
+                                                    <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                        <input type="text" id="username" name="FName" value="<?php echo $_SESSION['FName']?>" placeholder="First Name" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                        <input type="text" id="username" name="LName" placeholder="Last Name" value="<?php echo $_SESSION['LName']?>" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                        <input type="email" id="email" name="email" placeholder="Email" value="<?php echo $_SESSION['teamleader']?>" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                        <input type="password" id="password" name="password" placeholder="Current Password" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                        <input type="password" id="password" name="newpass" placeholder="New Password" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-actions form-group"><button type="submit" name="submit" class="btn btn-warning btn-sm">Change Pass</button></div>
-                            </form>
+                            </div><!--/.col-->
+
+                   <div class="col-lg-8">
+              <div class="card"><div class="card-body">
+              <div class="card-header">
+                           <center> <strong class="card-title">Current Tasks</strong></center>
                         </div>
+                        <div class="table-responsive">
+                                    <table class="table table-borderless table-striped table-earning" id="example">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">Team ID</th>
+                                            <th scope="col">Techie 1</th>
+                                            <th scope="col">Techie 2</th>
+                                            <th scope="col">Techie 3</th>
+                                            <th scope="col">Pending Tasks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+    
+    $sql="SELECT techietask.TeamID, COUNT(techietask.TeamID) as tasks,Token_teams.Techie1,Token_teams.Techie2,Token_teams.Techie3 FROM techietask left join papinstalled on papinstalled.ClientID=techietask.ClientID
+    left join Token_teams on techietask.TeamID=Token_teams.Team_ID WHERE papinstalled.ClientID is null and techietask.Region='".$_SESSION['Region']."' 
+    GROUP BY techietask.TeamID HAVING COUNT(techietask.TeamID)>1 OR COUNT(techietask.TeamID)=1";
+$result=$connection->query($sql);
+while($row=$result->fetch_array()){
+  ?>
+  <tr>
+    <td><?php echo $row['TeamID']?></td>
+    <td><?php echo $row['Techie1']?></td>
+    <td><?php echo $row['Techie2']?></td>
+    <td><?php echo $row['Techie3']?></td>
+   <td><?php echo $row['tasks']?></td>
+</tr>
+<?php } ?>
+                                    </tbody>
+                                    </table>
+                                </div>
+              </div></div>
                     </div>
-                </div>
-</div>
-            </div>
-
-
         </div><!-- .animated -->
     </div><!-- .content -->
 
@@ -344,6 +428,85 @@ if (isset($_POST["submit"])) {
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../../assets/js/main.js"></script>
 
+<script type="text/javascript">
+$( document ).ready(function() {
+$('#example').DataTable({
+		 "processing": true,
+		 "dom": 'lBfrtip',
+		 "buttons": [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: [
+                    'excel',
+                    'csv'
+                ]
+            }
+        ],
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "scrollY":        "700px",
+        "scrollCollapse": true,
+        "pagingType": "full_numbers"
+        });
+});
+</script>
+<script>
+ var todayDate= new Date();
+ var month= todayDate.getMonth() + 1;
+ var year= todayDate.getFullYear();
+ var todate=todayDate.getDate();
+if(todate<10){
+  todate= "0"+ todate;
+}
+if(month<10){
+  month= "0"+ month;
+}
+ mindate= year +"-" + month + "-" + todate;
+ document.getElementById("work").setAttribute("min",mindate);
+</script>
 
+<script>
+
+// onkeyup event will occur when the user
+// release the key and calls the function
+// assigned to this event
+function GetDetail(str) {
+  if (str.length == 0) {
+    document.getElementById("teamid").value = "";
+    return;
+  }
+  else {
+
+    // Creates a new XMLHttpRequest object
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+
+      // Defines a function to be called when
+      // the readyState property changes
+      if (this.readyState == 4 &&
+          this.status == 200) {
+        
+        // Typical action to be performed
+        // when the document is ready
+        var myObj = JSON.parse(this.responseText);
+
+        // Returns the response data as a
+        // string and store this array in
+        // a variable assign the value
+        // received to first name input field
+        
+        document.getElementById
+          ("members").value = myObj[0];
+      }
+    };
+
+    // xhttp.open("GET", "filename", true);
+    xmlhttp.open("GET", "retrieve.php?teamid=" + str, true);
+    
+    // Sends the request to the server
+    xmlhttp.send();
+  }
+}
+</script>
 </body>
 </html>

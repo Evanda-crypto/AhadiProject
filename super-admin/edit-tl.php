@@ -1,27 +1,24 @@
 <?php
 include("session.php");
 include("../config/config.php");
-$id=$_GET['userid'];
 
-$sql="select * from Users where ID=$id";
+$id = $_GET["id"];
+
+$sql="SELECT * from Users where ID=$id";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
 $fname=$row['FirstName'];
 $lname=$row['LastName'];
 $email=$row['Email'];
-$dpt=$row['Department'];
+$user=$row['User'];
 $reg=$row['Region'];
-$reg1=$row['Region1'];
-$User=$row['User'];
 
 if(isset($_POST['submit'])){
-$FirstName = $_POST['FName'];
-$LastName = $_POST['LName'];
-$Email = $_POST['Email'];
-$Department = $_POST['Department'];
+$FirstName = $_POST['Fname'];
+$LastName = $_POST['Lname'];
+$Email = $_POST['email'];
+$User = $_POST['User'];
 $Region = $_POST['Region'];
-$Region1 = $_POST['Region1'];
-$user = $_POST['user'];
 
 //checking if connection is not created successfully
 if($connection->connect_error){
@@ -29,15 +26,15 @@ if($connection->connect_error){
 }
 else
 {
-  $sql="update Users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',Department='$Department',Region='$Region',Region1='$Region1',User='$user' where ID=$id";
+  $sql="update Users set ID=$id,FirstName='$FirstName',LastName='$LastName',Email='$Email',User='$User',Region='$Region' where ID=$id";
   
   $result=mysqli_query($connection,$sql);
   if ($result) {
     echo '<script>alert("Update Successfull!")</script>';
-      echo '<script>window.location.href="users.php";</script>';
+      echo '<script>window.location.href="view-tl.php";</script>';
   } else {
     echo '<script>alert("Not submitted try again!")</script>';
-      echo '<script>window.location.href="edit-user.php";</script>';
+      echo '<script>window.location.href="edit-tl.php";</script>';
   }
    
 }
@@ -51,7 +48,7 @@ else
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Edit User</title>
+    <title>Edit Tl</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -89,8 +86,7 @@ else
 
 </head>
 <body style="background-color:#e1e1e1">
-      <!-- Left Panel -->
-<!-- Left Panel -->
+    <!-- Left Panel -->
 <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -139,7 +135,14 @@ else
                             </form>
                         </div>
 
-               
+                        <div class="dropdown for-notification">
+                        </div>
+
+                        <div class="dropdown for-message">
+                      
+                        </div>
+                    </div>
+
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="name float-left"><?php echo $_SESSION[
@@ -148,14 +151,13 @@ else
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="../index.php"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
                 </div>
             </div>
-        </header>
-        <!-- /#header -->
+        </header><!-- /header -->
         <!-- Header-->
 
         <div class="content">
@@ -168,92 +170,60 @@ else
                                     <div class="card-header"></div>
                                     <div class="card-body">
                                         <div class="card-title">
-                                            <h3 class="text-center title-2">Edit User Info</h3>
+                                            <h3 class="text-center title-2">Edit Tl Details</h3>
                                         </div>
                                         <hr>
                                         <form method="POST" action="">
+                                        <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">First Name</label>
+                                                        <input id="cc-exp" name="Fname" type="text" class="form-control cc-exp" value="<?php echo $fname; ?>" data-val="true" placeholder="First Name"
+                                                            data-val-cc-exp="Please enter a valid month and year" placeholder="MM / YY"
+                                                            autocomplete="cc-exp">
+                                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="x_card_code" class="control-label mb-1">Last Name</label>
+                                                    <div class="input-group">
+                                                        <input id="x_card_code" name="Lname" type="text" class="form-control cc-cvc" value="<?php echo $lname; ?>" data-val="true" placeholder="Last Name"
+                                                            data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
+
+                                                    </div>
+                                                </div>
+                                        </div>
                                             <div class="form-group">
-                                                <label for="cc-payment" class="control-label mb-1">First Name</label>
-                                                <input id="cc-pament" name="FName"  type="text" value="<?php echo $fname?>"  class="form-control" aria-required="true" aria-invalid="false" placeholder="First Name">
+                                                <label for="cc-payment" class="control-label mb-1">Email</label>
+                                                <input id="cc-pament" name="email"  type="email"  value="<?php echo $email; ?>" class="form-control" aria-required="true" aria-invalid="false" placeholder="Email">
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Last name</label>
-                                                <input id="cc-name" name="LName" type="text" class="form-control cc-name valid" value="<?php echo $lname?>"  data-val="true" placeholder="Last Name"
-                                                    autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Email</label>
-                                                <input id="cc-name" name="Email" type="text" class="form-control cc-name valid" value="<?php echo $email?>"  data-val="true" placeholder="Email"
-                                                    autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Department</label>
-                                                <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="Department" tabindex="1">
-                                            <option value="<?php echo $dpt?>"><?php echo $dpt?></option>
-                                                <option value="Executive">Executive</option>
-                                                  <option value="HR">HR</option>
-                                               <option value="Nats">Nats</option>
-                                              <option value="Maton">Maton</option>
-                                              <option value="SalesTL">SalesTL</option>
-                                               <option value="TechieTL">TechieTL</option>
-                                              <option value="Sales">Sales</option>
-                                              <option value="Techie">Techie</option>
-                                              </select>
-                                            </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Region</label>
-                                                <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="Region" tabindex="1">
-                                            <option value="<?php echo $reg?>"><?php echo $reg?></option>
-                                              <option value="G44">G44</option>
-                                             <option value="ZMM">ZMM</option>
-                                               <option value="G45S">G45S</option>
-                                                  <option value="G45N">G45N</option>
-                                              <option value="R&M">R&M</option>
-                                             <option value="LSM">LSM</option>
-                                              <option value="JCR">JCR</option>
-                                               <option value="KWT">KWT</option> 
-                                              </select>
-                                            </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Additional Region</label>
-                                                <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="Region1" tabindex="1">
-                                            <option value="<?php echo $reg1?>"><?php echo $reg1?></option>
-                                             <option value="G44">G44</option>
-                                            <option value="ZMM">ZMM</option>
-                                           <option value="G45S">G45S</option>
-                                             <option value="G45N">G45N</option>
-                                            <option value="R&M">R&M</option>
-                                            <option value="LSM">LSM</option>
-                                           <option value="JCR">JCR</option>
-                                            <option value="KWT">KWT</option> 
-                                              </select>
-                                            </div>
-                                            </div>
-                                            <div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">User</label>
-                                                <div class="form-group has-success">
-                                            <select data-placeholder="Choose a user..." class="standardSelect form-control" name="user" tabindex="1" required>
-                                            <option value="<?php echo $User?>"><?php echo $User?></option>
-                                            <option value="0">AdminMain(user 0)</option>
+                                            <label for="cc-payment" class="control-label mb-1">User</label>
+                                            <select data-placeholder="Choose  User..." class="standardSelect form-control" name="User" tabindex="1">
+                                            <option value="<?php echo $user?>">User <?php echo $user?></option>
                                                 <option value="1">Executive(user 1)</option>
                                                   <option value="2">Nats(user 2)</option>
                                                <option value="3">Maton(user 3)</option>
                                               <option value="4">SalesTL(user 4)</option>
                                               <option value="5">Techie TL(user 5)</option>
                                                <option value="6">Champ(user 6)</option>
-                                              <option value="7">Overall Techie TL (user 7)</option>
-                                              <option value="8">Overall champs TL (user 8)</option>
+                                              <option value="7">Overall Tl(user 7)</option>
+                                            </select>
+                                            </div>
+                                            <div class="form-group has-success">
+                                            <label for="cc-payment" class="control-label mb-1">Region</label>
+                                            <select class="standardSelect form-control" name="Region" tabindex="1">
+                                            <option value="<?php echo $reg?>" ><?php echo $reg?></option>
+                                           <option value="G44">G44</option>
+                                           <option value="ZMM">ZMM</option>
+                                           <option value="G45S">G45S</option>
+                                           <option value="G45N">G45N</option>
+                                           <option value="R&M">R&M</option>
+                                           <option value="LSM">LSM</option>
+                                           <option value="KWT">KWT</option>
                                               </select>
                                             </div>
-                                            </div>
+                                            <div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
@@ -264,41 +234,54 @@ else
                                 </div>
                             </div><!--/.col-->
 
-                   <!--<div class="col-lg-9">
+                   <div class="col-lg-9">
               <div class="card"><div class="card-body">
               <div class="card-header">
-                           <center> <strong class="card-title">Users</strong></center>
+                           <center> <strong class="card-title">List Of Teamleaders</strong></center>
                         </div>
                         <div class="table-responsive">
-                                    <table class="table table-striped " id="example">
+                                    <table class="table table-borderless table-striped table-earning" id="example">
                                         <thead>
                                             <tr>
-                                            <th scope="col">First Name</th>
+                                            <th scope="col">No</th>
+                    <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Department</th>
-                    
+                    <th scope="col">Region</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <?php
-    
-    $sql="select * from users order by ID ASC";
-    $result=$connection->query($sql);
-    while($row=$result->fetch_array()){
-      ?>
-      <tr>
-        <td><?php echo $row['FirstName']?></td>
-        <td><?php echo $row['LastName']?></td>
-        <td><?php echo $row['Email']?></td>
-        <td><?php echo $row['Department']?></td>
+                        $query  = "SELECT * FROM Users where User=4 OR User=5";
+                        $result  = mysqli_query($connection, $query);
 
-    </tr>
-    <?php } ?>
+                        $num_rows  = mysqli_num_rows($result);
+
+                        $num = 0;
+                        if ($num_rows > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $num++;
+                        ?>
+                                <tr>
+                                    <td><?php echo $num; ?></td>
+                                    <td><?php echo $row['FirstName']; ?></td>
+                                    <td><?php echo $row['LastName']; ?></td>
+                                    <td><?php echo $row['Email']; ?></td>
+                                    <td><?php echo $row['Department']; ?></td>
+                                    <td><?php echo $row['Region']; ?></td>
+
+
+                                </tr>
+                        <?php
+
+                            }
+                        }
+                        ?>
                                     </tbody>
                                     </table>
                                 </div>
-              </div></div>-->
+              </div></div>
                     </div>
         </div><!-- .animated -->
     </div><!-- .content -->
@@ -315,15 +298,7 @@ else
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
-<script>
-    jQuery(document).ready(function() {
-        jQuery(".standardSelect").chosen({
-            disable_search_threshold: 10,
-            no_results_text: "Oops, nothing matches",
-            width: "100%"
-        });
-    });
-</script>
+
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
@@ -341,6 +316,15 @@ $('#example').DataTable({
         ]
         });
 });
+</script>
+<script>
+    jQuery(document).ready(function() {
+        jQuery(".standardSelect").chosen({
+            disable_search_threshold: 10,
+            no_results_text: "Oops, nothing found!",
+            width: "100%"
+        });
+    });
 </script>
 </body>
 </html>

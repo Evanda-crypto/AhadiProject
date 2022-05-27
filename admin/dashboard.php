@@ -180,14 +180,6 @@ if (!$connection) {
                             <li><i class="fa fa-table"></i><a href="turnedon.php" style="color:black; font-size: 15px;">All Records</a></li>
                         </ul>
                     </li>
-                    <li class="menu-title">ACCOUNTS</li><!-- /.menu-title -->
-
-                    <li>
-                        <a href="add-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-themify-favicon-alt"></i>Add Teamleader </a>
-                    </li>
-                    <li>
-                        <a href="view-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-eye"></i>View Teamleader </a>
-                    </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                     <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
@@ -275,15 +267,15 @@ if (!$connection) {
             <div class="animated fadeIn">
                 <!-- Widgets  -->
                 <div class="row">
-                    <div class="col-lg-3 col-md-6"><a href="pap-daily-sales.php">
+                    <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
-                                    <div class="stat-icon ">
+                                    <div class="stat-icon dib flat-color-3 ">
                                         <i class="pe-7s-check"></i>
                                     </div>
                                     <div class="stat-content">
-                                        <div class="text-left dib">
+                                        <div class="text-left dib flat-color-2">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
                       "SELECT (SELECT count(*) from papdailysales as p left join papnotinstalled as r on p.ClientID=r.ClientID where r.ClientID is null)+(SELECT COUNT(*) as cccs from old) as clients";
@@ -292,12 +284,28 @@ if (!$connection) {
                       echo $row["clients"] . "<br><br>";
                   }
                   ?></span></div>
-                                            <div class="stat-heading">Signed</div>
+                                              <div class="dropdown show">
+                                <a class="" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Signed
+                                </a>
+
+                                <div class="dropdown-menu bg-flat-color-3" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item " href="signed-g44.php">G44</a>
+                                    <a class="dropdown-item" href="signed-zmm.php">ZMM</a>
+                                    <a class="dropdown-item " href="signed-r&m.php">R&M</a>
+                                    <a class="dropdown-item" href="signed-g45s.php">G45S</a>
+                                    <a class="dropdown-item " href="signed-g45n.php">G45N</a>
+                                    <a class="dropdown-item" href="signed-kwt.php">KWT</a>
+                                    <a class="dropdown-item" href="signed-lsm.php">LSM</a>
+                                </div>
+
+                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div></a>
+                        </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6"><a href="pending-installation.php">
@@ -317,7 +325,7 @@ if (!$connection) {
                       echo $row["pending"] . "<br><br>";
                   }
                   ?></span></div>
-                                            <div class="stat-heading">Pending Istallation</div>
+                                            <div class="stat-heading">Pending Installation</div>
                                         </div>
                                     </div>
                                 </div>
@@ -351,7 +359,7 @@ if (!$connection) {
                         </div></a>
                     </div>
 
-                    <div class="col-lg-3 col-md-6"><a href="turnedon.php">
+                    <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
@@ -367,12 +375,28 @@ if (!$connection) {
                       echo $row["turnedon"] . "<br><br>";
                   }
                   ?></span></div>
-                                            <div class="stat-heading">Turned On</div>
+                                           <div class="dropdown show">
+                                <a class="" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Turned On
+                                </a>
+
+                                <div class="dropdown-menu bg-flat-color-4" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item " href="turnedon-g44.php">G44</a>
+                                    <a class="dropdown-item" href="turnedon-zmm.php">ZMM</a>
+                                    <a class="dropdown-item " href="turnedon-r&m.php">R&M</a>
+                                    <a class="dropdown-item" href="turnedon-g45s.php">G45S</a>
+                                    <a class="dropdown-item " href="turnedon-g45n.php">G45N</a>
+                                    <a class="dropdown-item" href="turnedon-kwt.php">KWT</a>
+                                    <a class="dropdown-item" href="turnedon-lsm.php">LSM</a>
+                                </div>
+
+                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div></a>
+                        </div>
                     </div>
                 </div>
                 <!-- /Widgets -->

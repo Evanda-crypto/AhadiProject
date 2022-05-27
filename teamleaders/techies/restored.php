@@ -1,49 +1,6 @@
 <?php
 include("session.php");
 include("../../config/config.php");
-?>
-<?php
-$id=$_SESSION['ID'];
-if (isset($_POST["submit"])) {
-    $Password = trim($_POST["password"]);
-    $FirstName = trim($_POST['FName']);
-    $LastName = trim($_POST['LName']);
-    $Email = trim($_POST['email']);
-    $newpass = trim($_POST['newpass']);
-
-    $hashpass= password_hash($newpass,PASSWORD_DEFAULT);
-
-    if (!$connection) {
-        echo "<script>alert('There is no connection at this time.Please try again later.');</script>";
-        echo '<script>window.location.href="login.php";</script>';
-    }
-    else{
-        $stmt = $connection->prepare("SELECT * from Users where ID= ?");
-        $stmt->bind_param("s", $id);
-        $stmt->execute();
-        $stmt_result = $stmt->get_result();
-        if ($stmt_result->num_rows > 0) {
-            $data = $stmt_result->fetch_assoc();
-            if (password_verify($Password, $data["PASSWORD"])) {
-                $sql="update Users set FirstName='$FirstName',LastName='$LastName',Email='$Email',Password='$hashpass' where ID=$id";
-                $result=mysqli_query($connection,$sql);
-                if ($result) {
-                  echo '<script>alert("Password reset Succesfull")</script>';
-                    echo '<script>window.location.href="../../config/logout.php";</script>';
-                } else {
-                  echo '<script>alert("An Error occured please retry again!")</script>';
-                    echo '<script>window.location.href="profile.php";</script>';
-                }
-            }
-            else{
-                echo "<script>alert('Current password is wrong');</script>";
-                echo '<script>window.location.href="profile.php";</script>';
-            }
-        }
-    }
-    
-}
-
 
 ?>
 <!doctype html>
@@ -54,11 +11,12 @@ if (isset($_POST["submit"])) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Profile</title>
+    <title>Restored</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -68,15 +26,42 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+<link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+<!-- Bootstrap core JavaScript-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .future {
+  color: green;
+}
+
+.violet {
+  color: violet;
+}
+.tommorrow{
+    color:blue;
+}.orange{
+    color:orange;
+}
+.today{
+    color:red;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+ <!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -269,69 +254,116 @@ if (isset($_POST["submit"])) {
             </div>
         </header>
         <!-- /#header -->
+        <!-- Header-->
 
         <div class="content">
             <div class="animated fadeIn">
-
-
                 <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header"></div>
-                        <div class="round-img">
-                                                    <a href="#"><center><img class="rounded-circle" src="../../images/avatar/profile.png" alt=""></center></a>
-                                                </div>
-                        <div class="card-body card-block">
-                            <form action="" method="post" class="" autocomplete="off">
-                            <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                        <input type="text" id="email" name="id" value="<?php echo $_SESSION['ID']?>" placeholder="ID" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                        <input type="text" id="username" name="FName" value="<?php echo $_SESSION['FName']?>" placeholder="First Name" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                        <input type="text" id="username" name="LName" placeholder="Last Name" value="<?php echo $_SESSION['LName']?>" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                        <input type="email" id="email" name="email" placeholder="Email" value="<?php echo $_SESSION['teamleader']?>" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                        <input type="password" id="password" name="password" placeholder="Current Password" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                        <input type="password" id="password" name="newpass" placeholder="New Password" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-actions form-group"><button type="submit" name="submit" class="btn btn-warning btn-sm">Change Pass</button></div>
-                            </form>
+                <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                            <center><strong class="card-title">Restored[ <?php
+         $query="SELECT COUNT(*) as paps from 
+         papdailysales as p
+         WHERE p.PapStatus='Restored' and p.Region='".$_SESSION['Region']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['paps'];
+    }
+    ?> Records]</strong></center>
+                            </div>
+                            <div class="card-body">  <?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
+                                <table class="table table-striped" id="example">
+                                    <thead>
+                                        <tr>
+                     <th>Building Name</th>
+                     <th>Building Code</th>
+                     <th>Door No</th>
+                    <th>Champ</th>
+                     <th>Client Name</th>
+                     <th>Client Contact</th>
+                     <th>Date Signed</th>
+                     <th>Availability</th>
+                     <th>Champs Comment</th>
+                     <th>More</th>
+                                     
+                                         </tr>
+                                  </thead>
+                                  <tbody>
+<?php
+                        $query  = "SELECT p.ClientID,p.ClientName,p.Apt,p.ClientContact,p.ClientAvailability,p.Note,p.BuildingName,p.BuildingCode,p.ChampName,p.DateSigned,p.PapStatus from 
+                        papdailysales as p
+                        WHERE p.PapStatus='Restored' and p.Region='".$_SESSION['Region']."'";
+                        $result  = mysqli_query($connection, $query);
+
+                            while ($row = mysqli_fetch_array($result)) {
+                            
+                        ?>
+                                <tr>
+                                    <td><?php echo $row['BuildingName']; ?></td>
+                                    <td><?php echo $row['BuildingCode']; ?></td>
+                                    <td><?php echo $row['Apt']; ?></td>
+                                    <td><?php echo $row['ChampName']; ?></td>
+                                    <td><?php echo $row['ClientName']; ?></td>
+                                    <td><?php echo $row['ClientContact']; ?></td>
+                                    <td><?php echo $row['DateSigned']; ?></td>
+                                    <td class="centered colorText"><?php echo $row['ClientAvailability']; ?></td>
+                                    <td><?php echo $row['Note']; ?></td>
+                                    <td>
+                                    <button class="btn btn-warning" ><a href="assign-restored.php?client-id=<?php echo $row['ClientID']; ?>" class="text-bold">Assign Task</a></button>
+                                    </td>
+                                </tr>
+                        <?php
+
+                            }
+                    
+                        ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div>
-</div>
+                    <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog" >
+    <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#3073f5;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+            <div class="modal-body" style="background-color:#3073f5;">
 
+            </div>
+            <div class="modal-footer" style="background-color:#3073f5;">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+      
+    </div>
+</div><!--End of modal-->
+                
 
-        </div><!-- .animated -->
-    </div><!-- .content -->
-
-    <div class="clearfix"></div>
+</div><!-- .content -->
+<div class="clearfix"></div>
 
 </div><!-- /#right-panel -->
 
@@ -345,5 +377,35 @@ if (isset($_POST["submit"])) {
 <script src="../../assets/js/main.js"></script>
 
 
+<script>
+ $(document).ready(function () {
+$('#example').DataTable(
+    {
+
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "scrollY":        "700px",
+        "scrollCollapse": true,
+        "pagingType": "full_numbers"
+    }
+);
+$('.dataTables_length').addClass('bs-select');
+});
+
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent > "<?php echo date("Y-m-d", strtotime("+1 days")); ?>") {
+      cell.classList.toggle('future');
+    }
+    if (cell.textContent === "<?php echo date("Y-m-d", strtotime("+1 days")); ?>") {
+      cell.classList.toggle('tommorrow');
+    }
+    if (cell.textContent === "<?php echo date("Y-m-d"); ?>" || cell.textContent < "<?php echo date("Y-m-d"); ?>") {
+      cell.classList.toggle('today');
+    }
+  })
+})
+</script>
 </body>
 </html>

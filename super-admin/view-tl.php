@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Restituted</title>
+    <title>Teamleaders</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,60 +48,29 @@ include("../config/config.php");
 
 </head>
 <body style="background-color:#e1e1e1">
-   <!-- Left Panel -->
-   <aside id="left-panel" class="left-panel">
+    <!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="dashboard.php"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                        <a href="#"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
-                    <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
+                    <li class="menu-title">ACTIVITIES</li><!-- /.menu-title -->
                     <li>
-                        <a href="pap-daily-sales.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Signed </a>
-                    </li>
-                    <li>
-                        <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Resitituted </a>
+                        <a href="new-user.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Create New User </a>
                     </li>
                     <li>
-                        <a href="pending-installation.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Pending Installation </a>
+                        <a href="users.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Users </a>
                     </li>
                     <li>
-                        <a href="installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Installed </a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Turned On</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="turnedontoday.php" style="color:black; font-size: 15px;">Today</a></li>
-                            <li><i class="fa fa-table"></i><a href="last-7-days.php"style="color:black; font-size: 15px;">Last 7 Days</a></li>
-                            <li><i class="fa fa-table"></i><a href="last-30-days.php" style="color:black; font-size: 15px;">Last 30 Days</a></li>
-                            <li><i class="fa fa-table"></i><a href="turnedon.php" style="color:black; font-size: 15px;">All Records</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                    <li>
-                        <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
+                        <a href="view-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>View Tl </a>
                     </li>
                     <li>
-                        <a href="completed-tasks.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-money"></i>Completed Tasks </a>
+                        <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Buildings </a>
                     </li>
                     <li>
-                        <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
-                    </li>
-                    <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-inbox"></i><a href="nats_reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
-                            <li><i class="fa fa-inbox"></i><a href="nats_graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Maton</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-inbox"></i><a href="view-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
-                            <li><i class="fa fa-inbox"></i><a href="graphical-report.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
-                        </ul>
+                        <a href="completedtasks.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Completed Tasks </a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -113,7 +82,7 @@ include("../config/config.php");
         <!-- Header-->
         <header id="header" class="header" style="height: 65px;">
             <div class="top-left">
-                <div class="navbar-header">
+                <div class="navbar-header" style="height: 60px;">
                 <img src="../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -133,15 +102,15 @@ include("../config/config.php");
                         </div>
 
                         <div class="dropdown for-message">
-                           
+                         
                         </div>
                     </div>
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="name float-left"><?php echo $_SESSION[
-                 "FName"
-             ]; ?> <?php echo $_SESSION["LName"]; ?></span>
+                 "superadmin"
+             ]; ?> <?php echo $_SESSION["superadmin"]; ?></span>
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -160,43 +129,46 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Restituted</strong></center>
+                           <center> <strong class="card-title">Teamleaders</strong></center>
                         </div>
                         <div class="card-body">
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                     <th>Client Name</th>
-                     <th>Contact</th>
-                     <th>Building Name</th>
-                     <th>BuildingCode</th>
-                     <th>ChampName</th>
+                                    <th>No</th>
+                     <th>First Name</th>
+                     <th>Last Name</th>
+                     <th>Email</th>
+                     <th>Department</th>
                      <th>Region</th>
-                     <th>Techies</th>
-                    <th>Reason</th>
-                    <th>Comments</th>
+                     <th>More</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                               
- <?php
- $query =
-     "SELECT papnotinstalled.ClientID,papnotinstalled.ClientName,papnotinstalled.BuildingName,papnotinstalled.BuildingCode,papnotinstalled.Region,papnotinstalled.Floor,papnotinstalled.DateSigned,papnotinstalled.Reason,papnotinstalled.Contact,papnotinstalled.ChampName,CONCAT(papnotinstalled.Techie1,'/',papnotinstalled.Techie2) as techies,papnotinstalled.Note from papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID where trash.ClientID is null  order by DateSigned Desc";
- $result = mysqli_query($connection, $query);
- while ($row = mysqli_fetch_assoc($result)) { ?>
+                                <?php
+                    $query = "SELECT * from Users where User=4 OR user=5";
+                    $result = mysqli_query($connection, $query);
+
+                    $num_rows = mysqli_num_rows($result);
+
+                    $num = 0;
+                    if ($num_rows > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $num++; ?>
                                 <tr>
-                                    <td><?php echo $row["ClientName"]; ?></td>
-                                    <td><?php echo $row["Contact"]; ?></td>
-                                    <td><?php echo $row["BuildingName"]; ?></td>
-                                    <td><?php echo $row["BuildingCode"]; ?></td>
-                                    <td><?php echo $row["ChampName"]; ?></td>
+                                    <td><?php echo $num; ?></td>
+                                    <td><?php echo $row["FirstName"]; ?></td>
+                                    <td><?php echo $row["LastName"]; ?></td>
+                                    <td><?php echo $row["Email"]; ?></td>
+                                    <td><?php echo $row["Department"]; ?></td>
                                     <td><?php echo $row["Region"]; ?></td>
-                                    <td><?php echo $row["techies"]; ?></td>
-                                    <td><?php echo $row["Reason"]; ?></td>
-                                    <td><?php echo $row["Note"]; ?></td>
-                                </tr>
-                        <?php }
- ?>
+                                    <td>
+                                    <button class="btn btn-warning" ><a href="edit-tl.php?id=<?php echo $row['ID']; ?> "> <i class="zmdi zmdi-refresh-alt"></i>Edit</a></button>
+                                    </td>
+                        <?php
+                        }
+                    }
+                    ?>
                                 </tbody>
                             </table>
                         </div>

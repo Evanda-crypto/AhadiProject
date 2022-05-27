@@ -8,11 +8,11 @@ if(!empty($_GET['id'])){
     } 
      
     // Get content from the database 
-    $query = $connection->query("SELECT papdailysales.Note,papdailysales.ChampName,techietask.ClientName,techietask.ClientID,techietask.ClientContact,techietask.ClientAvailability,papdailysales.BuildingName,papdailysales.Region,techietask.Date,Token_teams.Team_ID,
-    papdailysales.BuildingCode,papdailysales.Floor,papdailysales.Apt from papdailysales LEFT JOIN 
-    techietask on techietask.ClientID=papdailysales.ClientID LEFT JOIN Token_teams ON Token_teams.Team_ID=techietask.TeamID  LEFT JOIN papinstalled ON papinstalled.ClientID=papdailysales.ClientID WHERE techietask.ClientID is not null AND papinstalled.ClientID is null and Token_teams.Team_ID='" .
+    $query = $connection->query("SELECT p.Note,p.ChampName,t.ClientName,t.ClientID,t.ClientContact,t.ClientAvailability,p.BuildingName,p.Region,t.Date,Token_teams.Team_ID,
+    p.BuildingCode,p.Floor,p.Apt,p.PhoneAlt from papdailysales as p LEFT JOIN 
+    techietask as t on t.ClientID=p.ClientID LEFT JOIN Token_teams ON Token_teams.Team_ID=t.TeamID  LEFT JOIN papinstalled ON papinstalled.ClientID=p.ClientID WHERE t.ClientID is not null AND papinstalled.ClientID is null and Token_teams.Team_ID='" .
                                           $_SESSION["TeamID"] .
-                                          "' and techietask.ClientID = {$_GET['id']}"); 
+                                          "' and t.ClientID = {$_GET['id']}"); 
      
     if($query->num_rows > 0){ 
         $cmsData = $query->fetch_assoc(); 
@@ -37,8 +37,12 @@ if(!empty($_GET['id'])){
         echo "<td>".$cmsData['ClientAvailability']."</td>";
         echo "</tr>";
         echo "<tr>";
-        echo "<td>Contact</td>";
+        echo "<td>Phone 1</td>";
         echo "<td>".$cmsData['ClientContact']."</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>Phone 2</td>";
+        echo "<td>".$cmsData['PhoneAlt']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Floor</td>";

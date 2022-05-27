@@ -73,7 +73,10 @@ include("../../config/config.php");
                         <a href="create-team.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Create New Team </a>
                     </li>
                     <li>
-                        <a href="assign-task.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Assign Task </a>
+                        <a href="assign-task.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Assign Task [Signed] </a>
+                    </li>
+                    <li>
+                        <a href="restored.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Assign Task [Restored] </a>
                     </li>
                     <li>
                         <a href="reasign-task.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Reasign Task</a>
@@ -81,9 +84,9 @@ include("../../config/config.php");
                     <li>
                         <a href="reminders.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Reminders</a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="rejected-meters.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Rejected Meters</a>
-                    </li>
+                    </li>-->
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
 
                     <li>
@@ -259,7 +262,15 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                            <center><strong class="card-title">Pending Installation</strong></center>
+                            <center><strong class="card-title">Pending Installation[<?php
+         $query="SELECT COUNT(*) as paps from 
+         papdailysales as p
+         WHERE p.PapStatus='Signed' and p.Region='".$_SESSION['Region']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['paps'];
+    }
+    ?> Records]</strong></center>
                             </div>
                             <div class="card-body">  <?php
             if(isset($_SESSION['status'])){
@@ -299,9 +310,9 @@ include("../../config/config.php");
                                   </thead>
                                   <tbody>
 <?php
-                        $query  = "SELECT DISTINCT p.ClientID,p.ClientName,p.Apt,p.ClientContact,p.ClientAvailability,p.Note,p.BuildingName,p.BuildingCode,p.ChampName,p.DateSigned from 
-                        papdailysales as p LEFT OUTER JOIN techietask as t on t.ClientID=p.ClientID left join papnotinstalled as r on r.ClientID=p.ClientID
-                        WHERE t.ClientID is null and r.clientID is null and p.Region='".$_SESSION['Region']."'";
+                        $query  = "SELECT p.ClientID,p.ClientName,p.Apt,p.ClientContact,p.ClientAvailability,p.Note,p.BuildingName,p.BuildingCode,p.ChampName,p.DateSigned,p.PapStatus from 
+                        papdailysales as p
+                        WHERE p.PapStatus='Signed' and p.Region='".$_SESSION['Region']."'";
                         $result  = mysqli_query($connection, $query);
 
                             while ($row = mysqli_fetch_array($result)) {

@@ -101,6 +101,9 @@ else
                         <a href="users.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Users </a>
                     </li>
                     <li>
+                        <a href="view-tl.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>View Tl </a>
+                    </li>
+                    <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Buildings </a>
                     </li>
                     <li>
