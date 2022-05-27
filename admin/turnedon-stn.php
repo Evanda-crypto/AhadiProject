@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Turnedon LSM</title>
+    <title>Turnedon STN</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
@@ -179,7 +179,7 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Turned On[LSM]</strong></center>
+                           <center> <strong class="card-title">Turned On[STN]</strong></center>
                         </div>
                         <center> <div class="table-responsive">
         <table border="0" cellspacing="5" cellpadding="5">
@@ -219,7 +219,7 @@ include("../config/config.php");
     $sql="SELECT t.ClientID,p.BuildingName,upper(p.BuildingCode) as bcode,upper(p.Region) as reg,p.ChampName,p.ClientName,p.ClientContact,Upper(t.MacAddress) as Mac,t.DateTurnedOn, CASE WHEN LENGTH(p.BuildingCode)>10 THEN CONCAT(p.BuildingCode,'-',(row_number() over(partition by p.BuildingCode)),'P')
     WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) <=9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,'0',(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
     WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) >9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
-    end as papcode from papdailysales as p LEFT JOIN turnedonpap as t ON t.ClientID=p.ClientID where t.ClientID is not null and p.Region='LSM'";
+    end as papcode from papdailysales as p LEFT JOIN turnedonpap as t ON t.ClientID=p.ClientID where t.ClientID is not null and p.Region='STN'";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>

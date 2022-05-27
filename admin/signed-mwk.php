@@ -11,11 +11,13 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Turnedon LSM</title>
+    <title>Signed MWK</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
-  <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet"/>
+
+    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
@@ -25,23 +27,19 @@ include("../config/config.php");
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../assets/css/style.css">
 
-    <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet"/>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-  <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
-
-
-
-<link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -67,8 +65,8 @@ include("../config/config.php");
 </style>
 </head>
 <body style="background-color:#e1e1e1">
-  <!-- Left Panel -->
-  <aside id="left-panel" class="left-panel">
+    <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -130,7 +128,7 @@ include("../config/config.php");
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
         <!-- Header-->
-        <header id="header" class="header" style="height: 65px;">
+        <header id="header" class="header" style="height: 60px;">
             <div class="top-left">
                 <div class="navbar-header">
                 <img src="../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">
@@ -152,7 +150,7 @@ include("../config/config.php");
                         </div>
 
                         <div class="dropdown for-message">
-                          
+                         
                         </div>
                     </div>
 
@@ -179,64 +177,72 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Turned On[LSM]</strong></center>
+                           <center> <strong class="card-title">Signed [MWK]</strong></center>
                         </div>
-                        <center> <div class="table-responsive">
-        <table border="0" cellspacing="5" cellpadding="5">
-        <tbody><tr>
-            <td><input type="text" id="min" placeholder="Start Date" style="color:black; margin-top:20px" class="form-control" name="min"></td>
-            <td><input type="text" id="max" placeholder="End Date" style="color:black;margin-top:20px"  class="form-control" name="max"></td>
-        </tr>
-    </tbody></table>
-                        </div></center>
-                        <div class="card-body" id="demo">
+                        <div class="card-body">
+                        <?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th class="th-sm">PAP Code
-                  </th>
-                   <th class="th-sm">Building Name
-                   </th>
-                   <th class="th-sm">Building Code
-                   </th>
-                   <th class="th-sm">Champ Name
-                   </th>
-                   <th class="th-sm">Client Name
-                   </th>
-                   <th class="th-sm">Client Contact
-                   </th>
-                   <th class="th-sm">MAC Address
-                   </th>
-                   <th class="th-sm">Date Turned On
-                   </th>
-                   <th class="th-sm">More
-                   </th>  
+                     <th>Building Name</th>
+                     <th>Building Code</th>
+                     <th>Champ</th>
+                     <th>Client Name</th>
+                     <th>Client Contact</th>
+                     <th>Date Signed</th>
+                     <th>Availability</th>
+                     <th>Champs Comment</th>
+                     <th>Pap Status</th>
+                     <th>More</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-    
-    $sql="SELECT t.ClientID,p.BuildingName,upper(p.BuildingCode) as bcode,upper(p.Region) as reg,p.ChampName,p.ClientName,p.ClientContact,Upper(t.MacAddress) as Mac,t.DateTurnedOn, CASE WHEN LENGTH(p.BuildingCode)>10 THEN CONCAT(p.BuildingCode,'-',(row_number() over(partition by p.BuildingCode)),'P')
-    WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) <=9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,'0',(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
-    WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) >9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
-    end as papcode from papdailysales as p LEFT JOIN turnedonpap as t ON t.ClientID=p.ClientID where t.ClientID is not null and p.Region='LSM'";
-$result=$connection->query($sql);
-while($row=$result->fetch_array()){
-  ?>
-  <tr>
-    <td><?php echo $row['papcode']?></td>
-    <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['bcode']?></td>
-    <td><?php echo $row['ChampName']?></td>
-    <td><?php echo $row['ClientName']?></td>
-    <td><?php echo $row['ClientContact']?></td>
-    <td><?php echo $row['Mac']?></td>
-    <td><?php echo $row['DateTurnedOn']?></td>
-    <td>
-    <button class="btn btn-warning" ><a href="edit-turnedon.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
-    </td>
-</tr>
-<?php } ?>
+                        $query  = "SELECT p.PapStatus,p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note from papdailysales AS p 
+                        LEFT JOIN papnotinstalled AS r ON r.ClientID=p.ClientID WHERE r.ClientID is null and p.Region='MWK' order by p.ClientID Desc";
+                        $result  = mysqli_query($connection, $query);
+
+                            while ($row = mysqli_fetch_array($result)) {
+                            
+                        ?>
+                                <tr>
+                                    <td><?php echo $row['BuildingName']; ?></td>
+                                    <td><?php echo $row['BuildingCode']; ?></td>
+                                    <td><?php echo $row['ChampName']; ?></td>
+                                    <td><?php echo $row['ClientName']; ?></td>
+                                    <td><?php echo $row['ClientContact']; ?></td>
+                                    <td><?php echo $row['DateSigned']; ?></td>
+                                    <td><?php echo $row['ClientAvailability']; ?></td>
+                                    <td><?php echo $row['Note']; ?></td>
+                                    <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>
+                                    <td>
+                                    <button class="btn btn-warning" ><a href="edit-records.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
+                                    </td>
+                                </tr>
+                        <?php
+
+                            }
+                    
+                        ?>
                                 </tbody>
                             </table>
                         </div>
@@ -258,59 +264,10 @@ while($row=$result->fetch_array()){
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
 
-
-<script>
-      
-      $.fn.dataTable.Api.register( 'column().data().sum()', function () {
-    return this.reduce( function (a, b) {
-        var x = parseFloat( a ) || 0;
-        var y = parseFloat( b ) || 0;
-        return x + y;
-    } );
-} );
- 
-var minDate, maxDate;
- 
- // Custom filtering function which will search data in column four between two values
- $.fn.dataTable.ext.search.push(
-     function( settings, data, dataIndex ) {
-         var min = minDate.val();
-         var max = maxDate.val();
-         var date = new Date( data[7] );
-  
-         if (
-             ( min === null && max === null ) ||
-             ( min === null && date <= max ) ||
-             ( min <= date   && max === null ) ||
-             ( min <= date   && date <= max )
-         ) {
-             return true;
-         }
-         return false;
-     }
- );
-  
-/* Init the table and fire off a call to get the hidden nodes. */
-$(document).ready(function() {
-    // Create date inputs
-    minDate = new DateTime($('#min'), {
-         format: 'MMMM Do YYYY'
-     });
-     maxDate = new DateTime($('#max'), {
-         format: 'MMMM Do YYYY'
-     });
-
-     // Refilter the table
-     $('#min, #max').on('change', function () {
-         table.draw();
-     });
-    var table = $('#example').DataTable(
-        {
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true,
-        "pagingType": "full_numbers",
-        "processing": true,
+<script type="text/javascript">
+$( document ).ready(function() {
+$('#example').DataTable({
+		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
             {
@@ -321,24 +278,35 @@ $(document).ready(function() {
                     'csv'
                 ]
             }
-        ]
-        }
-    );
-} );
-
-
-</script>
-<!--<script type='text/javascript'>
-    $(document).ready(function(){
-       //Iterate through each of the rows
-        $('tr').each(function(){
-          //Check the value of the last <td> element in the row (trimmed to ignore white-space)
-          if($(this).find('td:eq(8)').text().trim() < "2022-01-01"){
-              //Set the row to green
-              $(this).css('background','green');
-          }
+        ],
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "scrollY":        "700px",
+        "scrollCollapse": true,
+        "pagingType": "full_numbers"
         });
-    });
-</script>-->
+        
+});
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent === "Assigned") {
+      cell.classList.toggle('violet');
+    }
+    if (cell.textContent === "Turned On") {
+      cell.classList.toggle('green');
+    }
+    if (cell.textContent === "Signed") {
+      cell.classList.toggle('blue');
+    }
+    if (cell.textContent === "Installed") {
+      cell.classList.toggle('orange');
+    }
+    if (cell.textContent === "Restored") {
+      cell.classList.toggle('red');
+    }
+  })
+})
+</script>
 </body>
 </html>

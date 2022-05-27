@@ -298,6 +298,9 @@ if (!$connection) {
                                     <a class="dropdown-item " href="signed-g45n.php">G45N</a>
                                     <a class="dropdown-item" href="signed-kwt.php">KWT</a>
                                     <a class="dropdown-item" href="signed-lsm.php">LSM</a>
+                                    <a class="dropdown-item" href="signed-htr.php">HTR</a>
+                                    <a class="dropdown-item" href="signed-stn.php">STN</a>
+                                    <a class="dropdown-item" href="signed-mwk.php">MWK</a>
                                 </div>
 
                             </div>
@@ -389,6 +392,9 @@ if (!$connection) {
                                     <a class="dropdown-item " href="turnedon-g45n.php">G45N</a>
                                     <a class="dropdown-item" href="turnedon-kwt.php">KWT</a>
                                     <a class="dropdown-item" href="turnedon-lsm.php">LSM</a>
+                                    <a class="dropdown-item" href="turnedon-htr.php">HTR</a>
+                                    <a class="dropdown-item" href="turnedon-stn.php">STN</a>
+                                    <a class="dropdown-item" href="turnedon-mwk.php">MWK</a>
                                 </div>
 
                             </div>

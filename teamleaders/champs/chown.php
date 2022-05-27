@@ -6,7 +6,7 @@ if(isset($_POST["submit"])){
     $champ = $_POST['champ'];
     $code = $_POST['code'];
 
-        $stmt = $connection->prepare("select id from Users where id= ?");
+        $stmt = $connection->prepare("SELECT id from Users where id= ?");
         $stmt->bind_param("s", $code);
         $stmt->execute();
         $stmt_result = $stmt->get_result();
