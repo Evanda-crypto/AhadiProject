@@ -269,6 +269,7 @@ include("../../config/config.php");
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
+    order: [[5, 'desc']],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [

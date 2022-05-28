@@ -160,7 +160,7 @@ tfoot td {
         <tbody><tr>
             <td><input type="text" id="min" placeholder="Start Date" style="color:black; margin-top:20px" class="form-control" name="min"></td>
 
-            <td><input type="text" id="max" placeholder="End Date"   class="form-control" name="max"></td>
+            <td><input type="text" id="max" placeholder="End Date"  style="color:black; margin-top:20px" class="form-control" name="max"></td>
         </tr>
     </tbody></table>
                         </div></center>
@@ -262,7 +262,7 @@ tfoot td {
      // DataTables initialisation
      var table = $('#example').DataTable(
          {
-    
+            order: [[6, 'desc']],
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "scrollY":        "700px",
         "scrollCollapse": true,

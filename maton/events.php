@@ -203,7 +203,7 @@ date_default_timezone_set("Africa/Nairobi");
                              <option value="Fibre Issue (Poor SB Mgnt)">Poor SB Mgnt</option>
                             </optgroup>
                             <optgroup label="Replacement">
-                             <option  value="Replacement (Panel AP">Panel AP</option>  
+                             <option  value="Replacement (Panel AP)">Panel AP</option>  
                               <option value="Replacement (Power Cable)">Power Cable</option>
                               <option value="Replacement (Interlinking)">Interlinking</option>   
                               <option value="Replacement (Switch)">Switch</option>
