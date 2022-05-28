@@ -262,6 +262,7 @@ include("../../config/config.php");
                      <th>Building Name</th>
                      <th>BuildingCode</th>
                      <th>Techies</th>
+                     <th>Techie Feedback</th>
                     <th>Date Restituted</th>
                     <th>Restore</th>
                     <th>Delete</th>
@@ -271,7 +272,7 @@ include("../../config/config.php");
                                 <tbody>
                                 <?php
  $query =
-     "SELECT ClientID,ClientName,BuildingName,BuildingCode,RestitutedDate,DateSigned,Reason,Contact,CONCAT(Techie1,'/',Techie2) as techies from papnotinstalled where Reason='Already Installed' and Region='" .
+     "SELECT ClientID,ClientName,BuildingName,BuildingCode,RestitutedDate,DateSigned,Reason,Contact,CONCAT(Techie1,'/',Techie2) as techies,Note from papnotinstalled where Reason='Already Installed' and Region='" .
      $_SESSION["Region"] .
      "' order by DateSigned Desc";
  $result = mysqli_query($connection, $query);
@@ -282,6 +283,7 @@ include("../../config/config.php");
                                     <td><?php echo $row["BuildingName"]; ?></td>
                                     <td><?php echo $row["BuildingCode"]; ?></td>
                                     <td><?php echo $row["techies"]; ?></td>
+                                    <td><?php echo $row["Note"]; ?></td>
                                    <td><?php echo $row["RestitutedDate"]; ?></td>
                                     <td>
                                     <button class="btn btn-warning" ><a href="restore.php?clientid=<?php echo $row['ClientID']; ?> " onClick="return confirm('Sure to restore <?php  echo $row['ClientName']; ?> back to KOMP database?')">Restore</a></button>
