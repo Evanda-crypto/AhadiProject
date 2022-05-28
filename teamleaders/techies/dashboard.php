@@ -947,7 +947,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
             labels:<?php echo json_encode($Month)?>,
             datasets: [
                 {
-                    label: "Installed",
+                    label: "Installed : <?php echo $_SESSION['Region']?>",
                     data: <?php echo json_encode($Installed)?>,
                     borderColor: "#3072f5",
                     borderWidth: "2",
