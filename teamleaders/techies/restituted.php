@@ -260,7 +260,6 @@ include("../../config/config.php");
                                     <th>Client Name</th>
                      <th>Contact</th>
                      <th>Building Name</th>
-                     <th>BuildingCode</th>
                      <th>Techies</th>
                      <th>Techie Feedback</th>
                     <th>Date Restituted</th>
@@ -281,7 +280,6 @@ include("../../config/config.php");
                                     <td><?php echo $row["ClientName"]; ?></dh>
                                     <td><?php echo $row["Contact"]; ?></td>
                                     <td><?php echo $row["BuildingName"]; ?></td>
-                                    <td><?php echo $row["BuildingCode"]; ?></td>
                                     <td><?php echo $row["techies"]; ?></td>
                                     <td><?php echo $row["Note"]; ?></td>
                                    <td><?php echo $row["RestitutedDate"]; ?></td>
