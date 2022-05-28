@@ -894,7 +894,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
     } );
     </script>
     <script>
-        //Turnon chart
+        //Installation chart
     var ctx = document.getElementById( "monthly-progress" );
     ctx.height = 90;
     var myChart = new Chart( ctx, {
