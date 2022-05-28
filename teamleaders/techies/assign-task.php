@@ -403,6 +403,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
     if (cell.textContent === "<?php echo date("Y-m-d"); ?>" || cell.textContent < "<?php echo date("Y-m-d"); ?>") {
       cell.classList.toggle('today');
+      cell.classList.toggle('glow');
     }
   })
 })
