@@ -63,11 +63,11 @@ else
   
   $result=mysqli_query($connection,$sql);
   if ($result) {
-    echo '<script>alert("Update Successfull!")</script>';
-      echo '<script>window.location.href="../g45n.php";</script>';
+    $_SESSION["success"] = "Records Updated";
+    header("Location: ../g45n.php");
   } else {
-    echo '<script>alert("Not submitted try again!")</script>';
-      echo '<script>window.location.href="g45n.php";</script>';
+    $_SESSION["status"] = "Records Not Updated";
+    header("Location: ../g45n.php");
   }
    
 }

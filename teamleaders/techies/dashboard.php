@@ -343,7 +343,7 @@ if (!$connection) {
                                     Pending Installation
                                 </a>
 
-                                <div class="dropdown-menu bg-flat-color-1" aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-menu bg-flat-color-2" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item " href="assign-task.php">Newly Signed</a>
                                     <a class="dropdown-item" href="restored.php">Restored</a>
                                 </div>

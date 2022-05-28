@@ -26,6 +26,11 @@ $shops=$row['shops'];
 $apt=$row['apt'];
 $vacant=$row['vacantshops'];
 $comments=$row['note'];
+$sign = date("Y-m-d", strtotime($datesigned));
+$accept = date("Y-m-d", strtotime($dateaccepted));
+$cabled = date("Y-m-d", strtotime($datecabled));
+$full = date("Y-m-d", strtotime($datefullyinstalled));
+$turn = date("Y-m-d", strtotime($dateturnedon));
 
 
 if(isset($_POST['submit'])){
@@ -63,11 +68,11 @@ else
   
   $result=mysqli_query($connection,$sql);
   if ($result) {
-    echo '<script>alert("Update Successfull!")</script>';
-      echo '<script>window.location.href="../lsm.php";</script>';
+    $_SESSION["success"] = "Records Updated";
+    header("Location: ../lsm.php");
   } else {
-    echo '<script>alert("Not submitted try again!")</script>';
-      echo '<script>window.location.href="lsm.php";</script>';
+    $_SESSION["status"] = "Records Not Updated";
+    header("Location: ../lsm.php");
   }
    
 }
@@ -306,12 +311,12 @@ else
                                            <div class="col-6">
                                             <div class="form-group">
                                             <strong> <label for="cc-payment" class="control-label mb-1">Date Signed</label></strong>
-                                                <input id="date1" name="datesigned"  type="date" value="<?php echo $datesigned?>"  class="form-control"  aria-required="true" aria-invalid="false" placeholder="Date Signed">
+                                                <input id="date1" name="datesigned"  type="date" value="<?php echo $sign?>"  class="form-control"  aria-required="true" aria-invalid="false" placeholder="Date Signed">
                                             </div></div>
                                             <div class="col-6">
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">Date Cabled</label></strong>
-                                                <input id="date2" name="datecabled" type="date" class="form-control cc-name valid" value="<?php echo $datecabled?>"   data-val="true" placeholder="Date Cabled"
+                                                <input id="date2" name="datecabled" type="date" class="form-control cc-name valid" value="<?php echo $cabled?>"   data-val="true" placeholder="Date Cabled"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div></div>
@@ -319,18 +324,18 @@ else
                                            <div class="col-6">
                                             <div class="form-group">
                                             <strong><label for="cc-payment" class="control-label mb-1">Date Fully Installed</label></strong>
-                                                <input id="date3" name="datefullyinstalled"  type="date" value="<?php echo $datefullyinstalled?>"  class="form-control"  aria-required="true" aria-invalid="false" placeholder="Date Fully Installed">
+                                                <input id="date3" name="datefullyinstalled"  type="date" value="<?php echo $full?>"  class="form-control"  aria-required="true" aria-invalid="false" placeholder="Date Fully Installed">
                                             </div></div>
                                             <div class="col-6">
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">Date Accepted</label></strong>
-                                                <input id="date4" name="dateaccepted" type="date" class="form-control cc-name valid" value="<?php echo $dateaccepted?>"  data-val="true" placeholder="Date Accepted"
+                                                <input id="date4" name="dateaccepted" type="date" class="form-control cc-name valid" value="<?php echo $accept?>"  data-val="true" placeholder="Date Accepted"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div></div>
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">Date turnedon</label></strong>
-                                                <input id="date5" name="dateturnedon" type="date" class="form-control cc-name valid" value="<?php echo $dateturnedon?>"  data-val="true" placeholder="Date turnedon"
+                                                <input id="date5" name="dateturnedon" type="date" class="form-control cc-name valid" value="<?php echo $turn?>"  data-val="true" placeholder="Date turnedon"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>

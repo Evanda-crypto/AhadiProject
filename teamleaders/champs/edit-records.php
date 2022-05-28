@@ -32,6 +32,7 @@ $email=$row['Email'];
 $Bizname=$row['BizName'];
 $Phonealt=$row['PhoneAlt'];
 $note=$row['Note'];
+$avail = date("Y-m-d", strtotime($availability));
 
 if(isset($_POST['submit'])){
 $ClientName = $_POST['ClientName'];
@@ -259,25 +260,25 @@ if ($result && $query) {
                                         <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Building Code</label>
+                                                        <strong><label for="cc-exp" class="control-label mb-1">Building Code</label></strong>
                                                         <input id="bcode" value="<?php echo $BuildingCode?>" onkeyup="GetDetail(this.value)" placeholder="Search in 'BUILDING' to copy the EXACT building code here" name="bcode" type="text" class="form-control cc-exp"   placeholder="Building Name" required>
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">Building Name</label>
+                                                <strong> <label for="x_card_code" class="control-label mb-1">Building Name</label></strong>
                                                     <div class="input-group">
                                                         <input id="bname" name="bname" value="<?php echo $BuildingName?>" type="text" class="form-control cc-cvc"  placeholder="Building Name" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-payment" class="control-label mb-1">Region</label>
+                                            <strong> <label for="cc-payment" class="control-label mb-1">Region</label></strong>
                                                 <input id="region" name="Region" value="<?php echo $Region?>" type="text" class="form-control" required>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Floor</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Floor</label></strong>
                                                 <div class="form-group has-success">
                                             <select data-placeholder="Choose Floor..." class="standardSelect form-control" name="floor" tabindex="1">
                                             <option value="<?php echo $Floors?>"><?php echo $Floors?></option>
@@ -295,11 +296,11 @@ if ($result && $query) {
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">APT#</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">APT#</label></strong>
                                             <input id="cc-number" name="Apt" value="<?php echo $Apt?>" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">APT Layout</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">APT Layout</label></strong>
                                                 <div class="form-group has-success">
                                             <select data-placeholder="Choose Layout..." class="standardSelect form-control" name="aptlayout" tabindex="1">
                                             <option value="<?php echo $AptLayout?>"><?php echo $AptLayout?></option>
@@ -316,14 +317,14 @@ if ($result && $query) {
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">First Name</label>
+                                                    <strong><label for="cc-exp" class="control-label mb-1">First Name</label></strong>
                                                         <input id="cc-exp" name="ClientName" type="text" class="form-control cc-exp" value="<?php echo $ClientName?>"  data-val="true" placeholder="First Name"
                                                             autocomplete="cc-exp">
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">Family Name</label>
+                                                <strong><label for="x_card_code" class="control-label mb-1">Family Name</label></strong>
                                                     <div class="input-group">
                                                         <input id="x_card_code" name="FamilyName" type="text" class="form-control cc-cvc" value="<?php echo $FamilyName?>" data-val="true" placeholder="Family Name"
                                                             data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
@@ -331,14 +332,14 @@ if ($result && $query) {
                                                 </div>
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Availability</label>
-                                                <input id="cc-name" name="Day" type="date" class="form-control cc-name valid" value="<?php echo date("Y-m-d"); ?>" data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
+                                            <strong><label for="cc-name" class="control-label mb-1">Availability</label></strong>
+                                                <input id="cc-name" name="Day" type="date" class="form-control cc-name valid" value="<?php echo $avail?>" data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Phone Main</label>
+                                                    <strong><label for="cc-exp" class="control-label mb-1">Phone Main</label></strong>
                                                         <input  name="ClientContact" type="tel" pattern="[0-9]{10}" id="phone" value="<?php echo $ClientContact?>" name="ClientContact" placeholder="Phone Main 07XXXXXXXX" required class="form-control cc-exp" 
                                                             data-val-cc-exp="Please enter a valid month and year" 
                                                             autocomplete="cc-exp">
@@ -346,23 +347,29 @@ if ($result && $query) {
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">Phone Alt</label>
+                                                <strong><label for="x_card_code" class="control-label mb-1">Phone Alt</label></strong>
                                                     <div class="input-group">
                                                         <input id="x_card_code" name="PhoneAlt" type="tel" pattern="[0-9]{10}" value="<?php echo $Phonealt?>" class="form-control cc-cvc" placeholder="Phone Alt 07XXXXXXXX"  data-val="true" 
                                                             data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-6">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">WhatsApp</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">WhatsApp</label></strong>
                                             <input id="cc-number" name="whatsapp" type="text" value="<?php echo $WhatsApp?>" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
-                                            </div>
+                                            </div></div>
+                                            
+                                                <div class="col-6">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1"> Client's Email</label>
+                                            <strong><label for="cc-number" class="control-label mb-1"> Client's Email</label></strong>
                                             <input id="cc-number" name="email" type="text" value="<?php echo $email?>" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
-                                            </div>
+                                            </div></div></div>
+                                            <div class="row">
+                                                <div class="col-6">
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Gender</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Gender</label></strong>
                                                 <div class="form-group has-success">
                                             <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="gender" tabindex="1" required>
                                             <option value="<?php echo $ClientGender?>"><?php echo $ClientGender?></option>
@@ -371,9 +378,10 @@ if ($result && $query) {
                                             <option value="Other">Other</option> 
                                               </select>
                                             </div>
-                                            </div>
+                                            </div></div>
+                                                <div class="col-6">
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Age</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Age</label></strong>
                                                 <div class="form-group has-success">
                                             <select  class="standardSelect form-control" name="age" tabindex="1" required>
                                             <option value="<?php echo $ClientAge?>"><?php echo $ClientAge?></option>
@@ -385,38 +393,51 @@ if ($result && $query) {
                                             <option value="Above 60">Above 60</option>
                                               </select>
                                             </div>
+                                            </div></div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-6">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Current ISP Package</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Current ISP Package</label></strong>
                                             <input id="cc-number" name="package" type="text" value="<?php echo $ISP?>" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
-                                            </div>
+                                            </div></div>
+                                          
+                                                <div class="col-6">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Occupation</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Occupation</label></strong>
                                             <input id="cc-number" name="occupation" type="text" value="<?php echo $ClientOccupation?>" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
-                                            </div>
+                                            </div></div></diV>
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Birthday</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Birthday</label></strong>
                                             <input id="min" name="Birthday" type="text" value="<?php echo $Birthday?>" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Birthday"> 
                                             </div>
+                                            <div class="row">
+                                                <div class="col-3">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Household Size</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Household Size</label></strong>
                                             <input class="form-control cc-number identified visa" value="<?php echo $HouseholdSize?>" data-val="true" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="house" placeholder="Enter total number of peolpe living in the apartment"> 
-                                            </div>
+                                            </div></div>
+                                            
+                                                <div class="col-3">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Children</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Children</label></strong>
                                             <input class="form-control cc-number identified visa" value="<?php echo $Children?>" data-val="true" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Children" placeholder="<=12"> 
-                                            </div>
+                                            </div></div>
+                                            
+                                                <div class="col-3">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Teengers</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Teengers</label></strong>
                                             <input class="form-control cc-number identified visa" data-val="true" value="<?php echo $Teenagers?>" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Teenagers" placeholder="13-18"> 
-                                            </div>
+                                            </div></div>
+                                            
+                                                <div class="col-3">
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Adults</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Adults</label></strong>
                                             <input class="form-control cc-number identified visa" data-val="true" value="<?php echo $Adults?>" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Adults" placeholder="<=13"> 
                                             </div>
-                                            <div>
+                                            <div></div></div></div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label></strong>
                                                 <input id="cc-number" name="note" value="<?php echo $note?>" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
