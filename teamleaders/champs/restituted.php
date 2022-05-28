@@ -215,6 +215,7 @@ include("../../config/config.php");
                      <th>Techies</th>
                      <th>Restituted Date</th>
                     <th>Reason</th>
+                    <th>Techie Comment</th>
                     <th>Restore</th>
                     <th>Delete</th>
                                     </tr>
@@ -223,7 +224,7 @@ include("../../config/config.php");
                                
  <?php
  $query =
-     "SELECT p.ClientID,p.ClientName,p.BuildingName,p.BuildingCode,p.Floor,p.DateSigned,p.Reason,p.Contact,p.ChampName,p.RestitutedDate,CONCAT(p.Techie1,'/',p.Techie2) as techies from papnotinstalled as p  where  p.Reason<>'Already Installed' and p.Region='".$_SESSION['Region']."' order by DateSigned Desc";
+     "SELECT p.ClientID,p.ClientName,p.BuildingName,p.BuildingCode,p.Floor,p.DateSigned,p.Reason,p.Contact,p.ChampName,p.RestitutedDate,CONCAT(p.Techie1,'/',p.Techie2) as techies,p.Note from papnotinstalled as p  where  p.Reason<>'Already Installed' and p.Region='".$_SESSION['Region']."' order by DateSigned Desc";
  $result = mysqli_query($connection, $query);
  while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
@@ -235,6 +236,7 @@ include("../../config/config.php");
                                     <td><?php echo $row["techies"]; ?></td>
                                    <td><?php echo $row["RestitutedDate"]; ?></td>
                                     <td><?php echo $row["Reason"]; ?></td>
+                                    <td><?php echo $row["Note"]; ?></td>
                                     <td>
                                     <button class="btn btn-warning" ><a href="restore.php?clientid=<?php echo $row['ClientID']; ?> " onClick="return confirm('Sure to restore <?php  echo $row['ClientName']; ?> back to KOMP database?')"> <i class="zmdi zmdi-refresh-alt"></i>Restore</a></button>
                                     </td>
