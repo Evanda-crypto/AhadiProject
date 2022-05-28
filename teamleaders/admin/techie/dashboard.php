@@ -19,6 +19,19 @@ if (!$connection) {
     }
 }
 ?>
+<?php 
+ 
+ $sql =
+     "SELECT EXTRACT(MONTH FROM DateInstalled),MONTHNAME(DateInstalled) as month,COUNT(ClientID) as installed
+     FROM papinstalled
+     GROUP BY month,EXTRACT(MONTH FROM DateInstalled) order by EXTRACT(MONTH FROM DateInstalled) asc";
+ $result = mysqli_query($connection, $sql);
+ $chart_data = "";
+ while ($row = mysqli_fetch_array($result)) {
+     $Month[] = $row["month"];
+     $Installed[] = $row["installed"];
+ }
+?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -570,6 +583,20 @@ if (!$connection) {
                                 </tbody>
                             </table>
                     </div></div></div></div>
+
+                    <div class="row">
+
+<div class="col-lg-12">
+     <div class="card"><div class="card-header">
+        <center> <strong class="card-title">Monthly Pap Progress</strong></center>
+     </div>
+         <div class="card-body">
+             <h4 class="mb-3"></h4>
+             <canvas id="monthly-progress"></canvas>
+         </div>
+     </div>
+ </div><!-- /# column -->
+</div>
             </div>
             <!-- .animated -->
         </div>
@@ -865,6 +892,39 @@ while ($signed = mysqli_fetch_assoc($result)) {
             responsive: true
         }
     } );
+    </script>
+    <script>
+        //Turnon chart
+    var ctx = document.getElementById( "monthly-progress" );
+    ctx.height = 90;
+    var myChart = new Chart( ctx, {
+        type: 'line',
+        data: {
+            labels:<?php echo json_encode($Month)?>,
+            datasets: [
+                {
+                    label: "Installed",
+                    data: <?php echo json_encode($Installed)?>,
+                    borderColor: "#3072f5",
+                    borderWidth: "2",
+                    backgroundColor: "transparent"
+                            }
+                        ]
+        },
+        options: {
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            }
+
+        }
+    } );
+
     </script>
 </body>
 </html>
