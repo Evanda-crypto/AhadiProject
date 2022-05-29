@@ -653,7 +653,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 ?> ],
                     borderColor: "rgba(0, 194, 146, 0.9)",
                     borderWidth: "0",
-                    backgroundColor: "#0cbeaf"
+                    backgroundColor: "#85ce36"
                             },
                 {
                     label: "Installed",
