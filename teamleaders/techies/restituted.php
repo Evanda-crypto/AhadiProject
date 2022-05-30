@@ -253,7 +253,33 @@ include("../../config/config.php");
                         <div class="card-header">
                            <center> <strong class="card-title">Installed[Already Installed]</strong></center>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body"><?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><strong><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></strong>
+  </button>
+                 </div></span></center>
+                 
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><strong><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></strong>
+  </button>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>

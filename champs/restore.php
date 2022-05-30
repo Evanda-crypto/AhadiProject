@@ -27,15 +27,25 @@ else
 {
     $sql="update papdailysales set ClientID=$id,ClientAvailability='$avail',PapStatus='Restored',Note='$message' where ClientID=$id";
    $result=mysqli_query($connection,$sql);
+
+   
+  if ($result) {
     $query = "DELETE FROM  papnotinstalled  WHERE ClientID= '$id'";
     $restored = mysqli_query($connection, $query);
-   
-  if ($result && $restored) {
-    echo '<script>alert("Successfully Restored!")</script>';
-      echo '<script>window.location.href="to-restore.php";</script>';
+
+    if($restored){
+        $_SESSION["success"] = "Successfully Restored";
+        header("Location: to-restore.php");
+    }
+    else{
+        $_SESSION["status"] = "Not Restored";
+        header("Location: to-restore.php");
+    }
+
+    
   } else {
-    echo '<script>alert("Not restored try again!")</script>';
-      echo '<script>window.location.href="to-restore.php";</script>';
+    $_SESSION["status"] = "Not Restored";
+    header("Location: to-restore.php");
   }
    
 }

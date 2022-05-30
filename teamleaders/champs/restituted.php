@@ -58,19 +58,8 @@ include("../../config/config.php");
                         <a href="dashboard.php"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>All Paps</a>
-                        <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-table"></i><a href="all-paps.php" style="color:black; font-size: 15px;">All Paps</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-zmm.php" style="color:black; font-size: 15px;">ZMM</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-r&m.php"style="color:black; font-size: 15px;">R&M</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-g44.php" style="color:black; font-size: 15px;">G44</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-g45s.php" style="color:black; font-size: 15px;">G45S</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-g45n.php" style="color:black; font-size: 15px;">G45N</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-kwt.php"style="color:black; font-size: 15px;">KWT</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-lsm.php" style="color:black; font-size: 15px;">LSM</a></li>
-                        </ul>
+                    <li>
+                        <a href="all-paps.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>All Paps</a>
                     </li>
                     <li>
                         <a href="not-installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Not Installed </a>
@@ -129,7 +118,7 @@ include("../../config/config.php");
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell"></i>
                                 <span class="count bg-danger"><?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID WHERE trash.ClientID is null and papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
+         $query="SELECT COUNT(*) as restituted FROM papnotinstalled WHERE papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['restituted'];
@@ -138,7 +127,7 @@ include("../../config/config.php");
                             </button>
                             <div class="dropdown-menu" aria-labelledby="notification">
                                 <p class="red">You have <?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID WHERE trash.ClientID is null and papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
+         $query="SELECT COUNT(*) as restituted FROM papnotinstalled WHERE papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['restituted'];

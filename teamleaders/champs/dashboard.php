@@ -131,6 +131,7 @@ if (!$connection) {
 
 <body style="background-color:#e1e1e1">
 
+<!-- Left Panel -->
 <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -139,18 +140,8 @@ if (!$connection) {
                         <a href="dashboard.php"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>All Paps</a>
-                        <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-table"></i><a href="all-paps.php" style="color:black; font-size: 15px;">All Paps</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-zmm.php" style="color:black; font-size: 15px;">ZMM</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-r&m.php"style="color:black; font-size: 15px;">R&M</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-g44.php" style="color:black; font-size: 15px;">G44</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-g45s.php" style="color:black; font-size: 15px;">G45S</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-g45n.php" style="color:black; font-size: 15px;">G45N</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-kwt.php"style="color:black; font-size: 15px;">KWT</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps-lsm.php" style="color:black; font-size: 15px;">LSM</a></li>
-                        </ul>
+                    <li>
+                        <a href="all-paps.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>All Paps</a>
                     </li>
                     <li>
                         <a href="not-installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Not Installed </a>
@@ -208,7 +199,7 @@ if (!$connection) {
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell"></i>
                                 <span class="count bg-danger"><?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID WHERE trash.ClientID is null and papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
+         $query="SELECT COUNT(*) as restituted FROM papnotinstalled  WHERE papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['restituted'];
@@ -217,7 +208,7 @@ if (!$connection) {
                             </button>
                             <div class="dropdown-menu" aria-labelledby="notification">
                                 <p class="red">You have <?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled left join trash on trash.ClientID=papnotinstalled.ClientID WHERE trash.ClientID is null and papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
+         $query="SELECT COUNT(*) as restituted FROM papnotinstalled  WHERE papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['restituted'];
@@ -257,11 +248,11 @@ if (!$connection) {
             <div class="animated fadeIn">
                  <!-- Widgets  -->
                  <div class="row">
-                    <div class="col-lg-3 col-md-6"><a href="all-paps.php">
+                    <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
-                                    <div class="stat-icon ">
+                                    <div class="stat-icon flat-color-3">
                                         <i class="pe-7s-check"></i>
                                     </div>
                                     <div class="stat-content">
@@ -275,12 +266,31 @@ if (!$connection) {
                       echo $row["clients"] . "<br><br>";
                   }
                   ?></span></div>
-                                            <div class="stat-heading">Signed[<?php echo $_SESSION['Region']?>]</div>
+                                            <div class="dropdown show">
+                                <a class="" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Signed [<?php echo $_SESSION['Region']?>]
+                                </a>
+
+                                <div class="dropdown-menu bg-flat-color-3" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item " href="all-paps-g44.php">G44</a>
+                                    <a class="dropdown-item" href="all-paps-zmm.php">ZMM</a>
+                                    <a class="dropdown-item " href="all-paps-r&m.php">R&M</a>
+                                    <a class="dropdown-item" href="all-paps-g45s.php">G45S</a>
+                                    <a class="dropdown-item " href="all-paps-g45n.php">G45N</a>
+                                    <a class="dropdown-item" href="all-paps-kwt.php">KWT</a>
+                                    <a class="dropdown-item" href="all-paps-lsm.php">LSM</a>
+                                    <a class="dropdown-item" href="all-paps-htr.php">HTR</a>
+                                    <a class="dropdown-item" href="all-paps-stn.php">STN</a>
+                                    <a class="dropdown-item" href="all-paps-mwk.php">MWK</a>
+                                </div>
+
+                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div></a>
+                        </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6"><a href="not-installed.php">

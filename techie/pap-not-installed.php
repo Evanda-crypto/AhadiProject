@@ -50,17 +50,27 @@ if (isset($_POST["submit"])) {
         die("connection failed : " . $connection->connect_error);
     } else {
         // Insert records into database
-        $sql = "update papdailysales set ClientID=$id,ClientAvailability='$avail',PapStatus='Restituted' where ClientID=$id";
-        $upd = mysqli_query($connection, $sql);
-        $query = "DELETE FROM  techietask  WHERE ClientID= '$id'";
-        $result = mysqli_query($connection, $query);
+       
+
         $insert = $connection->query(
             "INSERT into papnotinstalled (ClientID,ClientName,BuildingName,BuildingCode,Region,Floor,DateSigned,Reason,ChampName,TeamID,Techie1,Techie2,Availability,Contact,RestitutedDate,Note) VALUES ('$ClientID','$ClientName','$BuildingName','$BuildingCode','$Region','$Floor','$DateSigned','$note','$ChampName','$Team_ID','$Techie1','$Techie2','$avail','$contact','$daterestituted','$msg')"
         );
 
-        if ($insert && $result && $upd) {
-            $_SESSION["success"] = "Moved to restituted";
-            header("Location: mytask.php");
+        if ($insert) {
+            $sql = "update papdailysales set ClientID=$id,ClientAvailability='$avail',PapStatus='Restituted' where ClientID=$id";
+            $upd = mysqli_query($connection, $sql);
+
+            $query = "DELETE FROM  techietask  WHERE ClientID= '$id'";
+            $result = mysqli_query($connection, $query);
+
+            if($result && $upd){
+                $_SESSION["success"] = "Moved to restituted";
+                header("Location: mytask.php");
+            }
+            else{
+                $_SESSION["status"] = "Error";
+                header("Location: mytask.php");
+            }
         } else {
             $_SESSION["status"] = "Error";
             header("Location: mytask.php");
