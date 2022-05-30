@@ -301,7 +301,7 @@ $Id = $_POST['id'];
                                                 <input id="cc-number" name="reason" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Reason for retrieval">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
-                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
+                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning" onClick="return confirm('Sure to move <?php  echo $client; ?> Retrieved paps?This action cannot be undone!')">
                                                 <strong><span id="payment-button-amount">Submit</span></strong>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button>
