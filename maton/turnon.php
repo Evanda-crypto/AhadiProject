@@ -246,7 +246,7 @@ values(?,?,?,?,?,?,?,?,?,?,?)");
                                             </div>
                                             
                                             <div>
-                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
+                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning" autofocus>
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button>

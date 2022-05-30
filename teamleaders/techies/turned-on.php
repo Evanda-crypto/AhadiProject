@@ -226,7 +226,33 @@ include("../../config/config.php");
                         <div class="card-header">
                            <center> <strong class="card-title">Turned On</strong></center>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body"><?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><strong><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></strong>
+  </button>
+                 </div></span></center>
+                 
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><strong><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></strong>
+  </button>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
@@ -249,6 +275,8 @@ include("../../config/config.php");
       <th class="th-sm">Date Installed
       </th>
       <th class="th-sm">Date Turned On
+      </th>
+      <th class="th-sm">Move to Retrieved
       </th>
                                     </tr>
                                 </thead>
@@ -292,6 +320,9 @@ include("../../config/config.php");
                                     <td><?php echo $row['Techie3']; ?></td>
                                     <td><?php echo $row['DateInstalled']; ?></td>
                                     <td><?php echo $row['DateTurnedOn']; ?></td>
+                                    <td>
+                                    <button class="btn btn-danger" ><a href="retrieve_pap.php?client-id=<?php echo $row['ClientID']; ?>" class="text-bold">Move to Retrieved</a></button>
+                                    </td>
                                 </tr>
                         <?php
 

@@ -66,11 +66,9 @@ include("../config/config.php");
                             <li><i class="fa fa-table"></i><a href="to-restore.php">To Restore</a></li>
                             <li><i class="fa fa-table"></i><a href="turned-on.php">Turned On</a></li>
                             <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
+                            <li><i class="fa fa-table"></i><a href="retrieved.php">Retrieved</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="monthly-counts.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-calendar"></i>Monthly Counts</a>
-                    </li> 
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>  

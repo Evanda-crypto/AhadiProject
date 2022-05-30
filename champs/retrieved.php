@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Building</title>
+    <title>Retrieved</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -41,6 +41,7 @@ include("../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
 </head>
 <body style="background-color:#e1e1e1">
 <!-- Left Panel -->
@@ -59,7 +60,7 @@ include("../config/config.php");
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APS</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APs</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="not-installed.php">Not Installed</a></li>
                             <li><i class="fa fa-table"></i><a href="to-restore.php">To Restore</a></li>
@@ -67,7 +68,7 @@ include("../config/config.php");
                             <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
                             <li><i class="fa fa-table"></i><a href="retrieved.php">Retrieved</a></li>
                         </ul>
-                    </li>
+                    </li> 
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>  
@@ -132,33 +133,36 @@ include("../config/config.php");
                 <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                            <center><strong class="card-title">Buildings[<?php
-         $query="SELECT COUNT(*) as buildings FROM buildings WHERE bstatus='6. IAP In Service' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service'";
+                            <center><strong class="card-title">Retrieved[<?php
+         $query="SELECT COUNT(*) as retrieved FROM retrieved_paps WHERE champ='".$_SESSION['FName']." ".$_SESSION['LName']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
-          echo $row['buildings'];
+          echo $row['retrieved'];
     }
     ?> Records]</strong></center>
                             </div>
                             <div class="card-body">
-                                 <table class="table table-bordered table-striped" id="example">
+                                <table class="table table-striped table-bordered" id="example">
                                     <thead>
                                         <tr>
-                                        <th scope="th-sm">B Name</th>
-                                          <th scope="th-sm">B Code</th>
-                                          <th scope="th-sm">Region</th>
+                                        <th class="th-sm">Client
+      </th>
+      <th class="th-sm">Contact
+      </th>
+      <th class="th-sm">Bname
+      </th>
                                       </tr>
                                   </thead>
                                   <tbody>
-    <?php
-                        $query  = "SELECT bname,bcode,region,id from buildings WHERE bstatus='6. IAP In Service' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service'";
+                                  <?php
+                        $query  = "SELECT clientid,client_name,contact,building_name from retrieved_paps WHERE champ='".$_SESSION['FName']." ".$_SESSION['LName']."'";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                                 <tr>
-        <td><a  data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['bname']?></a></td>
-        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['bcode']?></a></td>
-        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['region']?></a></td>
+                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['clientid']; ?>" class="openPopup"><?php echo $row['client_name']; ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['clientid']; ?>" class="openPopup"><?php echo $row['contact']; ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['clientid']; ?>" class="openPopup"><?php echo $row['building_name']; ?></a></td>
                                 </tr>
                         <?php
 
@@ -168,10 +172,8 @@ include("../config/config.php");
                             </table>
                         </div>
                     </div>
+                    <!-- Modal -->
                     
-                </div>
-<!-- Modal -->
-
 <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -189,7 +191,10 @@ include("../config/config.php");
                         </div>
                     </div>
                 </div>
-            </div><!--end of modal--><!--End of modal-->
+            </div>
+<!--End of modal-->
+                
+
 </div><!-- .content -->
 <div class="clearfix"></div>
 
@@ -198,38 +203,21 @@ include("../config/config.php");
 <!-- Right Panel -->
 
 <!-- Scripts -->
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
+
 <script>
  $(document).ready(function () {
 $('#example').DataTable(
     {
-
-        "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
-        "scrollY":        "500px",
-        "scrollCollapse": true
-    }
+"lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
+"scrollY":        "500px",
+"scrollCollapse": true
+}
 );
-$('.dataTables_length').addClass('bs-select');
-});
-</script>
-<script>
-$(document).ready(function(){
-  $(document).on('click','.openPopup',function(){
-        var dataURL = $(this).attr('data-href');
-        $('.modal-body').load(dataURL,function(){
-            $('#myModal').modal({show:true});
-        });
-    }); 
-});
-</script>
-<script>
- $(document).ready(function () {
-$('#example').DataTable();
 $('.dataTables_length').addClass('bs-select');
 });
 </script>
