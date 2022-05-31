@@ -47,8 +47,13 @@ if(!empty($_GET['id'])){
         echo "<td>Floor</td>";
         echo "<td>".$cmsData['Floor']."</td>";
         echo "</tr>";
+        echo "<tr>";
         echo "<td>Apt</td>";
         echo "<td>".$cmsData['Apt']."</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>Pap Status</td>";
+        echo "<td>".$cmsData['PapStatus']."</td>";
         echo "</tr>";
         echo "</table>";
     }else{ 
