@@ -150,7 +150,7 @@ include("../../config/config.php");
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-tachometer"></i>
                                 <span class="count bg-danger"><?php
-         $query="SELECT COUNT(*) as rejected FROM token_meter WHERE Status='Rejected' and Region='".$_SESSION['Region']."'";
+         $query="SELECT COUNT(*) as rejected FROM Token_meter WHERE Status='Rejected' and Region='".$_SESSION['Region']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['rejected'];
@@ -159,7 +159,7 @@ include("../../config/config.php");
                             </button>
                             <div class="dropdown-menu" aria-labelledby="notification">
                                 <p class="red">You have <?php
-         $query="SELECT COUNT(*) as rejected FROM token_meter WHERE Status='Rejected' and Region='".$_SESSION['Region']."'";
+         $query="SELECT COUNT(*) as rejected FROM Token_meter WHERE Status='Rejected' and Region='".$_SESSION['Region']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['rejected'];
