@@ -57,48 +57,22 @@ $Id = $_POST['id'];
     die("connection failed : " . $connection->connect_error);
 } else {
     
-    
+    $query = "DELETE FROM  techietask  WHERE ClientID=$id";
+    $result = mysqli_query($connection, $query);
+    $sql1 = "DELETE FROM  papdailysales  WHERE ClientID=$id";
+    $result1 = mysqli_query($connection, $sql1);
+    $sql2 = "DELETE FROM  papinstalled  WHERE ClientID=$id";
+    $result2 = mysqli_query($connection, $sql2);
+    $sql3 = "DELETE FROM  turnedonpap  WHERE ClientID=$id";
+    $result3 = mysqli_query($connection, $sql3);
     $insert = $connection->query(
         "INSERT into retrieved_paps (clientid,client_name,building_name,building_code,region,apt,reason,champ,teamid,contact,mac_address,reporter) VALUES ('$Id','$client','$Bname','$Bcode','$Region','$Apt','$Reason','$Champ','$Teamid','$Contact','$Mac','$Reporter')"
     );
+    
 
     if ($insert) {
-        $query = "DELETE FROM  techietask  WHERE ClientID=$id";
-        $result = mysqli_query($connection, $query);
-
-        if($result){
-            $sql1 = "DELETE FROM  papdailysales  WHERE ClientID=$id";
-             $result1 = mysqli_query($connection, $sql1);
-
-             if($result1){
-                $sql2 = "DELETE FROM  papinstalled  WHERE ClientID=$id";
-                $result2 = mysqli_query($connection, $sql2);
-
-                if($result2){
-                    $sql3 = "DELETE FROM  turnedonpap  WHERE ClientID=$id";
-                    $result3 = mysqli_query($connection, $sql3);
-
-                    if($result3){
-                        $_SESSION["success"] = "Moved to Retrieved";
-                        header("Location: turned-on.php");
-                    }else{
-                        $_SESSION["status"] = "Not moved!";
-                        header("Location: turned-on.php");
-                    }
-                }else{
-                    $_SESSION["status"] = "Not moved!";
-                    header("Location: turned-on.php");
-                }
-             }
-             else{
-                $_SESSION["status"] = "Not moved!";
-                header("Location: turned-on.php");
-             }
-        }else{
-            $_SESSION["status"] = "Not moved!";
-        header("Location: turned-on.php");
-        }
-        
+        $_SESSION["success"] = "Moved to Retrieved";
+        header("Location: turned-on.php");  
     } else {
         $_SESSION["status"] = "Error please try again!";
         header("Location: turned-on.php");
@@ -435,7 +409,7 @@ $Id = $_POST['id'];
                                                 <input id="cc-number" name="reason" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Reason for retrieval">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
-                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
+                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning" onClick="return confirm('Sure to move <?php  echo $client; ?> to retrieved paps?This action cannot be undone!')">
                                                 <strong><span id="payment-button-amount">Submit</span></strong>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button>
