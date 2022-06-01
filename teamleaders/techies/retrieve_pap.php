@@ -23,7 +23,7 @@ JOIN papdailysales as p ON p.ClientID = t.ClientID
 left join papinstalled as i ON i.ClientID = p.ClientID 
 left join Token_teams as g on g.Team_ID = i.Team_ID 
 WHERE 
-t.ClientID IS NOT null p.ClientID=$id
+t.ClientID IS NOT null and p.ClientID=$id
 and p.Region = '".$_SESSION['Region']."'";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
