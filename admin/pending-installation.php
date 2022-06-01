@@ -194,8 +194,7 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT p.ClientAvailability,p.ClientName,p.ClientContact,p.BuildingName,p.BuildingCode,p.DateSigned,p.Region,p.PapStatus FROM papdailysales as p left join 
-    papinstalled as i on p.ClientID=i.ClientID left join papnotinstalled as r on r.ClientID=p.ClientID where i.ClientID is null and r.ClientID is null";
+    $sql="SELECT BuildingName,BuildingCode,Region,ClientName,ClientContact,DateSigned,ClientAvailability,PapStatus from papdailysales where PapStatus ='Assigned' OR PapStatus ='Signed' OR PapStatus ='Restored'";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>

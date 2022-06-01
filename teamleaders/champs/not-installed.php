@@ -200,15 +200,7 @@ include("../../config/config.php");
                         p.ClientAvailability 
                       from 
                         papdailysales as p 
-                        left join papinstalled as i on i.ClientID = p.ClientID 
-                        left join techietask as t on t.ClientID = p.ClientID 
-                        left join reminders as r on p.ClientID = r.ClientID 
-                        left join papnotinstalled as n on n.ClientID = p.ClientID 
-                      where 
-                        n.ClientID IS null 
-                        and r.ClientID is null 
-                        and t.ClientID is null 
-                        and i.ClientID is null 
+                      where p.PapStatus='Signed' OR p.PapStatus='Restored' 
                         and p.Region = '".$_SESSION['Region']."'
                       ";
                         $result  = mysqli_query($connection, $query);
