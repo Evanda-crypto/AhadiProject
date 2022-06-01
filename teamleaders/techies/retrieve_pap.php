@@ -59,7 +59,7 @@ $Id = $_POST['id'];
     
     $query = "DELETE FROM  techietask  WHERE ClientID=$id";
     $result = mysqli_query($connection, $query);
-    $sql1 = "DELETE FROM  papdailysales  WHERE ClientID=$id";
+    $sql1 = "UPDATE papdailysales set PapStatus='Retrieved',Note='$Reason' WHERE ClientID=$id";
     $result1 = mysqli_query($connection, $sql1);
     $sql2 = "DELETE FROM  papinstalled  WHERE ClientID=$id";
     $result2 = mysqli_query($connection, $sql2);
@@ -69,7 +69,6 @@ $Id = $_POST['id'];
         "INSERT into retrieved_paps (clientid,client_name,building_name,building_code,region,apt,reason,champ,teamid,contact,mac_address,reporter) VALUES ('$Id','$client','$Bname','$Bcode','$Region','$Apt','$Reason','$Champ','$Teamid','$Contact','$Mac','$Reporter')"
     );
     
-
     if ($insert) {
         $_SESSION["success"] = "Moved to Retrieved";
         header("Location: turned-on.php");  

@@ -56,34 +56,21 @@ $Id = $_POST['id'];
  if ($connection->connect_error) {
     die("connection failed : " . $connection->connect_error);
 } else {
-    
-    
+    $query = "DELETE FROM  techietask  WHERE ClientID=$id";
+    $result = mysqli_query($connection, $query);
+    $sql1 = "UPDATE papdailysales set PapStatus='Retrieved',Note='$Reason' WHERE ClientID=$id";
+    $result1 = mysqli_query($connection, $sql1);
+    $sql2 = "DELETE FROM  papinstalled  WHERE ClientID=$id";
+    $result2 = mysqli_query($connection, $sql2);
+    $sql3 = "DELETE FROM  turnedonpap  WHERE ClientID=$id";
+    $result3 = mysqli_query($connection, $sql3);
     $insert = $connection->query(
         "INSERT into retrieved_paps (clientid,client_name,building_name,building_code,region,apt,reason,champ,teamid,contact,mac_address,reporter) VALUES ('$Id','$client','$Bname','$Bcode','$Region','$Apt','$Reason','$Champ','$Teamid','$Contact','$Mac','$Reporter')"
     );
-
+    
     if ($insert) {
-        $query = "DELETE FROM  techietask  WHERE ClientID= '$id'";
-        $result = mysqli_query($connection, $query);
-
-        $sql1 = "DELETE FROM  papdailysales  WHERE ClientID= '$id'";
-        $result1 = mysqli_query($connection, $sql1);
-
-        $sql2 = "DELETE FROM  papinstalled  WHERE ClientID= '$id'";
-        $result2 = mysqli_query($connection, $sql2);
-
-        $sql3 = "DELETE FROM  turnedonpap  WHERE ClientID= '$id'";
-        $result3 = mysqli_query($connection, $sql3);
-
-        if($result && $result1 && $result2 && $result3){
-            $_SESSION["success"] = "Moved to Retrieved";
-        header("Location: turnedon.php");
-        }
-        else{
-            $_SESSION["status"] = "Not moved!";
-        header("Location: turnedon.php");
-        }
-        
+        $_SESSION["success"] = "Moved to Retrieved";
+        header("Location: turnedon.php");  
     } else {
         $_SESSION["status"] = "Error please try again!";
         header("Location: turnedon.php");
