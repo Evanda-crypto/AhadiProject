@@ -66,20 +66,35 @@ $Id = $_POST['id'];
         $query = "DELETE FROM  techietask  WHERE ClientID= '$id'";
         $result = mysqli_query($connection, $query);
 
-        $sql1 = "DELETE FROM  papdailysales  WHERE ClientID= '$id'";
-        $result1 = mysqli_query($connection, $sql1);
+        if($result){
+            $sql1 = "DELETE FROM  papdailysales  WHERE ClientID= '$id'";
+             $result1 = mysqli_query($connection, $sql1);
 
-        $sql2 = "DELETE FROM  papinstalled  WHERE ClientID= '$id'";
-        $result2 = mysqli_query($connection, $sql2);
+             if($result1){
+                $sql2 = "DELETE FROM  papinstalled  WHERE ClientID= '$id'";
+                $result2 = mysqli_query($connection, $sql2);
 
-        $sql3 = "DELETE FROM  turnedonpap  WHERE ClientID= '$id'";
-        $result3 = mysqli_query($connection, $sql3);
+                if($result2){
+                    $sql3 = "DELETE FROM  turnedonpap  WHERE ClientID= '$id'";
+                    $result3 = mysqli_query($connection, $sql3);
 
-        if($result && $result1 && $result2 && $result3){
-            $_SESSION["success"] = "Moved to Retrieved";
-        header("Location: turned-on.php");
-        }
-        else{
+                    if($result3){
+                        $_SESSION["success"] = "Moved to Retrieved";
+                        header("Location: turned-on.php");
+                    }else{
+                        $_SESSION["status"] = "Not moved!";
+                        header("Location: turned-on.php");
+                    }
+                }else{
+                    $_SESSION["status"] = "Not moved!";
+                    header("Location: turned-on.php");
+                }
+             }
+             else{
+                $_SESSION["status"] = "Not moved!";
+                header("Location: turned-on.php");
+             }
+        }else{
             $_SESSION["status"] = "Not moved!";
         header("Location: turned-on.php");
         }

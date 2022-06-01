@@ -31,7 +31,6 @@ $champ=$row['ChampName'];
 $client=$row['ClientName'];
 $contact=$row['ClientContact'];
 $region=$row['Region'];
-$techies=$row['ClientAge'];
 $bname=$row['BuildingName'];
 $bcode=$row['BuildingCode'];
 $mac=$row['mac'];
