@@ -321,7 +321,7 @@ include("../../config/config.php");
                                     <td><?php echo $row['DateInstalled']; ?></td>
                                     <td><?php echo $row['DateTurnedOn']; ?></td>
                                     <td>
-                                    <button class="btn btn-danger" ><a href="retrieve_pap.php?client-id=<?php echo $row['ClientID']; ?>" class="text-bold">Move to Retrieved</a></button>
+                                    <button class="btn btn-danger" ><a href="retrieve_pap.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Move to Retrieved</a></button>
                                     </td>
                                 </tr>
                         <?php

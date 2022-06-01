@@ -2,7 +2,7 @@
 
 include("../../config/config.php");
 include("session.php");
-$id=$_GET['client-id'];
+$id=$_GET['clientid'];
 
 $sql="SELECT 
 t.ClientID, 
@@ -23,8 +23,8 @@ JOIN papdailysales as p ON p.ClientID = t.ClientID
 left join papinstalled as i ON i.ClientID = p.ClientID 
 left join Token_teams as g on g.Team_ID = i.Team_ID 
 WHERE 
-t.ClientID IS NOT null 
-and p.Region = '".$_SESSION['Region']."' and p.ClientID=$id";
+t.ClientID IS NOT null p.ClientID=$id
+and p.Region = '".$_SESSION['Region']."'";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
 $champ=$row['ChampName'];
@@ -63,19 +63,19 @@ $Id = $_POST['id'];
     );
 
     if ($insert) {
-        $query = "DELETE FROM  techietask  WHERE ClientID= '$id'";
+        $query = "DELETE FROM  techietask  WHERE ClientID=$id";
         $result = mysqli_query($connection, $query);
 
         if($result){
-            $sql1 = "DELETE FROM  papdailysales  WHERE ClientID= '$id'";
+            $sql1 = "DELETE FROM  papdailysales  WHERE ClientID=$id";
              $result1 = mysqli_query($connection, $sql1);
 
              if($result1){
-                $sql2 = "DELETE FROM  papinstalled  WHERE ClientID= '$id'";
+                $sql2 = "DELETE FROM  papinstalled  WHERE ClientID=$id";
                 $result2 = mysqli_query($connection, $sql2);
 
                 if($result2){
-                    $sql3 = "DELETE FROM  turnedonpap  WHERE ClientID= '$id'";
+                    $sql3 = "DELETE FROM  turnedonpap  WHERE ClientID=$id";
                     $result3 = mysqli_query($connection, $sql3);
 
                     if($result3){
