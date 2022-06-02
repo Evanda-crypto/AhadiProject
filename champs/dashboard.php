@@ -210,7 +210,7 @@ if (!$connection) {
                   $query =
                       "SELECT COUNT(papdailysales.ClientID) as notinstalled  FROM papdailysales LEFT JOIN papinstalled on papdailysales.ClientID=papinstalled.ClientID LEFT JOIN 
                       reminders on reminders.ClientID=papdailysales.ClientID LEFT JOIN techietask on techietask.ClientID=papdailysales.ClientID left join 
-                      papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papdailysales.PapStatus<>'Retrieved' and
+                      papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papdailysales.PapStatus<>'Retrieved' AND papdailysales.PapStatus<>'Restored' and
                      papnotinstalled.ClientID is null and papinstalled.ClientID is null and techietask.ClientID is null and reminders.ClientID is null and papdailysales.ChampName='" .
                       $_SESSION["FName"] .
                       " " .
