@@ -1526,25 +1526,43 @@ while ($signed = mysqli_fetch_assoc($result)) {
     while ($remind = mysqli_fetch_assoc($result)) {
         echo $remind["reminded"];
     }
+} ?>,<?php if (!$connection) {
+    echo "Problem in database connection! Contact administrator!" .
+        mysqli_error();
+} else {
+    $sql =
+        " SELECT COUNT(ClientID) as restored FROM papdailysales where PapStatus='Restored' and ChampName='" .
+        $_SESSION["FName"] .
+        " " .
+        $_SESSION["LName"] .
+        "'";
+    $result = mysqli_query($connection, $sql);
+    $chart_data = "";
+    while ($remind = mysqli_fetch_assoc($result)) {
+        echo $remind["restored"];
+    }
 } ?>],
                 backgroundColor: [
                             
                                     "#ffb91f",
                                     "#0cbeaf",
-                                    "#3072f5"
+                                    "#3072f5",
+                                    "#fe2d38"
                                 ],
                 hoverBackgroundColor: [
                                  
                                     "#ffb91f",
                                     "#0cbeaf",
-                                    "#3072f5"
+                                    "#3072f5",
+                                    "#fe2d38"
                                 ]
 
                             } ],
             labels: [
                             "Assigned",
                             "Installed",
-                            "Reminded"
+                            "Reminded",
+                            "Restored"
                         ]
         },
         options: {
