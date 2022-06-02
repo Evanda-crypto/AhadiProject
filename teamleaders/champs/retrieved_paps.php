@@ -183,7 +183,7 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Retrieved</strong></center>
+                           <center> <strong class="card-title">Retrieved [<?php echo $_SESSION['Region'];?>]</strong></center>
                         </div>
                         <div class="card-body">
                         <?php
@@ -211,7 +211,6 @@ include("../../config/config.php");
                                     <tr>
                      <th>Building Name</th>
                      <th>Building Code</th>
-                     <th>Region</th>
                      <th>Champ</th>
                      <th>Client Name</th>
                      <th>Client Contact</th>
@@ -234,7 +233,6 @@ include("../../config/config.php");
                                 <tr>
                                     <td><?php echo $row['BuildingName']; ?></td>
                                     <td><?php echo $row['BuildingCode']; ?></td>
-                                    <td><?php echo $row['Region']; ?></td>
                                     <td><?php echo $row['ChampName']; ?></td>
                                     <td><?php echo $row['ClientName']; ?></td>
                                     <td><?php echo $row['ClientContact']; ?></td>
