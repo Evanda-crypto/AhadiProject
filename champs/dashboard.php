@@ -269,7 +269,7 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT count(*) as turnedon from turnedonpap where ChampName='" .
+                      "SELECT count(*) as turnedon from papdailysales where PapStatus='Turned On' and ChampName='" .
                       $_SESSION["FName"] .
                       " " .
                       $_SESSION["LName"] .

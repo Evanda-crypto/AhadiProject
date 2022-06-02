@@ -136,7 +136,7 @@ include("../config/config.php");
                         <div class="card">
                             <div class="card-header">
                             <center><strong class="card-title">Turned On[<?php
-         $query="SELECT COUNT(*) as turnedon FROM turnedonpap WHERE ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+         $query="SELECT COUNT(*) as turnedon FROM papdailysales WHERE PapStatus='Turned On' and ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['turnedon'];
@@ -158,7 +158,7 @@ include("../config/config.php");
                                   </thead>
                                   <tbody>
                                   <?php
-                        $query  = "SELECT turnedonpap.ClientID,papdailysales.ChampName,papdailysales.ClientContact,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,turnedonpap.DateTurnedOn,papdailysales.Floor,papdailysales.ClientName,papdailysales.DateSigned FROM turnedonpap JOIN papdailysales ON papdailysales.ClientID=turnedonpap.ClientID WHERE turnedonpap.ClientID IS NOT null and papdailysales.ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+                        $query  = "SELECT ClientID,ChampName,ClientContact,BuildingName,ClientName FROM papdailysales WHERE PapStatus='Turned On' and ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
