@@ -1501,7 +1501,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
         mysqli_error();
 } else {
     $sql =
-        " SELECT COUNT(papinstalled.ClientID) as installed FROM papinstalled LEFT JOIN turnedonpap ON turnedonpap.ClientID=papinstalled.ClientID LEFT JOIN papdailysales ON papdailysales.ClientID=papinstalled.ClientID WHERE turnedonpap.ClientID is null and papdailysales.ChampName='" .
+        " SELECT COUNT(ClientID) as installed FROM papdailysales where PapStatus='Installed' and ChampName='" .
         $_SESSION["FName"] .
         " " .
         $_SESSION["LName"] .
