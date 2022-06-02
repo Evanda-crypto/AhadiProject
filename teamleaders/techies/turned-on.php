@@ -256,27 +256,16 @@ include("../../config/config.php");
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-      <th class="th-sm">Client Name
-      </th>
-      <th class="th-sm">Contact
-      </th>
-      <th class="th-sm">Building Name
-      </th>
-      <th class="th-sm">Building Code
-      </th>
-      <th class="th-sm">Mac Address
-      </th>
-      <th class="th-sm">Techie 1
-      </th>
-      <th class="th-sm">Techie 2
-      </th>
-      <th class="th-sm">Techie 3
-      </th>
-      <th class="th-sm">Date Installed
-      </th>
-      <th class="th-sm">Date Turned On
-      </th>
-      <th class="th-sm">Move to Retrieved
+      <th>Client Name</th>
+      <th>Contact</th>
+      <th>Building Name </th>
+      <th>Building Code</th>
+      <th>Mac Address</th>
+      <th>Techie 1</th>
+      <th>Techie 2</th>
+      <th>Techie 3</th>
+      <th >Date Turned On</th>
+      <th >Move to Retrieved
       </th>
                                     </tr>
                                 </thead>
@@ -318,7 +307,6 @@ include("../../config/config.php");
                                     <td><?php echo $row['Techie1']; ?></td>
                                     <td><?php echo $row['Techie2']; ?></td>
                                     <td><?php echo $row['Techie3']; ?></td>
-                                    <td><?php echo $row['DateInstalled']; ?></td>
                                     <td><?php echo $row['DateTurnedOn']; ?></td>
                                     <td>
                                     <button class="btn btn-danger" ><a href="retrieve_pap.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Move to Retrieved</a></button>

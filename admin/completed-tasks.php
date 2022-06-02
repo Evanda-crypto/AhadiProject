@@ -294,6 +294,7 @@ $(document).ready(function() {
      });
     var table = $('#example').DataTable(
         {
+            order: [[7, 'desc']],
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "scrollY":        "700px",
         "scrollCollapse": true,

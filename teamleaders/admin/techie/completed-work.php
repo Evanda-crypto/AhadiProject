@@ -162,7 +162,7 @@ tfoot td {
     </tbody></table>
                         </div></center>
                         <div class="card-body" id="demo">
-                        <table class="table table-striped" id="example">
+                        <table class="table table-striped table-bordered" id="example">
                                 <thead>
                                     <tr>
       <th class="th-sm">Building Name
@@ -278,6 +278,7 @@ $(document).ready(function() {
      });
     var table = $('#example').DataTable(
         {
+            order: [[7, 'desc']],
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "scrollY":        "700px",
         "scrollCollapse": true,
