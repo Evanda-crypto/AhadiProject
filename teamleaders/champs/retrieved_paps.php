@@ -218,6 +218,7 @@ include("../../config/config.php");
                      <th>Date Retrieved</th>
                      <th>Comment</th>
                      <th>Edit</th>
+                     <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -241,6 +242,9 @@ include("../../config/config.php");
                                     <td><?php echo $row['Note']; ?></td>
                                     <td>
                                     <button class="btn btn-warning" ><a href="edit-retrieved.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
+                                    </td>
+                                    <td>
+                                    <button class="btn btn-danger" ><a href="delete_retrieved.php?clientid=<?php echo $row['ClientID']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['ClientName']; ?> from KOMP database?')">Delete</a></button>
                                     </td>
 
                                 </tr>

@@ -155,14 +155,14 @@ include("../config/config.php");
                                   </thead>
                                   <tbody>
                                   <?php
-                        $query  = "SELECT clientid,client_name,contact,building_name from retrieved_paps WHERE champ='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+                        $query  = "SELECT ClientName,ClientID,ClientContact,BuildingName from papdailysales WHERE PapStatus='Retrieved' and ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                                 <tr>
-                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['clientid']; ?>" class="openPopup"><?php echo $row['client_name']; ?></a></td>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['clientid']; ?>" class="openPopup"><?php echo $row['contact']; ?></a></td>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['clientid']; ?>" class="openPopup"><?php echo $row['building_name']; ?></a></td>
+                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
                                 </tr>
                         <?php
 
