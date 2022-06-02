@@ -209,10 +209,7 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT COUNT(papdailysales.ClientID) as notinstalled  FROM papdailysales LEFT JOIN papinstalled on papdailysales.ClientID=papinstalled.ClientID LEFT JOIN 
-                      reminders on reminders.ClientID=papdailysales.ClientID LEFT JOIN techietask on techietask.ClientID=papdailysales.ClientID left join 
-                      papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE 
-                     papnotinstalled.ClientID is null and papinstalled.ClientID is null and techietask.ClientID is null and reminders.ClientID is null and papdailysales.ChampName='" .
+                      "SELECT COUNT(*) as notinstalled from papdailysales where PapStatus='Signed' and ChampName='" .
                       $_SESSION["FName"] .
                       " " .
                       $_SESSION["LName"] .
@@ -299,7 +296,7 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT count(*) as allpap from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papnotinstalled.ClientID is null and papdailysales.ChampName='" .
+                      "SELECT count(*) as allpap from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID left join retrieved_paps on retrieved_paps.ClientID=papdailysales.ClientID where retrieved_paps.ClientID is null and papnotinstalled.ClientID is null and papdailysales.ChampName='" .
                       $_SESSION["FName"] .
                       " " .
                       $_SESSION["LName"] .
@@ -1523,25 +1520,44 @@ while ($signed = mysqli_fetch_assoc($result)) {
     while ($remind = mysqli_fetch_assoc($result)) {
         echo $remind["reminded"];
     }
+} ?>,<?php if (!$connection) {
+    echo "Problem in database connection! Contact administrator!" .
+        mysqli_error();
+} else {
+    $sql =
+        " SELECT COUNT(ClientID) as restored FROM papdailysales where PapStatus='Restored' and ChampName='" .
+        $_SESSION["FName"] .
+        " " .
+        $_SESSION["LName"] .
+        "'";
+    $result = mysqli_query($connection, $sql);
+    $chart_data = "";
+    while ($remind = mysqli_fetch_assoc($result)) {
+        echo $remind["restored"];
+    }
 } ?>],
                 backgroundColor: [
                             
                                     "#ffb91f",
                                     "#0cbeaf",
-                                    "#3072f5"
+                                    "#3072f5",
+                                    "#fe2d38"
                                 ],
                 hoverBackgroundColor: [
                                  
                                     "#ffb91f",
                                     "#0cbeaf",
-                                    "#3072f5"
+                                    "#3072f5",
+                                    "#fe2d38"
+
                                 ]
 
                             } ],
             labels: [
                             "Assigned",
                             "Installed",
-                            "Reminded"
+                            "Reminded",
+                            "Restored"
                         ]
         },
         options: {

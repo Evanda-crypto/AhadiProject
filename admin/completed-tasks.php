@@ -152,7 +152,7 @@ tfoot td {
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="../../../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
