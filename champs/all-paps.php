@@ -41,8 +41,8 @@ include("../config/config.php");
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 </head>
 <body style="background-color:#e1e1e1">
- <!-- Left Panel -->
- <aside id="left-panel" class="left-panel">
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -57,7 +57,7 @@ include("../config/config.php");
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APs</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APS</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="not-installed.php">Not Installed</a></li>
                             <li><i class="fa fa-table"></i><a href="to-restore.php">To Restore</a></li>
@@ -66,7 +66,6 @@ include("../config/config.php");
                             <li><i class="fa fa-table"></i><a href="retrieved.php">Retrieved</a></li>
                         </ul>
                     </li>
-                    
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>  
@@ -133,7 +132,7 @@ include("../config/config.php");
                             <div class="card-header">
                             <center><strong class="card-title">All Paps[<?php
                   $query =
-                      "SELECT count(*) as allpap from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papnotinstalled.ClientID is null and papdailysales.ChampName='" .
+                      "SELECT count(*) as allpap from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papdailysales.PapStatus<>'Retrieved' and papnotinstalled.ClientID is null and papdailysales.ChampName='" .
                       $_SESSION["FName"] .
                       " " .
                       $_SESSION["LName"] .
@@ -157,7 +156,7 @@ include("../config/config.php");
                                   <tbody>
                                   <?php
     
-    $sql="SELECT papdailysales.ClientID,papdailysales.ClientName,papdailysales.BuildingName,papdailysales.ClientContact from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papnotinstalled.ClientID is null and papdailysales.ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+    $sql="SELECT papdailysales.ClientID,papdailysales.ClientName,papdailysales.BuildingName,papdailysales.ClientContact from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papdailysales.PapStatus<>'Retrieved' and papnotinstalled.ClientID is null and papdailysales.ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
     $result=$connection->query($sql);
     while($row=$result->fetch_array()){
       ?>
