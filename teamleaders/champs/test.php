@@ -11,7 +11,7 @@ include("../../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>All | Paps | LSM</title>
+    <title>Assigned</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -26,11 +26,6 @@ include("../../config/config.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
     <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -46,22 +41,7 @@ include("../../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-<style>
-    .green {
-  color: green;
-}
 
-.violet {
-  color: violet;
-}
-.blue{
-    color:blue;
-}.orange{
-    color:orange;
-}.red{
-    color:red;
-}
-</style>
 </head>
 <body style="background-color:#e1e1e1">
    <!-- Left Panel -->
@@ -80,7 +60,7 @@ include("../../config/config.php");
                         <a href="not-installed.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Not Installed </a>
                     </li>
                     <li>
-                        <a href="retrieved_paps.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Retrieved</a>
+                        <a href="assigned.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Assigned</a>
                     </li>
                     <li>
                         <a href="restituted.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Restituted </a>
@@ -132,7 +112,7 @@ include("../../config/config.php");
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell"></i>
                                 <span class="count bg-danger"><?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled  WHERE  papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
+         $query="SELECT COUNT(*) as restituted FROM papnotinstalled  WHERE papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['restituted'];
@@ -181,84 +161,74 @@ include("../../config/config.php");
             <div class="animated fadeIn">
                 <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                           <center> <strong class="card-title">All Paps[LSM]</strong></center>
-                        </div>
-                        <div class="card-body">
-                        <?php
-            if(isset($_SESSION['status'])){
-                ?>
-               <center><span> <div class="alert alert-danger" role="alert">
-                   <?php echo $_SESSION['status'];
-                unset($_SESSION['status']);?>
-                 </div></span></center>
-                <?php
-                
-            }
-            elseif(isset($_SESSION['success'])){
-                ?>
-                <center><span><div class="alert alert-success" role="alert">
-                   <?php echo $_SESSION['success'];
-                unset($_SESSION['success']);?>
-                 </div></span></center>
-                <?php
-                
-            }
-            ?>
-                            <table class="table table-striped" id="example">
-                                <thead>
-                                    <tr>
-                     <th>Building Name</th>
-                     <th>Building Code</th>
-                     <th>Champ</th>
-                     <th>Client Name</th>
-                     <th>Client Contact</th>
-                     <th>Date Signed</th>
-                     <th>Availability</th>
-                     <th>Champs Comment</th>
-                    <th>Pap Status</th>
-                     <th>Edit</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                        $query  = "SELECT p.PapStatus,p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,
-                        p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note from papdailysales as p 
-                        where p.PapStatus<>'Restituted' and p.Region='LSM'";
+                        <div class="card">
+                            <div class="card-header">
+                            <center><strong class="card-title">Assigned[Not Installed]</strong></center>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped" id="example">
+                                    <thead>
+                                        <tr>
+    <th class="th-sm">Building Name
+      </th>
+      <th class="th-sm">Building Code
+      </th>
+      <th class="th-sm">Client Name
+      </th>
+      <th class="th-sm">Contact
+      </th>
+      <th class="th-sm">Availability
+      </th>
+      <th class="th-sm">Techies
+      </th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                  <?php
+                        $query  = "SELECT p.ChampName,techietask.ClientName,techietask.ClientID,techietask.ClientContact,techietask.ClientAvailability,p.BuildingName,p.Region,techietask.Date,Token_teams.Team_ID,CONCAT(Token_teams.Techie1,'/',Token_teams.Techie2) as techies,
+                        p.BuildingCode,p.Floor,p.Apt from papdailysales as p LEFT JOIN 
+                        techietask on techietask.ClientID=p.ClientID LEFT JOIN Token_teams ON Token_teams.Team_ID=techietask.TeamID  LEFT JOIN papinstalled ON papinstalled.ClientID=p.ClientID WHERE techietask.ClientID is not null AND papinstalled.ClientID is null and p.Region='".$_SESSION['Region']."'";
                         $result  = mysqli_query($connection, $query);
-
-                            while ($row = mysqli_fetch_array($result)) {
-                            
+                            while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                                 <tr>
                                     <td><?php echo $row['BuildingName']; ?></td>
                                     <td><?php echo $row['BuildingCode']; ?></td>
-                                    <td><?php echo $row['ChampName']; ?></td>
                                     <td><?php echo $row['ClientName']; ?></td>
                                     <td><?php echo $row['ClientContact']; ?></td>
-                                    <td><?php echo $row['DateSigned']; ?></td>
                                     <td><?php echo $row['ClientAvailability']; ?></td>
-                                    <td><?php echo $row['Note']; ?></td>
-                                   <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>
-                                    <td>
-                                    <button class="btn btn-warning" ><a href="edit-records.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
-                                    </td>
-
+                                    <td><?php echo $row['techies']; ?></td>
                                 </tr>
                         <?php
 
                             }
-                    
                         ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
+                    <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog" >
+    <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#3073f5;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="background-color:#3073f5;">
+
+            </div>
+            <div class="modal-footer" style="background-color:#3073f5;">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+      
+    </div>
+</div><!--End of modal-->
+                
 
 </div><!-- .content -->
-
 <div class="clearfix"></div>
 
 </div><!-- /#right-panel -->
@@ -272,50 +242,20 @@ include("../../config/config.php");
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../../assets/js/main.js"></script>
 
-<script type="text/javascript">
-$( document ).ready(function() {
-    order: [[5, 'desc']],
-$('#example').DataTable({
-		 "processing": true,
-		 "dom": 'lBfrtip',
-		 "buttons": [
-            {
-                extend: 'collection',
-                text: 'Export',
-                buttons: [
-                    'excel',
-                    'csv'
-                ]
-            }
-        ],
+
+<script>
+ $(document).ready(function () {
+$('#example').DataTable(
+    {
+        
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "scrollY":        "700px",
         "scrollCollapse": true,
         "pagingType": "full_numbers"
-        });
+    }
+);
+$('.dataTables_length').addClass('bs-select');
 });
-
-
-window.addEventListener('DOMContentLoaded', (event) => {
-  var els = document.querySelectorAll('.colorText');
-  els.forEach(function(cell) {
-    if (cell.textContent === "Assigned") {
-      cell.classList.toggle('violet');
-    }
-    if (cell.textContent === "Turned On") {
-      cell.classList.toggle('green');
-    }
-    if (cell.textContent === "Signed") {
-      cell.classList.toggle('blue');
-    }
-    if (cell.textContent === "Installed") {
-      cell.classList.toggle('orange');
-    }
-    if (cell.textContent === "Restored") {
-      cell.classList.toggle('red');
-    }
-  })
-})
 </script>
 </body>
 </html>

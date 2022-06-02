@@ -60,15 +60,13 @@ $FamilyName = $_POST['FamilyName'];
 $note = $_POST['note'];
 
 
-$query="update turnedonpap set ClientID=$id,BuildingName='$BuildingName',BuildingCode='$BuildingCode',Region='$Region' where ClientID=$id";
-$upd=mysqli_query($connection,$query);
 $sql="update papdailysales set ClientID=$id,CurrentPackage='$CurrISP',ClientName='$ClientName',ClientContact='$ClientContact'
 ,ClientGender='$ClientGender',ClientAge='$ClientAge',ClientOccupation='$ClientOccupation',ClientAvailability='$ClientAvailability',Region='$Region',BuildingName='$BuildingName',BuildingCode='$BuildingCode',Apt='$Apt'
 ,Floor='$Floor',AptLayout='$Layout',HouseholdSize='$HouseholdSize',Children='$Children',Teenagers='$Teenagers',Adults='$Adults',Birthday='$Birthday',ClientWhatsApp='$ClientWhatsApp',
-PhoneAlt='$PhoneAlt',Email='$email' where ClientID=$id";
+PhoneAlt='$PhoneAlt',Email='$email',PapStatus='Restored' where ClientID=$id";
 
 $result=mysqli_query($connection,$sql);
-if ($result && $query) {
+if ($result) {
     $_SESSION["success"] = "Records Updated";
     header("Location: all-paps.php");
 } else {
@@ -241,7 +239,7 @@ if ($result && $query) {
                                 <div id="pay-invoice">
                                     <div class="card-body">
                                         <div class="card-title">
-                                            <h3 class="text-center">Edit Pap Record</h3>
+                                            <h3 class="text-center">Edit Retrieved Record</h3>
                                         </div>
                                         <hr>
                                         <form  method="post" action="">
@@ -430,7 +428,7 @@ if ($result && $query) {
                                                 <input id="cc-number" name="note" value="<?php echo $note?>" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
-                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
+                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning" onClick="return confirm('Sure to Restore <?php  echo $ClientName; ?> back to KOMP Database for Installation?')">
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button>

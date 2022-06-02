@@ -20,7 +20,7 @@ if (isset($_POST["submit"])) {
             $sql="UPDATE Users set Password='$hashpass' WHERE Email='$EMAIL'";
             $result=mysqli_query($connection,$sql);
             if($result){
-                $_SESSION["success"] = "Password Reset was successfully.";
+                $_SESSION["success"] = "Password Reset was Successfull.";
                 header("Location: ../index.php");
                 
             }
@@ -40,7 +40,7 @@ if (isset($_POST["submit"])) {
                 $sql="UPDATE Token_teams set PASSWORD='$hashpass' WHERE Team_ID='$EMAIL'";
             $result=mysqli_query($connection,$sql);
             if($result){
-                $_SESSION["success"] = "Password Reset was successfully.";
+                $_SESSION["success"] = "Password Reset was Successfull.";
                 header("Location: ../index.php");
             }
             else{

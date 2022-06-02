@@ -11,7 +11,7 @@ include("../../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>All | Paps | LSM</title>
+    <title>Retrieved | Paps</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -141,7 +141,7 @@ include("../../config/config.php");
                             </button>
                             <div class="dropdown-menu" aria-labelledby="notification">
                                 <p class="red">You have <?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled  WHERE papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
+         $query="SELECT COUNT(*) as restituted FROM papnotinstalled  WHERE  papnotinstalled.Reason<>'Already installed' and papnotinstalled.Region='".$_SESSION['Region']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['restituted'];
@@ -183,7 +183,7 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">All Paps[LSM]</strong></center>
+                           <center> <strong class="card-title">Retrieved</strong></center>
                         </div>
                         <div class="card-body">
                         <?php
@@ -211,21 +211,20 @@ include("../../config/config.php");
                                     <tr>
                      <th>Building Name</th>
                      <th>Building Code</th>
+                     <th>Region</th>
                      <th>Champ</th>
                      <th>Client Name</th>
                      <th>Client Contact</th>
-                     <th>Date Signed</th>
-                     <th>Availability</th>
-                     <th>Champs Comment</th>
-                    <th>Pap Status</th>
+                     <th>Date Retrieved</th>
+                     <th>Comment</th>
                      <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
                         $query  = "SELECT p.PapStatus,p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,
-                        p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note from papdailysales as p 
-                        where p.PapStatus<>'Restituted' and p.Region='LSM'";
+                        p.ClientName,p.ClientContact,Date(p.updated_at) as upd,p.AptLayout,p.DateSigned,p.Note from papdailysales as p 
+                        where p.PapStatus='Retrieved' and p.Region='".$_SESSION['Region']."'";
                         $result  = mysqli_query($connection, $query);
 
                             while ($row = mysqli_fetch_array($result)) {
@@ -234,15 +233,14 @@ include("../../config/config.php");
                                 <tr>
                                     <td><?php echo $row['BuildingName']; ?></td>
                                     <td><?php echo $row['BuildingCode']; ?></td>
+                                    <td><?php echo $row['Region']; ?></td>
                                     <td><?php echo $row['ChampName']; ?></td>
                                     <td><?php echo $row['ClientName']; ?></td>
                                     <td><?php echo $row['ClientContact']; ?></td>
-                                    <td><?php echo $row['DateSigned']; ?></td>
-                                    <td><?php echo $row['ClientAvailability']; ?></td>
+                                    <td><?php echo $row['upd']; ?></td>
                                     <td><?php echo $row['Note']; ?></td>
-                                   <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>
                                     <td>
-                                    <button class="btn btn-warning" ><a href="edit-records.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
+                                    <button class="btn btn-warning" ><a href="edit-retrieved.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
                                     </td>
 
                                 </tr>
@@ -274,8 +272,8 @@ include("../../config/config.php");
 
 <script type="text/javascript">
 $( document ).ready(function() {
-    order: [[5, 'desc']],
 $('#example').DataTable({
+    order: [[6, 'desc']],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [

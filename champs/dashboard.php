@@ -296,7 +296,8 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT count(*) as allpap from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID left join retrieved_paps on retrieved_paps.ClientID=papdailysales.ClientID where retrieved_paps.ClientID is null and papnotinstalled.ClientID is null and papdailysales.ChampName='" .
+                      "SELECT count(*) as allpap from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID left join retrieved_paps on 
+                      retrieved_paps.ClientID=papdailysales.ClientID where retrieved_paps.ClientID is null and papnotinstalled.ClientID is null and papdailysales.ChampName='" .
                       $_SESSION["FName"] .
                       " " .
                       $_SESSION["LName"] .
