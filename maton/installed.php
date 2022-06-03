@@ -176,12 +176,13 @@ include("../config/config.php");
                                    
                     <th>Building Name</th>
                     <th>Building Code</th>
+                    <th>Region</th>
                     <th>Mac Address</th>
                     <th>Date Installed</th>
                     <th>Client Name</th>
                     <th>Contact</th>
                    <th>Floor</th>
-                   <th>Region</th>
+
                     <th>More</th>
                                     </tr>
                                 </thead>
@@ -200,12 +201,13 @@ while($row=$result->fetch_array()){
  
     <td><?php echo $row['BuildingName']?></td>
     <td><?php echo $row['BuildingCode']?></td>
+    <td><?php echo $row['Region']?></td>
     <td><?php echo $row['Mac']?></td>
     <td class="centered colorText"><?php echo $row['DateInstalled']?></td>
     <td><?php echo $row['ClientName']?></td>
      <td><?php echo $row['ClientContact']?></td>
     <td><?php echo $row['Floor']?></td>
-    <td><?php echo $row['Region']?></td>
+
     <td>
     <button class="btn btn-warning" ><a href="turnon.php?clientid=<?php echo $row['ClientID']?>" class="text-bold">Turn On</a></button>
     </td>

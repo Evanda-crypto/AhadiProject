@@ -289,7 +289,7 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['Techie2']?></td>
     <td><?php echo $row['Techie3']?></td>
     <td><?php echo $row['Mac']?></td>
-    <td><?php echo $row['DateInstalled']?></td>
+    <td><?php echo $row['updated_at']?></td>
     <td>
     <button class="btn btn-warning" ><a href="edit-mac.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit Mac</a></button>
     </td>
