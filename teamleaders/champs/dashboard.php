@@ -264,13 +264,8 @@ while ($row = mysqli_fetch_array($result)) {
                                             <div class="stat-text"><span class="count"><?php
                                             $query =
                                                 "SELECT count(*) as clients from papdailysales left join papnotinstalled on papdailysales.ClientID=papnotinstalled.ClientID where papdailysales.PapStatus<>'Retrieved' and papnotinstalled.ClientID is null and papdailysales.Region='".$_SESSION["Region"]."'";
-                                            $data = mysqli_query(
-                                                $connection,
-                                                $query
-                                            );
-                                            while (
-                                                $row = mysqli_fetch_assoc($data)
-                                            ) {
+                                            $data = mysqli_query($connection,$query);
+                                            while ($row = mysqli_fetch_assoc($data)) {
                                                 echo $row["clients"]."<br><br>";
                                             }
                                             ?></span></div>
@@ -315,20 +310,12 @@ while ($row = mysqli_fetch_array($result)) {
                                                 "SELECT COUNT(*) as pending from papdailysales as p LEFT OUTER JOIN techietask as t on 
                                                 t.ClientID=p.ClientID left join  papnotinstalled as r on r.ClientID=p.ClientID WHERE t.ClientID is null and 
                                                 r.ClientID is null and p.Region='".$_SESSION["Region"]."'";
-                                            $data = mysqli_query(
-                                                $connection,
-                                                $query
-                                            );
-                                            while (
-                                                $row = mysqli_fetch_assoc($data)
-                                            ) {
-                                                echo $row["pending"] .
-                                                    "<br><br>";
+                                            $data = mysqli_query($connection, $query);
+                                            while ($row = mysqli_fetch_assoc($data)) {
+                                                echo $row["pending"];
                                             }
                                             ?></span></div>
-                                            <div class="stat-heading">Not Installed[<?php echo $_SESSION[
-                                                "Region"
-                                            ]; ?>]</div>
+                                            <div class="stat-heading">Not Installed[<?php echo $_SESSION["Region"]; ?>]</div>
                                         </div>
                                     </div>
                                 </div>
@@ -348,14 +335,9 @@ while ($row = mysqli_fetch_array($result)) {
                                             <div class="stat-text"><span class="count"><?php
                                             $query =
                                                 "SELECT COUNT(*) as pap FROM papdailysales where PapStatus='Installed' and Region='".$_SESSION["Region"]."'";
-                                            $data = mysqli_query(
-                                                $connection,
-                                                $query
-                                            );
-                                            while (
-                                                $row = mysqli_fetch_assoc($data)
-                                            ) {
-                                                echo $row["pap"] . "<br><br>";
+                                            $data = mysqli_query($connection,$query);
+                                            while ($row = mysqli_fetch_assoc($data)) {
+                                                echo $row["pap"];
                                             }
                                             ?></span></div>
                                             <div class="stat-heading">Installed[<?php echo $_SESSION["Region"]; ?>]</div>
@@ -378,13 +360,9 @@ while ($row = mysqli_fetch_array($result)) {
                                             <div class="stat-text"><span class="count"><?php
                                             $query =
                                                 "SELECT count(*) as turnedon from papdailysales Where PapStatus='Turned On' and Region='".$_SESSION["Region"]."'";
-                                            $data = mysqli_query(
-                                                $connection,
-                                                $query
-                                            );
+                                            $data = mysqli_query($connection,$query);
                                             while (
-                                                $row = mysqli_fetch_assoc($data)
-                                            ) {
+                                                $row = mysqli_fetch_assoc($data)) {
                                                 echo $row["turnedon"]."<br><br>";
                                             }
                                             ?></span></div>
