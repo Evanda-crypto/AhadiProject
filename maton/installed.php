@@ -237,7 +237,7 @@ while($row=$result->fetch_array()){
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
-    order: [[3, 'asc']],
+    order: [[4, 'asc']],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
