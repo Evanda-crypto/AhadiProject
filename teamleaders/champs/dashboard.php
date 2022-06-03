@@ -335,7 +335,8 @@ while ($row = mysqli_fetch_array($result)) {
                                             <div class="stat-text"><span class="count"><?php
                                             $query =
                                                 "SELECT COUNT(*) as pap FROM papdailysales where PapStatus='Installed' and Region='".$_SESSION["Region"]."'";
-                                            $data = mysqli_query($connection,$query);
+                                            $data = mysqli_query(
+                                                $connection,$query);
                                             while ($row = mysqli_fetch_assoc($data)) {
                                                 echo $row["pap"];
                                             }
@@ -360,9 +361,13 @@ while ($row = mysqli_fetch_array($result)) {
                                             <div class="stat-text"><span class="count"><?php
                                             $query =
                                                 "SELECT count(*) as turnedon from papdailysales Where PapStatus='Turned On' and Region='".$_SESSION["Region"]."'";
-                                            $data = mysqli_query($connection,$query);
+                                            $data = mysqli_query(
+                                                $connection,
+                                                $query
+                                            );
                                             while (
-                                                $row = mysqli_fetch_assoc($data)) {
+                                                $row = mysqli_fetch_assoc($data)
+                                            ) {
                                                 echo $row["turnedon"]."<br><br>";
                                             }
                                             ?></span></div>
@@ -599,6 +604,90 @@ $('#example').DataTable({
                     borderColor: "rgba(0, 194, 146, 0.9)",
                     borderWidth: "0",
                     backgroundColor: "#85ce36"
+                            },
+                {
+                    label: "Best Region",
+                    data: [ "<?php
+          $sql =
+              "SELECT (SELECT MAX(mycount)
+              FROM (SELECT Region,COUNT(DateSigned) AS mycount,DateSigned 
+              FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+              GROUP BY Region,DateSigned) as maxm) as bestreg";
+          $result = mysqli_query($connection, $sql);
+          $chart_data = "";
+          while ($signed = mysqli_fetch_assoc($result)) {
+              echo $signed["bestreg"];
+          }
+      ?>", "<?php
+      $sql =
+          "SELECT (SELECT MAX(mycount)
+          FROM (SELECT Region,COUNT(DateSigned) AS mycount,DateSigned 
+          FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY)
+          GROUP BY Region,DateSigned) as maxm) as bestreg";
+      $result = mysqli_query($connection, $sql);
+      $chart_data = "";
+      while ($signed = mysqli_fetch_assoc($result)) {
+          echo $signed["bestreg"];
+      }
+  ?>", "<?php
+  $sql =
+      "SELECT (SELECT MAX(mycount)
+      FROM (SELECT Region,COUNT(DateSigned) AS mycount,DateSigned 
+      FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 4 DAY)
+      GROUP BY Region,DateSigned) as maxm) as bestreg";
+  $result = mysqli_query($connection, $sql);
+  $chart_data = "";
+  while ($signed = mysqli_fetch_assoc($result)) {
+      echo $signed["bestreg"];
+  }
+?>", "<?php
+$sql =
+    "SELECT (SELECT MAX(mycount)
+    FROM (SELECT Region,COUNT(DateSigned) AS mycount,DateSigned 
+    FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY)
+    GROUP BY Region,DateSigned) as maxm) as bestreg";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["bestreg"];
+}
+?>", "<?php
+$sql =
+    "SELECT (SELECT MAX(mycount)
+    FROM (SELECT Region,COUNT(DateSigned) AS mycount,DateSigned 
+    FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY)
+    GROUP BY Region,DateSigned) as maxm) as bestreg";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["bestreg"];
+}
+?>","<?php
+$sql =
+    "SELECT (SELECT MAX(mycount)
+    FROM (SELECT Region,COUNT(DateSigned) AS mycount,DateSigned 
+    FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY)
+    GROUP BY Region,DateSigned) as maxm) as bestreg";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["bestreg"];
+}
+?>", "<?php
+$sql =
+    "SELECT (SELECT MAX(mycount)
+    FROM (SELECT Region,COUNT(DateSigned) AS mycount,DateSigned 
+    FROM papdailysales where DateSigned=CURDATE()
+    GROUP BY Region,DateSigned) as maxm) as bestreg";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["bestreg"];
+}
+?>" ],
+                    borderColor: "rgba(0,0,0,0.09)",
+                    borderWidth: "0",
+                    backgroundColor: "#FFB91F"
                             },
                 {
                     label: "My Region",
