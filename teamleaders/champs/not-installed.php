@@ -200,9 +200,7 @@ include("../../config/config.php");
                         p.ClientAvailability 
                       from 
                       papdailysales as p LEFT OUTER JOIN techietask as t on t.ClientID=p.ClientID left join  papnotinstalled on papnotinstalled.ClientID=p.ClientID
-                                             WHERE t.ClientID is null and papnotinstalled.ClientID is null and p.Region='" .
-                                                $_SESSION["Region"] .
-                                                "'";
+                                             WHERE t.ClientID is null and papnotinstalled.ClientID is null and p.Region='".$_SESSION["Region"]."'";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
