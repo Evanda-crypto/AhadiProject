@@ -263,10 +263,7 @@ while ($row = mysqli_fetch_array($result)) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                                             $query =
-                                                "SELECT count(*) as clients from papdailysales left join papnotinstalled on papdailysales.ClientID=papnotinstalled.ClientID where papnotinstalled.ClientID is null 
-                      and papdailysales.Region='" .
-                                                $_SESSION["Region"] .
-                                                "'";
+                                                "SELECT count(*) as clients from papdailysales left join papnotinstalled on papdailysales.ClientID=papnotinstalled.ClientID where papdailysales.PapStatus<>'Retrieved' and papnotinstalled.ClientID is null and papdailysales.Region='".$_SESSION["Region"]."'";
                                             $data = mysqli_query(
                                                 $connection,
                                                 $query
@@ -274,8 +271,7 @@ while ($row = mysqli_fetch_array($result)) {
                                             while (
                                                 $row = mysqli_fetch_assoc($data)
                                             ) {
-                                                echo $row["clients"] .
-                                                    "<br><br>";
+                                                echo $row["clients"]."<br><br>";
                                             }
                                             ?></span></div>
                                             <div class="dropdown show">
