@@ -235,7 +235,7 @@ include("../../config/config.php");
                         p.ClientContact, 
                         p.ClientAvailability, 
                         p.AptLayout, 
-                        p.updated_at, 
+                        p.DateSigned, 
                         p.Note 
                       from 
                         papdailysales as p 
@@ -256,7 +256,7 @@ include("../../config/config.php");
                                     <td><?php echo $row['ChampName']; ?></td>
                                     <td><?php echo $row['ClientName']; ?></td>
                                     <td><?php echo $row['ClientContact']; ?></td>
-                                    <td><?php echo $row['updated_at']; ?></td>
+                                    <td><?php echo $row['DateSigned']; ?></td>
                                     <td><?php echo $row['ClientAvailability']; ?></td>
                                     <td><?php echo $row['Note']; ?></td>
                                    <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>
