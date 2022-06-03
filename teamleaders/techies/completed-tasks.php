@@ -124,10 +124,115 @@ tfoot td {
                         </div>
 
                         <div class="dropdown for-notification">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell"></i>
+                                <span class="count bg-danger"><?php
+         $query="SELECT COUNT(*) as restituted FROM papnotinstalled WHERE Reason='Already installed' and Region='".$_SESSION['Region']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['restituted'];
+    }
+    ?></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="notification">
+                                <p class="red">You have <?php
+         $query="SELECT COUNT(*) as restituted FROM papnotinstalled WHERE Reason='Already installed' and Region='".$_SESSION['Region']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['restituted'];
+    }
+    ?> Restitute(s)</p>
+                                <a class="dropdown-item media" href="restituted.php">
+                                    <i class="fa fa-check"></i>
+                                    <p>Check Out.</p>
+                                </a>
+                            </div>
                         </div>
 
+                        <div class="dropdown for-notification">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-tachometer"></i>
+                                <span class="count bg-danger"><?php
+         $query="SELECT COUNT(*) as rejected FROM token_meter WHERE Status='Rejected' and Region='".$_SESSION['Region']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['rejected'];
+    }
+    ?></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="notification">
+                                <p class="red">You have <?php
+         $query="SELECT COUNT(*) as rejected FROM token_meter WHERE Status='Rejected' and Region='".$_SESSION['Region']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['rejected'];
+    }
+    ?> Rejected Meter(s)</p>
+                                <a class="dropdown-item media" href="rejected-meters.php">
+                                    <i class="fa fa-check"></i>
+                                    <p>Check Out.</p>
+                                </a>
+                            </div>
+                        </div>
                         <div class="dropdown for-message">
-                      
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-envelope"></i>
+                                <span class="count bg-primary"><?php
+                                             $query="SELECT COUNT(*) AS reminded from reminders Where Region='".$_SESSION['Region']."'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['reminded']."<br><br>";
+                                              }
+                                              ?></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="message">
+                                <p class="red">You have <?php
+                                             $query="SELECT COUNT(*) AS reminded from reminders Where Region='".$_SESSION['Region']."'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['reminded'];
+                                              }
+                                              ?> Pap to urgently assign</p>
+                                <a class="dropdown-item media" href="reminders.php">
+                                    <div class="message media-body">
+                                        <span class="name float-left">Check Out</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="dropdown for-message">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-question"></i>
+                                <span class="count bg-primary"><?php
+                                             $query="SELECT ((SELECT COUNT(*) from 
+                                             papdailysales as p
+                                             WHERE p.PapStatus='Signed' and p.Region='".$_SESSION['Region']."')+(SELECT COUNT(*) from 
+         papdailysales as p
+         WHERE p.PapStatus='Restored' and p.Region='".$_SESSION['Region']."')) as pending";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['pending'];
+                                              }
+                                              ?></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="message">
+                                <p class="red">You have <?php
+                                             $query="SELECT ((SELECT COUNT(*) from 
+                                             papdailysales as p
+                                             WHERE p.PapStatus='Signed' and p.Region='".$_SESSION['Region']."')+(SELECT COUNT(*) from 
+         papdailysales as p
+         WHERE p.PapStatus='Restored' and p.Region='".$_SESSION['Region']."')) as pending";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['pending'];
+                                              }
+                                              ?> pending installations</p>
+                                <a class="dropdown-item media" href="assign-task.php">
+                                    <div class="message media-body">
+                                        <span class="name float-left">Check Out</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -145,8 +250,8 @@ tfoot td {
 
                 </div>
             </div>
-        </header><!-- /header -->
-        <!-- Header-->
+        </header>
+        <!-- /#header -->
 
         <div class="content">
             <div class="animated fadeIn">

@@ -145,8 +145,8 @@ else
         </nav>
     </aside>
     <!-- /#left-panel -->
-    <!-- Right Panel -->
-    <div id="right-panel" class="right-panel">
+     <!-- Right Panel -->
+     <div id="right-panel" class="right-panel">
         <!-- Header-->
         <header id="header" class="header" style="height: 65px;">
             <div class="top-left">
@@ -190,6 +190,7 @@ else
                                 </a>
                             </div>
                         </div>
+
                         <div class="dropdown for-notification">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-tachometer"></i>
@@ -215,7 +216,6 @@ else
                                 </a>
                             </div>
                         </div>
-
                         <div class="dropdown for-message">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-envelope"></i>
@@ -246,8 +246,11 @@ else
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-question"></i>
                                 <span class="count bg-primary"><?php
-                                             $query="SELECT COUNT(papdailysales.ClientID) AS pending from papdailysales LEFT OUTER JOIN techietask on techietask.ClientID=papdailysales.ClientID left join  papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID
-                                             WHERE techietask.ClientID is null and papnotinstalled.ClientID is null and papdailysales.Region='".$_SESSION['Region']."'";
+                                             $query="SELECT ((SELECT COUNT(*) from 
+                                             papdailysales as p
+                                             WHERE p.PapStatus='Signed' and p.Region='".$_SESSION['Region']."')+(SELECT COUNT(*) from 
+         papdailysales as p
+         WHERE p.PapStatus='Restored' and p.Region='".$_SESSION['Region']."')) as pending";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['pending'];
@@ -256,8 +259,11 @@ else
                             </button>
                             <div class="dropdown-menu" aria-labelledby="message">
                                 <p class="red">You have <?php
-                                             $query="SELECT COUNT(papdailysales.ClientID) AS pending from papdailysales LEFT OUTER JOIN techietask on techietask.ClientID=papdailysales.ClientID left join  papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID
-                                             WHERE techietask.ClientID is null and papnotinstalled.ClientID is null and papdailysales.Region='".$_SESSION['Region']."'";
+                                             $query="SELECT ((SELECT COUNT(*) from 
+                                             papdailysales as p
+                                             WHERE p.PapStatus='Signed' and p.Region='".$_SESSION['Region']."')+(SELECT COUNT(*) from 
+         papdailysales as p
+         WHERE p.PapStatus='Restored' and p.Region='".$_SESSION['Region']."')) as pending";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['pending'];
@@ -288,7 +294,6 @@ else
             </div>
         </header>
         <!-- /#header -->
-        <!-- Header-->
 
         <div class="content">
             <div class="animated fadeIn">
