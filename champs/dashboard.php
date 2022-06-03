@@ -208,17 +208,12 @@ if (!$connection) {
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
-                  $query =
-                      "SELECT COUNT(papdailysales.ClientID) as notinstalled  FROM papdailysales LEFT JOIN papinstalled on papdailysales.ClientID=papinstalled.ClientID LEFT JOIN 
-                      reminders on reminders.ClientID=papdailysales.ClientID LEFT JOIN techietask on techietask.ClientID=papdailysales.ClientID left join 
-                      papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papdailysales.PapStatus<>'Retrieved' AND papdailysales.PapStatus<>'Restored' and
-                     papnotinstalled.ClientID is null and papinstalled.ClientID is null and techietask.ClientID is null and reminders.ClientID is null and papdailysales.ChampName='" .
-                      $_SESSION["FName"]." ". $_SESSION["LName"]."'";
-                  $data = mysqli_query($connection, $query);
-                  while ($row = mysqli_fetch_assoc($data)) {
-                      echo $row["notinstalled"] . "<br><br>";
-                  }
-                  ?></span></div>
+         $query="SELECT COUNT(*) as notinstalled FROM papdailysales where PapStatus='Signed' and ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['notinstalled'];
+    }
+    ?></span></div>
                                             <div class="stat-heading">Not Installed</div>
                                         </div>
                                     </div>
@@ -237,13 +232,12 @@ if (!$connection) {
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
-                  $query =
-                      "SELECT COUNT(*) as torestore from papnotinstalled WHERE ChampName='".$_SESSION["FName"]." ".$_SESSION["LName"]."'";
-                  $data = mysqli_query($connection, $query);
-                  while ($row = mysqli_fetch_assoc($data)) {
-                      echo $row["torestore"] . "<br><br>";
-                  }
-                  ?> </span></div>
+         $query="SELECT COUNT(*) as torestore FROM papnotinstalled WHERE ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['torestore'];
+    }
+    ?></span></div>
                                             <div class="stat-heading">To Restore</div>
                                         </div>
                                     </div>
@@ -262,13 +256,12 @@ if (!$connection) {
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
-                  $query =
-                      "SELECT count(*) as turnedon from papdailysales where PapStatus='Turned On' and ChampName='".$_SESSION["FName"]." ".$_SESSION["LName"]."'";
-                  $data = mysqli_query($connection, $query);
-                  while ($row = mysqli_fetch_assoc($data)) {
-                      echo $row["turnedon"] . "<br><br>";
-                  }
-                  ?></span></div>
+         $query="SELECT COUNT(*) as turnedon FROM papdailysales WHERE PapStatus='Turned On' and ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['turnedon'];
+    }
+    ?></span></div>
                                             <div class="stat-heading">Turned On</div>
                                         </div>
                                     </div>
@@ -288,10 +281,14 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT count(*) as allpap from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papdailysales.PapStatus<>'Retrieved' and papnotinstalled.ClientID is null and papdailysales.ChampName='".$_SESSION["FName"]." ".$_SESSION["LName"]."'";
+                      "SELECT count(*) as allpap from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papdailysales.PapStatus<>'Retrieved' and papnotinstalled.ClientID is null and papdailysales.ChampName='" .
+                      $_SESSION["FName"] .
+                      " " .
+                      $_SESSION["LName"] .
+                      "'";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
-                      echo $row["allpap"] . "<br><br>";
+                      echo $row["allpap"];
                   }
                   ?></span></div>
                                             <div class="stat-heading">All Paps</div>
