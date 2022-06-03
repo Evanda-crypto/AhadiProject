@@ -176,7 +176,6 @@ include("../config/config.php");
                                    
                     <th>Building Name</th>
                     <th>Building Code</th>
-                    <th>Pap Code</th>
                     <th>Mac Address</th>
                     <th>Date Installed</th>
                     <th>Client Name</th>
@@ -201,7 +200,6 @@ while($row=$result->fetch_array()){
  
     <td><?php echo $row['BuildingName']?></td>
     <td><?php echo $row['BuildingCode']?></td>
-    <td><?php echo $row['papcode']?></td>
     <td><?php echo $row['Mac']?></td>
     <td class="centered colorText"><?php echo $row['DateInstalled']?></td>
     <td><?php echo $row['ClientName']?></td>
