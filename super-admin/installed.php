@@ -179,7 +179,7 @@ include("../config/config.php");
     WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) <=9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,'0',(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
     WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) >9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
     end as papcode,p.Floor,p.ClientName,p.BuildingName,p.BuildingCode,p.Region,Upper(i.MacAddress) as Mac,i.DateInstalled,i.ClientID,p.ClientContact  
-    FROM Token_teams LEFT JOIN papinstalled as i on Token_teams.Team_ID=i.Team_ID left join turnedonpap on i.ClientID=turnedonpap.ClientID JOIN papdailysales as p on p.ClientID=i.ClientID WHERE turnedonpap.ClientID is null ORDER BY i.DateInstalled ASC";
+    FROM Token_teams LEFT JOIN papinstalled as i on Token_teams.Team_ID=i.Team_ID left join turnedonpap on i.ClientID=turnedonpap.ClientID JOIN papdailysales as p on p.ClientID=i.ClientID";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
