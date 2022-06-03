@@ -167,7 +167,9 @@ include("../config/config.php");
                    <th class="th-sm">Date Turned On
                    </th>
                    <th class="th-sm">More
-                   </th>  
+                   </th> 
+                   <th class="th-sm">Move to Retrieved
+                   </th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -192,6 +194,9 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['DateTurnedOn']?></td>
     <td>
     <button class="btn btn-warning" ><a href="edit-turnedon.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
+    </td>
+    <td>
+    <button style="color: white;" class="btn btn-danger" ><a href="retrieve_pap.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Move to Retrieved</a></button>
     </td>
 </tr>
 <?php } ?>

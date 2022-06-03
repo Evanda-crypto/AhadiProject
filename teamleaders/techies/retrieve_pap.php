@@ -368,7 +368,7 @@ $Id = $_POST['id'];
                                          <div class="col-6">
                                         <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">Apt</label></strong>
-                                                <input id="cc-number" name="apt" type="text" class="form-control cc-number identified visa" readonly maxlength="40" value="<?php echo $apt?>"  required placeholder="Reason for retrieval">
+                                                <input id="cc-number" name="apt" type="text" class="form-control cc-number identified visa" readonly maxlength="40" value="<?php echo $apt?>"  required placeholder="Apt">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div></div></diV>
                                         <div class="row">

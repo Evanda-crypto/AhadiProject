@@ -2,7 +2,7 @@
 
 include("../config/config.php");
 include("session.php");
-$id=$_GET['client-id'];
+$id=$_GET['clientid'];
 
 $sql="SELECT 
 t.ClientID, 
@@ -23,8 +23,8 @@ JOIN papdailysales as p ON p.ClientID = t.ClientID
 left join papinstalled as i ON i.ClientID = p.ClientID 
 left join Token_teams as g on g.Team_ID = i.Team_ID 
 WHERE 
-t.ClientID IS NOT null 
-and p.Region = '".$_SESSION['Region']."' and p.ClientID=$id";
+t.ClientID IS NOT null and p.ClientID=$id
+and p.Region = '".$_SESSION['Region']."'";
 $result=mysqli_query($connection,$sql);
 $row=mysqli_fetch_assoc($result);
 $champ=$row['ChampName'];
@@ -56,6 +56,7 @@ $Id = $_POST['id'];
  if ($connection->connect_error) {
     die("connection failed : " . $connection->connect_error);
 } else {
+    
     $query = "DELETE FROM  techietask  WHERE ClientID=$id";
     $result = mysqli_query($connection, $query);
     $sql1 = "UPDATE papdailysales set PapStatus='Retrieved',Note='$Reason' WHERE ClientID=$id";
@@ -70,10 +71,10 @@ $Id = $_POST['id'];
     
     if ($insert) {
         $_SESSION["success"] = "Moved to Retrieved";
-        header("Location: turnedon.php");  
+        header("Location: turnedontoday.php");  
     } else {
         $_SESSION["status"] = "Error please try again!";
-        header("Location: turnedon.php");
+        header("Location: turnedontoday.php");
     }
 }
 }
@@ -90,8 +91,6 @@ $Id = $_POST['id'];
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
@@ -104,11 +103,26 @@ $Id = $_POST['id'];
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
 
+<link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<!-- Bootstrap core JavaScript-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
-  <aside id="left-panel" class="left-panel">
+   <!-- Left Panel -->
+   <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -138,7 +152,7 @@ $Id = $_POST['id'];
                         <a href="general-report.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-email"></i>Compiled Reports </a>
                     </li>
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
-                    <li>
+                  <li>
                         <a href="charts.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-bar-chart"></i>Graphs & Charts </a>
                     </li>
                     <li>
@@ -170,11 +184,11 @@ $Id = $_POST['id'];
                         </div>
 
                         <div class="dropdown for-notification">
-                     
+
                         </div>
 
                         <div class="dropdown for-message">
-                          
+
                         </div>
                     </div>
 
@@ -192,8 +206,8 @@ $Id = $_POST['id'];
 
                 </div>
             </div>
-        </header><!-- /header -->
-        <!-- Header-->
+        </header>
+        <!-- /#header -->
 
         <div class="content">
             <div class="animated fadeIn">
@@ -247,7 +261,7 @@ $Id = $_POST['id'];
                                          <div class="col-6">
                                         <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">Apt</label></strong>
-                                                <input id="cc-number" name="apt" type="text" class="form-control cc-number identified visa" readonly maxlength="40" value="<?php echo $apt?>"  required placeholder="Reason for retrieval">
+                                                <input id="cc-number" name="apt" type="text" class="form-control cc-number identified visa" readonly maxlength="40" value="<?php echo $apt?>"  required placeholder="Apt">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div></div></diV>
                                         <div class="row">
@@ -314,7 +328,7 @@ $Id = $_POST['id'];
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
+<script src="../../assets/js/main.js"></script>
 
 
 </body>

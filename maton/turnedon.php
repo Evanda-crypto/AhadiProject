@@ -222,7 +222,7 @@ while($row=$result->fetch_array()){
     <button class="btn btn-warning" ><a href="edit-turnedon.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
     </td>
     <td>
-    <button style="color: white;" class="btn btn-danger" ><a href="retrieve_pap.php?client-id=<?php echo $row['ClientID']; ?>" class="text-bold">Move to Retrieved</a></button>
+    <button style="color: white;" class="btn btn-danger" ><a href="retrieve_pap.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Move to Retrieved</a></button>
     </td>
 </tr>
 <?php } ?>

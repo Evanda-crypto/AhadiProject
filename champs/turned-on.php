@@ -43,9 +43,8 @@ include("../config/config.php");
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 </head>
 <body style="background-color:#e1e1e1">
-  <!-- Left Panel -->
-   <!-- Left Panel -->
-   <aside id="left-panel" class="left-panel">
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -60,16 +59,16 @@ include("../config/config.php");
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APs</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APS</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="not-installed.php">Not Installed</a></li>
                             <li><i class="fa fa-table"></i><a href="to-restore.php">To Restore</a></li>
+                            <li><i class="fa fa-table"></i><a href="restored.php">Restored</a></li>
                             <li><i class="fa fa-table"></i><a href="turned-on.php">Turned On</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
                             <li><i class="fa fa-table"></i><a href="retrieved.php">Retrieved</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
                         </ul>
                     </li>
-                     
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>  
@@ -80,7 +79,6 @@ include("../config/config.php");
             </div><!-- /.navbar-collapse -->
         </nav>
     </aside>
-    <!-- /#left-panel -->
     <!-- /#left-panel -->
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">

@@ -59,16 +59,16 @@ include("../config/config.php");
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APs</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APS</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="not-installed.php">Not Installed</a></li>
                             <li><i class="fa fa-table"></i><a href="to-restore.php">To Restore</a></li>
+                            <li><i class="fa fa-table"></i><a href="restored.php">Restored</a></li>
                             <li><i class="fa fa-table"></i><a href="turned-on.php">Turned On</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
                             <li><i class="fa fa-table"></i><a href="retrieved.php">Retrieved</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
                         </ul>
                     </li>
-                    
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>  
