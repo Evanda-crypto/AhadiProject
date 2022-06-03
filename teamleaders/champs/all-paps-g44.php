@@ -223,9 +223,27 @@ include("../../config/config.php");
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT p.PapStatus,p.ClientID,p.BuildingName,p.BuildingCode,p.Region,p.ChampName,
-                        p.ClientName,p.ClientContact,p.ClientAvailability,p.AptLayout,p.DateSigned,p.Note from papdailysales as p 
-                        where p.PapStatus<>'Restituted' and p.Region='G44'";
+                        $query  = "SELECT 
+                        p.PapStatus, 
+                        p.ClientID, 
+                        p.BuildingName, 
+                        p.BuildingCode, 
+                        p.Region, 
+                        p.ChampName, 
+                        p.ClientName, 
+                        p.ClientContact, 
+                        p.ClientAvailability, 
+                        p.AptLayout, 
+                        p.DateSigned, 
+                        p.Note 
+                      from 
+                        papdailysales as p 
+                        left join papnotinstalled as r on r.ClientID = p.ClientID 
+                      where 
+                        r.ClientID is null 
+                        and p.PapStatus <> 'Retrieved' 
+                        and p.Region = 'G44'
+                      '";
                         $result  = mysqli_query($connection, $query);
 
                             while ($row = mysqli_fetch_array($result)) {

@@ -212,6 +212,7 @@ date_default_timezone_set("Africa/Nairobi");
                              <option value="Replacement (Adapter)">Adapter</option>
                             </optgroup>
                             <optgroup label="Other Issues">
+                            <option  value="Other Issues (Panel Relocation)">Panel Relocation</option>
                             <option  value="Other Issues (Switch Theft)">Switch Theft</option>
                             <option  value="Other Issues (Panel Retrieval)">Panel Retrieval</option>
                             <option  value="Other Issues (Offline AP)">Offline AP</option>
