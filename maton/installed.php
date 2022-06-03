@@ -174,22 +174,26 @@ include("../config/config.php");
                                 <thead>
                                     <tr>
                                    
-                                    <th>Building Name</th>
+                    <th>Building Name</th>
                     <th>Building Code</th>
-                    <th>Region</th>
+                    <th>Pap Code</th>
                     <th>Mac Address</th>
                     <th>Date Installed</th>
                     <th>Client Name</th>
                     <th>Contact</th>
                    <th>Floor</th>
+                   <th>Region</th>
                     <th>More</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT papdailysales.Floor,papdailysales.ClientName,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID,papdailysales.ClientContact  
-    FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID JOIN papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE turnedonpap.ClientID is null ORDER BY papinstalled.DateInstalled ASC";
+    $sql="SELECT CASE WHEN LENGTH(p.BuildingCode)>10 THEN CONCAT(p.BuildingCode,'-',(row_number() over(partition by p.BuildingCode)),'P')
+    WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) <=9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,'0',(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
+    WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) >9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
+    end as papcode,p.Floor,p.ClientName,p.BuildingName,p.BuildingCode,p.Region,Upper(i.MacAddress) as Mac,i.DateInstalled,i.ClientID,p.ClientContact  
+    FROM papinstalled as i left join turnedonpap as t on i.ClientID=t.ClientID left JOIN papdailysales as p on p.ClientID=i.ClientID WHERE t.ClientID is null";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
@@ -197,12 +201,13 @@ while($row=$result->fetch_array()){
  
     <td><?php echo $row['BuildingName']?></td>
     <td><?php echo $row['BuildingCode']?></td>
-    <td><?php echo $row['Region']?></td>
+    <td><?php echo $row['papcode']?></td>
     <td><?php echo $row['Mac']?></td>
     <td class="centered colorText"><?php echo $row['DateInstalled']?></td>
     <td><?php echo $row['ClientName']?></td>
      <td><?php echo $row['ClientContact']?></td>
     <td><?php echo $row['Floor']?></td>
+    <td><?php echo $row['Region']?></td>
     <td>
     <button class="btn btn-warning" ><a href="turnon.php?clientid=<?php echo $row['ClientID']?>" class="text-bold">Turn On</a></button>
     </td>
