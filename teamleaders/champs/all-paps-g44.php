@@ -243,7 +243,7 @@ include("../../config/config.php");
                         r.ClientID is null 
                         and p.PapStatus <> 'Retrieved' 
                         and p.Region = 'G44'
-                      '";
+                      ";
                         $result  = mysqli_query($connection, $query);
 
                             while ($row = mysqli_fetch_array($result)) {
