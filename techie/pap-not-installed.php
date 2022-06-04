@@ -38,7 +38,7 @@ if (isset($_POST["submit"])) {
     $Floor = $row["Floor"];
     $ClientName = $row["ClientName"];
     $ChampName = $row["ChampName"];
-    $BuildingName = $row["BuildingName"];
+    $BuildingName = addslashes($_POST['bname']);
     $BuildingCode = $row["BuildingCode"];
     $DateSigned = $row["DateSigned"];
     $contact = $row["ClientContact"];
