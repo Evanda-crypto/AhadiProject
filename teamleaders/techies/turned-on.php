@@ -297,6 +297,7 @@ include("../../config/config.php");
       <th>Techie 1</th>
       <th>Techie 2</th>
       <th>Techie 3</th>
+      <th >Date Installed</th>
       <th >Date Turned On</th>
       <th >Move to Retrieved
       </th>
@@ -340,6 +341,7 @@ include("../../config/config.php");
                                     <td><?php echo $row['Techie1']; ?></td>
                                     <td><?php echo $row['Techie2']; ?></td>
                                     <td><?php echo $row['Techie3']; ?></td>
+                                    <td><?php echo $row['DateInstalled']; ?></td>
                                     <td><?php echo $row['DateTurnedOn']; ?></td>
                                     <td>
                                     <button class="btn btn-danger" ><a href="retrieve_pap.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Move to Retrieved</a></button>
@@ -373,7 +375,7 @@ include("../../config/config.php");
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
-    order: [[9, 'desc']],
+    order: [[8, 'desc']],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
