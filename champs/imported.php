@@ -149,11 +149,11 @@ include("../config/config.php");
                                 <table class="table table-striped table-bordered" id="example">
                                     <thead>
                                         <tr>
-                                        <th class="th-sm">BName
+                                        <th class="th-sm">Bname
       </th>
-      <th class="th-sm">Client Name
+      <th class="th-sm">Client
       </th>
-      <th class="th-sm">Availability
+      <th class="th-sm">Contact
       </th>
                                       </tr>
                                   </thead>
