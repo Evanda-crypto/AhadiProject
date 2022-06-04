@@ -159,14 +159,14 @@ include("../config/config.php");
                                   </thead>
                                   <tbody>
                                   <?php
-                        $query  = "SELECT ClientName,ClientID,ClientContact,BuildingName from papdailysales WHERE PapStatus='Retrieved' and ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+                        $query  = "SELECT ClientName,id,ClientContact,BuildingName from papdailysales WHERE PapStatus='Retrieved' and ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                                 <tr>
-                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
+                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
                                 </tr>
                         <?php
 
