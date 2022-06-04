@@ -12,7 +12,7 @@ if(!empty($_GET['id'])){
     p.BuildingCode,p.Floor,p.Apt,p.PhoneAlt from papdailysales as p LEFT JOIN 
     techietask as t on t.ClientID=p.ClientID LEFT JOIN Token_teams ON Token_teams.Team_ID=t.TeamID  LEFT JOIN papinstalled ON papinstalled.ClientID=p.ClientID WHERE t.ClientID is not null AND papinstalled.ClientID is null and Token_teams.Team_ID='" .
                                           $_SESSION["TeamID"] .
-                                          "' and t.ClientID = {$_GET['id']}"); 
+                                          "' and p.ClientID = {$_GET['id']}"); 
      
     if($query->num_rows > 0){ 
         $cmsData = $query->fetch_assoc(); 
