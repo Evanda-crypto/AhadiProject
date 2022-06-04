@@ -250,7 +250,7 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT count(*) as clients from papdailysales left join papnotinstalled on papdailysales.ClientID=papnotinstalled.ClientID where papnotinstalled.ClientID is null";
+                      "SELECT (SELECT count(*) from papdailysales as p left join papnotinstalled as r on p.ClientID=r.ClientID where r.ClientID is null)+(SELECT COUNT(*) as cccs from old) as clients";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
                       echo $row["clients"] . "<br><br>";
@@ -274,13 +274,13 @@ if (!$connection) {
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
-                                             $query="SELECT COUNT(papdailysales.ClientID) AS pending from papdailysales LEFT OUTER JOIN techietask on techietask.ClientID=papdailysales.ClientID left join  papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID
-                                             WHERE techietask.ClientID is null and papnotinstalled.ClientID is null";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['pending']."<br><br>";
-                                              }
-                                              ?></span></div>
+                  $query =
+                      "SELECT COUNT(*)as pending from papdailysales where PapStatus ='Assigned' OR PapStatus ='Signed' OR PapStatus ='Restored'";
+                  $data = mysqli_query($connection, $query);
+                  while ($row = mysqli_fetch_assoc($data)) {
+                      echo $row["pending"] . "<br><br>";
+                  }
+                  ?></span></div>
                                             <div class="stat-heading">Not Installed</div>
                                         </div>
                                     </div>
@@ -323,7 +323,7 @@ if (!$connection) {
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
-                  $query = "SELECT count(*) as turnedon from turnedonpap";
+                  $query = "SELECT ((SELECT count(*) from turnedonpap) + (SELECT COUNT(*) from old)) AS turnedon";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
                       echo $row["turnedon"] . "<br><br>";
