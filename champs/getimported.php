@@ -7,7 +7,7 @@ if (!empty($_GET["id"])) {
 $id=$_GET["id"];
     // Get content from the database
     $query = $connection->query(
-        "SELECT * from old where ClientID =$id"
+        "SELECT * from old where id =$id"
     );
 
     if ($query->num_rows > 0) {
