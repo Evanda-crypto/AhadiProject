@@ -70,6 +70,9 @@ include("../config/config.php");
                         </ul>
                     </li>
                     <li>
+                        <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Imported</a>
+                    </li>
+                    <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>  
                     <li class="active">

@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Retrieved</title>
+    <title>Imported</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -60,16 +60,16 @@ include("../config/config.php");
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APs</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APS</a>
                         <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-table"></i><a href="not-installed.php">Not Installed</a></li>
+                            <li><i class="fa fa-table"></i><a href="not-installed.php">Not Installed</a></li>
                             <li><i class="fa fa-table"></i><a href="to-restore.php">To Restore</a></li>
                             <li><i class="fa fa-table"></i><a href="restored.php">Restored</a></li>
                             <li><i class="fa fa-table"></i><a href="turned-on.php">Turned On</a></li>
                             <li><i class="fa fa-table"></i><a href="retrieved.php">Retrieved</a></li>
                             <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
                         </ul>
-                    </li> 
+                    </li>
                     <li>
                         <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Imported</a>
                     </li>
@@ -137,11 +137,11 @@ include("../config/config.php");
                 <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                            <center><strong class="card-title">Retrieved[<?php
-         $query="SELECT COUNT(*) as retrieved FROM retrieved_paps WHERE champ='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+                            <center><strong class="card-title">Imported [<?php
+         $query="SELECT COUNT(*) as older FROM old where ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
-          echo $row['retrieved'];
+          echo $row['older'];
     }
     ?> Records]</strong></center>
                             </div>
@@ -149,24 +149,24 @@ include("../config/config.php");
                                 <table class="table table-striped table-bordered" id="example">
                                     <thead>
                                         <tr>
-                                        <th class="th-sm">Client
+                                        <th class="th-sm">BName
       </th>
-      <th class="th-sm">Contact
+      <th class="th-sm">Client Name
       </th>
-      <th class="th-sm">Bname
+      <th class="th-sm">Availability
       </th>
                                       </tr>
                                   </thead>
                                   <tbody>
                                   <?php
-                        $query  = "SELECT ClientName,ClientID,ClientContact,BuildingName from papdailysales WHERE PapStatus='Retrieved' and ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+                        $query  = "SELECT ClientName,ClientContact,BuildingName,ClientID from old where ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                                 <tr>
-                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getretrieved.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getimported.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo trim($row['BuildingName']); ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getimported.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo trim($row['ClientName']); ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getimported.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo trim($row['ClientContact']); ?></a></td>
                                 </tr>
                         <?php
 

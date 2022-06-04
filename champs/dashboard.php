@@ -137,6 +137,9 @@ if (!$connection) {
                         </ul>
                     </li>
                     <li>
+                        <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Imported</a>
+                    </li>
+                    <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>  
                     <li class="active">
@@ -269,7 +272,29 @@ if (!$connection) {
                             </div>
                         </div></a>
                     </div>
-
+                    <div class="col-lg-3 col-md-6"><a href="imported.php">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <i class="pe-7s-cloud-download"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text"><span class="count"><?php
+         $query="SELECT COUNT(*) as older FROM old WHERE ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['older'];
+    }
+    ?></span></div>
+                                            <div class="stat-heading">Imported Paps</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></a>
+                    </div>
                     <div class="col-lg-3 col-md-6"><a href="all-paps.php">
                         <div class="card">
                             <div class="card-body">
@@ -281,11 +306,7 @@ if (!$connection) {
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
                   $query =
-                      "SELECT count(*) as allpap from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papdailysales.PapStatus<>'Retrieved' and papnotinstalled.ClientID is null and papdailysales.ChampName='" .
-                      $_SESSION["FName"] .
-                      " " .
-                      $_SESSION["LName"] .
-                      "'";
+                      "SELECT ((SELECT count(*) from papdailysales left join papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID where papdailysales.PapStatus<>'Retrieved' and papnotinstalled.ClientID is null and papdailysales.ChampName='".$_SESSION["FName"]." ".$_SESSION["LName"]."') + (SELECT COUNT(*) as older FROM old where ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."')) as allpap";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
                       echo $row["allpap"];
