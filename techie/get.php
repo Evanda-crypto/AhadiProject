@@ -8,7 +8,7 @@ if(!empty($_GET['id'])){
     } 
      
     // Get content from the database 
-    $query = $connection->query("SELECT p.Note,p.ChampName,t.ClientName,t.ClientID,t.ClientContact,t.ClientAvailability,p.BuildingName,p.Region,t.Date,Token_teams.Team_ID,
+    $query = $connection->query("SELECT p.Note,p.ChampName,t.ClientName,t.ClientID,t.ClientContact,t.updated_at,t.ClientAvailability,p.BuildingName,p.Region,t.Date,Token_teams.Team_ID,
     p.BuildingCode,p.Floor,p.Apt,p.PhoneAlt from papdailysales as p LEFT JOIN 
     techietask as t on t.ClientID=p.ClientID LEFT JOIN Token_teams ON Token_teams.Team_ID=t.TeamID  LEFT JOIN papinstalled ON papinstalled.ClientID=p.ClientID WHERE t.ClientID is not null AND papinstalled.ClientID is null and Token_teams.Team_ID='" .
                                           $_SESSION["TeamID"] .
@@ -52,11 +52,14 @@ if(!empty($_GET['id'])){
         echo "<td>Door No</td>";
         echo "<td>".$cmsData['Apt']."</td>";
         echo "</tr>";
-        echo"</tr>";
+        echo"<tr>";
         echo "<td>Champs comment</td>";
         echo "<td>".$cmsData['Note']."</td>";
         echo "</tr>";
-        echo"</tr>";
+        echo"<tr>";
+        echo "<td>Time Assigned</td>";
+        echo "<td>".$cmsData['updated_at']."</td>";
+        echo "</tr>";
         echo "</table>";
     }else{ 
         echo 'Content not found....1'; 
