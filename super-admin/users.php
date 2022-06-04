@@ -167,6 +167,7 @@ else
                     <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Department</th>
+                    <th scope="col">Password</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                     
@@ -177,13 +178,21 @@ else
     
     $sql="SELECT * from Users order by ID ASC";
     $result=$connection->query($sql);
+    
     while($row=$result->fetch_array()){
+        $pass='123456';
+        if(password_verify($pass,$row['Password'])){
+            $wrong=$pass;
+        }else{
+            $wrong='Changed pass';
+        }
       ?>
       <tr>
         <td><?php echo $row['FirstName']?></td>
         <td><?php echo $row['LastName']?></td>
         <td><?php echo $row['Email']?></td>
         <td><?php echo $row['Department']?></td>
+        <td><?php echo $wrong; ?></td>
        <td>
        <button class="btn btn-warning"><a href="edit-user.php?userid=<?php echo $row['ID']; ?>">Edit</i></a></button>
     </td><td>
