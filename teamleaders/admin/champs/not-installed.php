@@ -41,7 +41,23 @@ include("../../../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .green {
+  color: green;
+}
 
+.violet {
+  color: violet;
+}
+.blue{
+    color:blue;
+}.orange{
+    color:orange;
+}
+.red{
+    color:red;
+}
+</style>
 </head>
 <body style="background-color:#e1e1e1">
    <!-- Left Panel -->
@@ -160,63 +176,38 @@ include("../../../config/config.php");
                             <center><strong class="card-title">Not Installed</strong></center>
                             </div>
                             <div class="card-body">
-                                <table class="table table-striped" id="example">
-                                    <thead>
-                                        <tr>
-    <th class="th-sm">Building Name
-      </th>
-      <th class="th-sm">Building Code
-      </th>
-      <th class="th-sm">Champ
-      </th>
-      <th class="th-sm">Client Name
-      </th>
-      <th class="th-sm">Contact
-      </th>
-      <th class="th-sm">Availability
-      </th>
-      <th class="th-sm">Champs comment
-      </th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                  <?php
-                        $query  = "SELECT 
-                        p.Note, 
-                        p.ClientName, 
-                        p.ClientContact, 
-                        p.ClientID, 
-                        p.BuildingCode, 
-                        p.BuildingName, 
-                        p.ChampName, 
-                        p.ClientAvailability 
-                      from 
-                        papdailysales as p 
-                        left join papinstalled as i on i.ClientID = p.ClientID 
-                        left join techietask as t on t.ClientID = p.ClientID 
-                        left join reminders as r on p.ClientID = r.ClientID 
-                        left join papnotinstalled as n on n.ClientID = p.ClientID 
-                      where 
-                        n.ClientID IS null 
-                        and r.ClientID is null 
-                        and t.ClientID is null 
-                        and i.ClientID is null";
-                        $result  = mysqli_query($connection, $query);
-                            while ($row = mysqli_fetch_assoc($result)) {
-                        ?>
-                                <tr>
-                                    <td><?php echo $row['BuildingName']; ?></td>
-                                    <td><?php echo $row['BuildingCode']; ?></td>
-                                   <td><?php echo $row['ChampName']; ?></td>
-                                    <td><?php echo $row['ClientName']; ?></td>
-                                    <td><?php echo $row['ClientContact']; ?></td>
-                                    <td><?php echo $row['ClientAvailability']; ?></td>
-                                    <td><?php echo $row['Note']; ?></td>
-                                </tr>
-                        <?php
+                            <table class="table table-striped" id="example">
+                                <thead>
+                                    <tr>
+                                    <th>Building Name</th>
+                    <th>Building Code</th>
+                    <th>Region</th>
+                    <th>Client Name</th>
+                    <th>Client Contact</th>
+                    <th>Date Signed</th>
+                    <th>Availability</th>
+                    <th>Pap Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+    
+    $sql="SELECT BuildingName,BuildingCode,Region,ClientName,ClientContact,DateSigned,ClientAvailability,PapStatus from papdailysales where PapStatus ='Assigned' OR PapStatus ='Signed' OR PapStatus ='Restored'";
+$result=$connection->query($sql);
+while($row=$result->fetch_array()){
+  ?>
+  <tr>
+    <td><?php echo $row['BuildingName']?></td>
+    <td><?php echo $row['BuildingCode']?></td>
+    <td><?php echo $row['Region']?></td>
+    <td><?php echo $row['ClientName']?></td>
+    <td><?php echo $row['ClientContact']?></td>
+    <td><?php echo $row['DateSigned']?></td>
+     <td><?php echo $row['ClientAvailability']?></td>
+     <td class="centered colorText"><?php echo $row['PapStatus']?></td>
 
-                            }
-                        ?>
+</tr>
+<?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -261,6 +252,7 @@ include("../../../config/config.php");
  $(document).ready(function () {
 $('#example').DataTable(
     {
+        order: [[6, 'asc']],
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "scrollY":        "700px",
         "scrollCollapse": true,
@@ -269,6 +261,27 @@ $('#example').DataTable(
 );
 $('.dataTables_length').addClass('bs-select');
 });
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent === "Assigned") {
+      cell.classList.toggle('violet');
+    }
+    if (cell.textContent === "Turned On") {
+      cell.classList.toggle('green');
+    }
+    if (cell.textContent === "Signed") {
+      cell.classList.toggle('blue');
+    }
+    if (cell.textContent === "Installed") {
+      cell.classList.toggle('orange');
+    }
+    if (cell.textContent === "Restored") {
+      cell.classList.toggle('red');
+    }
+  })
+})
 </script>
 </body>
 </html>
