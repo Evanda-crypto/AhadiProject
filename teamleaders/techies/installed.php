@@ -259,7 +259,14 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Installed</strong></center>
+                           <center> <strong class="card-title">Installed [ <?php
+         $query="SELECT COUNT(*) as paps FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID left join papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE
+          papinstalled.ClientID is NOT null and turnedonpap.ClientID is null and papinstalled.Region='".$_SESSION['Region']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['paps'];
+    }
+    ?> Records]</strong></center>
                         </div>
                         <div class="card-body">
                             <table class="table table-striped" id="example">
@@ -280,7 +287,7 @@ include("../../config/config.php");
                                 <?php
     
     $sql="SELECT papdailysales.ClientName,papdailysales.BuildingName,papdailysales.ClientContact,papinstalled.updated_at,Token_teams.Team_ID,Token_teams.Techie1,Token_teams.Techie3,Token_teams.Techie2,Upper(papinstalled.MacAddress) as Mac,papinstalled.DateInstalled,papinstalled.ClientID 
-    FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID left join papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE papinstalled.ClientID is NOT null and turnedonpap.ClientID is null and papinstalled.Region='".$_SESSION['Region']."' ORDER BY papinstalled.DateInstalled ASC";
+    FROM Token_teams LEFT JOIN papinstalled on Token_teams.Team_ID=papinstalled.Team_ID left join turnedonpap on papinstalled.ClientID=turnedonpap.ClientID left join papdailysales on papdailysales.ClientID=papinstalled.ClientID WHERE papinstalled.ClientID is NOT null and turnedonpap.ClientID is null and papinstalled.Region='".$_SESSION['Region']."'";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>

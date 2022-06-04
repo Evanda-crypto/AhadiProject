@@ -253,7 +253,14 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                            <center><strong class="card-title">Reasign task</strong></center>
+                            <center><strong class="card-title">Reasign task[ <?php
+         $query="SELECT COUNT(*) AS assigned from techietask left join papinstalled on papinstalled.ClientID=techietask.ClientID left join papdailysales on 
+         papdailysales.ClientID=techietask.ClientID where papinstalled.ClientID is null and techietask.Region='".$_SESSION['Region']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['assigned'];
+    }
+    ?> Records]</strong></center>
                             </div>
                             <div class="card-body">   <?php
             if(isset($_SESSION['status'])){
@@ -290,7 +297,9 @@ include("../../config/config.php");
                                   </thead>
                                   <tbody>
                                   <?php
-    $query=mysqli_query($connection,"SELECT techietask.TeamID,techietask.ClientID,techietask.ClientName,techietask.ClientContact,techietask.TeamID,techietask.Region,techietask.ClientAvailability,papdailysales.BuildingCode,papdailysales.BuildingName,techietask.Date,papdailysales.Apt  from techietask left join papinstalled on papinstalled.ClientID=techietask.ClientID left join papdailysales on papdailysales.ClientID=techietask.ClientID where papinstalled.ClientID is null and techietask.Region='".$_SESSION['Region']."'");
+    $query=mysqli_query($connection,"SELECT techietask.TeamID,techietask.ClientID,techietask.ClientName,techietask.ClientContact,techietask.TeamID,techietask.Region,techietask.ClientAvailability,papdailysales.BuildingCode,papdailysales.BuildingName,techietask.Date,papdailysales.Apt  
+    from techietask left join papinstalled on papinstalled.ClientID=techietask.ClientID left join papdailysales on 
+    papdailysales.ClientID=techietask.ClientID where papinstalled.ClientID is null and techietask.Region='".$_SESSION['Region']."'");
     while($row=mysqli_fetch_assoc($query)){
       $tid=$row['TeamID'];
       $id=$row['ClientID'];

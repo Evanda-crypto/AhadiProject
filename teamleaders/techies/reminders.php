@@ -254,7 +254,13 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                            <center><strong class="card-title">Reminders</strong></center>
+                            <center><strong class="card-title">Reminders[ <?php
+         $query="SELECT COUNT(*) AS reminded from reminders Where Region='".$_SESSION['Region']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['reminded'];
+    }
+    ?> Records]</strong></center>
                             </div>
                             <div class="card-body">
                                 <table class="table table-striped" id="example">

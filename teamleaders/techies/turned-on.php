@@ -259,7 +259,20 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Turned On</strong></center>
+                           <center> <strong class="card-title">Turned On[ <?php
+         $query="SELECT COUNT(*) as paps FROM 
+         turnedonpap as t 
+         JOIN papdailysales as p ON p.ClientID = t.ClientID 
+         left join papinstalled as i ON i.ClientID = p.ClientID 
+         left join Token_teams as g on g.Team_ID = i.Team_ID 
+       WHERE 
+         t.ClientID IS NOT null 
+         and p.Region = '".$_SESSION['Region']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['paps'];
+    }
+    ?> Records]</strong></center>
                         </div>
                         <div class="card-body"><?php
             if(isset($_SESSION['status'])){

@@ -259,7 +259,13 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Installed[Already Installed]</strong></center>
+                           <center> <strong class="card-title">Installed[Already Installed][ <?php
+         $query="SELECT COUNT(*) as paps FROM papnotinstalled where Reason='Already Installed' and Region = '".$_SESSION['Region']."'";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['paps'];
+    }
+    ?> Records]</strong></center>
                         </div>
                         <div class="card-body"><?php
             if(isset($_SESSION['status'])){
