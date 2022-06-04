@@ -97,6 +97,9 @@ include("../../config/config.php");
                     </li>
                     <li>
                         <a href="turned-on.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On</a>
+                    </li>
+                    <li>
+                        <a href="retrieved_paps.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Retrieved</a>
                     </li> 
                     <li class="menu-title" >COMPLETED TASKS</li><!-- /.menu-title --> 
                     <li>
