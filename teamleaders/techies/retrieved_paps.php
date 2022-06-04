@@ -265,7 +265,7 @@ include("../../config/config.php");
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                    <th>Client Name</th>
+                    <th>Building Name</th>
                     <th>Door No</th>
                     <th>Client</th>
                     <th>Contact</th>
