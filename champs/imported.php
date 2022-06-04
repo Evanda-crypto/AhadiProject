@@ -159,14 +159,14 @@ include("../config/config.php");
                                   </thead>
                                   <tbody>
                                   <?php
-                        $query  = "SELECT ClientName,ClientContact,BuildingName,ClientID from old where ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+                        $query  = "SELECT ClientName,ClientContact,BuildingName,id from old where ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                                 <tr>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getimported.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo trim($row['BuildingName']); ?></a></td>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getimported.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo trim($row['ClientName']); ?></a></td>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getimported.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo trim($row['ClientContact']); ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getimported.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo trim($row['BuildingName']); ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getimported.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo trim($row['ClientName']); ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getimported.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo trim($row['ClientContact']); ?></a></td>
                                 </tr>
                         <?php
 
