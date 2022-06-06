@@ -4,11 +4,11 @@ $output=array();
 $output['turnedon']=array();
 
 if ($connection) {
-    $sql = "SELECT t.ClientID,p.BuildingName,upper(p.BuildingCode) as bcode,upper(p.Region) as reg,t.ChampName,t.Region,p.ClientContact,Upper(t.MacAddress) as Mac,t.PapStatus,t.DateTurnedOn,
+    $sql = "SELECT t.ClientID,p.BuildingName,upper(p.BuildingCode) as bcode,upper(p.Region) as reg,p.ClientContact,Upper(t.MacAddress) as Mac,
     CASE WHEN LENGTH(p.BuildingCode)>11 THEN CONCAT(p.BuildingCode,'-',(row_number() over(partition by p.BuildingCode)),'P')
 WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) <=9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,'0',(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
 WHEN (row_number() over(partition by p.BuildingCode,p.Floor)) >9 THEN CONCAT(upper(p.BuildingCode),'-',p.Floor,(row_number() over(partition by p.BuildingCode,p.Floor)),'P')
-end as papcode from papdailysales as p LEFT JOIN turnedonpap as t ON t.ClientID=p.ClientID WHERE DateTurnedOn >= DATE_SUB(CURDATE(), INTERVAL 70 DAY) order by t.DateTurnedOn Desc";
+end as papcode from papdailysales as p LEFT JOIN turnedonpap as t ON t.ClientID=p.ClientID UNION SELECT ClientID,BuildingName,(BuildingCode) as bcode,(Region) as reg,ClientContact,(MacAddress) as Mac,papcode from old order by ClientID asc";
 
     $result = mysqli_query($connection, $sql);
     if ($result) {
@@ -22,7 +22,7 @@ end as papcode from papdailysales as p LEFT JOIN turnedonpap as t ON t.ClientID=
             'Mac' =>$row['Mac'],
             'bname' =>$row['BuildingName'],
             'bcode' =>$row['bcode'],
-            'Region' =>$row['Region'],
+            'Region' =>$row['reg'],
             'Contact' =>$row['ClientContact'],
            );
            
