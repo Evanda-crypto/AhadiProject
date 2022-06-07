@@ -219,6 +219,7 @@ include("../config/config.php");
  $(document).ready(function () {
 $('#example').DataTable(
     {
+        order: [[2, 'asc']],
 "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
 "scrollY":        "500px",
 "scrollCollapse": true

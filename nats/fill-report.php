@@ -321,19 +321,19 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
                                             <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">No of Buildings Affected</label></strong>
-                                                <input id="buildings" name="buildings" type="number" class="form-control cc-number identified visa" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" maxlength="40" placeholder="No of Buildings Affected">
+                                                <input id="buildings" required name="buildings" type="number" class="form-control cc-number identified visa" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" maxlength="40" placeholder="No of Buildings Affected">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                    <strong><label for="cc-exp" class="control-label mb-1">Start Time</label></strong>
+                                                    <strong><label for="cc-exp" class="control-label mb-1">Start Time<span style="color: #FF0000" >*</span></label></strong>
                                                         <input id="start"  placeholder="Start Time" value="00:00"  name="start" type="time" class="form-control cc-exp"  placeholder="Start Time">
                                                         <span class="help-block"  data-valmsg-replace="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-                                                <strong><label for="x_card_code" class="control-label mb-1">End Time</label></strong>
+                                                <strong><label for="x_card_code" class="control-label mb-1">End Time<span style="color: #FF0000" >*</span></label></strong>
                                                     <div class="input-group">
                                                         <input id="end" name="end" value="00:00" type="time" class="form-control cc-cvc"  placeholder="End Time">
                                                     </div>

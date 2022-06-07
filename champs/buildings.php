@@ -137,7 +137,7 @@ include("../config/config.php");
                         <div class="card">
                             <div class="card-header">
                             <center><strong class="card-title">Buildings[<?php
-         $query="SELECT COUNT(*) as buildings FROM buildings WHERE bstatus='6. IAP In Service' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service'";
+         $query="SELECT COUNT(*) as buildings FROM buildings WHERE bstatus='6. IAP In Service' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service' and region='".$_SESSION['Region']."' OR region='".$_SESSION['Region1']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['buildings'];

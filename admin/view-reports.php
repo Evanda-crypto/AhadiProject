@@ -203,7 +203,6 @@ include("../config/config.php");
                                     <th>Duration</th>
                                     <th>Buildings</th>
                                     <th>Reported By</th>
-                                    <th>Count</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -226,7 +225,6 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['duration']?></td>
     <td><?php echo $row['buildings']?></td>
      <td><?php echo $row['reporter']?></td>
-     <td><?php echo $row['occ']?></td>
  
 </tr>
 <?php } ?>

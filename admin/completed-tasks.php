@@ -247,9 +247,8 @@ tfoot td {
 
 
 
-  <script>
-      
-      $.fn.dataTable.Api.register( 'column().data().sum()', function () {
+  <script> 
+    $.fn.dataTable.Api.register( 'column().data().sum()', function () {
     return this.reduce( function (a, b) {
         var x = parseFloat( a ) || 0;
         var y = parseFloat( b ) || 0;
