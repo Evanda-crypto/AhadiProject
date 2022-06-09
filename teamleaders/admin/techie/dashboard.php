@@ -581,6 +581,36 @@ if (!$connection) {
                                               }
                                               ?> </td>
                                         </tr>
+                                        <td>HTR</td>
+                                        <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='HTR'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='HTR'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='HTR'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?></td>
+                    <td><?php
+                                             $query="SELECT COUNT(*) as installed from papinstalled WHERE DateInstalled=CURDATE() AND Region='HTR'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['installed'];
+                                              }
+                                              ?> </td>
+                                        </tr>
                                 </tbody>
                             </table>
                     </div></div></div></div>
