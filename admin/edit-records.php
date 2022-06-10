@@ -32,6 +32,7 @@ $email=$row['Email'];
 $Bizname=$row['BizName'];
 $Phonealt=$row['PhoneAlt'];
 $note=$row['Note'];
+$avail = date("Y-m-d", strtotime($availability));
 
 if(isset($_POST['submit'])){
 $ClientName = $_POST['ClientName'];
@@ -315,7 +316,7 @@ if ($result && $query) {
                                             </div>
                                             <div class="form-group has-success">
                                                 <label for="cc-name" class="control-label mb-1">Availability</label>
-                                                <input id="cc-name" name="Day" type="date" class="form-control cc-name valid" value="<?php echo $ClientAvailability?>" data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
+                                                <input id="cc-name" name="Day" type="date" class="form-control cc-name valid" value="<?php echo $avail?>" data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="row">

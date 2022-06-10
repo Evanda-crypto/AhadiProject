@@ -902,18 +902,20 @@ while ($signed = mysqli_fetch_assoc($result)) {
                                     "#ffb91f",
                                     "#0cbeaf",
                                     "#3072f5",
-                                    "#000000",
+                                    "#C70039",
                                     "#85ce36",
-                                    "#800080"
+                                    "#800080",
+                                    "#09AB7A "
                                 ],
                 hoverBackgroundColor: [
                                     "#ee2c4e",
                                     "#ffb91f",
                                     "#0cbeaf",
                                     "#3072f5",
-                                    "#000000",
+                                    "#C70039",
                                     "#85ce36",
-                                    "#800080"
+                                    "#800080",
+                                    "#09AB7A "
                                 ]
 
                             } ],
