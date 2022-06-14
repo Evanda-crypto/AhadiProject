@@ -205,6 +205,8 @@ else
                                               <option value="R&M">R&M</option>
                                              <option value="LSM">LSM</option>
                                                <option value="KWT">KWT</option> 
+                                               <option value="HTR">HTR</option>
+                                           <option value="MWK">MWK</option>
                                               </select>
                                             </div>
                                             </div>
@@ -220,6 +222,8 @@ else
                                             <option value="R&M">R&M</option>
                                             <option value="LSM">LSM</option>
                                             <option value="KWT">KWT</option> 
+                                            <option value="HTR">HTR</option>
+                                           <option value="MWK">MWK</option>
                                               </select>
                                             </div>
                                             </div>

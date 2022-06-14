@@ -217,6 +217,8 @@ else
                                              <option value="LSM">LSM</option>
                                               <option value="JCR">JCR</option>
                                                <option value="KWT">KWT</option> 
+                                               <option value="HTR">HTR</option>
+                                           <option value="MWK">MWK</option>
                                               </select>
                                             </div>
                                             </div>
@@ -233,6 +235,8 @@ else
                                             <option value="LSM">LSM</option>
                                            <option value="JCR">JCR</option>
                                             <option value="KWT">KWT</option> 
+                                            <option value="HTR">HTR</option>
+                                           <option value="MWK">MWK</option>
                                               </select>
                                             </div>
                                             </div>
