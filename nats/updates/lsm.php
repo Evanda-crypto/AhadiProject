@@ -155,6 +155,19 @@ else
                             <li><i class="fa fa-table"></i><a href="../htr.php" style="color:black; font-size: 15px;">HTR</a></li>
                         </ul>
                     </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>IP DOCUMENT</a>
+                        <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon ti-list"></i><a href="../new_ip_entry.php" style="color:black; font-size: 15px;">New Entry</a></li>
+                        <li><i class="fa fa-table"></i><a href="../r&m_ip.php" style="color:black; font-size: 15px;">R&M</a></li>
+                            <li><i class="fa fa-table"></i><a href="../zmm_ip.php" style="color:black; font-size: 15px;">ZMM</a></li>
+                            <li><i class="fa fa-table"></i><a href="../g44_ip.php" style="color:black; font-size: 15px;">G44</a></li>
+                            <li><i class="fa fa-table"></i><a href="../g45s_ip.php" style="color:black; font-size: 15px;">G45S</a></li>
+                            <li><i class="fa fa-table"></i><a href="../g45n_ip.php" style="color:black; font-size: 15px;">G45N</a></li>
+                            <li><i class="fa fa-table"></i><a href="../kwt_ip.php" style="color:black; font-size: 15px;">KWT</a></li>
+                            <li><i class="fa fa-table"></i><a href="../lsm_ip.php" style="color:black; font-size: 15px;">LSM</a></li>
+                            <li><i class="fa fa-table"></i><a href="../htr_ip.php" style="color:black; font-size: 15px;">HTR</a></li></ul>
+                    </li>
                     <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
                     <li>
                         <a href="../fill-report.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-list"></i>Fill Report </a>

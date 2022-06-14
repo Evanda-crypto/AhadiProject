@@ -67,6 +67,19 @@ date_default_timezone_set("Africa/Nairobi");
                             <li><i class="fa fa-table"></i><a href="lsm.php" style="color:black; font-size: 15px;">LSM</a></li>
                             <li><i class="fa fa-table"></i><a href="htr.php" style="color:black; font-size: 15px;">HTR</a></li></ul>
                     </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>IP DOCUMENT</a>
+                        <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon ti-list"></i><a href="new_ip_entry.php" style="color:black; font-size: 15px;">New Entry</a></li>
+                        <li><i class="fa fa-table"></i><a href="r&m_ip.php" style="color:black; font-size: 15px;">R&M</a></li>
+                            <li><i class="fa fa-table"></i><a href="zmm_ip.php" style="color:black; font-size: 15px;">ZMM</a></li>
+                            <li><i class="fa fa-table"></i><a href="g44_ip.php" style="color:black; font-size: 15px;">G44</a></li>
+                            <li><i class="fa fa-table"></i><a href="g45s_ip.php" style="color:black; font-size: 15px;">G45S</a></li>
+                            <li><i class="fa fa-table"></i><a href="g45n_ip.php" style="color:black; font-size: 15px;">G45N</a></li>
+                            <li><i class="fa fa-table"></i><a href="kwt_ip.php" style="color:black; font-size: 15px;">KWT</a></li>
+                            <li><i class="fa fa-table"></i><a href="lsm_ip.php" style="color:black; font-size: 15px;">LSM</a></li>
+                            <li><i class="fa fa-table"></i><a href="htr_ip.php" style="color:black; font-size: 15px;">HTR</a></li></ul>
+                    </li>
                     <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
                     <li>
                         <a href="fill-report.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-list"></i>Fill Report </a>
@@ -180,19 +193,20 @@ date_default_timezone_set("Africa/Nairobi");
                 <?php } ?>
                                         <form method="POST" action="ip_details.php">
                                         <div class="row">
-                                           <div class="col-4">
-                                            <div class="form-group">   
-                                            <strong><label for="cc-payment" class="control-label mb-1">Building Name<span style="color: #FF0000" >*</span></label></strong>
-                                                <input id="cc-pament" name="bname"  type="text" required  class="form-control" aria-required="true" aria-invalid="false" placeholder="Building Name">
-                                            </div>
-                                               </div>
-                                               <div class="col-4">
+                                        <div class="col-4">
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">Building Code<span style="color: #FF0000" >*</span></label></strong>
-                                                <input id="cc-name" name="bcode" type="text" class="form-control cc-name valid"  required  data-val="true" placeholder="Building Code"
+                                                <input id="bcode" onkeyup="GetDetails(this.value)" name="bcode" type="text" class="form-control cc-name valid"  required  data-val="true" placeholder="Building Code"
                                                     autocomplete="cc-name"  aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div>
+                                           <div class="col-4">
+                                            <div class="form-group">   
+                                            <strong><label for="cc-payment" class="control-label mb-1">Building Name<span style="color: #FF0000" >*</span></label></strong>
+                                                <input id="bname" name="bname"  type="text" required  class="form-control" aria-required="true" aria-invalid="false" placeholder="Building Name">
+                                            </div>
+                                               </div>
+
                                             <div class="col-4">
                                             <div class="form-group has-success">
                                         <strong><label for="cc-name" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label></strong>
@@ -202,12 +216,15 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
                                               </div>
                                         </div>
-                                            
+                                        <div class="form-group">
+                                            <strong><label for="cc-payment" class="control-label mb-1">Cluster</label></strong>
+                                                <input id="cluster" name="cluster"  type="text"  class="form-control" aria-required="true" aria-invalid="false" placeholder="Cluster">
+                                            </div>
                                             <div class="form-group">
                                             <strong> <label for="cc-number" class="control-label mb-1">Zone<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
                                             
-                             <select placeholder="Choose a Zone..." class="standardSelect form-control" tabindex="1" name="zones" required>
+                             <select placeholder="Choose a Zone..." class="standardSelect form-control" onChange="GetDetail(this.value)" tabindex="1" name="zones" required>
                             <optgroup label="">
                                 <option value=""></option>
                             <option  value="Zone 1">Zone 1</option>  
@@ -337,10 +354,7 @@ date_default_timezone_set("Africa/Nairobi");
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div>
                                         </div>
-                                            <div class="form-group">
-                                            <strong><label for="cc-payment" class="control-label mb-1">Cluster</label></strong>
-                                                <input id="cluster" name="cluster"  type="text"  class="form-control" aria-required="true" aria-invalid="false" placeholder="Cluster">
-                                            </div>
+                                           
                                             <div class="row">
                                            <div class="col-4">
                                             <div class="form-group has-success">
@@ -368,28 +382,28 @@ date_default_timezone_set("Africa/Nairobi");
                                            <div class="col-3">
                                             <div class="form-group has-success">
                                             <strong> <label for="cc-name" class="control-label mb-1">2226d</label></strong>
-                                                <input id="2226d" name="2226d" type="text" class="form-control cc-name valid"   data-val="true" placeholder="2226d"
+                                                <input id="2226d" name="2226d" type="text" value="0" class="form-control cc-name valid"   data-val="true" placeholder="2226d"
                                                     autocomplete="cc-name"  aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div>
                                             <div class="col-3">
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">20p_2422</label></strong>
-                                                <input id="20p_2422" name="20p_2422" type="text" class="form-control cc-name valid"   data-val="true" placeholder="20p_2422"
+                                                <input id="20p_2422" value="0" name="20p_2422" type="text" class="form-control cc-name valid"   data-val="true" placeholder="20p_2422"
                                                     autocomplete="cc-name"  aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div>
                                             <div class="col-3">
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">16p_1218</label></strong>
-                                                <input id="16p_1218" name="16p_1218" type="text" class="form-control cc-name valid"   data-val="true" placeholder="16p_1218"
+                                                <input id="16p_1218" value="0" name="16p_1218" type="text" class="form-control cc-name valid"   data-val="true" placeholder="16p_1218"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div>
                                             <div class="col-3">
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">16p_2218</label></strong>
-                                                <input id="16p_2218" name="16p_2218" type="text" class="form-control cc-name valid"  data-val="true" placeholder="16p_2218"
+                                                <input id="16p_2218" value="0" name="16p_2218" type="text" class="form-control cc-name valid"  data-val="true" placeholder="16p_2218"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div>
@@ -399,28 +413,28 @@ date_default_timezone_set("Africa/Nairobi");
                                            <div class="col-3">
                                             <div class="form-group has-success">
                                             <strong> <label for="cc-name" class="control-label mb-1">8p_2210</label></strong>
-                                                <input id="8p_2210" name="8p_2210" type="text" class="form-control cc-name valid"   data-val="true" placeholder="8p_2210"
+                                                <input id="8p_2210" value="0" name="8p_2210" type="text" class="form-control cc-name valid"   data-val="true" placeholder="8p_2210"
                                                     autocomplete="cc-name"  aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div>
                                             <div class="col-3">
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">8p_1210</label></strong>
-                                                <input id="8p_1210" name="8p_1210" type="text" class="form-control cc-name valid"   data-val="true" placeholder="8p_1210"
+                                                <input id="8p_1210" name="8p_1210" value="0" type="text" class="form-control cc-name valid"   data-val="true" placeholder="8p_1210"
                                                     autocomplete="cc-name"  aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div>
                                             <div class="col-3">
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">8p_2008</label></strong>
-                                                <input id="8p_2008" name="8p_2008" type="text" class="form-control cc-name valid"   data-val="true" placeholder="8p_2008"
+                                                <input id="8p_2008" name="8p_2008" type="text" value="0" class="form-control cc-name valid"   data-val="true" placeholder="8p_2008"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div>
                                             <div class="col-3">
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">5p_2005</label></strong>
-                                                <input id="5p_2005" name="5p_2005" type="text" class="form-control cc-name valid"  data-val="true" placeholder="5p_2005"
+                                                <input id="5p_2005" name="5p_2005" value="0" type="text" class="form-control cc-name valid"  data-val="true" placeholder="5p_2005"
                                                     autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div></div>
@@ -462,6 +476,134 @@ date_default_timezone_set("Africa/Nairobi");
             width: "100%"
         });
     });
+</script>
+<script>
+
+// onkeyup event will occur when the user
+// release the key and calls the function
+// assigned to this event
+function GetDetails(str) {
+  if (str.length == 0) {
+    document.getElementById("bname").value = "";
+    document.getElementById("region").value = "";
+    document.getElementById("pap").value = "";
+    document.getElementById("oap").value = "";
+    document.getElementById("iap").value = "";
+    return;
+  }
+  else {
+
+    // Creates a new XMLHttpRequest object
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+
+      // Defines a function to be called when
+      // the readyState property changes
+      if (this.readyState == 4 &&
+          this.status == 200) {
+        
+        // Typical action to be performed
+        // when the document is ready
+        var myObj = JSON.parse(this.responseText);
+
+        // Returns the response data as a
+        // string and store this array in
+        // a variable assign the value
+        // received to first name input field
+        
+        document.getElementById
+          ("bname").value = myObj[0];
+        
+        // Assign the value received to
+        // last name input field
+        document.getElementById(
+          "region").value = myObj[1];
+
+          // Assign the value received to
+        // last name input field
+        document.getElementById(
+          "pap").value = myObj[2];
+
+                    // Assign the value received to
+        // last name input field
+        document.getElementById(
+          "oap").value = myObj[3];
+
+                    // Assign the value received to
+        // last name input field
+        document.getElementById(
+          "iap").value = myObj[4];
+      }
+    };
+
+    // xhttp.open("GET", "filename", true);
+    xmlhttp.open("GET", "getbdetails.php?bcode=" + str, true);
+    
+    // Sends the request to the server
+    xmlhttp.send();
+  }
+}
+</script>
+
+<script>
+
+// onkeyup event will occur when the user
+// release the key and calls the function
+// assigned to this event
+function GetDetail(str) {
+  if (str.length == 0) {
+    document.getElementById("vlanid_device").value = "";
+    document.getElementById("vlanid_user ").value = "";
+    document.getElementById("device_ip").value = "";
+    document.getElementById("user_ip ").value = "";
+    return;
+  }
+  else {
+
+    // Creates a new XMLHttpRequest object
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+
+      // Defines a function to be called when
+      // the readyState property changes
+      if (this.readyState == 4 &&
+          this.status == 200) {
+        
+        // Typical action to be performed
+        // when the document is ready
+        var myObj = JSON.parse(this.responseText);
+
+        // Returns the response data as a
+        // string and store this array in
+        // a variable assign the value
+        // received to first name input field
+        
+        document.getElementById
+          ("vlanid_device").value = myObj[0];
+        
+        // Assign the value received to
+        // last name input field
+        document.getElementById(
+          "vlanid_user").value = myObj[1];
+
+           // Assign the value received to
+        // last name input field
+        document.getElementById(
+          "device_ip").value = myObj[2];
+           // Assign the value received to
+        // last name input field
+        document.getElementById(
+          "user_ip").value = myObj[3];
+      }
+    };
+
+    // xhttp.open("GET", "filename", true);
+    xmlhttp.open("GET", "getipdetails.php?zone=" + str, true);
+    
+    // Sends the request to the server
+    xmlhttp.send();
+  }
+}
 </script>
 </body>
 </html>
