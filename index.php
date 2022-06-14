@@ -11,7 +11,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <title>KOMP</title>
 </head>
-<body style="background-image: url('images/bg.png');" >
+<body style="background-color:#e1e1e1" >
 <div class="container my-5" >
     <div class="row my-5">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">

@@ -527,6 +527,49 @@ date_default_timezone_set("Africa/Nairobi");
                              <option value="LSM Zone 39">Zone 39</option>
                              <option value="LSM Zone 40">Zone 40</option>
                             </optgroup>
+                            <optgroup label="HTR">
+                            <option  value="HTR All Zones">All Zones</option> 
+                            <option  value="HTR Zone 1">Zone 1</option>  
+                              <option value="HTR Zone 2">Zone 2</option>
+                              <option value="HTR Zone 3">Zone 3</option>   
+                              <option value="HTR Zone 4">Zone 4</option>
+                             <option value="HTR Zone 5">Zone 5</option>
+                             <option value="HTR Zone 6">Zone 6</option>  
+                             <option value="HTR Zone 7">Zone 7</option>
+                             <option  value="HTR Zone 8">Zone 8</option>  
+                              <option value="HTR Zone 9">Zone 9</option>
+                              <option value="HTR Zone 10">Zone 10</option>   
+                              <option value="HTR Zone 11">Zone 11</option>
+                             <option value="HTR Zone 12">Zone 12</option>
+                             <option value="HTR Zone 13">Zone 13</option>  
+                             <option value="HTR Zone 14">Zone 14</option>
+                             <option  value="HTR Zone 15">Zone 15</option>  
+                              <option value="HTR Zone 16">Zone 16</option>
+                              <option value="HTR Zone 17">Zone 17</option>   
+                              <option value="HTR Zone 18">Zone 18</option>
+                             <option value="HTR Zone 19">Zone 19</option>
+                             <option value="HTR Zone 20">Zone 20</option>
+                             <option  value="HTR Zone 21">Zone 21</option>  
+                              <option value="HTR Zone 22">Zone 22</option>
+                              <option value="HTR Zone 23">Zone 23</option>   
+                              <option value="HTR Zone 24">Zone 24</option>
+                             <option value="HTR Zone 25">Zone 25</option>
+                             <option value="HTR Zone 26">Zone 26</option>  
+                             <option value="HTR Zone 27">Zone 27</option>
+                             <option  value="HTR Zone 28">Zone 28</option>  
+                              <option value="HTR Zone 29">Zone 29</option>
+                              <option value="HTR Zone 30">Zone 30</option>   
+                              <option value="HTR Zone 31">Zone 31</option>
+                             <option value="HTR Zone 32">Zone 32</option>
+                             <option value="HTR Zone 33">Zone 33</option>  
+                             <option value="HTR Zone 34">Zone 34</option>
+                             <option  value="HTR Zone 35">Zone 35</option>  
+                              <option value="HTR Zone 36">Zone 36</option>
+                              <option value="HTR Zone 37">Zone 37</option>   
+                              <option value="HTR Zone 38">Zone 38</option>
+                             <option value="HTR Zone 39">Zone 39</option>
+                             <option value="HTR Zone 40">Zone 40</option>
+                            </optgroup>
                             </select>
                              </div>
                               </div>
@@ -542,6 +585,8 @@ date_default_timezone_set("Africa/Nairobi");
                                             <option value="R&M">R&M</option>
                                             <option value="LSM">LSM</option>
                                             <option value="KWT">KWT</option> 
+                                            <option value="HTR">HTR</option>
+                                            <option value="MWK">MWK</option>
                                             </select>
                                             </div>
                                             </div>

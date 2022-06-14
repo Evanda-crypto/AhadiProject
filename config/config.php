@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set("Africa/Nairobi");
 
-$server = "localhost";
+$server = "127.0.0.1";
 $username = "pusa";
 $password = "qw3r1234@1";
 $db = "paneldb";

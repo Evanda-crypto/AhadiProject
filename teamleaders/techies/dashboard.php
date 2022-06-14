@@ -603,7 +603,7 @@ while($row=$result->fetch_array()){
     <script src="../../assets/js/init/fullcalendar-init.js"></script>
 
     <!--Local Stuff-->
-    <script type="text/javascript">
+<script type="text/javascript">
 $( document ).ready(function() {
 $('#completed').DataTable({
 		 "processing": true,

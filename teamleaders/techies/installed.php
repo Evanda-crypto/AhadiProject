@@ -268,7 +268,33 @@ include("../../config/config.php");
     }
     ?> Records]</strong></center>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body"><?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><strong><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></strong>
+  </button>
+                 </div></span></center>
+                 
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><strong><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></strong>
+  </button>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
@@ -281,6 +307,7 @@ include("../../config/config.php");
                     <th>Mac Address</th>
                     <th>Date Installed</th>
                     <th>Edit mac</th>
+                    <th>Retrieve</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -302,6 +329,9 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['updated_at']?></td>
     <td>
     <button class="btn btn-warning" ><a href="edit-mac.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit Mac</a></button>
+    </td>
+    <td>
+    <button class="btn btn-danger" ><a href="retrieve_installed.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Retrieved</a></button>
     </td>
 </tr>
 <?php } ?>
