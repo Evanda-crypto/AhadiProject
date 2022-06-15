@@ -489,6 +489,7 @@ function GetDetails(str) {
     document.getElementById("pap").value = "";
     document.getElementById("oap").value = "";
     document.getElementById("iap").value = "";
+    document.getElementById("cluster").value = "";
     return;
   }
   else {
@@ -509,30 +510,35 @@ function GetDetails(str) {
         // Returns the response data as a
         // string and store this array in
         // a variable assign the value
-        // received to first name input field
+        // received to bname input field
         
         document.getElementById
           ("bname").value = myObj[0];
         
         // Assign the value received to
-        // last name input field
+        // region input field
         document.getElementById(
           "region").value = myObj[1];
 
           // Assign the value received to
-        // last name input field
+        // pap input field
         document.getElementById(
           "pap").value = myObj[2];
 
                     // Assign the value received to
-        // last name input field
+        // oap input field
         document.getElementById(
           "oap").value = myObj[3];
 
                     // Assign the value received to
-        // last name input field
+        // iap input field
         document.getElementById(
           "iap").value = myObj[4];
+
+                             // Assign the value received to
+        // cluster input field
+        document.getElementById(
+          "cluster").value = myObj[5];
       }
     };
 
@@ -576,22 +582,22 @@ function GetDetail(str) {
         // Returns the response data as a
         // string and store this array in
         // a variable assign the value
-        // received to first name input field
+        // received to vlanid_device input field
         
         document.getElementById
           ("vlanid_device").value = myObj[0];
         
         // Assign the value received to
-        // last name input field
+        // vlanid_user input field
         document.getElementById(
           "vlanid_user").value = myObj[1];
 
            // Assign the value received to
-        // last name input field
+        // device_ip input field
         document.getElementById(
           "device_ip").value = myObj[2];
            // Assign the value received to
-        // last name input field
+        // user_ip input field
         document.getElementById(
           "user_ip").value = myObj[3];
       }

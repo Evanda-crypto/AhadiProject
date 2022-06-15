@@ -15,7 +15,7 @@ include("../config/config.php");
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+     
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -173,7 +173,6 @@ include("../config/config.php");
                     <th>Client Name</th>
                     <th>Contact</th>
                    <th>Floor</th>
-                    <th>More</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -193,9 +192,7 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['ClientName']?></td>
      <td><?php echo $row['ClientContact']?></td>
     <td><?php echo $row['Floor']?></td>
-    <td>
-    <button class="btn btn-warning" ><a href="turnon.php?clientid=<?php echo $row['ClientID']?>" class="text-bold">Turn On</a></button>
-    </td>
+   
 </tr>
 <?php } ?>
                                 </tbody>

@@ -2,7 +2,7 @@
 
 // Get the user id
 $bcode = trim($_REQUEST['bcode']);
-
+$get_cluster = substr($bcode,0,-1);
 // Database connection
 include("../config/config.php");
 
@@ -18,6 +18,11 @@ if ($bcode !== "") {
 
 	$result = mysqli_fetch_array($sql);
 
+
+	$sql1 = mysqli_query($connection, "SELECT cluster FROM ip_document_reports WHERE building_codes LIKE '$get_cluster%'");
+
+	$result1 = mysqli_fetch_array($sql1);
+
 	// Get bname
 	$Bname = $row["bname"];
 
@@ -32,10 +37,13 @@ if ($bcode !== "") {
 
     // Get pap
 	$pap = $result["pap"];
+
+	// Get cluster
+	$cluster = $result1["cluster"];
 }
 
 // Store it in a array
-$result = array("$Bname", "$Reg","$pap","$oap","$iap");
+$result = array("$Bname", "$Reg","$pap","$oap","$iap","$cluster");
 
 // Send in JSON encoded form
 $myJSON = json_encode($result);
