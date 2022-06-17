@@ -40,6 +40,9 @@ if ($bcode !== "") {
 
 	// Get cluster
 	$cluster = $result1["cluster"];
+
+	// Get cluster code
+	#$clustercode = $result1["building_codes"];
 }
 
 // Store it in a array

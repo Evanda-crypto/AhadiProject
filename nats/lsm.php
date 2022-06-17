@@ -93,8 +93,11 @@ include("../config/config.php");
                             <li><i class="fa fa-table"></i><a href="zmm_ip.php" style="color:black; font-size: 15px;">ZMM</a></li>
                             <li><i class="fa fa-table"></i><a href="g44_ip.php" style="color:black; font-size: 15px;">G44</a></li>
                             <li><i class="fa fa-table"></i><a href="g45s_ip.php" style="color:black; font-size: 15px;">G45S</a></li>
-                            <li><i class="fa fa-table"></i><a href="g45n_ip.php" style="color:black; font-size: 15px;">G45N</a></li>
-                            <li><i class="fa fa-table"></i><a href="kwt_ip.php" style="color:black; font-size: 15px;">KWT</a></li>
+                            <li><i class="fa fa-table"></i><a href="g45n1_ip.php" style="color:black; font-size: 15px;">G45N 1</a></li>
+                            <li><i class="fa fa-table"></i><a href="g45n2_ip.php" style="color:black; font-size: 15px;">G45N 2</a></li>
+                            <li><i class="fa fa-table"></i><a href="kwt1_ip.php" style="color:black; font-size: 15px;">KWT 1</a></li>
+                            <li><i class="fa fa-table"></i><a href="kwt2_ip.php" style="color:black; font-size: 15px;">KWT 2</a></li>
+                            <li><i class="fa fa-table"></i><a href="jcr_ip.php" style="color:black; font-size: 15px;">JAR</a></li>
                             <li><i class="fa fa-table"></i><a href="lsm_ip.php" style="color:black; font-size: 15px;">LSM</a></li>
                             <li><i class="fa fa-table"></i><a href="htr_ip.php" style="color:black; font-size: 15px;">HTR</a></li></ul>
                     </li>
@@ -230,9 +233,7 @@ include("../config/config.php");
                                           <th scope="col">Champs(Sales)</th>
                                           <th scope="col">IAP</th>
                                           <th scope="col">OAP</th>
-                                          <th scope="col">Shops</th>
-                                          <th scope="col">Apt</th>
-                                          <th scope="col">Change Status</th>
+                                        <th scope="col">Change Status</th>
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -250,9 +251,7 @@ include("../config/config.php");
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['champs_sales']?></a></td>
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['iap']?></a></td>
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['oap']?></a></td>
-        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['shops']?></a></td>
-        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['apt']?></a></td>
-        <td>
+       <td>
        <button class="btn btn-warning"><a href="updates/lsm.php?id=<?php echo $row['id']; ?>">Edit</i></a></button>
     </td>
     </tr>

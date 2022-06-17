@@ -167,8 +167,10 @@ include("../config/config.php");
                                 <thead>
                                     <tr>
                                     <th>Date</th>
+                                    <th>Day</th>
                                     <th>Issue(s)</th>
-                                    <th>Zone(s) affected</th>
+                                    <th>Region</th>
+                                    <th>Zone(s)</th>
                                     <th>Duration</th>
                                     <th>Buildings</th>
                                     <th>Reported By</th>
@@ -177,19 +179,22 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT issue, occurancedate, 
+    $sql="SELECT  occurancedate,region,dayname(occurancedate) as dayn, 
+    group_concat(issue ,'".'<br>'."' SEPARATOR ' ' ) AS issue,
     group_concat( DISTINCT zones ,'".'<br>'."' SEPARATOR ' ' ) AS affectedzones,
-    group_concat( DISTINCT building ,'".'<br>'."' SEPARATOR ' ' ) AS buildings,
+    group_concat(building ,'".'<br>'."' SEPARATOR ' ' ) AS buildings,
     group_concat( duration ,'".'<br>'."' SEPARATOR ' ' ) AS duration,
     group_concat( DISTINCT reporter ,'".'<br>'."' SEPARATOR ' ' ) AS reporter,COUNT(issue) as occ
 FROM reports
-GROUP BY issue,occurancedate ORDER BY occurancedate ASC";
+GROUP BY occurancedate,region ORDER BY occurancedate ASC";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
     <td><?php echo $row['occurancedate']?></td>
+    <td><?php echo $row['dayn']?></td>
     <td><?php echo $row['issue']?></td>
+    <td><?php echo $row['region']?></td>
     <td><?php echo $row['affectedzones']?></td>
     <td><?php echo $row['duration']?></td>
     <td><?php echo $row['buildings']?></td>

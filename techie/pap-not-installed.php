@@ -24,6 +24,9 @@ $champ = $row["ChampName"];
 $bname = $row["BuildingName"];
 $bcode = $row["BuildingCode"];
 $datesigned = $row["DateSigned"];
+$bname=$row['BuildingName'];
+$client=$row['ClientName'];
+$contact=$row['ClientContact'];
 
 if (isset($_POST["submit"])) {
     date_default_timezone_set('Africa/Nairobi');
@@ -312,7 +315,7 @@ if (isset($_POST["submit"])) {
                                                 <input id="cc-number" name="message" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
-                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
+                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning" onClick="return confirm('Confirm Moving <?php  echo $client; ?> details from <?php  echo $bname; ?> to Restitutes.This action cannot be undone!')">
                                                 <strong><span id="payment-button-amount">Submit</span></strong>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button>

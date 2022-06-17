@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>IP Reports KWT</title>
+    <title>IP Reports JAR</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="refresh" content="1200">
@@ -79,8 +79,11 @@ include("../config/config.php");
                             <li><i class="fa fa-table"></i><a href="zmm_ip.php" style="color:black; font-size: 15px;">ZMM</a></li>
                             <li><i class="fa fa-table"></i><a href="g44_ip.php" style="color:black; font-size: 15px;">G44</a></li>
                             <li><i class="fa fa-table"></i><a href="g45s_ip.php" style="color:black; font-size: 15px;">G45S</a></li>
-                            <li><i class="fa fa-table"></i><a href="g45n_ip.php" style="color:black; font-size: 15px;">G45N</a></li>
-                            <li><i class="fa fa-table"></i><a href="kwt_ip.php" style="color:black; font-size: 15px;">KWT</a></li>
+                            <li><i class="fa fa-table"></i><a href="g45n1_ip.php" style="color:black; font-size: 15px;">G45N 1</a></li>
+                            <li><i class="fa fa-table"></i><a href="g45n2_ip.php" style="color:black; font-size: 15px;">G45N 2</a></li>
+                            <li><i class="fa fa-table"></i><a href="kwt1_ip.php" style="color:black; font-size: 15px;">KWT 1</a></li>
+                            <li><i class="fa fa-table"></i><a href="kwt2_ip.php" style="color:black; font-size: 15px;">KWT 2</a></li>
+                            <li><i class="fa fa-table"></i><a href="jcr_ip.php" style="color:black; font-size: 15px;">JAR</a></li>
                             <li><i class="fa fa-table"></i><a href="lsm_ip.php" style="color:black; font-size: 15px;">LSM</a></li>
                             <li><i class="fa fa-table"></i><a href="htr_ip.php" style="color:black; font-size: 15px;">HTR</a></li></ul>
                     </li>
@@ -177,7 +180,7 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">IP Reports KWT</strong></center>
+                           <center> <strong class="card-title">IP Reports JAR</strong></center>
                         </div>
                         <div class="card-body"><?php
             if(isset($_SESSION['status'])){
@@ -202,15 +205,14 @@ include("../config/config.php");
                             <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th>Zone</th>
-                                    <th>vlanid_device</th>
-                                    <th>vlanid_user</th>
-                                    <th>device_ip</th>
-                                    <th>user_ip</th>
-                                    <th>cluster</th>
-                                    <th>Buildings</th>
-                                    <th>Codes</th>
-                                    <th>Turned On</th>
+                                    <th>Unit Blocks</th>
+                                    <th>Vlanid_device</th>
+                                    <th>Vlanid_user</th>
+                                    <th>Device_ip</th>
+                                    <th>User_ip</th>
+                                    <th>Blocks</th>
+                                    <th>Units</th>
+                                    <th>Apartments</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -223,10 +225,10 @@ include("../config/config.php");
     group_concat(DISTINCT device_ip ,'".'<br>'."' SEPARATOR ' ' ) AS device_ip,
     group_concat(DISTINCT user_ip ,'".'<br>'."' SEPARATOR ' ' ) AS user_ip,
     group_concat(DISTINCT cluster ,'".'<br>'."' SEPARATOR ' ' ) AS cluster,
-    group_concat(buildings ,'".'<br>'."' SEPARATOR ' ' ) AS buildings,
+    group_concat(DISTINCT buildings ,'".'<br>'."' SEPARATOR ' ' ) AS buildings,
     group_concat(building_codes ,'".'<br>'."' SEPARATOR ' ' ) AS building_codes,
     group_concat(bstatus ,'".'<br>'."' SEPARATOR ' ' ) AS bstatus   
-    from ip_document_reports where region='KWT 1' OR region='KWT 2' group by zones,cluster";
+    from ip_document_reports where region='JCR' group by zones,cluster";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
@@ -239,7 +241,6 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['cluster']?></td>
     <td><?php echo $row['buildings']?></td>
     <td><?php echo $row['building_codes']?></td>
-     <td><?php echo $row['bstatus']?></td>
 </tr>
 <?php } ?>
                                 </tbody>

@@ -420,7 +420,7 @@ while ($row = mysqli_fetch_array($result)) {
                                 echo $row["ChampName"];
                                 echo ": ";
                                 echo $row["bestchamp"];
-                                echo "[";
+                                echo "["; echo " ";
                                 echo $row["Region"];
                                 echo "]";
                             }

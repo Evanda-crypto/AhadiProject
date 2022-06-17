@@ -75,8 +75,11 @@ date_default_timezone_set("Africa/Nairobi");
                             <li><i class="fa fa-table"></i><a href="zmm_ip.php" style="color:black; font-size: 15px;">ZMM</a></li>
                             <li><i class="fa fa-table"></i><a href="g44_ip.php" style="color:black; font-size: 15px;">G44</a></li>
                             <li><i class="fa fa-table"></i><a href="g45s_ip.php" style="color:black; font-size: 15px;">G45S</a></li>
-                            <li><i class="fa fa-table"></i><a href="g45n_ip.php" style="color:black; font-size: 15px;">G45N</a></li>
-                            <li><i class="fa fa-table"></i><a href="kwt_ip.php" style="color:black; font-size: 15px;">KWT</a></li>
+                            <li><i class="fa fa-table"></i><a href="g45n1_ip.php" style="color:black; font-size: 15px;">G45N 1</a></li>
+                            <li><i class="fa fa-table"></i><a href="g45n2_ip.php" style="color:black; font-size: 15px;">G45N 2</a></li>
+                            <li><i class="fa fa-table"></i><a href="kwt1_ip.php" style="color:black; font-size: 15px;">KWT 1</a></li>
+                            <li><i class="fa fa-table"></i><a href="kwt2_ip.php" style="color:black; font-size: 15px;">KWT 2</a></li>
+                            <li><i class="fa fa-table"></i><a href="jcr_ip.php" style="color:black; font-size: 15px;">JAR</a></li>
                             <li><i class="fa fa-table"></i><a href="lsm_ip.php" style="color:black; font-size: 15px;">LSM</a></li>
                             <li><i class="fa fa-table"></i><a href="htr_ip.php" style="color:black; font-size: 15px;">HTR</a></li></ul>
                     </li>
@@ -216,10 +219,18 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
                                               </div>
                                         </div>
+                                        <div class="row">
+                                        <div class="col-6">
                                         <div class="form-group">
-                                            <strong><label for="cc-payment" class="control-label mb-1">Cluster</label></strong>
-                                                <input id="cluster" name="cluster"  type="text"  class="form-control" aria-required="true" aria-invalid="false" placeholder="Cluster">
-                                            </div>
+                                            <strong><label for="cc-payment" class="control-label mb-1">Cluster Name</label></strong>
+                                                <input id="cluster" name="cluster"  type="text" onclick="GetCode(this.value)" class="form-control" aria-required="true" aria-invalid="false" placeholder="Cluster Name">
+                                            </div></div>
+                                        <div class="col-6">
+                                        <div class="form-group">
+                                            <strong><label for="cc-payment" class="control-label mb-1">Cluster Code</label></strong>
+                                                <input id="clustercode" onkeyup="GetCluster(this.value)" name="clustercode"  type="text"  class="form-control" aria-required="true" aria-invalid="false" placeholder="Cluster Code">
+                                            </div></div>
+                                           </div>
                                             <div class="form-group">
                                             <strong> <label for="cc-number" class="control-label mb-1">Zone<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
@@ -605,6 +616,95 @@ function GetDetail(str) {
 
     // xhttp.open("GET", "filename", true);
     xmlhttp.open("GET", "getipdetails.php?zone=" + str, true);
+    
+    // Sends the request to the server
+    xmlhttp.send();
+  }
+}
+</script>
+
+<script>
+
+// onkeyup event will occur when the user
+// release the key and calls the function
+// assigned to this event
+function GetCode(str) {
+  if (str.length == 0) {
+    document.getElementById("clustercode").value = "";
+    return;
+  }
+  else {
+
+    // Creates a new XMLHttpRequest object
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+
+      // Defines a function to be called when
+      // the readyState property changes
+      if (this.readyState == 4 &&
+          this.status == 200) {
+        
+        // Typical action to be performed
+        // when the document is ready
+        var myObj = JSON.parse(this.responseText);
+
+        // Returns the response data as a
+        // string and store this array in
+        // a variable assign the value
+        // received to first name input field
+        
+        document.getElementById
+          ("clustercode").value = myObj[0];
+        
+      }
+    };
+
+    // xhttp.open("GET", "filename", true);
+    xmlhttp.open("GET", "getcode.php?cluster=" + str, true);
+    
+    // Sends the request to the server
+    xmlhttp.send();
+  }
+}
+</script>
+<script>
+
+// onkeyup event will occur when the user
+// release the key and calls the function
+// assigned to this event
+function GetCluster(str) {
+  if (str.length == 0) {
+    document.getElementById("cluster").value = "";
+    return;
+  }
+  else {
+
+    // Creates a new XMLHttpRequest object
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+
+      // Defines a function to be called when
+      // the readyState property changes
+      if (this.readyState == 4 &&
+          this.status == 200) {
+        
+        // Typical action to be performed
+        // when the document is ready
+        var myObj = JSON.parse(this.responseText);
+
+        // Returns the response data as a
+        // string and store this array in
+        // a variable assign the value
+        // received to first name input field
+        
+        document.getElementById
+          ("cluster").value = myObj[0];
+        
+      }
+    };
+
+    // xhttp.open("GET", "filename", true);
+    xmlhttp.open("GET", "getcluster.php?bname=" + str, true);
     
     // Sends the request to the server
     xmlhttp.send();

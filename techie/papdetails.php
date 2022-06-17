@@ -18,6 +18,9 @@ $t2=$row['Techie2'];
 $floor=$row['Floor'];
 $layout=$row['AptLayout'];
 $split=$row['split'];
+$bname=$row['BuildingName'];
+$client=$row['ClientName'];
+$contact=$row['ClientContact'];
 
 ?>
 
@@ -259,7 +262,7 @@ $split=$row['split'];
                                         <div class="form-group">
                                         <strong><label for="cc-number" class="control-label mb-1">MAC Address<span style="color: #FF0000" >*</span></label></strong>
                                             <input id="cc-number" pattern="[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}-[0-9A-Fa-f]{1}[0-9A-Fa-f]{1}"
-                                             name="macaddress" style="text-transform: uppercase" type="text" class="form-control cc-number identified visa"  data-val="true" required placeholder="Format AB-CD-EF-GH-IJ-KL" > 
+                                             name="macaddress" style="text-transform: uppercase" type="text" class="form-control cc-number identified visa"  data-val="true" required placeholder="Format AB-CD-EF-GH-IJ-KL" autofocus > 
                                             </div>
                                             <div class="form-group has-success">
                                             <strong><label for="cc-name" class="control-label mb-1">Date Installed<span style="color: #FF0000" >*</span></label></strong>
@@ -275,7 +278,7 @@ $split=$row['split'];
                                                 <input id="cc-number" name="note" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
-                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
+                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning" onClick="return confirm('Confirm Submitting Mac for\n \n Building : <?php  echo $bname; ?> \n \n Client : <?php  echo $client; ?> \n \n Contact : <?php  echo $contact; ?>')">
                                                 <strong><span id="payment-button-amount">Submit</span></strong>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button>

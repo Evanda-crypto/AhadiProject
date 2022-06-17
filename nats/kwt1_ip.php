@@ -11,9 +11,10 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Compiled Report</title>
+    <title>IP Reports KWT 1</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="1200">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
 
@@ -48,8 +49,8 @@ include("../config/config.php");
 
 </head>
 <body style="background-color:#e1e1e1">
-  <!-- Left Panel -->
-  <aside id="left-panel" class="left-panel">
+ <!-- Left Panel -->
+ <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -93,7 +94,7 @@ include("../config/config.php");
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
                         <ul class="sub-menu children dropdown-menu">
-                         <li><i class="fa fa-inbox"></i><a href="nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                        <li><i class="fa fa-inbox"></i><a href="nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
                             <li><i class="fa fa-inbox"></i><a href="compiled_nats-reports.php" style="color:black; font-size: 15px;">Compiled Reports </a></li>
                             <li><i class="fa fa-inbox"></i><a href="nats-graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
                         </ul>
@@ -179,7 +180,7 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Maton Reports</strong></center>
+                           <center> <strong class="card-title">IP Reports KWT 1</strong></center>
                         </div>
                         <div class="card-body"><?php
             if(isset($_SESSION['status'])){
@@ -201,40 +202,45 @@ include("../config/config.php");
                 
             }
             ?>
-                               <table class="table table-bordered table-striped" id="example">
+                            <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th>Date</th>
-                                    <th>Issue(s)</th>
-                                    <th>Region</th>
-                                    <th>Zone(s)</th>
-                                    <th>Duration</th>
+                                    <th>Zone</th>
+                                    <th>vlanid_device</th>
+                                    <th>vlanid_user</th>
+                                    <th>device_ip</th>
+                                    <th>user_ip</th>
+                                    <th>cluster</th>
                                     <th>Buildings</th>
-                                    <th>Reported By</th>
+                                    <th>Codes</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT issue, occurancedate,region, 
-    group_concat( DISTINCT zones ,'".'<br>'."' SEPARATOR ' ' ) AS affectedzones,
-    group_concat( DISTINCT building ,'".'<br>'."' SEPARATOR ' ' ) AS buildings,
-    group_concat( duration ,'".'<br>'."' SEPARATOR ' ' ) AS duration,
-    group_concat( DISTINCT reporter ,'".'<br>'."' SEPARATOR ' ' ) AS reporter,COUNT(issue) as occ
-FROM reports
-GROUP BY issue,occurancedate,region ORDER BY occurancedate ASC";
+    $sql="SELECT 
+    group_concat(DISTINCT zones ,'".'<br>'."' SEPARATOR ' ' ) AS zones,
+    group_concat(DISTINCT vlanid_device ,'".'<br>'."' SEPARATOR ' ' ) AS vlanid_device,
+    group_concat(DISTINCT vlanid_user ,'".'<br>'."' SEPARATOR ' ' ) AS vlanid_user,
+    group_concat(DISTINCT device_ip ,'".'<br>'."' SEPARATOR ' ' ) AS device_ip,
+    group_concat(DISTINCT user_ip ,'".'<br>'."' SEPARATOR ' ' ) AS user_ip,
+    group_concat(DISTINCT cluster ,'".'<br>'."' SEPARATOR ' ' ) AS cluster,
+    group_concat(buildings ,'".'<br>'."' SEPARATOR ' ' ) AS buildings,
+    group_concat(building_codes ,'".'<br>'."' SEPARATOR ' ' ) AS building_codes,
+    group_concat(bstatus ,'".'<br>'."' SEPARATOR ' ' ) AS bstatus   
+    from ip_document_reports where region='KWT 1' group by zones,cluster";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
-    <td><?php echo $row['occurancedate']?></td>
-    <td><?php echo $row['issue']?></td>
-    <td><?php echo $row['region']?></td>
-    <td><?php echo $row['affectedzones']?></td>
-    <td><?php echo $row['duration']?></td>
+    <td><?php echo $row['zones']?></td>
+    <td><?php echo $row['vlanid_device']?></td>
+    <td><?php echo $row['vlanid_user']?></td>
+    <td><?php echo $row['device_ip']?></td>
+    <td><?php echo $row['user_ip']?></td>
+    <td><?php echo $row['cluster']?></td>
     <td><?php echo $row['buildings']?></td>
-     <td><?php echo $row['reporter']?></td>
- 
+    <td><?php echo $row['building_codes']?></td>
 </tr>
 <?php } ?>
                                 </tbody>
@@ -261,7 +267,8 @@ while($row=$result->fetch_array()){
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
-    order: [[0, 'desc']],
+    order: [[1, 'asc']],
+    
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [

@@ -2,6 +2,33 @@
 include("session.php");
 include("../config/config.php");
 
+if(isset($_POST["submit"])){
+    $contact = trim($_POST["contact"]);
+
+        $stmt = $connection->prepare("SELECT * FROM papdailysales WHERE ClientContact= ?");
+        $stmt->bind_param("s", $contact);
+        $stmt->execute();
+        $stmt_result = $stmt->get_result();
+        if ($stmt_result->num_rows > 0) {
+            $data = $stmt_result->fetch_assoc();
+
+            $_SESSION["success"] = "Pap Details";
+            $cname = $data["ClientName"];
+            $cont = $data["ClientContact"];
+            $reg = $data["Region"];
+            $bname = $data["BuildingName"];
+            $bcode = $data["BuildingCode"];
+            $status = $data["PapStatus"];
+            $door = $data["Apt"];
+            $floor = $data["Floor"];
+        
+            header("Location: get_all_paps_info.php");
+        }
+        else{
+            $_SESSION["status"] = "Sorry no data matched your Search";
+            header("Location: get_all_paps_info.php");
+        }
+}
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -11,7 +38,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Monthly Count</title>
+    <title>All Paps Info</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -41,7 +68,6 @@ include("../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-
 </head>
 <body style="background-color:#e1e1e1">
 <!-- Left Panel -->
@@ -60,14 +86,18 @@ include("../config/config.php");
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APs</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APS</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="not-installed.php">Not Installed</a></li>
                             <li><i class="fa fa-table"></i><a href="to-restore.php">To Restore</a></li>
+                            <li><i class="fa fa-table"></i><a href="restored.php">Restored</a></li>
                             <li><i class="fa fa-table"></i><a href="turned-on.php">Turned On</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
                             <li><i class="fa fa-table"></i><a href="retrieved.php">Retrieved</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="get_all_paps_info.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-table"></i>All Paps Info</a>
                     </li>
                     <li>
                         <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-table"></i>Imported</a>
@@ -135,59 +165,102 @@ include("../config/config.php");
                 <div class="row">
                 <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header"><center>Monthly Counts</center> </div>
-                            <div class="card-body">
-                                <table class="table table-striped" id="example">
-                                    <thead>
-                                        <tr>
-                                        <th class="th-sm">Month
-      </th>
-      <th class="th-sm">Signed
-      </th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                  <?php
-                        $query  = "SELECT EXTRACT(MONTH FROM papdailysales.DateSigned),MONTHNAME(papdailysales.DateSigned) as month,COUNT(papdailysales.ClientID) as pap
-                        FROM papdailysales LEFT JOIN papnotinstalled on papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null and papdailysales.ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'
-                        GROUP BY EXTRACT(MONTH FROM papdailysales.DateSigned),month";
-                        $result  = mysqli_query($connection, $query);
-                            while ($row = mysqli_fetch_assoc($result)) {
-                        ?>
-                                <tr>
-                                    <td><?php echo $row['month']; ?></td>
-                                    <td><?php echo $row['pap']; ?></td>
-                                </tr>
-                        <?php
-
-                            }
-                        ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- Modal -->
-                    
-<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="mediumModalLabel"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-<!--End of modal-->
+                            <div class="card-header">
+                            <center><strong class="card-title">All Paps [<?php
+         $query="SELECT (SELECT count(*) from papdailysales as p left join papnotinstalled as r on p.ClientID=r.ClientID where r.ClientID is null)+(SELECT COUNT(*) as cccs from old) as clients";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['clients'];
+    }
+    ?> Records]</strong></center>
+                            </div>
+                            <div class="card-body"><br>  
+                                <form method="POST" action="getpapinfo.php">
+                            <div class="input-group">
+  <input type="tel" pattern="[0-9]{10}" class="form-control rounded" name="contact" placeholder="Enter Contact to Search" required>
+  <button type="submit" name="submit" class="btn btn-outline-primary">Search</button>
+</div></form>
+<?php
+            if(isset($_SESSION['status'])){
+                ?> <br></br>
+               <center><strong><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></strong>
+  </button>
+                 </div></span></center>
+                 
+                <?php
                 
+            }
+            elseif(isset($_SESSION['success'])){
+                ?><br></br>
+                <center><strong><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success']; unset($_SESSION['success']);?>
+
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></strong>
+  </button>
+                 </div></span></center>
+                 <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td><?php echo $_SESSION['ClientName']; unset($_SESSION['ClientName']);?></td>
+    </tr>
+    <tr>
+      <td>Contact</td>
+      <td><?php echo $_SESSION['ClientContact']; unset($_SESSION['ClientContact']);?></td>
+    </tr>
+    <tr>
+      <td>Champ</td>
+      <td><?php echo $_SESSION['ChampName']; unset($_SESSION['ChampName']);?></td>
+    </tr>
+    <tr>
+      <td>DateSigned</td>
+      <td><?php echo $_SESSION['DateSigned']; unset($_SESSION['DateSigned']);?></td>
+    </tr>
+    <tr>
+      <td>Building</td>
+      <td><?php echo $_SESSION['BuildingName']; unset($_SESSION['BuildingName']);?></td>
+    </tr>
+    <tr>
+      <td>Code</td>
+      <td><?php echo $_SESSION['BuildingCode']; unset($_SESSION['BuildingCode']);?></td>
+    </tr>
+    <tr>
+      <td>Region</td>
+      <td><?php echo $_SESSION['Region']; unset($_SESSION['Reg']);?></td>
+    </tr>
+    <tr>
+      <td>Door No.</td>
+      <td><?php echo $_SESSION['Apt']; unset($_SESSION['Apt']);?></td>
+    </tr>
+    <tr>
+      <td>Floor</td>
+      <td><?php echo $_SESSION['Floor']; unset($_SESSION['Floor']);?></td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td><?php echo $_SESSION['PapStatus']; unset($_SESSION['PapStatus']);?></td>
+    </tr>
+  </tbody>
+</table>
+                <?php
+                
+            }
+            ?>
+                        </div>
+                    </div>
+                
+                </div>
 
 </div><!-- .content -->
 <div class="clearfix"></div>
@@ -202,58 +275,5 @@ include("../config/config.php");
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
-
-<script>
- $(document).ready(function () {
-$('#example').DataTable(
-    {
-"lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
-"scrollY":        "500px",
-"scrollCollapse": true
-}
-);
-$('.dataTables_length').addClass('bs-select');
-});
-</script>
-<script>
-$(document).ready(function(){
-  $(document).on('click','.open',function(){
-      var dataURL = $(this).attr('data-href');
-        $('.modal-body').load(dataURL,function(){
-            $('#myModal').modal({show:true});
-        });
-    }); 
-});
-</script>
-<script>
- $(document).ready(function () {
-$('#dtBasicExample').DataTable();
-$('.dataTables_length').addClass('bs-select');
-});
-</script>
-<script>
-$(document).ready(function(){
-  $(document).on('click','.openPopup',function(){
-        var dataURL = $(this).attr('data-href');
-        $('.modal-body').load(dataURL,function(){
-            $('#Modal').modal({show:true});
-        });
-    }); 
-});
-</script>
-<script>
-$(document).ready(function(){
-    $('.openPopup').on('click',function(){
-        var dataURL = $(this).attr('data-href');
-        $('.modal-body').load(dataURL,function(){
-            $('#Modal').modal({show:true});
-        });
-    }); 
-});
-
-function changeValue(value) {
-  document.getElementById('remind').innerHTML = value;
-}
-</script>
 </body>
 </html>

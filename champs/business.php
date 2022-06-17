@@ -68,6 +68,9 @@ include("session.php");
                         <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-table"></i>Imported</a>
                     </li>
                     <li>
+                        <a href="get_all_paps_info.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-table"></i>All Paps Info</a>
+                    </li>
+                    <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>  
                     <li class="active">

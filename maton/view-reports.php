@@ -168,6 +168,7 @@ include("../config/config.php");
                                     <tr>
                                     <th>Date</th>
                                     <th>Issue</th>
+                                    <th>Region</th>
                     <th>Zone(s)</th>
                     <th>Building</th>
                     <th>Duration</th>
@@ -179,13 +180,14 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT zones,issue,starttime,endtime,duration,reporter,occurancedate,comments,building,id from reports where Department='MATON'";
+    $sql="SELECT zones,issue,starttime,endtime,duration,reporter,occurancedate,comments,building,id,region from reports where Department='MATON'";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
     <td><?php echo $row['occurancedate']?></td>
     <td><?php echo $row['issue']?></td>
+    <td><?php echo $row['region']?></td>
     <td><?php echo $row['zones']?></td>
     <td><?php echo $row['building']?></td>
     <td><?php echo $row['duration']?></td>
