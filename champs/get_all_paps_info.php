@@ -97,10 +97,10 @@ if(isset($_POST["submit"])){
                         </ul>
                     </li>
                     <li>
-                        <a href="get_all_paps_info.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-table"></i>All Paps Info</a>
+                        <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-table"></i>Imported</a>
                     </li>
                     <li>
-                        <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-table"></i>Imported</a>
+                        <a href="get_all_paps_info.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-table"></i>All Paps Info</a>
                     </li>
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
@@ -177,7 +177,7 @@ if(isset($_POST["submit"])){
                             <div class="card-body"><br>  
                                 <form method="POST" action="getpapinfo.php">
                             <div class="input-group">
-  <input type="tel" pattern="[0-9]{10}" class="form-control rounded" name="contact" placeholder="Enter Contact to Search" required>
+  <input type="tel" pattern="[0-9]{10}" class="form-control rounded" autofocus autocomplete="off" name="contact" placeholder="Enter Contact to Search" required>
   <button type="submit" name="submit" class="btn btn-outline-primary">Search</button>
 </div></form>
 <?php
@@ -186,9 +186,7 @@ if(isset($_POST["submit"])){
                <center><strong><span> <div class="alert alert-danger" role="alert">
                    <?php echo $_SESSION['status'];
                 unset($_SESSION['status']);?>
-                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span></strong>
-  </button>
+            
                  </div></span></center>
                  
                 <?php
