@@ -1,39 +1,51 @@
 <?php
 include("../config/config.php");
-?>
-<?php
 session_start();
-// If upload button is clicked ...
-if (isset($_POST['submit']) && !empty($_FILES["image"]["name"])) {
-$Team_ID=$_POST['teamid'];
-$mtrno = $_POST['mtrno'];
-$DateInstalled = $_POST['dateinstalled'];
-$Region = $_POST['region'];
-$contact = $_POST['contact'];
-$bname = $_POST['bname'];
-$Note = $_POST['note'];
-$status = "New";
-$Contperson = $_POST['person'];
+if(isset($_POST["submit"])){
+    $Team_ID=$_POST['teamid'];
+    $MacAddress = $_POST['macaddress'];
+    $SerialNumber = "N/A";
+    $DateInstalled = $_POST['dateinstalled'];
+    $ClientID = $_POST['ClientID'];
+    $Region = $_POST['region'];
+    $Floor = $_POST['floor'];
+    $Note = $_POST['note'];
+    $layout = $_POST['layout'];
+    $status = "Installed";
+    $split = $_POST['split'];
+   
+       
+                    // Insert image file name into database
+                    $stmt= $connection->prepare("select * from papinstalled where MacAddress= ?");
+                    $stmt->bind_param("s",$MacAddress);
+                    $stmt->execute();
+                    $stmt_result= $stmt->get_result();
+                    if($stmt_result->num_rows>0){
+                        $_SESSION["status"] = "Mac already Exists";
+                        header("Location: mytask.php");
+                    }
+                    else{
+                    
+                    $insert = $connection->query("INSERT into papinstalled (Team_ID,ClientID,MacAddress,SerialNumber,DateInstalled,Region,Note,Floor,AptLayout,split) VALUES ('$Team_ID','$ClientID','$MacAddress','$SerialNumber','$DateInstalled','$Region','$Note','$Floor','$layout','$split')"); 
 
-	$filename = $_FILES["image"]["name"];
-	$tempname = $_FILES["image"]["tmp_name"];	
-		$folder = "../images/mtrpics".$filename;
+                    if($insert){
+                        $sql="update papdailysales set ClientID=$ClientID,Floor='$Floor',AptLayout='$layout',PapStatus='$status' where ClientID=$ClientID";
+                        $result=mysqli_query($connection,$sql);
 
-		// Get all the submitted data from the form
-		$sql = "INSERT INTO Token_meter (Meter_Picture,Techie_team,Meter_Number,Contact_Number,Contact_Person,date_Installed,Status,Region,Comments,Cluster_name) VALUES 
-		('$filename','$Team_ID','$mtrno','$contact','$Contperson','$DateInstalled','$status','$Region','$Note','$bname' )";
+                        if($result){
+                            $_SESSION["success"] = "Submitted";
+                            header("Location: mytask.php");
+                        }
+                        else{
+                            $_SESSION["status"] = "Error occurred!";
+                            header("Location: mytask.php");
+                        }
+                    }else{
+                        $_SESSION["status"] = "Error occurred!";
+                        header("Location: mytask.php");
+                    }} 
+               
+       
 
-		// Execute query
-		mysqli_query($connection, $sql);
-		
-		// Now let's move the uploaded image into the folder: image
-		if (move_uploaded_file($tempname, $folder)) {
-            $_SESSION["success"] = "Submitted";
-            header("Location: new-meter-form.php");
-		}else{
-            $_SESSION["status"] = "An Error Occured";
-            header("Location: new-meter-form.php");
-         
-	}
 }
 ?>

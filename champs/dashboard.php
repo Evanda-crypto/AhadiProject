@@ -208,7 +208,7 @@ if (!$connection) {
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
-                                    <div class="stat-icon ">
+                                    <div class="stat-icon dib flat-color-1">
                                         <i class="pe-7s-help1"></i>
                                     </div>
                                     <div class="stat-content">
@@ -232,7 +232,7 @@ if (!$connection) {
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
-                                    <div class="stat-icon dib flat-color-2">
+                                    <div class="stat-icon dib flat-color-1">
                                         <i class="pe-7s-refresh-2"></i>
                                     </div>
                                     <div class="stat-content">
@@ -256,7 +256,7 @@ if (!$connection) {
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
-                                    <div class="stat-icon dib flat-color-3">
+                                    <div class="stat-icon dib flat-color-1">
                                         <i class="pe-7s-signal"></i>
                                     </div>
                                     <div class="stat-content">
@@ -302,7 +302,7 @@ if (!$connection) {
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
-                                    <div class="stat-icon dib flat-color-4">
+                                    <div class="stat-icon dib flat-color-1">
                                         <i class="pe-7s-check"></i>
                                     </div>
                                     <div class="stat-content">

@@ -214,7 +214,7 @@ include("../config/config.php");
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
-                                    <div class="stat-icon ">
+                                    <div class="stat-icon dib flat-color-4 ">
                                         <i class="pe-7s-help1"></i>
                                     </div>
                                     <div class="stat-content">
@@ -262,7 +262,7 @@ include("../config/config.php");
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
-                                    <div class="stat-icon dib flat-color-3">
+                                    <div class="stat-icon dib flat-color-4">
                                         <i class="pe-7s-signal"></i>
                                     </div>
                                     <div class="stat-content">
@@ -285,7 +285,7 @@ include("../config/config.php");
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
-                                    <div class="stat-icon dib flat-color-2">
+                                    <div class="stat-icon dib flat-color-4">
                                         <i class="pe-7s-attention"></i>
                                     </div>
                                     <div class="stat-content">
@@ -304,7 +304,29 @@ include("../config/config.php");
                             </div>
                         </div></a>
                     </div>
-
+                    <div class="col-lg-3 col-md-6"><a href="not-turnedon.php">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-4">
+                                        <i class="pe-7s-power"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text"><span class="count"><?php
+                                             $query="SELECT COUNT(*) as offlines FROM papinstalled left join turnedonpap on turnedonpap.ClientID=papinstalled.ClientID WHERE turnedonpap.ClientID is Null and  papinstalled.Team_ID='".$_SESSION['TeamID']."'";
+                                             $data=mysqli_query($connection,$query);
+                                             while($row=mysqli_fetch_assoc($data)){
+                                             echo $row['offlines']."<br><br>";
+                                              }
+                                              ?></span></div>
+                                            <div class="stat-heading">Offlines</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></a>
+                    </div>
                     
 
                  

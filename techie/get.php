@@ -16,7 +16,7 @@ if(!empty($_GET['id'])){
      
     if($query->num_rows > 0){ 
         $cmsData = $query->fetch_assoc(); 
-        echo "<table class='table table-striped'>";
+        echo "<table class='table table-striped table-bordered'>";
         echo "<tr>";
         echo "<td>Building Name</td>";
         echo "<td>".$cmsData['BuildingName']."</td>";

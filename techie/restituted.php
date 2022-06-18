@@ -190,7 +190,7 @@ include("../config/config.php");
                             <center><strong class="card-title">Restituted</strong></center>
                             </div>
                             <div class="card-body">
-                                <table class="table" id="example">
+                                <table class="table table-bordered table-striped" id="example">
                                     <thead>
                                         <tr>
                           <th scope="th-sm">Building Name</th>

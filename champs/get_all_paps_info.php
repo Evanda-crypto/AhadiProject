@@ -235,7 +235,7 @@ if(isset($_POST["submit"])){
     </tr>
     <tr>
       <td>Region</td>
-      <td><?php echo $_SESSION['Region']; unset($_SESSION['Reg']);?></td>
+      <td><?php echo $_SESSION['Reg']; unset($_SESSION['Reg']);?></td>
     </tr>
     <tr>
       <td>Door No.</td>

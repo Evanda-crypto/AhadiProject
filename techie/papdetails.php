@@ -205,7 +205,7 @@ $contact=$row['ClientContact'];
                                         </div>
                                         <hr>
                                         
-                                        <form  method="post" enctype="multipart/form-data" autocomplete="off" action="pic.php">
+                                        <form  method="post" enctype="multipart/form-data" autocomplete="off" action="action.php">
                                         <div class="form-group">
                                         <strong><label for="x_card_code" class="control-label mb-1">Client ID</label></strong>
                                         <div class="input-group">
