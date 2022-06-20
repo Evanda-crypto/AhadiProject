@@ -206,8 +206,8 @@ include("../config/config.php");
                      <th>Building Name</th>
                      <th>Building Code</th>
                      <th>Champ</th>
-                     <th>Client Name</th>
-                     <th>Client Contact</th>
+                     <th>Client</th>
+                     <th>Contact</th>
                      <th>Date Signed</th>
                      <th>Availability</th>
                      <th>Champs Comment</th>

@@ -177,37 +177,55 @@ include("../../config/config.php");
     }
     ?> Records]</strong></center>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body"><?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th class="th-sm">PAP Code
-                  </th>
-                   <th class="th-sm">Building Name
+                   <th class="th-sm">Building
                    </th>
-                   <th class="th-sm">Building Code
+                   <th class="th-sm">Code
                    </th>
                    <th class="th-sm">Champ
                    </th>
-                   <th class="th-sm">Client Name
+                   <th class="th-sm">Client
                    </th>
-                   <th class="th-sm">Client Contact
+                   <th class="th-sm">Contact
                    </th>
-                   <th class="th-sm">MAC Address
+                   <th class="th-sm">MAC
                    </th>
-                   <th class="th-sm">Date Turned On
+                   <th class="th-sm">Date
                    </th>  
+                   <th class="th-sm">Edit
+                   </th> 
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT ClientID,BuildingName,BuildingCode,Region,ChampName,ClientName,ClientContact,MacAddress,DateTurnedOn,papcode from old where Region='".$_SESSION['Region']."'";
+    $sql="SELECT id,BuildingName,BuildingCode,Region,ChampName,ClientName,ClientContact,MacAddress,DateTurnedOn,papcode from old where Region='".$_SESSION['Region']."'";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
-    <td><?php echo $row['papcode']?></td>
     <td><?php echo $row['BuildingName']?></td>
     <td><?php echo $row['BuildingCode']?></td>
     <td><?php echo $row['ChampName']?></td>
@@ -215,6 +233,9 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['ClientContact']?></td>
     <td><?php echo $row['MacAddress']?></td>
     <td><?php echo $row['DateTurnedOn']?></td>
+    <td>
+    <button class="btn btn-warning" ><a href="edit-imported.php?id=<?php echo $row['id']; ?>" class="text-bold">Edit</a></button>
+    </td>
 </tr>
 <?php } ?>
                                 </tbody>

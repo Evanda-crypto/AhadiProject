@@ -89,6 +89,8 @@ include("../../config/config.php");
                         <a href="turned-on.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
                     </li>
                     <li>
+                        <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Imported</a>
+                    </li>
                     <li class="menu-title">BUILDINGS</li><!-- /.menu-title -->
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
@@ -209,12 +211,12 @@ include("../../config/config.php");
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                     <th>Building Name</th>
-                     <th>Building Code</th>
+                     <th>Building</th>
+                     <th>Code</th>
                      <th>Region</th>
                      <th>Champ</th>
-                     <th>Client Name</th>
-                     <th>Client Contact</th>
+                     <th>Client</th>
+                     <th>Contact</th>
                      <th>Date Signed</th>
                      <th>Availability</th>
                      <th>Champs Comment</th>
@@ -292,7 +294,7 @@ include("../../config/config.php");
 <script src="../../assets/js/main.js"></script>
 
 <script type="text/javascript">
-/*$( document ).ready(function() {
+$( document ).ready(function() {
 $('#example').DataTable({
     order: [[6, 'desc']],
 		 "processing": true,
@@ -334,10 +336,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
       cell.classList.toggle('red');
     }
   })
-})*/
+})
 </script>
 <script>
-    $(document).ready(function () {
+   /* $(document).ready(function () {
     // Setup - add a text input to each footer cell
     $('#example thead th').each(function () {
         var title = $(this).text();
@@ -399,7 +401,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       cell.classList.toggle('red');
     }
   })
-})
+})*/
 </script>
 </body>
 </html>

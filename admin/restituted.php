@@ -166,11 +166,11 @@ include("../config/config.php");
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                     <th>Client Name</th>
+                     <th>Client</th>
                      <th>Contact</th>
                      <th>Building Name</th>
                      <th>BuildingCode</th>
-                     <th>ChampName</th>
+                     <th>Champ</th>
                      <th>Region</th>
                      <th>Techies</th>
                     <th>Reason</th>

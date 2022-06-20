@@ -289,11 +289,11 @@ values(?,?,?,?,?,?,?,?,?,?,?)");
                    </th>
                    <th class="th-sm">Region
                   </th>
-                   <th class="th-sm">Client Name
+                   <th class="th-sm">Client
                    </th>
-                   <th class="th-sm">Client Contact
+                   <th class="th-sm">Contact
                    </th>
-                   <th class="th-sm">MAC Address
+                   <th class="th-sm">MAC
                    </th>  
                                             </tr>
                                         </thead>

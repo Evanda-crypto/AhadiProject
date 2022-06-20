@@ -168,7 +168,7 @@ include("../../../config/config.php");
                                   </thead>
                                   <tbody>
                                   <?php
-                        $query  = "SELECT p.Region,t.ClientName,t.ClientID,t.ClientContact,t.ClientAvailability,p.BuildingName,p.Region,t.Date,g.Team_ID,CONCAT(g.Techie1,'/',g.Techie2) as techies,
+                        $query  = "SELECT p.Region,t.ClientName,t.ClientID,t.ClientContact,t.ClientAvailability,p.BuildingName,p.Region,t.Date,g.Team_ID,CONCAT(g.Techie1,'|',g.Techie2) as techies,
                         p.BuildingCode,p.Floor,p.Apt from papdailysales as p LEFT JOIN 
                         techietask as t on t.ClientID=p.ClientID LEFT JOIN Token_teams as g ON g.Team_ID=t.TeamID  LEFT JOIN papinstalled as i ON i.ClientID=p.ClientID WHERE t.ClientID is not null AND i.ClientID is null";
                         $result  = mysqli_query($connection, $query);

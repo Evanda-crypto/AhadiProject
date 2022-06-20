@@ -204,25 +204,25 @@ include("session.php");
                 
             }
             ?>
-                                        <form  method="post" enctype="multipart/form-data" action="action.php" autocomplete="off"> 
+                                        <form  method="post" enctype="multipart/form-data" autocomplete="off"> 
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Team ID</label>
                                         <div class="input-group">
-                                        <input id="bname" name="teamid" type="text" class="form-control cc-cvc" value="<?php echo $_SESSION['TeamID']?>"   placeholder="Team ID" readonly><br></br>
+                                        <input id="teamid" name="teamid" type="text" class="form-control cc-cvc" value="<?php echo $_SESSION['TeamID']?>"   placeholder="Team ID" readonly><br></br>
                                         </div>
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Contact Person<span style="color: #FF0000" >*</span></label>
                                         <div class="input-group">
-                                        <input id="bname" name="person" required type="text" class="form-control cc-cvc"   placeholder="Contact Person" ><br></br>
+                                        <input id="person" name="person" required type="text" class="form-control cc-cvc"   placeholder="Contact Person" ><br></br>
                                         </div>
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Phone Number<span style="color: #FF0000" >*</span></label>
                                         <div class="input-group">
-                                        <input  name="contact" type="tel" pattern="[0-9]{10}" class="form-control cc-cvc" required   placeholder="Phone Number 07XXXXXXXX" ><br></br>
+                                        <input id="contact" name="contact" type="tel" pattern="[0-9]{10}" class="form-control cc-cvc" required   placeholder="Phone Number 07XXXXXXXX" ><br></br>
                                         </div>
                                         <div class="form-group">
                                             <label for="cc-number" class="control-label mb-1">Meter No<span style="color: #FF0000" >*</span></label>
-                                            <input id="cc-number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11) return false;"pattern="[0-9]{11}" name="mtrno" type="number" class="form-control cc-number identified visa"  data-val="true" required placeholder="Meter Number" > 
+                                            <input id="meter" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11) return false;"pattern="[0-9]{11}" name="mtrno" type="number" class="form-control cc-number identified visa"  data-val="true" required placeholder="Meter Number" > 
                                             </div>
                                                     <label for="x_card_code" class="control-label mb-1">Building Name<span style="color: #FF0000" >*</span></label>
                                                     <div class="input-group">
@@ -232,7 +232,7 @@ include("session.php");
                                         <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label>
                                                 <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Region..." class="standardSelect form-control" name="region" tabindex="1" required>
+                                            <select data-placeholder="Choose a Region..." class="standardSelect form-control" id="region" tabindex="1" required>
                                             <option ></option>
                                             <option disabled selected>Select Region</option>
                                              <option value="G44">G44</option>
@@ -253,14 +253,14 @@ include("session.php");
                                             </div>
                                             <div class="form-group">
                                             <label for="cc-number" class="control-label mb-1">Image<span style="color: #FF0000" >*</span></label>
-                                            <input id="cc-number" name="image" type="file" class="form-control cc-number identified visa"> 
+                                            <input id="image" name="image" type="file" class="form-control cc-number identified visa"> 
                                             </div>
                                             <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label>
-                                                <input id="cc-number" name="note" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
+                                                <input id="comment" name="note" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
-                                                <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
+                                                <button id="button" type="submit" name="submit" class="btn btn-warning">
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button>
@@ -315,6 +315,33 @@ if(month<10){
 }
 maxdate= year +"-" + month + "-" + todate;
  document.getElementById("termination").setAttribute("max",maxdate);
+ </script>
+ <script>
+    let meters =[];
+
+    const addMeter(ev)=>{
+        ev.preventDefaullt();
+
+        let meter ={
+        Cluster_name: document.getElementById('bname').value,
+        Meter_Number: document.getElementById('meter').value,
+        Contact_number:document.getElementById('contact').value,
+        date_Installed: document.getElementById('termination').value,
+        Region: document.getElementById('region').value,
+        Techie_team: document.getElementById('teamid').value,
+        Contact_Person: document.getElementById('person').value,
+        Meter_Picture: document.getElementById('image').value,
+        Comments: document.getElementById('comment').value
+        }
+        meters.push(meter);
+        document.forms[0].reset();
+
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+        document.getElementById('button').addEventListener('click',addMeter);
+    });
+
  </script>
 </body>
 </html>

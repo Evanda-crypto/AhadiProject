@@ -160,7 +160,7 @@ else
                            <center> <strong class="card-title">Users</strong></center>
                         </div>
                         <div class="table-responsive">
-                                    <table class="table table-bordered table-striped table-dark" id="example">
+                                    <table class="table table-bordered table-striped" id="example">
                                         <thead>
                                             <tr>
                                             <th scope="col">First Name</th>

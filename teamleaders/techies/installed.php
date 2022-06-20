@@ -298,13 +298,13 @@ include("../../config/config.php");
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                    <th>Client Name</th>
+                    <th>Client</th>
                    <th>Contact</th>
                   <th>Building Name</th>
                     <th>Techie 1</th>
                     <th>Techie 2</th>
                     <th>Techie 3</th>
-                    <th>Mac Address</th>
+                    <th>Mac</th>
                     <th>Date Installed</th>
                     <th>Edit mac</th>
                     <th>Retrieve</th>

@@ -151,14 +151,14 @@ include("../../../config/config.php");
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                     <th>Client Name</th>
+                     <th>Client</th>
                      <th>Contact</th>
-                     <th>Building Name</th>
-                     <th>BuildingCode</th>
-                     <th>ChampName</th>
+                     <th>Building</th>
+                     <th>Champ</th>
                      <th>Region</th>
                      <th>Techies</th>
-                    <th>Reason</th>
+                     <th>Date</th>
+                     <th>Reason</th>
                     <th>Techie Feedback</th>
                                     </tr>
                                 </thead>
@@ -166,17 +166,17 @@ include("../../../config/config.php");
                                
  <?php
  $query =
-     "SELECT ClientID,ClientName,BuildingName,BuildingCode,Region,Reason,Contact,ChampName,CONCAT(Techie1,'/',Techie2) as techies,Note from papnotinstalled";
+     "SELECT ClientID,ClientName,BuildingName,BuildingCode,Region,Reason,Contact,ChampName,CONCAT(Techie1,'|',Techie2) as techies,Note,RestitutedDate from papnotinstalled";
  $result = mysqli_query($connection, $query);
  while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
                                     <td><?php echo $row["ClientName"]; ?></td>
                                     <td><?php echo $row["Contact"]; ?></td>
                                     <td><?php echo $row["BuildingName"]; ?></td>
-                                    <td><?php echo $row["BuildingCode"]; ?></td>
                                     <td><?php echo $row["ChampName"]; ?></td>
                                     <td><?php echo $row["Region"]; ?></td>
                                     <td><?php echo $row["techies"]; ?></td>
+                                    <td><?php echo $row["RestitutedDate"]; ?></td>
                                     <td><?php echo $row["Reason"]; ?></td>
                                     <td><?php echo $row["Note"]; ?></td>
                                 </tr>
@@ -206,6 +206,7 @@ include("../../../config/config.php");
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
+    order: [[6, 'desc']],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [

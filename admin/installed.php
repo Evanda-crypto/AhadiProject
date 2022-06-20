@@ -168,9 +168,9 @@ include("../config/config.php");
                                     <th>Building Name</th>
                     <th>Building Code</th>
                     <th>Region</th>
-                    <th>Mac Address</th>
+                    <th>Mac</th>
                     <th>Date Installed</th>
-                    <th>Client Name</th>
+                    <th>Client</th>
                     <th>Contact</th>
                    <th>Floor</th>
                                     </tr>

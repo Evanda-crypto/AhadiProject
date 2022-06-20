@@ -26,11 +26,19 @@ $shops=$row['shops'];
 $apt=$row['apt'];
 $vacant=$row['vacantshops'];
 $comments=$row['note'];
+if(is_null($dateaccepted) || is_null($datecabled) || is_null($datefullyinstalled) || is_null($dateturnedon)){
+    $sign = date("Y-m-d");
+    $accept = date("Y-m-d");
+    $cabled = date("Y-m-d");
+    $full = date("Y-m-d");
+    $turn = date("Y-m-d");
+}else{
 $sign = date("Y-m-d", strtotime($datesigned));
 $accept = date("Y-m-d", strtotime($dateaccepted));
 $cabled = date("Y-m-d", strtotime($datecabled));
 $full = date("Y-m-d", strtotime($datefullyinstalled));
 $turn = date("Y-m-d", strtotime($dateturnedon));
+}
 
 if(isset($_POST['submit'])){
 $Bname = $_POST['bname'];
