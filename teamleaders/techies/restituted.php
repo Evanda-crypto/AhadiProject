@@ -259,13 +259,13 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Installed[Already Installed][ <?php
-         $query="SELECT COUNT(*) as paps FROM papnotinstalled where Reason='Already Installed' and Region = '".$_SESSION['Region']."'";
+                           <center> <strong class="card-title">Resitituted[ All Records <?php echo $_SESSION['Region'];?>][ <?php
+         $query="SELECT COUNT(*) as paps FROM papnotinstalled where Region = '".$_SESSION['Region']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['paps'];
     }
-    ?> Records]</strong></center>
+    ?>]</strong></center>
                         </div>
                         <div class="card-body"><?php
             if(isset($_SESSION['status'])){
@@ -311,7 +311,7 @@ include("../../config/config.php");
                                 <tbody>
                                 <?php
  $query =
-     "SELECT ClientID,ClientName,BuildingName,BuildingCode,RestitutedDate,DateSigned,Reason,Contact,CONCAT(Techie1,'/',Techie2) as techies,Note from papnotinstalled where Reason='Already Installed' and Region='" .
+     "SELECT ClientID,ClientName,BuildingName,BuildingCode,RestitutedDate,DateSigned,Reason,Contact,CONCAT(Techie1,'|',Techie2) as techies,Note from papnotinstalled where Region='" .
      $_SESSION["Region"] .
      "' order by DateSigned Desc";
  $result = mysqli_query($connection, $query);

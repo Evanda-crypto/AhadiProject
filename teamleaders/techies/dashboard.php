@@ -191,7 +191,7 @@ include("../../config/config.php");
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell"></i>
                                 <span class="count bg-danger"><?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled WHERE Reason='Already installed' and Region='".$_SESSION['Region']."'";
+         $query="SELECT COUNT(*) as restituted FROM papnotinstalled WHERE   Region='".$_SESSION['Region']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['restituted'];
@@ -200,7 +200,7 @@ include("../../config/config.php");
                             </button>
                             <div class="dropdown-menu" aria-labelledby="notification">
                                 <p class="red">You have <?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled WHERE Reason='Already installed' and Region='".$_SESSION['Region']."'";
+         $query="SELECT COUNT(*) as restituted FROM papnotinstalled WHERE   Region='".$_SESSION['Region']."'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['restituted'];
@@ -422,7 +422,7 @@ include("../../config/config.php");
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count"><?php
-                                             $query="SELECT COUNT(*) AS restituted from papnotinstalled Where Reason='Already Installed' and Region='".$_SESSION['Region']."'";
+                                             $query="SELECT COUNT(*) AS restituted from papnotinstalled Where   Region='".$_SESSION['Region']."'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['restituted']."<br><br>";
@@ -901,7 +901,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
                         mysqli_error();
                 } else {
                     $sql =
-                        "SELECT COUNT(*) as restituted FROM papnotinstalled WHERE Reason='Already installed' and Region='".$_SESSION['Region']."'";
+                        "SELECT COUNT(*) as restituted FROM papnotinstalled WHERE   Region='".$_SESSION['Region']."'";
                     $result = mysqli_query($connection, $sql);
                     $chart_data = "";
                     while ($torestore = mysqli_fetch_assoc($result)) {
