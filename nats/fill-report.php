@@ -327,6 +327,7 @@ date_default_timezone_set("Africa/Nairobi");
                                             <option value="Core Device Failure">Core Device Failure</option>
                                             <option value="Public IP Issue">Public IP Issue</option>
                                             <option value="Speed Issue">Speed Issue</option>
+                                            <option value="Sites Unreachable">Sites Unreachable</option>
                                             <option value="No Issues">No Issues</option>
                                             
                                             </select>

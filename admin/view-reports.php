@@ -211,7 +211,7 @@ include("../config/config.php");
                                 <?php
     
     $sql="SELECT  occurancedate,region,dayname(occurancedate) as dayn, 
-    group_concat(issue ,'".'<br>'."' SEPARATOR ' ' ) AS issue,
+    group_concat(DISTINCT issue ,'".'<br>'."' SEPARATOR ' ' ) AS issue,
     group_concat( DISTINCT zones ,'".'<br>'."' SEPARATOR ' ' ) AS affectedzones,
     group_concat(building ,'".'<br>'."' SEPARATOR ' ' ) AS buildings,
     group_concat( duration ,'".'<br>'."' SEPARATOR ' ' ) AS duration,
