@@ -301,6 +301,7 @@ include("../../config/config.php");
                      <th>Contact</th>
                      <th>Building Name</th>
                      <th>Techies</th>
+                     <th>Reason</th>
                      <th>Techie Feedback</th>
                     <th>Date Restituted</th>
                     <th>Restore</th>
@@ -321,6 +322,7 @@ include("../../config/config.php");
                                     <td><?php echo $row["Contact"]; ?></td>
                                     <td><?php echo $row["BuildingName"]; ?></td>
                                     <td><?php echo $row["techies"]; ?></td>
+                                    <td><?php echo $row["Reason"]; ?></td>
                                     <td><?php echo $row["Note"]; ?></td>
                                    <td><?php echo $row["RestitutedDate"]; ?></td>
                                     <td>
