@@ -204,66 +204,67 @@ include("session.php");
                 
             }
             ?>
-                                        <form  method="post" enctype="multipart/form-data" autocomplete="off"> 
+                                        <form  method="post" id="mtr-form"  onsubmit="myFunction()" enctype="multipart/form-data" action="http://app.sasakonnect.net:19003/api/Meters/" autocomplete="off"> 
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Team ID</label>
                                         <div class="input-group">
-                                        <input id="teamid" name="teamid" type="text" class="form-control cc-cvc" value="<?php echo $_SESSION['TeamID']?>"   placeholder="Team ID" readonly><br></br>
+                                        <input id="Techie_team" name="Techie_team" type="text" class="form-control cc-cvc" value="<?php echo $_SESSION['TeamID']?>"   placeholder="Team ID" readonly><br></br>
                                         </div>
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Contact Person<span style="color: #FF0000" >*</span></label>
                                         <div class="input-group">
-                                        <input id="person" name="person" required type="text" class="form-control cc-cvc"   placeholder="Contact Person" ><br></br>
+                                        <input id="Contact_Person" name="Contact_Person" required type="text" class="form-control cc-cvc"   placeholder="Contact Person" ><br></br>
                                         </div>
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Phone Number<span style="color: #FF0000" >*</span></label>
                                         <div class="input-group">
-                                        <input id="contact" name="contact" type="tel" pattern="[0-9]{10}" class="form-control cc-cvc" required   placeholder="Phone Number 07XXXXXXXX" ><br></br>
+                                        <input id="Contact_number" name="Contact_number" type="tel" pattern="[0-9]{10}" class="form-control cc-cvc" required   placeholder="Phone Number 07XXXXXXXX" ><br></br>
                                         </div>
                                         <div class="form-group">
                                             <label for="cc-number" class="control-label mb-1">Meter No<span style="color: #FF0000" >*</span></label>
-                                            <input id="meter" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11) return false;"pattern="[0-9]{11}" name="mtrno" type="number" class="form-control cc-number identified visa"  data-val="true" required placeholder="Meter Number" > 
+                                            <input id="Meter_Number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11) return false;"pattern="[0-9]{11}" name="Meter_Number" type="number" class="form-control cc-number identified visa"  data-val="true" required placeholder="Meter Number" > 
                                             </div>
                                                     <label for="x_card_code" class="control-label mb-1">Building Name<span style="color: #FF0000" >*</span></label>
                                                     <div class="input-group">
-                                                        <input id="bname" name="bname" type="text" class="form-control cc-cvc"  placeholder="Building Name" required>
+                                                        <input id="Cluster_name" name="Cluster_name" type="text" class="form-control cc-cvc"  placeholder="Building Name" required>
                                                     </div>
                                                
                                         <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label>
                                                 <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Region..." class="standardSelect form-control" id="region" tabindex="1" required>
+                                            <select data-placeholder="Choose a Region..." class="standardSelect form-control" id="Region" name="Region" tabindex="1" required>
                                             <option ></option>
                                             <option disabled selected>Select Region</option>
-                                             <option value="G44">G44</option>
-                                            <option value="ZMM">ZMM</option>
-                                           <option value="G45S">G45S</option>
-                                             <option value="G45N">G45N</option>
-                                            <option value="RM">RM</option>
-                                           <option value="JACARANDA">JACARANDA</option>
-                                            <option value="KWT">KWT</option>  
-                                           <option value="LSM">LSM</option>
+                                             <option value="1">G44</option>
+                                            <option value="2">RM</option>
+                                           <option value="3">ZMM</option>
+                                             <option value="4">G45S</option>
+                                            <option value="5">G45N</option>
+                                           <option value="6">KWT</option>
+                                            <option value="7">LSM</option>  
+                                           <option value="8">JACARANDA</option>
+                                           <option value="11">HTR</option>  
                                               </select>
                                             </div>
                                             </div>
                                             <div class="form-group has-success">
                                                 <label for="cc-name" class="control-label mb-1">Termination Date<span style="color: #FF0000" >*</span></label>
-                                                <input id="termination" name="dateinstalled" type="date" class="form-control cc-name valid" data-val="true" required autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
+                                                <input id="date_Installed" name="date_Installed" type="date" class="form-control cc-name valid" data-val="true" required autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
                                             <label for="cc-number" class="control-label mb-1">Image<span style="color: #FF0000" >*</span></label>
-                                            <input id="image" name="image" type="file" class="form-control cc-number identified visa"> 
+                                            <input id="Meter_Picture" name="Meter_Picture" type="file" class="form-control cc-number identified visa"> 
                                             </div>
                                             <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label>
-                                                <input id="comment" name="note" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
+                                                <input id="Comments" name="Comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
-                                                <button id="button" type="submit" name="submit" class="btn btn-warning">
+                                            <a href="new-meter-form.php"> <button id="button" type="submit"  name="submit" class="btn btn-warning">
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
-                                                </button>
+                                                </button></a>
                                             </div>
                                         </form>
                                     </div>
@@ -300,6 +301,8 @@ include("session.php");
             width: "100%"
         });
     });
+    document.getElementById("mtr-form").submit();
+
 </script>
 </body>
 <script>
@@ -317,31 +320,10 @@ maxdate= year +"-" + month + "-" + todate;
  document.getElementById("termination").setAttribute("max",maxdate);
  </script>
  <script>
-    let meters =[];
-
-    const addMeter(ev)=>{
-        ev.preventDefaullt();
-
-        let meter ={
-        Cluster_name: document.getElementById('bname').value,
-        Meter_Number: document.getElementById('meter').value,
-        Contact_number:document.getElementById('contact').value,
-        date_Installed: document.getElementById('termination').value,
-        Region: document.getElementById('region').value,
-        Techie_team: document.getElementById('teamid').value,
-        Contact_Person: document.getElementById('person').value,
-        Meter_Picture: document.getElementById('image').value,
-        Comments: document.getElementById('comment').value
-        }
-        meters.push(meter);
-        document.forms[0].reset();
-
-    }
-
-    document.addEventListener('DOMContentLoaded', ()=>{
-        document.getElementById('button').addEventListener('click',addMeter);
-    });
-
- </script>
+function myFunction() {
+  alert("Data Submited");
+  window.location.href='new-meter-form.php'
+}
+</script>
 </body>
 </html>
