@@ -1,6 +1,17 @@
 <?php
 include("../config/config.php");
 include("session.php");
+
+$url ="http://app.sasakonnect.net:19003/api/Meters/";
+
+if(isset($_POST['submit'])){
+    if(empty($url)){
+        header("Location: new-meter-form.php");
+    }
+    else{
+        header("Location: new-meter-form.php");
+    }
+}
 ?>
 
 
@@ -204,7 +215,7 @@ include("session.php");
                 
             }
             ?>
-                                        <form  method="post" id="mtr-form"  onsubmit="myFunction()" enctype="multipart/form-data" action="http://app.sasakonnect.net:19003/api/Meters/" autocomplete="off"> 
+                                        <form  method="post" id="mtr-form" class="w-75 mx-auto"  enctype="multipart/form-data" action="http://app.sasakonnect.net:19003/api/Meters/" autocomplete="off"> 
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Team ID</label>
                                         <div class="input-group">
@@ -301,8 +312,6 @@ include("session.php");
             width: "100%"
         });
     });
-    document.getElementById("mtr-form").submit();
-
 </script>
 </body>
 <script>
@@ -317,13 +326,66 @@ if(month<10){
   month= "0"+ month;
 }
 maxdate= year +"-" + month + "-" + todate;
- document.getElementById("termination").setAttribute("max",maxdate);
+ document.getElementById("date_Installed").setAttribute("max",maxdate);
  </script>
  <script>
-function myFunction() {
+/*function myFunction() {
   alert("Data Submited");
-  window.location.href='new-meter-form.php'
+  window.reload();
 }
+
+
+$(document).ready(function () {
+  $("form").submit(function (event) {
+    var formData = {
+        Cluster_name: $("#Cluster_name").val(),
+        Meter_Number: $("#Meter_Number").val(),
+        Contact_number: $("#Contact_number").val(),
+        date_Installed: $("#date_Installed").val(),
+        Region: $("#Region").val(),
+        Techie_team: $("#Techie_team").val(),
+        Contact_Person: $("#Contact_Person").val(),
+        Meter_Picture: $("#Meter_Picture").val(),
+        Comments: $("#Comments").val(),
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "test.php",
+      data: formData,
+      dataType: "json",
+      encode: true,
+    }).done(function (data) {
+      console.log(data);
+    });
+
+    event.preventDefault();
+  });
+});*/
+</script>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+
+<script>
+    $('#mtr-form').submit(function (e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        
+        var form = $(this);
+        var url = form.attr('action');
+        
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), // serializes the form's elements.
+            success: function(data)
+            {
+                alert(data); // show server response 
+            }
+        });
+    });
 </script>
 </body>
 </html>
