@@ -290,7 +290,26 @@ $('#example').DataTable({
         
 });
 
-
+window.addEventListener('DOMContentLoaded', (event) => {
+  var els = document.querySelectorAll('.colorText');
+  els.forEach(function(cell) {
+    if (cell.textContent === "Assigned") {
+      cell.classList.toggle('violet');
+    }
+    if (cell.textContent === "Turned On") {
+      cell.classList.toggle('green');
+    }
+    if (cell.textContent === "Signed") {
+      cell.classList.toggle('blue');
+    }
+    if (cell.textContent === "Installed") {
+      cell.classList.toggle('orange');
+    }
+    if (cell.textContent === "Restored") {
+      cell.classList.toggle('red');
+    }
+  })
+})
 </script>
 <script>
    /* $(document).ready(function () {
@@ -335,27 +354,7 @@ $('#example').DataTable({
         },
     });
 });
-
-window.addEventListener('DOMContentLoaded', (event) => {
-  var els = document.querySelectorAll('.colorText');
-  els.forEach(function(cell) {
-    if (cell.textContent === "Assigned") {
-      cell.classList.toggle('violet');
-    }
-    if (cell.textContent === "Turned On") {
-      cell.classList.toggle('green');
-    }
-    if (cell.textContent === "Signed") {
-      cell.classList.toggle('blue');
-    }
-    if (cell.textContent === "Installed") {
-      cell.classList.toggle('orange');
-    }
-    if (cell.textContent === "Restored") {
-      cell.classList.toggle('red');
-    }
-  })
-})*/
+*/
 </script>
 </body>
 </html>

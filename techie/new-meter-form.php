@@ -215,7 +215,7 @@ if(isset($_POST['submit'])){
                 
             }
             ?>
-                                        <form  method="post" id="mtr-form" class="w-75 mx-auto"  enctype="multipart/form-data" action="http://app.sasakonnect.net:19003/api/Meters/" autocomplete="off"> 
+                                        <form  method="post" id="mtr-form"  enctype="multipart/form-data" action="http://app.sasakonnect.net:19003/api/Meters/" autocomplete="off"> 
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Team ID</label>
                                         <div class="input-group">
@@ -263,10 +263,10 @@ if(isset($_POST['submit'])){
                                                 <input id="date_Installed" name="date_Installed" type="date" class="form-control cc-name valid" data-val="true" required autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
-                                            <div class="form-group">
+                                            <!--<div class="form-group">
                                             <label for="cc-number" class="control-label mb-1">Image<span style="color: #FF0000" >*</span></label>
                                             <input id="Meter_Picture" name="Meter_Picture" type="file" class="form-control cc-number identified visa"> 
-                                            </div>
+                                            </div>-->
                                             <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label>
                                                 <input id="Comments" name="Comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
@@ -382,7 +382,7 @@ $(document).ready(function () {
             data: form.serialize(), // serializes the form's elements.
             success: function(data)
             {
-                alert(data); // show server response 
+                alert("Submitted"); // show server response 
             }
         });
     });
