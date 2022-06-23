@@ -215,7 +215,7 @@ if(isset($_POST['submit'])){
                 
             }
             ?>
-                                        <form  method="post" id="mtr-form"  enctype="multipart/form-data" action="http://app.sasakonnect.net:19003/api/Meters/" autocomplete="off"> 
+                                        <form  method="post" id="mtr-form" onsubmit="myFunction()"  enctype="multipart/form-data" action="" autocomplete="off"> 
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Team ID</label>
                                         <div class="input-group">
@@ -240,9 +240,9 @@ if(isset($_POST['submit'])){
                                                         <input id="Cluster_name" name="Cluster_name" type="text" class="form-control cc-cvc"  placeholder="Building Name" required>
                                                     </div>
                                                
-                                        <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label>
-                                                <div class="form-group has-success">
+                                            <div class="form-group">
+                                            <label for="cc-number" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label>
+                                            <div class="form-group has-success">
                                             <select data-placeholder="Choose a Region..." class="standardSelect form-control" id="Region" name="Region" tabindex="1" required>
                                             <option ></option>
                                             <option disabled selected>Select Region</option>
@@ -263,10 +263,10 @@ if(isset($_POST['submit'])){
                                                 <input id="date_Installed" name="date_Installed" type="date" class="form-control cc-name valid" data-val="true" required autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
-                                            <!--<div class="form-group">
+                                            <div class="form-group">
                                             <label for="cc-number" class="control-label mb-1">Image<span style="color: #FF0000" >*</span></label>
                                             <input id="Meter_Picture" name="Meter_Picture" type="file" class="form-control cc-number identified visa"> 
-                                            </div>-->
+                                            </div>
                                             <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label>
                                                 <input id="Comments" name="Comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
@@ -329,14 +329,10 @@ maxdate= year +"-" + month + "-" + todate;
  document.getElementById("date_Installed").setAttribute("max",maxdate);
  </script>
  <script>
-/*function myFunction() {
-  alert("Data Submited");
-  window.reload();
-}
-
+function myFunction() {
 
 $(document).ready(function () {
-  $("form").submit(function (event) {
+  $("mtr-form").submit(function (event) {
     var formData = {
         Cluster_name: $("#Cluster_name").val(),
         Meter_Number: $("#Meter_Number").val(),
@@ -351,7 +347,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "test.php",
+      url: "http://app.sasakonnect.net:19003/api/Meters/",
       data: formData,
       dataType: "json",
       encode: true,
@@ -361,14 +357,15 @@ $(document).ready(function () {
 
     event.preventDefault();
   });
-});*/
+});
+alert("Data Submited");
+  window.reload();
+}
 </script>
-<script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <script>
+   /* function myFunction() {
     $('#mtr-form').submit(function (e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
 
@@ -386,6 +383,9 @@ $(document).ready(function () {
             }
         });
     });
+
+    alert("The form was submitted");
+}*/
 </script>
 </body>
 </html>

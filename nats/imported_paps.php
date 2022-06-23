@@ -11,7 +11,7 @@ include("../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Turned | On Last | 7 | Days</title>
+    <title>Imported</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,8 +48,8 @@ include("../config/config.php");
 
 </head>
 <body style="background-color:#e1e1e1">
- <!-- Left Panel -->
- <aside id="left-panel" class="left-panel">
+         <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -93,7 +93,7 @@ include("../config/config.php");
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
                         <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-inbox"></i><a href="nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
                             <li><i class="fa fa-inbox"></i><a href="compiled_nats-reports.php" style="color:black; font-size: 15px;">Compiled Reports </a></li>
                             <li><i class="fa fa-inbox"></i><a href="nats-graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
                         </ul>
@@ -137,7 +137,7 @@ include("../config/config.php");
         <header id="header" class="header" style="height: 65px;">
             <div class="top-left">
                 <div class="navbar-header">
-                <img src="../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">
+                    <img src="../images/picture1.png" style="width: 120px; height: 60px;" alt="Logo">
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -152,11 +152,11 @@ include("../config/config.php");
                         </div>
 
                         <div class="dropdown for-notification">
-                     
+
                         </div>
 
                         <div class="dropdown for-message">
-                          
+
                         </div>
                     </div>
 
@@ -174,8 +174,8 @@ include("../config/config.php");
 
                 </div>
             </div>
-        </header><!-- /header -->
-        <!-- Header-->
+        </header>
+        <!-- /#header -->
 
         <div class="content">
             <div class="animated fadeIn">
@@ -183,53 +183,68 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Turned On[Last 7 Days]</strong></center>
+                           <center> <strong class="card-title">Imported [<?php
+         $query="SELECT COUNT(*) as paps FROM old";
+          $data=mysqli_query($connection,$query);
+          while($row=mysqli_fetch_assoc($data)){
+          echo $row['paps'];
+    }
+    ?> Records]</strong></center>
                         </div>
-                        <div class="card-body">
-                            <table class="table table-bordered table-striped" id="example">
+                        <div class="card-body"><?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
+                            <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th class="th-sm">PAP Code
-                  </th>
-                   <th class="th-sm">Building Name
+                   <th class="th-sm">Building
                    </th>
-                   <th class="th-sm">Building Code
+                   <th class="th-sm">Code
                    </th>
                    <th class="th-sm">Region
-                  </th>
-                   <th class="th-sm">Champ Name
+                   </th> 
+                   <th class="th-sm">Champ
                    </th>
-                   <th class="th-sm">Client Name
+                   <th class="th-sm">Client
                    </th>
-                   <th class="th-sm">Client Contact
+                   <th class="th-sm">Contact
                    </th>
-                   <th class="th-sm">MAC Address
+                   <th class="th-sm">MAC
                    </th>
-                   <th class="th-sm">Date Turned On
-                   </th>
-                  
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
     
-    $sql="SELECT turnedonpap.ClientID,papdailysales.BuildingName,upper(papdailysales.BuildingCode) as bcode,upper(papdailysales.Region) as reg,papdailysales.ChampName,papdailysales.ClientName,papdailysales.ClientContact,Upper(turnedonpap.MacAddress) as Mac,turnedonpap.DateTurnedOn, CASE WHEN LENGTH(papdailysales.BuildingCode)>11 THEN CONCAT(papdailysales.BuildingCode,'-',(row_number() over(partition by papdailysales.BuildingCode)),'P')
-    WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) <=9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,'0',(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
-    WHEN (row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)) >9 THEN CONCAT(upper(papdailysales.BuildingCode),'-',papdailysales.Floor,(row_number() over(partition by papdailysales.BuildingCode,papdailysales.Floor)),'P')
-    end as papcode from papdailysales LEFT JOIN turnedonpap ON turnedonpap.ClientID=papdailysales.ClientID where turnedonpap.ClientID is not null and turnedonpap.DateTurnedOn>= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+    $sql="SELECT id,BuildingName,BuildingCode,Region,ChampName,ClientName,ClientContact,MacAddress,DateTurnedOn,papcode,Region from old";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
-    <td><?php echo $row['papcode']?></td>
     <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['bcode']?></td>
-    <td><?php echo $row['reg']?></td>
+    <td><?php echo $row['BuildingCode']?></td>
+    <td><?php echo $row['Region']?></td>
     <td><?php echo $row['ChampName']?></td>
     <td><?php echo $row['ClientName']?></td>
     <td><?php echo $row['ClientContact']?></td>
-    <td><?php echo $row['Mac']?></td>
-    <td><?php echo $row['DateTurnedOn']?></td>
+    <td><?php echo $row['MacAddress']?></td>
 </tr>
 <?php } ?>
                                 </tbody>
@@ -257,6 +272,7 @@ while($row=$result->fetch_array()){
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
+    order: [[0, 'asc']],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
@@ -271,7 +287,8 @@ $('#example').DataTable({
         ],
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "scrollY":        "700px",
-        "scrollCollapse": true
+        "scrollCollapse": true,
+        "pagingType": "full_numbers"
         });
 });
 </script>
