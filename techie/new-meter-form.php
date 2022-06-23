@@ -38,16 +38,28 @@ if(isset($_POST['submit'])){
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/lib/chosen/chosen.min.css">
-
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <script>
+      $(function () {
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-    <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet"/>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-  <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+        $('form').on('submit', function (e) {
+
+          e.preventDefault();
+
+          $.ajax({
+            type: 'POST',
+            url: 'http://app.sasakonnect.net:19003/api/Meters/',
+            data: $('form').serialize(),
+            success: function () {
+              alert('Form was submitted');
+            }
+          });
+
+        });
+
+      });
+    </script>
 </head>
 <body style="background-color:#e1e1e1">
     <!-- Left Panel -->
@@ -99,9 +111,7 @@ if(isset($_POST['submit'])){
                     <div class="header-left">
                         
                         <div class="form-inline">
-                            <form class="search-form">
-                                
-                            </form>
+                           
                         </div>
                         <div class="dropdown for-notification">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -215,7 +225,7 @@ if(isset($_POST['submit'])){
                 
             }
             ?>
-                                        <form  method="post" id="mtr-form" onsubmit="myFunction()"  enctype="multipart/form-data" action="" autocomplete="off"> 
+                                        <form> 
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Team ID</label>
                                         <div class="input-group">
@@ -272,7 +282,7 @@ if(isset($_POST['submit'])){
                                                 <input id="Comments" name="Comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
-                                            <a href="new-meter-form.php"> <button id="button" type="submit"  name="submit" class="btn btn-warning">
+                                            <a href="new-meter-form.php"> <button type="submit"  name="submit" class="btn btn-warning">
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                                 </button></a>
@@ -304,15 +314,7 @@ if(isset($_POST['submit'])){
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/lib/chosen/chosen.jquery.min.js"></script>
-<script>
-    jQuery(document).ready(function() {
-        jQuery(".standardSelect").chosen({
-            disable_search_threshold: 10,
-            no_results_text: "Oops, nothing found!",
-            width: "100%"
-        });
-    });
-</script>
+
 </body>
 <script>
  var todayDate= new Date();
@@ -329,10 +331,14 @@ maxdate= year +"-" + month + "-" + todate;
  document.getElementById("date_Installed").setAttribute("max",maxdate);
  </script>
  <script>
-function myFunction() {
+/*function myFunction() {
+  alert("Data Submited");
+  window.reload();
+}
+
 
 $(document).ready(function () {
-  $("mtr-form").submit(function (event) {
+  $("form").submit(function (event) {
     var formData = {
         Cluster_name: $("#Cluster_name").val(),
         Meter_Number: $("#Meter_Number").val(),
@@ -347,7 +353,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "http://app.sasakonnect.net:19003/api/Meters/",
+      url: "test.php",
       data: formData,
       dataType: "json",
       encode: true,
@@ -357,15 +363,12 @@ $(document).ready(function () {
 
     event.preventDefault();
   });
-});
-alert("Data Submited");
-  window.reload();
-}
+});*/
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-<script>
-   /* function myFunction() {
+<!--<script>
+    function myFunction() {
     $('#mtr-form').submit(function (e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
 
@@ -385,7 +388,7 @@ alert("Data Submited");
     });
 
     alert("The form was submitted");
-}*/
-</script>
+}
+</script>-->
 </body>
 </html>
