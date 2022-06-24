@@ -277,7 +277,7 @@ $data = json_decode( $response, true );
             <td><?php echo $row['date_Installed']; ?></td>
             <td><?php echo $row['Comments']; ?></td>
             <td>
-            <button class="btn btn-danger" ><a href="changemtrstatus.php?clientid=<?php echo $row['id']; ?> " onClick="return confirm('Sure to Change <?php  echo $row['Cluster_name']; ?> Status to New Meter?')">Delete</a></button>
+            <button class="btn btn-danger" ><a href="changemtrstatus.php?clientid=<?php echo $row['Cluster_name']; ?> " onClick="return confirm('Sure to Change <?php  echo $row['Cluster_name']; ?> Status to New Meter?')">Delete</a></button>
             </td>
 
         </tr>
