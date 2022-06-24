@@ -11,11 +11,12 @@ include("../../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Restituted</title>
+    <title>Rejected</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -48,8 +49,7 @@ include("../../config/config.php");
 
 </head>
 <body style="background-color:#e1e1e1">
-    <!-- Left Panel -->
-     <!-- Left Panel -->
+      <!-- Left Panel -->
 <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -86,14 +86,14 @@ include("../../config/config.php");
                     </li>
                     <li>
                         <a href="turned-on.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On</a>
-                    </li>
+                    </li> 
                     <li>
                         <a href="retrieved_paps.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Retrieved</a>
-                    </li>   
+                    </li> 
                     <li class="menu-title" >COMPLETED TASKS</li><!-- /.menu-title --> 
                     <li>
                         <a href="completed-tasks.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Completed Tasks </a>
-                    </li>          
+                    </li>           
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
@@ -103,13 +103,13 @@ include("../../config/config.php");
         </nav>
     </aside>
     <!-- /#left-panel -->
-  <!-- Right Panel -->
-  <div id="right-panel" class="right-panel">
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
         <!-- Header-->
-        <header id="header" class="header" style="height: 65px;">
+        <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                <img src="../../images/picture1.png" style="width: 120px; height: 60px;" class="logo-icon" alt="logo icon">
+                <img src="../../images/picture1.png" style="width: 120px; height: 70px;" class="logo-icon" alt="logo icon">
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -124,89 +124,11 @@ include("../../config/config.php");
                         </div>
 
                         <div class="dropdown for-notification">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell"></i>
-                                <span class="count bg-danger"><?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled WHERE   Region='".$_SESSION['Region']."'";
-          $data=mysqli_query($connection,$query);
-          while($row=mysqli_fetch_assoc($data)){
-          echo $row['restituted'];
-    }
-    ?></span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="notification">
-                                <p class="red">You have <?php
-         $query="SELECT COUNT(*) as restituted FROM papnotinstalled WHERE   Region='".$_SESSION['Region']."'";
-          $data=mysqli_query($connection,$query);
-          while($row=mysqli_fetch_assoc($data)){
-          echo $row['restituted'];
-    }
-    ?> Restitute(s)</p>
-                                <a class="dropdown-item media" href="restituted.php">
-                                    <i class="fa fa-check"></i>
-                                    <p>Check Out.</p>
-                                </a>
-                            </div>
-                            </div>
-                        <div class="dropdown for-message">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-envelope"></i>
-                                <span class="count bg-primary"><?php
-                                             $query="SELECT COUNT(*) AS reminded from reminders Where Region='".$_SESSION['Region']."'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['reminded']."<br><br>";
-                                              }
-                                              ?></span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="message">
-                                <p class="red">You have <?php
-                                             $query="SELECT COUNT(*) AS reminded from reminders Where Region='".$_SESSION['Region']."'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['reminded'];
-                                              }
-                                              ?> Pap to urgently assign</p>
-                                <a class="dropdown-item media" href="reminders.php">
-                                    <div class="message media-body">
-                                        <span class="name float-left">Check Out</span>
-                                    </div>
-                                </a>
-                            </div>
+                     
                         </div>
+
                         <div class="dropdown for-message">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-question"></i>
-                                <span class="count bg-primary"><?php
-                                             $query="SELECT ((SELECT COUNT(*) from 
-                                             papdailysales as p
-                                             WHERE p.PapStatus='Signed' and p.Region='".$_SESSION['Region']."')+(SELECT COUNT(*) from 
-         papdailysales as p
-         WHERE p.PapStatus='Restored' and p.Region='".$_SESSION['Region']."')) as pending";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['pending'];
-                                              }
-                                              ?></span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="message">
-                                <p class="red">You have <?php
-                                             $query="SELECT ((SELECT COUNT(*) from 
-                                             papdailysales as p
-                                             WHERE p.PapStatus='Signed' and p.Region='".$_SESSION['Region']."')+(SELECT COUNT(*) from 
-         papdailysales as p
-         WHERE p.PapStatus='Restored' and p.Region='".$_SESSION['Region']."')) as pending";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['pending'];
-                                              }
-                                              ?> pending installations</p>
-                                <a class="dropdown-item media" href="assign-task.php">
-                                    <div class="message media-body">
-                                        <span class="name float-left">Check Out</span>
-                                    </div>
-                                </a>
-                            </div>
+                         
                         </div>
                     </div>
 
@@ -218,14 +140,14 @@ include("../../config/config.php");
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="../../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="../config/logout.php"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
                 </div>
             </div>
-        </header>
-        <!-- /#header -->
+        </header><!-- /header -->
+        <!-- Header-->
 
         <div class="content">
             <div class="animated fadeIn">
@@ -233,36 +155,24 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">Resitituted[ All Records <?php echo $_SESSION['Region'];?>][ <?php
-         $query="SELECT COUNT(*) as paps FROM papnotinstalled where Region = '".$_SESSION['Region']."'";
-          $data=mysqli_query($connection,$query);
-          while($row=mysqli_fetch_assoc($data)){
-          echo $row['paps'];
-    }
-    ?>]</strong></center>
+                           <center> <strong class="card-title">Rejected</strong></center>
                         </div>
-                        <div class="card-body"><?php
+                        <div class="card-body">
+                        <?php
             if(isset($_SESSION['status'])){
                 ?>
-               <center><strong><span> <div class="alert alert-danger" role="alert">
+               <center><span> <div class="alert alert-danger" role="alert">
                    <?php echo $_SESSION['status'];
                 unset($_SESSION['status']);?>
-                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span></strong>
-  </button>
                  </div></span></center>
-                 
                 <?php
                 
             }
             elseif(isset($_SESSION['success'])){
                 ?>
-                <center><strong><span><div class="alert alert-success" role="alert">
+                <center><span><div class="alert alert-success" role="alert">
                    <?php echo $_SESSION['success'];
                 unset($_SESSION['success']);?>
-                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span></strong>
-  </button>
                  </div></span></center>
                 <?php
                 
@@ -271,43 +181,18 @@ include("../../config/config.php");
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                                    <th>Client Name</th>
-                     <th>Contact</th>
-                     <th>Building Name</th>
-                     <th>Techies</th>
-                     <th>Reason</th>
-                     <th>Techie Feedback</th>
-                    <th>Date Restituted</th>
-                    <th>Restore</th>
-                    <th>Delete</th>
-                
+                                    <th>id</th>
+                     <th>Cluster_name</th>
+                     <th>Contact_number</th>
+                     <th>Meter_Number</th>
+                     <th>Contact_number</th>
+                     <th>date_Installed</th>
+                     <th>Region</th>
+                     <th>Techie_team</th>
+                     <th>Contact_Person</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
- $query =
-     "SELECT ClientID,ClientName,BuildingName,BuildingCode,RestitutedDate,DateSigned,Reason,Contact,CONCAT(Techie1,'|',Techie2) as techies,Note from papnotinstalled where Region='" .
-     $_SESSION["Region"] .
-     "' order by DateSigned Desc";
- $result = mysqli_query($connection, $query);
- while ($row = mysqli_fetch_assoc($result)) { ?>
-                                <tr>
-                                    <td><?php echo $row["ClientName"]; ?></dh>
-                                    <td><?php echo $row["Contact"]; ?></td>
-                                    <td><?php echo $row["BuildingName"]; ?></td>
-                                    <td><?php echo $row["techies"]; ?></td>
-                                    <td><?php echo $row["Reason"]; ?></td>
-                                    <td><?php echo $row["Note"]; ?></td>
-                                   <td><?php echo $row["RestitutedDate"]; ?></td>
-                                    <td>
-                                    <button class="btn btn-warning" ><a href="restore.php?clientid=<?php echo $row['ClientID']; ?> " onClick="return confirm('Sure to restore <?php  echo $row['ClientName']; ?> back to KOMP database?')">Restore</a></button>
-                                    </td>
-                                    <td>
-                                    <button class="btn btn-danger" ><a href="delete.php?clientid=<?php echo $row['ClientID']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['ClientName']; ?> from KOMP database?')">Delete</a></button>
-                                    </td>
-                                </tr>
-                        <?php }
- ?>
                                 </tbody>
                             </table>
                         </div>
@@ -332,8 +217,22 @@ include("../../config/config.php");
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
-    order: [[5, 'desc']],
-		 "processing": true,
+		ajax :{
+            "url": "http://app.sasakonnect.net:19003/api/Rejected/",
+            "dataSrc": ""
+        },
+        "columns":[
+            {"data":"id"},
+            {"data":"Cluster_name"},
+            {"data":"Meter_Number"},
+            {"data":"Contact_number"},
+            {"data":"date_Installed"},
+            {"data":"Region"},
+            {"data":"Techie_team"},
+            {"data":"Contact_Person"},
+            {"data":"Comments"}
+        ],
+        "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
             {
@@ -345,10 +244,7 @@ $('#example').DataTable({
                 ]
             }
         ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true,
-        "pagingType": "full_numbers"
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
         });
 });
 </script>

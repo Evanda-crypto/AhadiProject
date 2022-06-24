@@ -1,17 +1,6 @@
 <?php
 include("../config/config.php");
 include("session.php");
-
-$url ="http://app.sasakonnect.net:19003/api/Meters/";
-
-if(isset($_POST['submit'])){
-    if(empty($url)){
-        header("Location: new-meter-form.php");
-    }
-    else{
-        header("Location: new-meter-form.php");
-    }
-}
 ?>
 
 
@@ -40,7 +29,7 @@ if(isset($_POST['submit'])){
     <link rel="stylesheet" href="../assets/css/lib/chosen/chosen.min.css">
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <script>
+    <!--<script>
       $(function () {
 
         $('form').on('submit', function (e) {
@@ -53,13 +42,14 @@ if(isset($_POST['submit'])){
             data: $('form').serialize(),
             success: function () {
               alert('Form was submitted');
+              window.reload();
             }
           });
 
         });
 
       });
-    </script>
+    </script>-->
 </head>
 <body style="background-color:#e1e1e1">
     <!-- Left Panel -->
@@ -225,7 +215,7 @@ if(isset($_POST['submit'])){
                 
             }
             ?>
-                                        <form> 
+                                        <form method="POST" onsubmit="myFunction()" enctype="multipart/form-data" action="api.php"> 
                                         <div class="form-group">
                                         <label for="x_card_code" class="control-label mb-1">Team ID</label>
                                         <div class="input-group">
@@ -282,10 +272,10 @@ if(isset($_POST['submit'])){
                                                 <input id="Comments" name="Comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
-                                            <a href="new-meter-form.php"> <button type="submit"  name="submit" class="btn btn-warning">
+                                             <button type="submit"  name="submit" class="btn btn-warning" >
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
-                                                </button></a>
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
@@ -331,64 +321,9 @@ maxdate= year +"-" + month + "-" + todate;
  document.getElementById("date_Installed").setAttribute("max",maxdate);
  </script>
  <script>
-/*function myFunction() {
-  alert("Data Submited");
-  window.reload();
+function myFunction() {
+  alert("New Meter Details Submitted");
 }
-
-
-$(document).ready(function () {
-  $("form").submit(function (event) {
-    var formData = {
-        Cluster_name: $("#Cluster_name").val(),
-        Meter_Number: $("#Meter_Number").val(),
-        Contact_number: $("#Contact_number").val(),
-        date_Installed: $("#date_Installed").val(),
-        Region: $("#Region").val(),
-        Techie_team: $("#Techie_team").val(),
-        Contact_Person: $("#Contact_Person").val(),
-        Meter_Picture: $("#Meter_Picture").val(),
-        Comments: $("#Comments").val(),
-    };
-
-    $.ajax({
-      type: "POST",
-      url: "test.php",
-      data: formData,
-      dataType: "json",
-      encode: true,
-    }).done(function (data) {
-      console.log(data);
-    });
-
-    event.preventDefault();
-  });
-});*/
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-<!--<script>
-    function myFunction() {
-    $('#mtr-form').submit(function (e) {
-        e.preventDefault(); // avoid to execute the actual submit of the form.
-
-        
-        var form = $(this);
-        var url = form.attr('action');
-        
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: form.serialize(), // serializes the form's elements.
-            success: function(data)
-            {
-                alert("Submitted"); // show server response 
-            }
-        });
-    });
-
-    alert("The form was submitted");
-}
-</script>-->
 </body>
 </html>

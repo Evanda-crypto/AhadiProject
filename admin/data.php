@@ -6,7 +6,7 @@ $result=mysqli_query($connection ,"SELECT papdailysales.ClientID,papdailysales.B
 LEFT JOIN papnotinstalled ON papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null and papdailysales.DateSigned >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) order by papdailysales.ClientID Desc");
 
 $rows=array();
-while($row=mysqli_fetch_array($result)){
+while($row=mysqli_fetch_assoc($result)){
     $rows[]=$row;
 }
 echo json_encode($rows, JSON_PRETTY_PRINT);

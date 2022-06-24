@@ -1,56 +1,20 @@
+
 <?php
-include("../../config/config.php");
-include_once("session.php");
-$id = $_GET['id'];
 
-$msg = "";
-if (isset($id)) {
+$curl = curl_init();
 
-    $query = "UPDATE Token_meter set Status='Pending' WHERE id= '$id'";
-    $result = mysqli_query($connection, $query);
-    if ($result) {
-        $msg = '<div class="alert alert-success" role="alert">
-        Sucessfully Updated
-      </div>';
-        "";
-    } else {
-        $msg = '<div class="alert alert-warning" role="alert">
-        Error occured.Please try again later
-      </div>';
-    }
-}
-?>
-<!doctype html>
-<html lang="ar" dir="ltr">
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://app.sasakonnect.net:19003/api/Rejected/',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'PUT',
+));
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+$response = curl_exec($curl);
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-
-    <title></title>
-</head>
-
-<body>
-    <div class="container">
-        <div class="row py-5">
-            <div class="col-md-12 border p-3">
-                <span><?php echo $msg; ?></span>
-            </div>
-
-            <div class="col-md-12 text-center pt-5 ">
-                <a href="rejected-meters.php" class="btn btn-info">Go back</a>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script> -->
-
-</body>
-
-</html>
+curl_close($curl);
+echo $response;

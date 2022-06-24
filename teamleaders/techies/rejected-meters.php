@@ -68,9 +68,9 @@ include("../../config/config.php");
                     <li>
                         <a href="reminders.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Reminders</a>
                     </li>
-                    <!--<li>
+                    <li>
                         <a href="rejected-meters.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Rejected Meters</a>
-                    </li>-->
+                    </li>
                     <li class="menu-title">PANEL APS</li><!-- /.menu-title -->
 
                     <li>
@@ -138,32 +138,6 @@ include("../../config/config.php");
     }
     ?> Restitute(s)</p>
                                 <a class="dropdown-item media" href="restituted.php">
-                                    <i class="fa fa-check"></i>
-                                    <p>Check Out.</p>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="dropdown for-notification">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-tachometer"></i>
-                                <span class="count bg-danger"><?php
-         $query="SELECT COUNT(*) as rejected FROM token_meter WHERE Status='Rejected' and Region='".$_SESSION['Region']."'";
-          $data=mysqli_query($connection,$query);
-          while($row=mysqli_fetch_assoc($data)){
-          echo $row['rejected'];
-    }
-    ?></span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="notification">
-                                <p class="red">You have <?php
-         $query="SELECT COUNT(*) as rejected FROM token_meter WHERE Status='Rejected' and Region='".$_SESSION['Region']."'";
-          $data=mysqli_query($connection,$query);
-          while($row=mysqli_fetch_assoc($data)){
-          echo $row['rejected'];
-    }
-    ?> Rejected Meter(s)</p>
-                                <a class="dropdown-item media" href="rejected-meters.php">
                                     <i class="fa fa-check"></i>
                                     <p>Check Out.</p>
                                 </a>
@@ -260,37 +234,57 @@ include("../../config/config.php");
                                 <table class="table table-striped" id="example">
                                     <thead>
                                         <tr>
-                     <th>Building Name</th>
-                     <th>Meter Number</th>
-                     <th>Team ID</th>
-                    <th>Contact Person</th>
-                     <th>Contact_Number</th>
+                     <th>Building</th>
+                     <th>Contact_Person</th>
+                    <th>Contact_number</th>
+                     <th>Team</th>
                      <th>Termination Date</th>
                      <th>Reason</th>
                      <th>More</th>
+                     
                                          </tr>
                                   </thead>
                                   <tbody>
                                   <?php
-    $sql="SELECT * from Token_meter where Status='Rejected' and Region='".$_SESSION['Region']."'";
-    $result=$connection->query($sql);
-    while($row=$result->fetch_array()){
-      ?>
-      <tr>
-        <td><?php echo $row['Cluster_name']?></td>
-        <td><?php echo $row['Meter_Number']?></td>
-        <td><?php echo $row['Techie_team']?></td>
-        <td><?php echo $row['Contact_Person']?></td>
-        <td><?php echo $row['Contact_number']?></td>
-        <td><?php echo $row['date_Installed']?></td>
-        <td><?php echo $row['Comments_rejected']?></td>
-        <td>
-        <button class="btn btn-warning" ><a href="changemtrstatus.php?id=<?php echo $row['id']; ?> " onClick="return confirm('Sure to remove Meter No.  <?php  echo $row['Meter_Number']; ?> from rejected Meters ?')">Change Status</a></button>
-        </td>
-    </tr>
-    <?php } ?>
-                                </tbody>
-                            </table>
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://app.sasakonnect.net:19003/api/Rejected/',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+));
+
+$response = curl_exec($curl);
+
+$data = json_decode( $response, true );
+
+?>
+    <?php
+    foreach( $data as $row )
+    {
+        ?>
+        <tr>
+            <td><?php echo $row['Cluster_name']; ?></td>
+            <td><?php echo $row['Contact_Person']; ?></td>
+            <td><?php echo $row['Contact_number']; ?></td>
+            <td><?php echo $row['Techie_team']; ?></td>
+            <td><?php echo $row['date_Installed']; ?></td>
+            <td><?php echo $row['Comments']; ?></td>
+            <td>
+            <button class="btn btn-danger" ><a href="changemtrstatus.php?clientid=<?php echo $row['id']; ?> " onClick="return confirm('Sure to Change <?php  echo $row['Cluster_name']; ?> Status to New Meter?')">Delete</a></button>
+            </td>
+
+        </tr>
+        <?php
+    }
+    ?>
+</table>
                         </div>
                     </div>
                     <!-- Modal -->
