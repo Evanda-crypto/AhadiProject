@@ -304,6 +304,8 @@ $data = json_decode( $response, true );
         </tr>
         <?php
     }
+
+    curl_close ($curl);
     ?>
 </table>
                         </div>

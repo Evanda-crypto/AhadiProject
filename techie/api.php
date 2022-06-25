@@ -2,7 +2,7 @@
 <?php
 if(isset($_POST['submit']) && isset($_FILES['Meter_Picture']['tmp_name'])){
 
-  $ch = curl_init();
+$ch = curl_init();
 
 //The CURLFile class 
 $cfile = new CURLFile($_FILES['Meter_Picture']['tmp_name'], $_FILES['Meter_Picture']['type'], $_FILES['Meter_Picture']['name']);
