@@ -32,21 +32,21 @@ if (isset($_POST["submit"])) {
     date_default_timezone_set('Africa/Nairobi');
     $Team_ID = $_POST["teamid"];
     $avail = $_POST["Date"];
-    $Techie1 = $row["Techie1"];
-    $Techie2 = $row["Techie2"];
+    $Techie1 = addslashes($row["Techie1"]);
+    $Techie2 = addslashes($row["Techie2"]);
     $note = $_POST["note"];
     $ClientID = $row["ClientID"];
     $Date = $row["Date"];
     $Region = $row["Region"];
     $Floor = $row["Floor"];
-    $ClientName = $row["ClientName"];
-    $ChampName = $row["ChampName"];
+    $ClientName = addslashes($row["ClientName"]);
+    $ChampName = addslashes($row["ChampName"]);
     $BuildingName = addslashes($_POST['bname']);
     $BuildingCode = $row["BuildingCode"];
     $DateSigned = $row["DateSigned"];
     $contact = $row["ClientContact"];
     $daterestituted = date('Y-m-d h:ia');
-    $msg =  $_POST["message"];
+    $msg =  addslashes($_POST["message"]);
 
     //checking connection
     if ($connection->connect_error) {
