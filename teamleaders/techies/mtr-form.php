@@ -1,8 +1,38 @@
 <?php
-include("session.php");
 include("../../config/config.php");
+include("session.php");
 
+$id =
+
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://app.sasakonnect.net:19003/api/Rejected/',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+));
+
+$response = curl_exec($curl);
+
+$data = json_decode( $response, true );
+
+foreach( $data as $row ){
+    $person = $row['Contact_Person'];
+    $contact = $row['Contact_number'];
+    $mtr = $row['Cluster_name'];
+    $cluster = $row['Cluster_name'];
+    $comments = $row['Cluster_name'];
+    $Status = $row['Status'];
+}
 ?>
+
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -11,12 +41,11 @@ include("../../config/config.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Rejected Meters</title>
+    <title>New Meter Report</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -26,25 +55,33 @@ include("../../config/config.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
-    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/lib/chosen/chosen.min.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <!--<script>
+      $(function () {
 
-<link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        $('form').on('submit', function (e) {
 
-<!-- Bootstrap core JavaScript-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          e.preventDefault();
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+          $.ajax({
+            type: 'POST',
+            url: 'http://app.sasakonnect.net:19003/api/Meters/',
+            data: $('form').serialize(),
+            success: function () {
+              alert('Form was submitted');
+              window.reload();
+            }
+          });
 
+        });
+
+      });
+    </script>-->
 </head>
 <body style="background-color:#e1e1e1">
- <!-- Left Panel -->
+  <!-- Left Panel -->
 <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -81,14 +118,14 @@ include("../../config/config.php");
                     </li>
                     <li>
                         <a href="turned-on.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On</a>
-                    </li> 
+                    </li>  
                     <li>
                         <a href="retrieved_paps.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Retrieved</a>
-                    </li> 
+                    </li>
                     <li class="menu-title" >COMPLETED TASKS</li><!-- /.menu-title --> 
                     <li>
                         <a href="completed-tasks.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Completed Tasks </a>
-                    </li>           
+                    </li>         
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                     <li>
                         <a href="profile.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-user"></i>Profile </a>
@@ -98,8 +135,8 @@ include("../../config/config.php");
         </nav>
     </aside>
     <!-- /#left-panel -->
-  <!-- Right Panel -->
-  <div id="right-panel" class="right-panel">
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
         <!-- Header-->
         <header id="header" class="header" style="height: 65px;">
             <div class="top-left">
@@ -224,13 +261,22 @@ include("../../config/config.php");
 
         <div class="content">
             <div class="animated fadeIn">
+
+
                 <div class="row">
-                <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="card">
                             <div class="card-header">
-                            <center><strong class="card-title">Rejected Meters</strong></center>
                             </div>
-                            <div class="card-body"><?php
+                            <div class="card-body">
+                                <!-- Credit Card -->
+                                <div id="pay-invoice">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="text-center">Change Meter Status</h3>
+                                        </div>
+                                        <hr>
+                                        <?php
             if(isset($_SESSION['status'])){
                 ?>
                <center><span> <div class="alert alert-danger" role="alert">
@@ -250,88 +296,52 @@ include("../../config/config.php");
                 
             }
             ?>
-                                <table class="table table-striped" id="example">
-                                    <thead>
-                                        <tr>
-                     <th>Building</th>
-                     <th>Contact_Person</th>
-                    <th>Contact_number</th>
-                    <th>Meter_number</th>
-                     <th>Team</th>
-                     <th>Termination Date</th>
-                     <th>Reason</th>
-                     <th>More</th>
-                     
-                                         </tr>
-                                  </thead>
-                                  <tbody>
-                                  <?php
+                                        <form method="POST" onsubmit="myFunction()" enctype="multipart/form-data" action="api.php"> 
+                                        <div class="form-group">
+                                        <label for="x_card_code" class="control-label mb-1">Contact Person<span style="color: #FF0000" >*</span></label>
+                                        <div class="input-group">
+                                        <input id="Contact_Person" name="Contact_Person" required type="text" class="form-control cc-cvc" value="<?php echo $person?>"  placeholder="Contact Person" ><br></br>
+                                        </div></diV>
+                                        <div class="form-group">
+                                        <label for="x_card_code" class="control-label mb-1">Phone Number<span style="color: #FF0000" >*</span></label>
+                                        <div class="input-group">
+                                        <input id="Contact_number" name="Contact_number" type="tel" pattern="[0-9]{10}" class="form-control cc-cvc" required   placeholder="Phone Number 07XXXXXXXX" ><br></br>
+                                        </div></diV>
+                                        <div class="form-group">
+                                            <label for="cc-number" class="control-label mb-1">Meter No<span style="color: #FF0000" >*</span></label>
+                                            <input id="Meter_Number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11) return false;"pattern="[0-9]{11}" name="Meter_Number" type="number" class="form-control cc-number identified visa"  data-val="true" required placeholder="Meter Number" > 
+                                            </div>
+                                            <div class="form-group">
+                                         <label for="x_card_code" class="control-label mb-1">Building Name<span style="color: #FF0000" >*</span></label>
+                                         <div class="input-group">
+                                         <input id="Cluster_name" name="Cluster_name" type="text" class="form-control cc-cvc"  placeholder="Building Name" required>
+                                         </div></diV>
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label>
+                                                <input id="Comments" name="Comments" type="text" class="form-control cc-number identified visa" required maxlength="40"  required placeholder="Suggestions/Observations/Comments">
+                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                            </div>
+                                             <button type="submit"  name="submit" class="btn btn-warning" >
+                                                    <span id="payment-button-amount">Submit</span>
+                                                    <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
 
-$curl = curl_init();
+                            </div>
+                        </div> <!-- .card -->
 
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://app.sasakonnect.net:19003/api/Rejected/',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'GET',
-));
-
-$response = curl_exec($curl);
-
-$data = json_decode( $response, true );
-
-?>
-    <?php
-    foreach( $data as $row )
-    {
-        ?>
-        <tr>
-            <td><?php echo $row['Cluster_name']; ?></td>
-            <td><?php echo $row['Contact_Person']; ?></td>
-            <td><?php echo $row['Contact_number']; ?></td>
-            <td><?php echo $row['Meter_Number']; ?></td>
-            <td><?php echo $row['Techie_team']; ?></td>
-            <td><?php echo $row['date_Installed']; ?></td>
-            <td><?php echo $row['Comments']; ?></td>
-            <td>
-            <button class="btn btn-warning"  onClick="return confirm('Confirm Resubmitting Meter Number <?php echo $row['Meter_Number']; ?> from <?php echo $row['Cluster_name']; ?> as New Meters')"><a href="changemtrstatus.php?id=<?php echo $row['id']; ?>">Resubmit</a></button>
-            </td>
-
-        </tr>
-        <?php
-    }
-    ?>
-</table>
-                        </div>
-                    </div>
-                    <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog" >
-    <div class="modal-dialog">
-    
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#3073f5;">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body" style="background-color:#3073f5;">
+                    </div><!--/.col-->
 
             </div>
-            <div class="modal-footer" style="background-color:#3073f5;">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-      
-    </div>
-</div><!--End of modal-->
-                
 
-</div><!-- .content -->
-<div class="clearfix"></div>
 
+        </div><!-- .animated -->
+    </div><!-- .content -->
+
+    <div class="clearfix"></div>
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
@@ -341,19 +351,28 @@ $data = json_decode( $response, true );
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../../assets/js/main.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/lib/chosen/chosen.jquery.min.js"></script>
 
-
+</body>
 <script>
- $(document).ready(function () {
-$('#example').DataTable({
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true,
-        "pagingType": "full_numbers"
-});
-$('.dataTables_length').addClass('bs-select');
-});
+ var todayDate= new Date();
+ var month= todayDate.getMonth() + 1;
+ var year= todayDate.getFullYear();
+ var todate=todayDate.getDate();
+if(todate<10){
+  todate= "0"+ todate;
+}
+if(month<10){
+  month= "0"+ month;
+}
+maxdate= year +"-" + month + "-" + todate;
+ document.getElementById("date_Installed").setAttribute("max",maxdate);
+ </script>
+ <script>
+function myFunction() {
+  alert("New Meter Details Submitted");
+}
 </script>
 </body>
 </html>

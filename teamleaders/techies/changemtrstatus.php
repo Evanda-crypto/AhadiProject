@@ -1,20 +1,53 @@
-
 <?php
 
-$curl = curl_init();
+$id= $_GET['id'];
 
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://app.sasakonnect.net:19003/api/Rejected/',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'PUT',
-));
+function callAPI($method, $url, $data){
+    $curl = curl_init();
+    switch ($method){
+       case "POST":
+          curl_setopt($curl, CURLOPT_POST, 1);
+          if ($data)
+             curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+          break;
+       case "PUT":
+          curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+          if ($data)
+             curl_setopt($curl, CURLOPT_POSTFIELDS, $data);			 					
+          break;
+       default:
+          if ($data)
+             $url = sprintf("%s?%s", $url, http_build_query($data));
+    }
+    // OPTIONS:
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+       'APIKEY: ',
+       'Content-Type: application/json',
+    ));
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    // EXECUTE:
+    $result = curl_exec($curl);
+    if(!$result){die("Connection Failure");}
+    curl_close($curl);
+    return $result;
+ }
 
-$response = curl_exec($curl);
+$data_array =  array(
+    "Status" => 'New',
+ );
+ $update_plan = callAPI('PUT', "http://app.sasakonnect.net:19003/api/Rejected/".$id."/", json_encode($data_array));
+ $response = json_decode($update_plan, true);
 
-curl_close($curl);
-echo $response;
+ if(!$update_plan){
+ $_SESSION["status"] = "Status Not Changed";
+ header("Location: rejected-meters.php");
+ #var_dump($response);
+ }else{
+    $_SESSION["success"] = "Status changed";
+    header("Location: rejected-meters.php");
+ }
+
+?>
+
