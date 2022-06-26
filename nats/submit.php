@@ -15,9 +15,9 @@ if (isset($_POST["submit"])) {
     $startime = $_POST["start"];
     $endtime = $_POST["end"];
     $duration = $_POST["duration"];
-    $reporter = $_POST["reporter"];
-    $comments = $_POST["comments"];
-    $cluster = $_POST["cluster"];
+    $reporter = addslashes($_POST["reporter"]);
+    $comments = addslashes($_POST["comments"]);
+    $cluster = addslashes($_POST["cluster"]);
     $buildings = $_POST["buildings"];
    
 
