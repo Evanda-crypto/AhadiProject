@@ -265,47 +265,7 @@ include("../../config/config.php");
                                          </tr>
                                   </thead>
                                   <tbody>
-<?php
-$curl = curl_init();
-
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://app.sasakonnect.net:19003/api/Rejected/',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'GET',
-));
-
-$response = curl_exec($curl);
-
-$data = json_decode( $response, true );
-
-?>
-    <?php
-    foreach( $data as $row )
-    {
-        ?>
-        <tr>
-            <td><?php echo $row['Cluster_name']; ?></td>
-            <td><?php echo $row['Contact_Person']; ?></td>
-            <td><?php echo $row['Contact_number']; ?></td>
-            <td><?php echo $row['Meter_Number']; ?></td>
-            <td><?php echo $row['Techie_team']; ?></td>
-            <td><?php echo $row['date_Installed']; ?></td>
-            <td><?php echo $row['Comments']; ?></td>
-            <td>
-            <button class="btn btn-warning"  onClick="return confirm('Confirm Resubmitting Meter Number <?php echo $row['Meter_Number']; ?> from <?php echo $row['Cluster_name']; ?> as New Meters')"><a href="changemtrstatus.php?id=<?php echo $row['id']; ?>">Resubmit</a></button>
-            </td>
-
-        </tr>
-        <?php
-    }
-
-    curl_close ($curl);
-    ?>
+        </tbody>
 </table>
                         </div>
                     </div>
@@ -343,18 +303,57 @@ $data = json_decode( $response, true );
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../../assets/js/main.js"></script>
-
-
-<script>
- $(document).ready(function () {
-$('#example').DataTable({
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true,
-        "pagingType": "full_numbers"
-});
-$('.dataTables_length').addClass('bs-select');
-});
+<script> 
+function myFunction(){
+    var checkstr =  confirm('Sure to Resubmit the Meter to MATON?');
+    if(checkstr == true){
+      
+    }else{
+    return false;
+    }
+  }
 </script>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+$('#example').DataTable({
+		ajax :{
+            "url": "api.php",
+            "dataSrc": ""
+        },
+        "columns":[
+            {"data":"Cluster_name"},
+            {"data":"Contact_Person"},
+            {"data":"Contact_number"},
+            {"data":"Meter_Number"},
+            {"data":"Techie_team"},
+            {"data":"date_Installed"},
+            {"data":"Comments"},
+            {
+  data: null,
+  render: function ( data, type, row ) {
+    return '<button class="btn btn-primary" onclick="myFunction()">Resubmit</button>';
+  }
+},
+            
+        ],
+        
+		 "dom": 'lBfrtip',
+		 "buttons": [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: [
+                    'excel',
+                    'csv'
+                ]
+            }
+        ],
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+        });
+});
+
+</script>
+
 </body>
 </html>
