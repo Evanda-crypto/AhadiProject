@@ -40,7 +40,7 @@ if(isset($_POST['submit'])){
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Update Availability</title>
+    <title>Edit Client Info</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -95,6 +95,9 @@ if(isset($_POST['submit'])){
                     </li>
                     <li>
                         <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-table"></i>Imported</a>
+                    </li>
+                    <li>
+                        <a href="get_all_paps_info.php" style="color:black; font-size: 15px;"> <i class="menu-icon fa fa-table"></i>All Paps Info</a>
                     </li>
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
@@ -167,7 +170,7 @@ if(isset($_POST['submit'])){
                                 <div id="pay-invoice">
                                     <div class="card-body">
                                         <div class="card-title">
-                                            <h3 class="text-center">Update Availability</h3>
+                                            <h3 class="text-center">Edit Client Info</h3>
                                         </div>
                                         <hr>
                                         <form  method="post" action="">

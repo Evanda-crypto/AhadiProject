@@ -350,7 +350,7 @@ date_default_timezone_set("Africa/Nairobi");
                                         <div class="form-group has-success">
                                         <strong><label for="cc-name" class="control-label mb-1">Comments<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="cc-name" name="comments" type="text" class="form-control cc-name valid"  data-val="true" placeholder="Comments"
-                                                    autocomplete="cc-name" required aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                    autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div>

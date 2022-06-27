@@ -204,7 +204,7 @@ tfoot td {
                                 <tbody>
                                 <?php
                                 $query = "SELECT i.ClientID,p.Region,p.BuildingName,p.BuildingCode,upper(i.MacAddress) as mac,t.Techie1,t.Techie2,t.Techie3,FLOOR(300/i.split) as amount,
-                        p.Region,i.DateInstalled FROM papdailysales as p left join papinstalled as i ON i.ClientID=p.ClientID left join Token_teams as t on t.Team_ID=i.Team_ID 
+                        p.Region,i.DateInstalled FROM papdailysales as p left join papinstalled as i USING(ClientID) left join Token_teams as t USING(ClientID) 
                         WHERE i.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 35 DAY)";
                                 $result = mysqli_query($connection, $query);
 

@@ -1,32 +1,21 @@
-<html>
-  <head>
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script>
-      $(function () {
-
-        $('form').on('submit', function (e) {
-
-          e.preventDefault();
-
-          $.ajax({
-            type: 'post',
-            url: 'post.php',
-            data: $('form').serialize(),
-            success: function () {
-              alert('form was submitted');
-            }
-          });
-
-        });
-
-      });
-    </script>
-  </head>
-  <body>
-    <form>
-      <input name="time" value="00:00:00.00"><br>
-      <input name="date" value="0000-00-00"><br>
-      <input name="submit" type="submit" value="Submit">
-    </form>
-  </body>
-</html>
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('http://app.sasakonnect.net:19003/api/Meters/');
+$request->setMethod(HTTP_Request2::METHOD_GET);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}

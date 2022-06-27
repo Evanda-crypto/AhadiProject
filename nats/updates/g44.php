@@ -414,7 +414,7 @@ else
                                         <div class="form-group has-success">
                                         <strong><label for="cc-name" class="control-label mb-1">Comments</label></strong>
                                                 <input id="cc-name" name="comments" type="text" class="form-control cc-name valid" value="<?php echo $comments?>"  data-val="true" placeholder="Comments"
-                                                    autocomplete="cc-name" radonly aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                    autocomplete="cc-name"  aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div>

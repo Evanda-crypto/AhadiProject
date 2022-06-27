@@ -147,29 +147,28 @@ include("../config/config.php");
     }
     ?> Records]</strong></center>
                             </div>
-                            <div class="card-body">
-                                <table class="table" id="example">
+                            <div class="card-body d-md-block d-lg-none">
+                                <table class="table table-striped table-bordered" id="example">
                                     <thead>
-      </th>
+     
       <th class="th-sm">Client
       </th>
-      <th class="th-sm">Phone Main
-      </th>
   <th class="th-sm">Bname
+      </th><th class="th-sm">Date Turned On
       </th>
 
                                       </tr>
                                   </thead>
                                   <tbody>
                                   <?php
-                        $query  = "SELECT ClientID,ChampName,ClientContact,BuildingName,ClientName FROM papdailysales WHERE PapStatus='Turned On' and ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+                        $query  = "SELECT p.ClientID,p.ChampName,p.ClientContact,p.BuildingName,p.ClientName,t.DateTurnedOn FROM papdailysales as p LEFT JOIN turnedonpap as t USING(ClientID) WHERE p.PapStatus='Turned On' and p.ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                                 <tr>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['DateTurnedOn']; ?></a></td>
                             
                                 </tr>
                         <?php
@@ -217,6 +216,7 @@ include("../config/config.php");
  $(document).ready(function () {
 $('#example').DataTable(
     {
+        order: [[2, 'desc']],
         "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
         "scrollY":        "500px",
         "scrollCollapse": true

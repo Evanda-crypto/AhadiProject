@@ -13,28 +13,24 @@ if(!empty($_GET['id'])){
         $cmsData = $query->fetch_assoc(); 
         echo "<table class='table table-striped'>";
         echo "<tr>";
-        echo "<td>Date Turned On</td>";
-        echo "<td>".$cmsData['DateTurnedOn']."</td>";
+        echo "<td>Client Name</td>";
+        echo "<td>".$cmsData['ClientName']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>DateSigned</td>";
         echo "<td>".$cmsData['DateSigned']."</td>";
         echo "</tr>";
         echo "<tr>";
-        echo "<td>Client Name</td>";
-        echo "<td>".$cmsData['ClientName']."</td>";
+        echo "<td>Date Turned On</td>";
+        echo "<td>".$cmsData['DateTurnedOn']."</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Availability</td>";
         echo "<td>".$cmsData['ClientAvailability']."</td>";
         echo "</tr>";
         echo "<tr>";
-        echo "<td>Phone Main</td>";
+        echo "<td>Contact</td>";
         echo "<td>".$cmsData['ClientContact']."</td>";
-        echo "</tr>";
-        echo "<tr>";
-        echo "<td>Phone Alt</td>";
-        echo "<td>".$cmsData['PhoneAlt']."</td>";
         echo "</tr>";
         echo "<td>Region</td>";
         echo "<td>".$cmsData['Region']."</td>";
@@ -55,11 +51,6 @@ if(!empty($_GET['id'])){
         echo "<td>Apt</td>";
         echo "<td>".$cmsData['Apt']."</td>";
         echo "</tr>";
-        echo"</tr>";
-        echo "<td>Techies</td>";
-        echo "<td>".$cmsData['techies']."</td>";
-        echo "</tr>";
-        echo"</tr>";
         echo "</table>";
     }else{ 
         echo 'Content not found....1'; 
@@ -94,7 +85,7 @@ if(isset($_POST['submit'])){
 </head>
 <body>
       <div class="modal-footer">
-    <button type="button" name="submit" class="col-lg-5 btn btn-warning"><a href='update-availability.php?client-id=<?php echo $cmsData['ClientID'];?>'>Change Availability</a></button>
+    <button type="button" name="submit" class="col-lg-5 btn btn-warning"><a href='update-availability.php?client-id=<?php echo $cmsData['ClientID'];?>'>Edit</a></button>
     <button type="button" class="col-lg-4 btn btn-danger" data-dismiss="modal">Close</button>
 </div>
 </body>
