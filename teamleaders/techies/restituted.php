@@ -274,6 +274,7 @@ include("../../config/config.php");
                                     <th>Client Name</th>
                      <th>Contact</th>
                      <th>Building Name</th>
+                     <th>Champ</th>
                      <th>Techies</th>
                      <th>Reason</th>
                      <th>Techie Feedback</th>
@@ -286,7 +287,7 @@ include("../../config/config.php");
                                 <tbody>
                                 <?php
  $query =
-     "SELECT ClientID,ClientName,BuildingName,BuildingCode,RestitutedDate,DateSigned,Reason,Contact,CONCAT(Techie1,'|',Techie2) as techies,Note from papnotinstalled where Region='" .
+     "SELECT ClientID,ClientName,BuildingName,BuildingCode,RestitutedDate,DateSigned,Reason,ChampName,Contact,CONCAT(Techie1,'|',Techie2) as techies,Note from papnotinstalled where Region='" .
      $_SESSION["Region"] .
      "' order by DateSigned Desc";
  $result = mysqli_query($connection, $query);
@@ -295,6 +296,7 @@ include("../../config/config.php");
                                     <td><?php echo $row["ClientName"]; ?></dh>
                                     <td><?php echo $row["Contact"]; ?></td>
                                     <td><?php echo $row["BuildingName"]; ?></td>
+                                    <td><?php echo $row["ChampName"]; ?></td>
                                     <td><?php echo $row["techies"]; ?></td>
                                     <td><?php echo $row["Reason"]; ?></td>
                                     <td><?php echo $row["Note"]; ?></td>

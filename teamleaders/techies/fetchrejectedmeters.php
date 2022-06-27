@@ -1,9 +1,8 @@
 <?php
-$id= $_GET['id'];
 require_once 'HTTP/Request2.php';
 $request = new HTTP_Request2();
-$request->setUrl("http://app.sasakonnect.net:19003/api/Rejected/".$id."/");
-$request->setMethod(HTTP_Request2::METHOD_PUT);
+$request->setUrl('http://app.sasakonnect.net:19003/api/Rejected/');
+$request->setMethod(HTTP_Request2::METHOD_GET);
 $request->setConfig(array(
   'follow_redirects' => TRUE
 ));

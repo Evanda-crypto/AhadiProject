@@ -651,7 +651,7 @@ class HTTP_Request2 implements SplSubject
      * @return   HTTP_Request2
      * @throws   HTTP_Request2_LogicException
      */
-    public function addUpload(
+    public static  function addUpload(
         $fieldName, $filename, $sendFilename = null, $contentType = null
     ) {
         if (!is_array($filename)) {

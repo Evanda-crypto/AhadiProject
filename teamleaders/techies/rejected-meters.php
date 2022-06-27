@@ -314,11 +314,11 @@ function myFunction(){
   }
 </script>
 
-<script type="text/javascript">
+<script>
 $( document ).ready(function() {
 $('#example').DataTable({
 		ajax :{
-            "url": "api.php",
+            "url": "fetchrejectedmeters.php",
             "dataSrc": ""
         },
         "columns":[
