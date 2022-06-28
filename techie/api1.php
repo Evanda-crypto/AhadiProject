@@ -47,31 +47,4 @@ catch(HTTP_Request2_Exception $e) {
   echo 'Error: ' . $e->getMessage();
 }
 }
-
-?>
-
-<?php
-/*if(isset($_POST['submit']) && isset($_FILES['Meter_Picture']['tmp_name'])){
-  include 'HTTP/Request2.php';
-$request = new HTTP_Request2('http://app.sasakonnect.net:19003/api/Meters/');
-$request->setMethod(HTTP_Request2::METHOD_POST)
-    ->addPostParameter(array(
-        'Cluster_name' => $_POST["Cluster_name"],
-  
-        'Meter_Number'  => $_POST["Meter_Number"],
-
-        'Contact_number'    => $_POST["Contact_number"],
-
-        'date_Installed' => $_POST["date_Installed"],
-
-        'Region'  => $_POST["Region"],
-
-        'Techie_team'    => $_POST["Techie_team"],
-
-        'Contact_Person'    => $_POST["Contact_Person"],
-
-        'Comments'    => $_POST["Comments"]
-    ))
-    ->addUpload('Meter_Picture', $_FILES['Meter_Picture']['tmp_name'], $_FILES['Meter_Picture']['type'], $_FILES['Meter_Picture']['name']);
-}*/
 ?>
