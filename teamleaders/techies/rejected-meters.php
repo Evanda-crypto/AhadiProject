@@ -265,7 +265,37 @@ include("../../config/config.php");
                                          </tr>
                                   </thead>
                                   <tbody>
-        </tbody>
+<?php
+
+
+require_once __DIR__ . '../../../vendor/autoload.php';
+$client = new GuzzleHttp\Client();
+
+$response = $client->get("http://app.sasakonnect.net:19003/api/Rejected/");
+
+$data = json_decode($response->getBody(), true);
+
+    foreach($data as $row)
+    {
+        ?>
+        <tr>
+            <td><?php echo $row['Cluster_name']; ?></td>
+            <td><?php echo $row['Contact_Person']; ?></td>
+            <td><?php echo $row['Contact_number']; ?></td>
+            <td><?php echo $row['Meter_Number']; ?></td>
+            <td><?php echo $row['Techie_team']; ?></td>
+            <td><?php echo $row['date_Installed']; ?></td>
+            <td><?php echo $row['Comments']; ?></td>
+            <td>
+            <button class="btn btn-warning"  onClick="return confirm('Confirm Resubmitting Meter Number <?php echo $row['Meter_Number']; ?> from <?php echo $row['Cluster_name']; ?> as New Meters')"><a href="changemtrstatus.php?id=<?php echo $row['id']; ?>">Resubmit</a></button>
+            </td>
+
+        </tr>
+        <?php
+    }
+
+    
+    ?>
 </table>
                         </div>
                     </div>
@@ -317,27 +347,6 @@ function myFunction(){
 <script>
 $( document ).ready(function() {
 $('#example').DataTable({
-		ajax :{
-            "url": "fetchrejectedmeters.php",
-            "dataSrc": ""
-        },
-        "columns":[
-            {"data":"Cluster_name"},
-            {"data":"Contact_Person"},
-            {"data":"Contact_number"},
-            {"data":"Meter_Number"},
-            {"data":"Techie_team"},
-            {"data":"date_Installed"},
-            {"data":"Comments"},
-            {
-  data: null,
-  render: function ( data, type, row ) {
-    return '<button class="btn btn-primary" onclick="myFunction()">Resubmit</button>';
-  }
-},
-            
-        ],
-        
 		 "dom": 'lBfrtip',
 		 "buttons": [
             {
@@ -354,6 +363,28 @@ $('#example').DataTable({
 });
 
 </script>
+<script>
+  /*  $.ajax({
+  method: 'GET',
+  url: 'https://www.seetrustudio.com/data.php',
+  success: function(response) {
+    buildTable(JSON.parse(response)); 
+  }
+})
 
+function buildTable(data) {
+  var table = document.getElementById('test')
+
+  for (var i = 0; i < data.length; i++) {
+    var row = `<tr>
+                            <td>${data[i].date}</td>
+                            <td>${data[i].weather}</td>
+                            <td>${data[i].temperature}</td>
+                            <td>${data[i].temp_unit}</td>
+                      </tr>`
+    table.innerHTML += row
+  }
+}
+</script>
 </body>
 </html>

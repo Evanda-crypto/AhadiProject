@@ -1,22 +1,8 @@
 <?php
-$id= $_GET['id'];
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl("http://app.sasakonnect.net:19003/api/Rejected/".$id."/");
-$request->setMethod(HTTP_Request2::METHOD_PUT);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
+
+require_once __DIR__ . '../../../vendor/autoload.php';
+$client = new GuzzleHttp\Client();
+
+$response = $client->get("http://app.sasakonnect.net:19003/api/Rejected/");
+
+echo $response->getBody();

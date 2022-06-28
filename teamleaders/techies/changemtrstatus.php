@@ -2,7 +2,7 @@
 
 $id= $_GET['id'];
 
-function callAPI($method, $url, $data){
+/*function callAPI($method, $url, $data){
     $curl = curl_init();
     switch ($method){
        case "POST":
@@ -47,7 +47,19 @@ $data_array =  array(
  }else{
     $_SESSION["success"] = "Status changed";
     header("Location: rejected-meters.php");
- }
+ }*/
+ 
+
+ require_once __DIR__ . '../../../vendor/autoload.php';
+ $client = new GuzzleHttp\Client();
+
+$response = $client->put("http://app.sasakonnect.net:19003/api/Rejected/".$id."/", [
+    'parameters' => [
+        'Status' => 'New',
+    ]
+]);
+
+echo ($response->getBody()->getContents());
 
 ?>
 
