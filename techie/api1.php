@@ -1,18 +1,20 @@
 <?php
 
+require_once __DIR__ . '../../vendor/autoload.php';
+
+use GuzzleHttp\Client;
 if(isset($_POST['submit']) && isset($_FILES['Meter_Picture']['tmp_name'])){
 
-include 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('http://app.sasakonnect.net:19003/api/Meters/');
-$request->setMethod(HTTP_Request2::METHOD_POST);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-#$request->$fileContent = basename(file_get_contents($_FILES['Meter_Picture']['tmp_name']));
 
-try {
-    $request->addPostParameter(json_decode(array(
+$client = new GuzzleHttp\Client();
+  
+$client = new Client([
+    // Base URI is used with relative requests
+    'base_uri' => 'https://reqres.in',
+]);
+  
+$response = $client->request('POST', 'http://app.sasakonnect.net:19003/api/Meters/', [
+    'json' => [
         'Cluster_name' => $_POST["Cluster_name"],
   
         'Meter_Number'  => $_POST["Meter_Number"],
@@ -27,24 +29,21 @@ try {
 
         'Contact_Person'    => $_POST["Contact_Person"],
 
-        'Meter_Picture'    => basename(file_get_contents($_FILES['Meter_Picture']['tmp_name'])),
-
-
         'Comments'    => $_POST["Comments"]
-    )));
+    ]
+]);
 
-    
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
+$file = new fopen($_FILES['Meter_Picture']['tmp_name'], $_FILES['Meter_Picture']['type'], $_FILES['Meter_Picture']['name']);
+
+$this->httpClient->post(
+    "http://app.sasakonnect.net:19003/api/Meters/",
+    ['multipart' =>['Meter_Picture' => $file]
+    ]
+);
+  
+//get status code using $response->getStatusCode();
+  
+$body = $response->getBody();
+$arr_body = json_decode($body);
+print_r($arr_body);
 }
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-}
-?>

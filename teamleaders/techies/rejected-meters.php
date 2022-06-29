@@ -266,8 +266,6 @@ include("../../config/config.php");
                                   </thead>
                                   <tbody>
 <?php
-
-
 require_once __DIR__ . '../../../vendor/autoload.php';
 $client = new GuzzleHttp\Client();
 

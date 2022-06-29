@@ -215,33 +215,33 @@ include("session.php");
                 
             }
             ?>
-                                        <form method="POST" enctype="multipart/form-data" action="api2.php"> 
+                                        <form method="POST" enctype="multipart/form-data" action="api.php"> 
                                         <div class="form-group">
-                                        <label for="x_card_code" class="control-label mb-1">Team ID</label>
+                                        <strong><label for="x_card_code" class="control-label mb-1">Team ID</label></strong>
                                         <div class="input-group">
                                         <input id="Techie_team" name="Techie_team" type="text" class="form-control cc-cvc" value="<?php echo $_SESSION['TeamID']?>"   placeholder="Team ID" readonly><br></br>
-                                        </div>
+                                        </div></div>
                                         <div class="form-group">
-                                        <label for="x_card_code" class="control-label mb-1">Contact Person<span style="color: #FF0000" >*</span></label>
+                                        <strong><label for="x_card_code" class="control-label mb-1">Contact Person<span style="color: #FF0000" >*</span></label></strong>
                                         <div class="input-group">
                                         <input id="Contact_Person" name="Contact_Person" required type="text" class="form-control cc-cvc"   placeholder="Contact Person" ><br></br>
-                                        </div>
+                                        </div></div>
                                         <div class="form-group">
-                                        <label for="x_card_code" class="control-label mb-1">Phone Number<span style="color: #FF0000" >*</span></label>
+                                        <strong><label for="x_card_code" class="control-label mb-1">Phone Number<span style="color: #FF0000" >*</span></label></strong>
                                         <div class="input-group">
                                         <input id="Contact_number" name="Contact_number" type="tel" pattern="[0-9]{10}" class="form-control cc-cvc" required   placeholder="Phone Number 07XXXXXXXX" ><br></br>
-                                        </div>
+                                        </div></div>
                                         <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Meter No<span style="color: #FF0000" >*</span></label>
+                                        <strong> <label for="cc-number" class="control-label mb-1">Meter No<span style="color: #FF0000" >*</span></label></strong>
                                             <input id="Meter_Number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11) return false;"pattern="[0-9]{11}" name="Meter_Number" type="number" class="form-control cc-number identified visa"  data-val="true" required placeholder="Meter Number" > 
                                             </div>
-                                                    <label for="x_card_code" class="control-label mb-1">Building Name<span style="color: #FF0000" >*</span></label>
-                                                    <div class="input-group">
-                                                        <input id="Cluster_name" name="Cluster_name" type="text" class="form-control cc-cvc"  placeholder="Building Name" required>
-                                                    </div>
-                                               
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="x_card_code" class="control-label mb-1">Building Name<span style="color: #FF0000" >*</span></label></strong>
+                                             <div class="input-group">
+                                             <input id="Cluster_name" name="Cluster_name" type="text" class="form-control cc-cvc"  placeholder="Building Name" required>
+                                             </div> </div>
+                                            <div class="form-group">
+                                            <strong><label for="cc-number" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label></strong>
                                             <div class="form-group has-success">
                                             <select data-placeholder="Choose a Region..." class="standardSelect form-control" id="Region" name="Region" tabindex="1" required>
                                             <option ></option>
@@ -259,16 +259,16 @@ include("session.php");
                                             </div>
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Termination Date<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-name" class="control-label mb-1">Termination Date<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="date_Installed" name="date_Installed" type="date" class="form-control cc-name valid" data-val="true" required autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Image<span style="color: #FF0000" >*</span></label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Image<span style="color: #FF0000" >*</span></label></strong>
                                             <input id="Meter_Picture" name="Meter_Picture" type="file" class="form-control cc-number identified visa"> 
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label>
+                                            <strong><label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label></strong>
                                                 <input id="Comments" name="Comments" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>

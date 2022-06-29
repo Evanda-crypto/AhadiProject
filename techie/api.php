@@ -1,5 +1,7 @@
 
 <?php
+
+include("session.php");
 if(isset($_POST['submit']) && isset($_FILES['Meter_Picture']['tmp_name'])){
 
 $ch = curl_init();

@@ -1,5 +1,5 @@
 <?php
-
+include("session.php");
 $id= $_GET['id'];
 
 require_once __DIR__ . '../../../vendor/autoload.php';
@@ -22,4 +22,10 @@ $response = $client->request('PATCH', "http://app.sasakonnect.net:19003/api/Reje
 //get status code using $response->getStatusCode();
 $body = $response->getBody();
 $arr_body = json_decode($body);
-print_r($arr_body);
+if(!$response){
+    $_SESSION["status"] = "An Error occurred please try again later";
+    header("Location: rejected-meters.php");
+}else{
+    $_SESSION["success"] = "Meter Resubmited";
+    header("Location: rejected-meters.php");
+}
