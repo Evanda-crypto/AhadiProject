@@ -266,12 +266,13 @@ include("../../config/config.php");
                                   </thead>
                                   <tbody>
 <?php
-//read the json file contents
-$jsonurl = "http://app.sasakonnect.net:19003/api/Rejected/";
-$json = file_get_contents($jsonurl);
+require_once __DIR__ . '../../../vendor/autoload.php';
+$client = new GuzzleHttp\Client();
 
-//convert json object to php associative array
-$data = json_decode($json, true);
+$response = $client->get("http://app.sasakonnect.net:19003/api/Rejected/");
+
+$data = json_decode($response->getBody(), true);
+
     foreach($data as $row)
     {
         ?>
