@@ -215,7 +215,7 @@ include("session.php");
                 
             }
             ?>
-                                        <form method="POST" enctype="multipart/form-data" action="api2.php"> 
+                                        <form method="POST" enctype="multipart/form-data" action="api.php"> 
                                         <div class="form-group">
                                         <strong><label for="x_card_code" class="control-label mb-1">Team ID</label></strong>
                                         <div class="input-group">

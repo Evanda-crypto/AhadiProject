@@ -16,4 +16,7 @@ foreach ($data as $dataarray) {
     echo $dataarray["date_Installed"];
     echo $dataarray["Comments"];
 }
+
+
+#phpinfo();
 ?>

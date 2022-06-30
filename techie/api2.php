@@ -13,6 +13,8 @@ $client = new Client([
     'base_uri' => 'https://reqres.in',
 ]);
 
+$pic = fopen($_FILES["Meter_Picture"]["tmp_name"], 'r');
+
 $response = $client->request('POST', 'http://app.sasakonnect.net:19003/api/Meters/', [
     'json' => [
         'Cluster_name' => $_POST["Cluster_name"],
@@ -29,13 +31,21 @@ $response = $client->request('POST', 'http://app.sasakonnect.net:19003/api/Meter
 
         'Contact_Person'    => $_POST["Contact_Person"],
 
+        'Meter_Picture'    => $pic,
+
         'Comments'    => $_POST["Comments"]
     ]
 ]);
 
+#$pic = fopen($_FILES["Meter_Picture"]["tmp_name"], 'r');
+
+#echo $pic;
+#echo $_FILES['Meter_Picture']['tmp_name']; echo "  ";
+#echo $_FILES['Meter_Picture']['type']; echo "  ";
+#echo $_FILES['Meter_Picture']['name'];
 
 //get status code using $response->getStatusCode();
-
+var_dump($_FILES);
 $body = $response->getBody();
 $arr_body = json_decode($body);
 print_r($arr_body);
