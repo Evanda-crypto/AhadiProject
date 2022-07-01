@@ -265,14 +265,23 @@ include("../../config/config.php");
                                          </tr>
                                   </thead>
                                   <tbody>
-<?php
-//read the json file contents
-$jsonurl = "http://app.sasakonnect.net:19003/api/Rejected/";
-$json = file_get_contents($jsonurl);
+                                  <?php
+$curl = curl_init();
 
-//convert json object to php associative array
-$data = json_decode($json, true);
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://app.sasakonnect.net:19003/api/Rejected/',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+));
 
+$response = curl_exec($curl);
+
+$data = json_decode( $response, true );
 
     foreach($data as $row)
     {
@@ -292,7 +301,6 @@ $data = json_decode($json, true);
         </tr>
         <?php
     }
-
 
     
     ?>
@@ -358,10 +366,7 @@ $('#example').DataTable({
                 ]
             }
         ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true,
-        "pagingType": "full_numbers"
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
         });
 });
 
