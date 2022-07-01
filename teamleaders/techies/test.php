@@ -271,11 +271,8 @@ $jsonurl = "https://jsonplaceholder.typicode.com/todos/";
 $json = file_get_contents($jsonurl);
 
 //convert json object to php associative array
-$data = json_encode($json, true);
-
-if (is_array($data) || is_object($data))
-{
-    foreach($json as $row)
+$data = json_decode($json, true);
+    foreach($data as $row)
     {
         ?>
         <tr>
@@ -293,12 +290,6 @@ if (is_array($data) || is_object($data))
         </tr>
         <?php
     }
-}
-else{
-    echo "Not array";
-}
-
-    
     ?>
 </table>
                         </div>
