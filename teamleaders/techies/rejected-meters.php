@@ -273,8 +273,7 @@ $json = file_get_contents($jsonurl);
 //convert json object to php associative array
 $data = json_decode($json, true);
 
-if (is_array($data) || is_object($data))
-{
+
     foreach($data as $row)
     {
         ?>
@@ -293,10 +292,7 @@ if (is_array($data) || is_object($data))
         </tr>
         <?php
     }
-}
-else{
-    echo "Not array";
-}
+
 
     
     ?>
