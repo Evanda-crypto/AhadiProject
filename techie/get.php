@@ -75,7 +75,7 @@ if(!empty($_GET['id'])){
     <title></title>
 </head>
 <body>
-      <div class="modal-footer">
+    <div class="modal-footer">
     <button type="button" name="submit" class="col-lg-5 btn btn-warning"><a href='papdetails.php?clientid=<?php echo $cmsData['ClientID'];?>'>Installed</a></button>
     <button type="button" name="submit" class="col-lg-5 btn btn-danger"><a href='pap-not-installed.php?clientid=<?php echo $cmsData['ClientID'];?>'>To Restitutes</a></button>
 </div>

@@ -1,6 +1,6 @@
 <?php
 include("session.php");
-/*$id= $_GET['id'];
+$id= $_GET['id'];
 
 require_once __DIR__ . '../../../vendor/autoload.php';
 $client = new GuzzleHttp\Client();
@@ -28,12 +28,12 @@ if(!$response){
 }else{
     $_SESSION["success"] = "Meter Resubmited";
     header("Location: rejected-meters.php");
-}*/
+}
 ?>
 
 <?php
 
-$id= $_GET['id'];
+/*$id= $_GET['id'];
 
 function callAPI($method, $url, $data){
     $curl = curl_init();
@@ -80,6 +80,6 @@ $data_array =  array(
  }else{
     $_SESSION["success"] = "Meter Resubmited";
     header("Location: rejected-meters.php");
- }
+ }*/
 
 ?>

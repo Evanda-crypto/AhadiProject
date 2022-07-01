@@ -377,7 +377,26 @@ if (!$connection) {
                       echo $row["turnedon"] . "<br><br>";
                   }
                   ?></span></div>
-                                            <div class="stat-heading">Turned On</div>
+                                                  <div class="dropdown show">
+                                <a class="" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Turned On
+                                </a>
+
+                                <div class="dropdown-menu bg-flat-color-4" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item " href="turnedon-g44.php">G44</a>
+                                    <a class="dropdown-item" href="turnedon-zmm.php">ZMM</a>
+                                    <a class="dropdown-item " href="turnedon-r&m.php">R&M</a>
+                                    <a class="dropdown-item" href="turnedon-g45s.php">G45S</a>
+                                    <a class="dropdown-item " href="turnedon-g45n.php">G45N</a>
+                                    <a class="dropdown-item" href="turnedon-kwt.php">KWT</a>
+                                    <a class="dropdown-item" href="turnedon-lsm.php">LSM</a>
+                                    <a class="dropdown-item" href="turnedon-htr.php">HTR</a>
+                                    <a class="dropdown-item" href="turnedon-stn.php">STN</a>
+                                    <a class="dropdown-item" href="turnedon-mwk.php">MWK</a>
+                                </div>
+
+                            </div>
                                         </div>
                                     </div>
                                 </div>
