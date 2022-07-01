@@ -13,7 +13,7 @@ $client = new Client([
     'base_uri' => 'https://reqres.in',
 ]);
   
-$response = $client->request('PATCH', "http://app.sasakonnect.net:19003/api/Rejected/".$id."/", [
+$response = $client->request('PATCH', "http://app.sasakonnect.net:19003/api/EditMeterViewset/".$id."/", [
     'json' => [
         'Status' => 'New',
     ]

@@ -271,11 +271,11 @@ $jsonurl = "https://jsonplaceholder.typicode.com/todos/";
 $json = file_get_contents($jsonurl);
 
 //convert json object to php associative array
-$data = json_decode($json, true);
+$data = json_encode($json, true);
 
 if (is_array($data) || is_object($data))
 {
-    foreach($data as $row)
+    foreach($json as $row)
     {
         ?>
         <tr>
