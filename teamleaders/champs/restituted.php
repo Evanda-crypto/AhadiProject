@@ -191,7 +191,8 @@ include("../../config/config.php");
                 
             }
             ?>
-            <form method="POST" action="delete.php">
+            <form method="POST" action="handlerestitute.php">
+            <p align="right"> <input class="btn btn-warning" type="submit" name="restore" onClick="return confirm('Sure to Restore marked records back to KOMP database?')"  value="Restore"></p>
                             <p align="right"> <input class="btn btn-danger" type="submit" name="delete" onClick="return confirm('Sure to delete marked records from KOMP database?')"  value="Delete"></p>
                             <table class="table table-striped" id="example">
                                 <thead>
@@ -225,7 +226,7 @@ include("../../config/config.php");
                                     <td><?php echo $row["Reason"]; ?></td>
                                     <td><?php echo $row["Note"]; ?></td>
                                     <td>
-                                    <button class="btn btn-warning" ><a href="restore.php?clientid=<?php echo $row['ClientID']; ?> " onClick="return confirm('Sure to restore <?php  echo $row['ClientName']; ?> back to KOMP database?')"> <i class="zmdi zmdi-refresh-alt"></i>Restore</a></button>
+                                    <input type="checkbox" name="rest[]" value="<?php echo $row['ClientID']?>">
                                     </td>
                                     <td>
                                     <input type="checkbox" name="check[]" value="<?php echo $row['ClientID']?>">
