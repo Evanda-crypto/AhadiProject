@@ -6,7 +6,7 @@ if (!isset($_SESSION["Techie"]) && $_SESSION["Techie"] == false || !isset($_SESS
 !isset($_SESSION["Region"]) && $_SESSION["Region"] == false || !isset($_SESSION["ID"]) && $_SESSION["ID"] == false) {
     header("location: ../index.php");
 } else {
-    if (time() - $_SESSION["start"] >604800 ) {
+    if (time() - $_SESSION["start"] >604800) {
         header("location: ../index.php");
     } else {
         $_SESSION["start"] = time();

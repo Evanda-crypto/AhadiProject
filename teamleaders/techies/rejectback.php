@@ -265,15 +265,27 @@ include("../../config/config.php");
                                          </tr>
                                   </thead>
                                   <tbody>
-<?php
-require_once __DIR__ . '../../../vendor/autoload.php';
-$client = new GuzzleHttp\Client();
+                                  <?php
+$curl = curl_init();
 
-$response = $client->get("http://app.sasakonnect.net:19003/api/Rejected/");
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://app.sasakonnect.net:19003/api/Rejected/',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+));
 
-$data = json_decode($response->getBody(), true);
+$response = curl_exec($curl);
 
-    foreach($data as $row)
+$data = json_decode( $response, true );
+
+?>
+    <?php
+    foreach( $data as $row )
     {
         ?>
         <tr>
@@ -292,7 +304,7 @@ $data = json_decode($response->getBody(), true);
         <?php
     }
 
-    
+    curl_close ($curl);
     ?>
 </table>
                         </div>
