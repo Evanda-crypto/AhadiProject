@@ -265,40 +265,46 @@ include("../../config/config.php");
                                          </tr>
                                   </thead>
                                   <tbody>
-<?php
-//read the json file contents
-$jsonurl = "http://app.sasakonnect.net:19003/api/Rejected/";
-$json = file_get_contents($jsonurl);
+                                  <?php
+$curl = curl_init();
 
-//convert json object to php associative array
-$data = json_decode($json, true);
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://jsonplaceholder.typicode.com/todos/',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+));
 
-if (is_array($data) || is_object($data))
-{
-    foreach($data as $row)
+$response = curl_exec($curl);
+
+$data = json_decode( $response, true );
+
+?>
+    <?php
+    foreach( $data as $row )
     {
         ?>
         <tr>
-            <td><?php echo $row['Cluster_name']; ?></td>
-            <td><?php echo $row['Contact_Person']; ?></td>
-            <td><?php echo $row['Contact_number']; ?></td>
-            <td><?php echo $row['Meter_Number']; ?></td>
-            <td><?php echo $row['Techie_team']; ?></td>
-            <td><?php echo $row['date_Installed']; ?></td>
-            <td><?php echo $row['Comments']; ?></td>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo $row['title']; ?></td>
+            <td><?php echo $row['completed']; ?></td>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo $row['title']; ?></td>
+            <td><?php echo $row['completed']; ?></td>
+            <td><?php echo $row['id']; ?></td>
             <td>
-            <button class="btn btn-warning"  onClick="return confirm('Confirm Resubmitting Meter Number <?php echo $row['Meter_Number']; ?> from <?php echo $row['Cluster_name']; ?> as New Meters')"><a href="changemtrstatus.php?id=<?php echo $row['id']; ?>">Resubmit</a></button>
+            <button class="btn btn-warning"  onClick="return confirm('Confirm Resubmitting Meter Number <?php echo $row['userId']; ?> from <?php echo $row['userId']; ?> as New Meters')"><a href="changemtrstatus.php?id=<?php echo $row['id']; ?>">Resubmit</a></button>
             </td>
 
         </tr>
         <?php
     }
-}
-else{
-    echo "Not array";
-}
 
-    
+    curl_close ($curl);
     ?>
 </table>
                         </div>
@@ -362,10 +368,7 @@ $('#example').DataTable({
                 ]
             }
         ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true,
-        "pagingType": "full_numbers"
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
         });
 });
 
