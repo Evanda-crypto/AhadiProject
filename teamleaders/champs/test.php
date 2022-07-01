@@ -69,6 +69,8 @@ include("../../config/config.php");
                         <a href="turned-on.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
                     </li>
                     <li>
+                        <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Imported</a>
+                    </li>
                     <li class="menu-title">BUILDINGS</li><!-- /.menu-title -->
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>

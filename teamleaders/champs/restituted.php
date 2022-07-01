@@ -74,6 +74,8 @@ include("../../config/config.php");
                         <a href="turned-on.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
                     </li>
                     <li>
+                        <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Imported</a>
+                    </li>
                     <li class="menu-title">BUILDINGS</li><!-- /.menu-title -->
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
@@ -192,10 +194,10 @@ include("../../config/config.php");
             }
             ?>
             <form method="POST" action="handlerestitute.php">
-            <p align="right"> <input class="btn btn-warning" type="submit" name="restore" onClick="return confirm('Sure to Restore marked records back to KOMP database?')"  value="Restore"></p>
-                            <p align="right"> <input class="btn btn-danger" type="submit" name="delete" onClick="return confirm('Sure to delete marked records from KOMP database?')"  value="Delete"></p>
+           <div style="alignment:right; float: right;" class="row"> <p align="right"><input class="btn btn-warning" type="submit" name="restore" onClick="return confirm('Sure to Restore marked records back to KOMP database?')"  value="Restore"></p>
+                            <p align="right"> <input class="btn btn-danger" style="margin-left:20px" type="submit" name="delete" onClick="return confirm('Sure to delete marked records from KOMP database?')"  value="Delete"></p></div>
                             <table class="table table-striped" id="example">
-                                <thead>
+                            <thead>
                                     <tr>
                      <th>Client Name</th>
                      <th>Contact</th>
@@ -222,7 +224,7 @@ include("../../config/config.php");
                                     <td><?php echo $row["BuildingName"]; ?></td>
                                     <td><?php echo $row["ChampName"]; ?></td>
                                     <td><?php echo $row["techies"]; ?></td>
-                                   <td><?php echo $row["RestitutedDate"]; ?></td>
+                                   <td><?php  echo $row["RestitutedDate"]; ?></td>
                                     <td><?php echo $row["Reason"]; ?></td>
                                     <td><?php echo $row["Note"]; ?></td>
                                     <td>

@@ -22,7 +22,7 @@ if ($result && $del) {
 }
 }
 else{
-    $_SESSION["status"] = "Please Select Records to delete";
+    $_SESSION["status"] = "Please Select Records to Delete";
       header("Location: restituted.php");
 }
 }
@@ -47,7 +47,7 @@ else if(isset($_POST['restore'])){
        }
        }
        else{
-           $_SESSION["status"] = "Please Select Records to delete";
+           $_SESSION["status"] = "Please Select Records to Restore";
              header("Location: restituted.php");
        }
 

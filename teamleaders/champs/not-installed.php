@@ -85,6 +85,8 @@ include("../../config/config.php");
                         <a href="turned-on.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Turned On </a>
                     </li>
                     <li>
+                        <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Imported</a>
+                    </li>
                     <li class="menu-title">BUILDINGS</li><!-- /.menu-title -->
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
@@ -186,13 +188,13 @@ include("../../config/config.php");
                                 <table class="table table-striped" id="example">
                                     <thead>
                                         <tr>
-    <th class="th-sm">Building Name
+    <th class="th-sm">Building
       </th>
-      <th class="th-sm">Building Code
+      <th class="th-sm">Code
       </th>
- <th class="th-sm">Region
+ <th class="th-sm">Champ
       </th>
-      <th class="th-sm">Client Name
+      <th class="th-sm">Client
       </th>
       <th class="th-sm">Contact
       </th>
