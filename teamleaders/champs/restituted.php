@@ -199,9 +199,9 @@ include("../../config/config.php");
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                     <th>Client Name</th>
+                     <th>Client</th>
                      <th>Contact</th>
-                     <th>Building Name</th>
+                     <th>Building</th>
                      <th>Champ</th>
                      <th>Techies</th>
                      <th>Restituted Date</th>
