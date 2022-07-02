@@ -171,7 +171,7 @@ include("../config/config.php");
             }
             ?>
             <form method="POST" action="multipleturnon.php">
-            <div align="right"><div class="modal-footer">  <p align="right"> <input class="btn btn-success" type="submit" name="turnon" onClick="return confirm('Sure to change the status of the selected records to Turned On?')"  value="Turn On Multiple"></p></div></div>
+            <div align="right"><div class="modal-footer">  <p align="right"> <input class="btn btn-success" type="submit" name="turnon" onClick="return confirm('Sure to change the status of the selected records to Turned On?')"  value="Turn On Selected"></p></div></div>
                             <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
