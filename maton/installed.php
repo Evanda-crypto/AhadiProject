@@ -170,6 +170,8 @@ include("../config/config.php");
                 
             }
             ?>
+            <form method="POST" action="multipleturnon.php">
+            <div align="right"><div class="modal-footer">  <p align="right"> <input class="btn btn-success" type="submit" name="turnon" onClick="return confirm('Sure to change the status of the selected records to Turned On?')"  value="Turn On Multiple"></p></div></div>
                             <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
@@ -182,7 +184,7 @@ include("../config/config.php");
                     <th>Client Name</th>
                     <th>Contact</th>
                    <th>Floor</th>
-
+                   <th>Check</th>
                     <th>More</th>
                                     </tr>
                                 </thead>
@@ -207,7 +209,9 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['ClientName']?></td>
      <td><?php echo $row['ClientContact']?></td>
     <td><?php echo $row['Floor']?></td>
-
+    <td>
+    <input type="checkbox" name="check[]" value="<?php echo $row['ClientID']?>">
+    </td>
     <td>
     <button class="btn btn-warning" ><a href="turnon.php?clientid=<?php echo $row['ClientID']?>" class="text-bold">Turn On</a></button>
     </td>
@@ -215,6 +219,7 @@ while($row=$result->fetch_array()){
 <?php } ?>
                                 </tbody>
                             </table>
+</form>
                         </div>
                     </div>
                 </div>
