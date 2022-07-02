@@ -727,22 +727,24 @@ while ($signed = mysqli_fetch_assoc($result)) {
             datasets: [ {
                 data:<?php echo json_encode($Clients)?>,
                 backgroundColor: [
-                                    "#ee2c4e",
+                                   "#ee2c4e",
                                     "#ffb91f",
                                     "#0cbeaf",
                                     "#3072f5",
-                                    "#000000",
+                                    "#C70039",
                                     "#85ce36",
-                                    "#800080"
+                                    "#800080",
+                                    "#09AB7A "
                                 ],
                 hoverBackgroundColor: [
                                     "#ee2c4e",
                                     "#ffb91f",
                                     "#0cbeaf",
                                     "#3072f5",
-                                    "#000000",
+                                    "#C70039",
                                     "#85ce36",
-                                    "#800080"
+                                    "#800080",
+                                    "#09AB7A "
                                 ]
 
                             } ],
