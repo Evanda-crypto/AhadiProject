@@ -666,6 +666,7 @@ if (!$connection) {
     <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
+    order: [[4, 'desc']],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
