@@ -140,7 +140,7 @@ include("../config/config.php");
                         <div class="card">
                             <div class="card-header">
                             <center><strong class="card-title">Buildings[<?php
-         $query="SELECT COUNT(*) as buildings FROM buildings WHERE bstatus='6. IAP In Service' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service' and region='".$_SESSION['Region']."' OR region='".$_SESSION['Region1']."'";
+         $query="SELECT COUNT(*) as buildings FROM buildings WHERE bstatus='6. IAP In Service' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service'";
           $data=mysqli_query($connection,$query);
           while($row=mysqli_fetch_assoc($data)){
           echo $row['buildings'];
@@ -163,9 +163,9 @@ include("../config/config.php");
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                                 <tr>
-        <td><a  data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['bname']?></a></td>
-        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['bcode']?></a></td>
-        <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['region']?></a></td>
+        <td scope="th-sm"><a  data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['bname']?></a></td>
+        <td scope="th-sm"><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['bcode']?></a></td>
+        <td scope="th-sm"><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['region']?></a></td>
                                 </tr>
                         <?php
 
@@ -239,46 +239,6 @@ $(document).ready(function(){
 $('#example').DataTable();
 $('.dataTables_length').addClass('bs-select');
 });
-</script>
-<script>
-$(document).ready(function(){
-  $(document).on('click','.open',function(){
-      var dataURL = $(this).attr('data-href');
-        $('.modal-body').load(dataURL,function(){
-            $('#myModal').modal({show:true});
-        });
-    }); 
-});
-</script>
-<script>
- $(document).ready(function () {
-$('#dtBasicExample').DataTable();
-$('.dataTables_length').addClass('bs-select');
-});
-</script>
-<script>
-$(document).ready(function(){
-  $(document).on('click','.openPopup',function(){
-        var dataURL = $(this).attr('data-href');
-        $('.modal-body').load(dataURL,function(){
-            $('#Modal').modal({show:true});
-        });
-    }); 
-});
-</script>
-<script>
-$(document).ready(function(){
-    $('.openPopup').on('click',function(){
-        var dataURL = $(this).attr('data-href');
-        $('.modal-body').load(dataURL,function(){
-            $('#Modal').modal({show:true});
-        });
-    }); 
-});
-
-function changeValue(value) {
-  document.getElementById('remind').innerHTML = value;
-}
 </script>
 </body>
 </html>
