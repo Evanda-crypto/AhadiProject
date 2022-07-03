@@ -348,6 +348,10 @@ if (!$connection) {
                                     <div class="row m-0 row-group text-center border-top border-light-3">
 		   <div class="col-12 col-lg-4">
 		     <div class="p-3">
+             <small class="mb-0">My Region [<?php 
+             echo $_SESSION["Region"];
+               
+               ?>]<span> <i class="fa fa-arrow-"></i></span></small>
 		       <h5 class="mb-0"><?php
           $sql =
               "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
@@ -357,23 +361,25 @@ if (!$connection) {
               echo $signed["sales"];
           }
       ?> </h5>
-			   <small class="mb-0">My Region Today<span> <i class="fa fa-arrow-"></i></span></small>
+
 		     </div>
 		   </div>
 		   <div class="col-12 col-lg-4">
 		     <div class="p-3">
+             <small class="mb-0"><span>Best Champ<i class="fa fa-arrow-"></i></span></small>
 		       <h5 class="mb-0"> <?php
-         $query = "SELECT ChampName,Count(*) as bestchamp from papdailysales where DateSigned =CURDATE() group by ChampName order by bestchamp DESC limit 1";
+         $query = "SELECT Region,ChampName,Count(*) as bestchamp from papdailysales where DateSigned =CURDATE() group by Region,ChampName order by bestchamp DESC limit 1";
          $result = mysqli_query($connection, $query);
          while ($row = mysqli_fetch_assoc($result)) {
-             echo $row["ChampName"]; echo ":"; echo $row["bestchamp"]; 
+             echo $row["ChampName"]; echo ": "; echo $row["bestchamp"]; echo " From "; echo $row["Region"];
          }
          ?>   </h5>
-			   <small class="mb-0"><span>Best Champ Today<i class="fa fa-arrow-"></i></span></small>
+			   
 		     </div>
 		   </div>
 		   <div class="col-12 col-lg-4">
 		     <div class="p-3">
+             <small class="mb-0">Signed<span> <i class="fa fa-arrow-"></i></span></small>
 		     <b><h5 class="mb-0"> <?php
          $query =
              "SELECT COUNT(*) as myreg from papdailysales where DateSigned=CURDATE() and  ChampName='" .
@@ -386,7 +392,7 @@ if (!$connection) {
              echo $row["myreg"] . "<br></br>";
          }
          ?>  </h5></b>
-			   <small class="mb-0"> My signing Today<span> <i class="fa fa-arrow-"></i></span></small>
+			   
 		     </div>
 		   </div>
 		 </div>
@@ -479,10 +485,10 @@ if (!$connection) {
 ); ?>","<?php echo date("Y-m-d"); ?>" ],
             datasets: [
                 {
-                    label: "My Region",
+                    label: "My Region [<?php echo $_SESSION['Region']?>]",
                     data: ["<?php
           $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
+              "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND Region='".$_SESSION['Region']."'";
           $result = mysqli_query($connection, $sql);
           $chart_data = "";
           while ($signed = mysqli_fetch_assoc($result)) {
@@ -490,47 +496,47 @@ if (!$connection) {
           }
       ?>","<?php
           $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
+              "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND Region='".$_SESSION['Region']."'";
           $result = mysqli_query($connection, $sql);
           $chart_data = "";
           while ($signed = mysqli_fetch_assoc($result)) {
               echo $signed["sales"];
           }
       ?>","<?php
+      $sql =
+          "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 4 DAY) AND Region='".$_SESSION['Region']."'";
+      $result = mysqli_query($connection, $sql);
+      $chart_data = "";
+      while ($signed = mysqli_fetch_assoc($result)) {
+          echo $signed["sales"];
+      }
+  ?>","<?php
+  $sql =
+      "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='".$_SESSION['Region']."'";
+  $result = mysqli_query($connection, $sql);
+  $chart_data = "";
+  while ($signed = mysqli_fetch_assoc($result)) {
+      echo $signed["sales"];
+  }
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
           $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 4 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 4 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
+              "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region']."'";
           $result = mysqli_query($connection, $sql);
           $chart_data = "";
           while ($signed = mysqli_fetch_assoc($result)) {
@@ -729,394 +735,127 @@ if (!$connection) {
         }
     } );
 </script>
-<script>
-        //bar chart
-    var ctx = document.getElementById( "barChart" );
-    ctx.height = 500;;
-    var myChart = new Chart( ctx, {
-        type: 'bar',
-        data: {
-            labels: ["<?php echo date("Y-m-d", strtotime("-6 days")); ?>","<?php echo date(
-    "Y-m-d",
-    strtotime("-5 days")
-); ?>","<?php echo date("Y-m-d", strtotime("-4 days")); ?>","<?php echo date(
-    "Y-m-d",
-    strtotime("-3 days")
-); ?>","<?php echo date("Y-m-d", strtotime("-2 days")); ?>","<?php echo date(
-    "Y-m-d",
-    strtotime("-1 days")
-); ?>","<?php echo date("Y-m-d"); ?>" ],
-            datasets: [
-                {
-                    label: "My Region",
-                    data: ["<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 4 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 4 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>" ],
-                    borderColor: "rgba(0, 194, 146, 0.9)",
-                    borderWidth: "0",
-                    backgroundColor: "#0cbeaf"
-                            },
-                {
-                    label: "Best Champ",
-                    data: ["<?php
-          $sql =
-              "SELECT (SELECT MAX(mycount)
-              FROM (SELECT ChampName,COUNT(DateSigned) AS mycount,DateSigned 
-              FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY)
-              GROUP BY ChampName,DateSigned) as maxm) as sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT (SELECT MAX(mycount)
-              FROM (SELECT ChampName,COUNT(DateSigned) AS mycount,DateSigned 
-              FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY)
-              GROUP BY ChampName,DateSigned) as maxm) as sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT (SELECT MAX(mycount)
-              FROM (SELECT ChampName,COUNT(DateSigned) AS mycount,DateSigned 
-              FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 4 DAY)
-              GROUP BY ChampName,DateSigned) as maxm) as sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT (SELECT MAX(mycount)
-              FROM (SELECT ChampName,COUNT(DateSigned) AS mycount,DateSigned 
-              FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY)
-              GROUP BY ChampName,DateSigned) as maxm) as sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT (SELECT MAX(mycount)
-              FROM (SELECT ChampName,COUNT(DateSigned) AS mycount,DateSigned 
-              FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY)
-              GROUP BY ChampName,DateSigned) as maxm) as sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT (SELECT MAX(mycount)
-              FROM (SELECT ChampName,COUNT(DateSigned) AS mycount,DateSigned 
-              FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY)
-              GROUP BY ChampName,DateSigned) as maxm) as sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>",<?php
-          $sql =
-              "SELECT (SELECT MAX(mycount)
-              FROM (SELECT ChampName,COUNT(DateSigned) AS mycount,DateSigned 
-              FROM papdailysales where DateSigned=CURDATE()
-              GROUP BY ChampName,DateSigned) as maxm) as sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?> ],
-                    borderColor: "rgba(0,0,0,0.09)",
-                    borderWidth: "0",
-                    backgroundColor: "#ffb91f"
-                            },
-                            {
-                    label: "Signed",
-                    data: [ "<?php
-          $sql =
-              "SELECT COUNT(DateSigned) as sales FROM papdailysales where papdailysales.DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY) and papdailysales.ChampName='" .
-              $_SESSION["FName"] .
-              " " .
-              $_SESSION["LName"] .
-              "'";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT COUNT(DateSigned) as sales FROM papdailysales where papdailysales.DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY) and papdailysales.ChampName='" .
-              $_SESSION["FName"] .
-              " " .
-              $_SESSION["LName"] .
-              "'";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT COUNT(DateSigned) as sales FROM papdailysales where papdailysales.DateSigned=DATE_SUB(CURDATE(), INTERVAL 4 DAY) and papdailysales.ChampName='" .
-              $_SESSION["FName"] .
-              " " .
-              $_SESSION["LName"] .
-              "'";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT COUNT(DateSigned) as sales FROM papdailysales where papdailysales.DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) and papdailysales.ChampName='" .
-              $_SESSION["FName"] .
-              " " .
-              $_SESSION["LName"] .
-              "'";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT COUNT(DateSigned) as sales FROM papdailysales where papdailysales.DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) and papdailysales.ChampName='" .
-              $_SESSION["FName"] .
-              " " .
-              $_SESSION["LName"] .
-              "'";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT COUNT(DateSigned) as sales FROM papdailysales where papdailysales.DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) and papdailysales.ChampName='" .
-              $_SESSION["FName"] .
-              " " .
-              $_SESSION["LName"] .
-              "'";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>",<?php
-          $sql =
-              "SELECT COUNT(DateSigned) as sales FROM papdailysales where papdailysales.DateSigned=CURDATE() and papdailysales.ChampName='" .
-              $_SESSION["FName"] .
-              " " .
-              $_SESSION["LName"] .
-              "'";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?> ],
-                    borderColor: "rgba(0,0,0,0.09)",
-                    borderWidth: "0",
-                    backgroundColor: "#fe2d38"
-                            }
-                        ]
-        },
-        options: {
-            scales: {
-                yAxes: [ {
-                    ticks: {
-                        beginAtZero: true
-                    }
-                                } ]
-            }
-        }
-</script>
+
 <script>
     document.getElementById("01").addEventListener("click", last14days);
     function last14days() {
         //bar chart
     var ctx = document.getElementById( "barChart" );
-    ctx.height = 500;;
+    ctx.height = 250;;
     var myChart = new Chart( ctx, {
         type: 'bar',
         data: {
             labels: [ "<?php echo date('Y-m-d',strtotime("-13 days"));?>","<?php echo date('Y-m-d',strtotime("-12 days"));?>","<?php echo date('Y-m-d',strtotime("-11 days"));?>","<?php echo date('Y-m-d',strtotime("-10 days"));?>","<?php echo date('Y-m-d',strtotime("-9 days"));?>","<?php echo date('Y-m-d',strtotime("-8 days"));?>","<?php echo date('Y-m-d',strtotime("-7 days"));?>","<?php echo date('Y-m-d',strtotime("-6 days"));?>","<?php echo date('Y-m-d',strtotime("-5 days"));?>","<?php echo date('Y-m-d',strtotime("-4 days"));?>","<?php echo date('Y-m-d',strtotime("-3 days"));?>","<?php echo date('Y-m-d',strtotime("-2 days"));?>","<?php echo date('Y-m-d',strtotime("-1 days"));?>","<?php echo date('Y-m-d');?>" ],
             datasets: [
                 {
-                    label: "My Region",
+                    label: "My Region [<?php echo $_SESSION['Region']?>]",
                     data: [ "<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 13 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 12 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 11 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 10 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 9 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 8 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL  4 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
+$sql =
+    "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='".$_SESSION['Region']."'";
+$result = mysqli_query($connection, $sql);
+$chart_data = "";
+while ($signed = mysqli_fetch_assoc($result)) {
+    echo $signed["sales"];
+}
+?>","<?php
           $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 13 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 13 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 12 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 12 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 11 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 11 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 10 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 10 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 9 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 9 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 8 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 8 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 4 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 4 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
-          $result = mysqli_query($connection, $sql);
-          $chart_data = "";
-          while ($signed = mysqli_fetch_assoc($result)) {
-              echo $signed["sales"];
-          }
-      ?>","<?php
-          $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
+              "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=CURDATE() AND Region='".$_SESSION['Region']."'";
           $result = mysqli_query($connection, $sql);
           $chart_data = "";
           while ($signed = mysqli_fetch_assoc($result)) {
