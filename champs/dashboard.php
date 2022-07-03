@@ -354,7 +354,7 @@ if (!$connection) {
                ?>]<span> <i class="fa fa-arrow-"></i></span></small>
 		       <h5 class="mb-0"><?php
           $sql =
-              "SELECT ((SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region']."')+(SELECT COUNT(DateSigned) FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region1']."')) AS sales";
+              "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region']."'";
           $result = mysqli_query($connection, $sql);
           $chart_data = "";
           while ($signed = mysqli_fetch_assoc($result)) {
