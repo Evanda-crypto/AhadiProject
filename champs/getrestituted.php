@@ -8,7 +8,7 @@ $id=$_GET["id"];
     // Get content from the database
     $query = $connection->query(
         "SELECT papnotinstalled.ClientID,papnotinstalled.ClientName,papnotinstalled.Contact,papnotinstalled.ChampName,papnotinstalled.Region,papnotinstalled.Availability,papdailysales.PhoneAlt,
-        papnotinstalled.Reason,papdailysales.Apt,papdailysales.DateSigned,papdailysales.ClientAvailability,papdailysales.Floor,papnotinstalled.BuildingName,papnotinstalled.BuildingCode
+        papnotinstalled.Reason,papdailysales.Apt,papdailysales.DateSigned,papdailysales.ClientAvailability,papdailysales.Floor,papnotinstalled.BuildingName,papnotinstalled.BuildingCode,papnotinstalled.Note
         from papnotinstalled LEFT JOIN papdailysales on papdailysales.ClientID=papnotinstalled.ClientID WHERE papnotinstalled.ClientID =$id"
     );
 
@@ -18,6 +18,10 @@ $id=$_GET["id"];
         echo "<tr>";
         echo "<td>Techie Feedback</td>";
         echo "<td>" . $cmsData["Reason"] . "</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>Techie Comment</td>";
+        echo "<td>" . $cmsData["Note"] . "</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>DateSigned</td>";
