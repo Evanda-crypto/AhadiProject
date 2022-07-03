@@ -1,7 +1,11 @@
 <?php
     session_start();
-    session_unset();
-    session_destroy();
+
+    $endsession= array_keys($_SESSION);
+    foreach($endsession as $end)
+    {
+        unset($_SESSION[$end]);
+    }
     header("location: ../index.php");
     exit;
 ?>

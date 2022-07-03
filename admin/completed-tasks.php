@@ -204,8 +204,8 @@ tfoot td {
                                 <tbody>
                                 <?php
                                 $query = "SELECT i.ClientID,p.Region,p.BuildingName,p.BuildingCode,upper(i.MacAddress) as mac,t.Techie1,t.Techie2,t.Techie3,FLOOR(300/i.split) as amount,
-                        p.Region,i.DateInstalled FROM papdailysales as p left join papinstalled as i USING(ClientID) left join Token_teams as t USING(ClientID) 
-                        WHERE i.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 35 DAY)";
+                                p.Region,i.DateInstalled FROM papdailysales as p left join papinstalled as i ON i.ClientID=p.ClientID left join Token_teams as t on t.Team_ID=i.Team_ID 
+                                WHERE i.DateInstalled >= DATE_SUB(CURDATE(), INTERVAL 35 DAY)";
                                 $result = mysqli_query($connection, $query);
 
                                 while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -217,9 +217,7 @@ tfoot td {
                                     <td><?php echo $row["Techie1"]; ?></td>
                                     <td><?php echo $row["Techie2"]; ?></td>
                                     <td><?php echo $row["Techie3"]; ?></td>
-                                    <td><?php echo $row[
-                                        "DateInstalled"
-                                    ]; ?></td>
+                                    <td><?php echo $row["DateInstalled"]; ?></td>
                                     <td><?php echo $row["amount"]; ?></td>
                                 </tr>
                         <?php }

@@ -29,27 +29,22 @@ include("session.php");
     <link rel="stylesheet" href="../assets/css/lib/chosen/chosen.min.css">
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <!--<script>
-      $(function () {
+<script>
+var thisForm = document.getElementById('form');
+thisForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const formData = new FormData(thisForm).entries()
+    const response = await fetch('http://app.sasakonnect.net:19003/api/Meters/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(formData))
+    });
 
-        $('form').on('submit', function (e) {
+    const result = await response.json();
+    console.log(result)
+});
 
-          e.preventDefault();
-
-          $.ajax({
-            type: 'POST',
-            url: 'http://app.sasakonnect.net:19003/api/Meters/',
-            data: $('form').serialize(),
-            success: function () {
-              alert('Form was submitted');
-              window.reload();
-            }
-          });
-
-        });
-
-      });
-    </script>-->
+</script>
 </head>
 <body style="background-color:#e1e1e1">
     <!-- Left Panel -->
@@ -215,7 +210,7 @@ include("session.php");
                 
             }
             ?>
-                                        <form method="POST" enctype="multipart/form-data" action="api.php"> 
+                                        <form id="form" enctype="multipart/form-data"> 
                                         <div class="form-group">
                                         <strong><label for="x_card_code" class="control-label mb-1">Team ID</label></strong>
                                         <div class="input-group">
