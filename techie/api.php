@@ -7,7 +7,7 @@ if(isset($_POST['submit']) && isset($_FILES['Meter_Picture']['tmp_name'])){
 $ch = curl_init();
 
 //The CURLFile class 
-$cfile = new CURLFile($_FILES['Meter_Picture']['tmp_name'], $_FILES['Meter_Picture']['type'], $_FILES['Meter_Picture']['name']);
+#$cfile = new CURLFile($_FILES['Meter_Picture']['tmp_name'], $_FILES['Meter_Picture']['type'], $_FILES['Meter_Picture']['name']);
 
 
   $fields = array( 
@@ -25,7 +25,7 @@ $cfile = new CURLFile($_FILES['Meter_Picture']['tmp_name'], $_FILES['Meter_Pictu
 
   'Contact_Person'    => $_POST["Contact_Person"],
   
-  'Meter_Picture'    => $cfile,
+  #'Meter_Picture'    => $cfile,
 
   'Comments'    => $_POST["Comments"],);
 

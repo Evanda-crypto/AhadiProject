@@ -29,7 +29,7 @@ include("session.php");
     <link rel="stylesheet" href="../assets/css/lib/chosen/chosen.min.css">
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-<script>
+<!--<script>
     $(document).ready(function(){
 // Variable to hold request
 var request;
@@ -89,7 +89,7 @@ $("#form").submit(function(event){
 
 });
 });
-</script>
+</script>-->
 </head>
 <body style="background-color:#e1e1e1">
     <!-- Left Panel -->
@@ -255,7 +255,7 @@ $("#form").submit(function(event){
                 
             }
             ?>
-                                        <form id="form" method="POST" enctype="multipart/form-data"> 
+                                        <form id="form" method="POST" enctype="multipart/form-data" action="api.php"> 
                                         <div class="form-group">
                                         <strong><label for="x_card_code" class="control-label mb-1">Team ID</label></strong>
                                         <div class="input-group">
