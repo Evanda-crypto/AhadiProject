@@ -3,8 +3,9 @@
 
 include("session.php");
 if(isset($_POST['submit']) && isset($_FILES['Meter_Picture']['tmp_name'])){
-
-$ch = curl_init();
+$url = "http://app.sasakonnect.net:19003/api/Meters/";
+$ch = curl_init($url);
+#$ch = curl_init();
 
 //The CURLFile class 
 #$cfile = new CURLFile($_FILES['Meter_Picture']['tmp_name'], $_FILES['Meter_Picture']['type'], $_FILES['Meter_Picture']['name']);
@@ -29,9 +30,10 @@ $ch = curl_init();
 
   'Comments'    => $_POST["Comments"],);
 
-  $url = "http://app.sasakonnect.net:19003/api/Meters/";
+  
   curl_setopt($ch,CURLOPT_URL,$url);
-  curl_setopt($ch,CURLOPT_POST, 1);                //0 for a get request
+  curl_setopt($ch,CURLOPT_POST, 1); 
+  #curl_setopt($ch,CURLOPT_HEADER, 1);               //0 for a get request
   curl_setopt($ch,CURLOPT_POSTFIELDS,$fields);
   curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
   curl_setopt($ch,CURLOPT_CONNECTTIMEOUT ,3);
