@@ -2,7 +2,7 @@
 include("../config/config.php");
 include("session.php");
 ?>
-
+<?php header('Access-Control-Allow-Origin: *'); ?>
 
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -30,20 +30,65 @@ include("session.php");
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 <script>
-var thisForm = document.getElementById('form');
-thisForm.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    const formData = new FormData(thisForm).entries()
-    const response = await fetch('http://app.sasakonnect.net:19003/api/Meters/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(formData))
+    $(document).ready(function(){
+// Variable to hold request
+var request;
+
+// Bind to the submit event of our form
+$("#form").submit(function(event){
+
+    // Prevent default posting of form - put here to work in case of errors
+    event.preventDefault();
+
+    // Abort any pending request
+    if (request) {
+        request.abort();
+    }
+    // setup some local variables
+    var $form = $(this);
+
+    // Let's select and cache all the fields
+    var $inputs = $form.find("input, select, button");
+
+    // Serialize the data in the form
+    var serializedData = $form.serialize();
+
+    // Let's disable the inputs for the duration of the Ajax request.
+    // Note: we disable elements AFTER the form data has been serialized.
+    // Disabled form elements will not be serialized.
+    $inputs.prop("disabled", true);
+
+    // Fire off the request to /form.php
+    request = $.ajax({
+        url: "http://app.sasakonnect.net:19003/api/Meters/allow-cors",
+        type: "POST",
+        data: serializedData
     });
 
-    const result = await response.json();
-    console.log(result)
-});
+    // Callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+        // Log a message to the console
+        console.log("Hooray, it worked!");
+    });
 
+    // Callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        // Log the error to the console
+        console.error(
+            "The following error occurred: "+
+            textStatus, errorThrown
+        );
+    });
+
+    // Callback handler that will be called regardless
+    // if the request failed or succeeded
+    request.always(function () {
+        // Reenable the inputs
+        $inputs.prop("disabled", false);
+    });
+
+});
+});
 </script>
 </head>
 <body style="background-color:#e1e1e1">
@@ -210,7 +255,7 @@ thisForm.addEventListener('submit', async function (e) {
                 
             }
             ?>
-                                        <form id="form" enctype="multipart/form-data"> 
+                                        <form id="form" method="POST" enctype="multipart/form-data"> 
                                         <div class="form-group">
                                         <strong><label for="x_card_code" class="control-label mb-1">Team ID</label></strong>
                                         <div class="input-group">

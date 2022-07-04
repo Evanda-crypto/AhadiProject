@@ -266,36 +266,37 @@ include("../../config/config.php");
                                   </thead>
                                   <tbody>
                                   <?php
-$curl = curl_init();
 
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://app.sasakonnect.net:19003/api/Rejected/',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'GET',
-));
+$api_url = 'http://app.sasakonnect.net:19003/api/Rejected/';
 
-$response = curl_exec($curl);
+// Read JSON file
+$json_data = file_get_contents($api_url);
 
-$data = json_decode( $response, true );
+// Decode JSON data into PHP array
+$response_data = json_decode($json_data);
 
-    foreach($data as $row)
-    {
+// All user data exists in 'data' object
+$user_data = $response_data;;
+
+// Cut long data into small & select only first 10 records
+$user_data = array_slice($user_data, 0, 9);
+
+// Print data if need to debug
+//print_r($user_data);
+
+// Traverse array and display user data
+foreach ($user_data as $row) {
         ?>
         <tr>
-            <td><?php echo $row['Cluster_name']; ?></td>
-            <td><?php echo $row['Contact_Person']; ?></td>
-            <td><?php echo $row['Contact_number']; ?></td>
-            <td><?php echo $row['Meter_Number']; ?></td>
-            <td><?php echo $row['Techie_team']; ?></td>
-            <td><?php echo $row['date_Installed']; ?></td>
-            <td><?php echo $row['Comments']; ?></td>
+            <td><?php echo $row->Cluster_name; ?></td>
+            <td><?php echo $row->Contact_Person; ?></td>
+            <td><?php echo $row->Contact_number; ?></td>
+            <td><?php echo $row->Meter_Number; ?></td>
+            <td><?php echo $row->Techie_team; ?></td>
+            <td><?php echo $row->date_Installed; ?></td>
+            <td><?php echo $row->Comments; ?></td>
             <td>
-            <button class="btn btn-warning"  onClick="return confirm('Confirm Resubmitting Meter Number <?php echo $row['Meter_Number']; ?> from <?php echo $row['Cluster_name']; ?> as New Meters')"><a href="changemtrstatus.php?id=<?php echo $row['id']; ?>">Resubmit</a></button>
+            <button class="btn btn-warning"  onClick="return confirm('Confirm Resubmitting Meter Number <?php echo $row->Meter_Number; ?> from <?php echo $row->Cluster_name; ?> as New Meters')"><a href="changemtrstatus.php?id=<?php echo $row->id; ?>">Resubmit</a></button>
             </td>
 
         </tr>

@@ -1,37 +1,28 @@
-<html>
-        <head>
-            <meta charset="UTF-8">
-            <title>AJAX image upload with, jQuery</title>
-            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script type="text/javascript">
-                $(document).ready(function (e) {
-                    $('#upload').on('click', function () {
-                        var file_data = $('#file').prop('files')[0];
-                        var form_data = new FormData();
-                        form_data.append('file', file_data);
-                        $.ajax({
-                            url: 'http://localhost/ci/index.php/welcome/upload', // point to server-side controller method
-                            dataType: 'text', // what to expect back from the server
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            data: form_data,
-                            type: 'post',
-                            success: function (response) {
-                                $('#msg').html(response); // display success response from the server
-                            },
-                            error: function (response) {
-                                $('#msg').html(response); // display error response from the server
-                            }
-                        });
-                    });
-                });
-            </script>
-        </head>
-        <body>
-            <p id="msg"></p>
+<?php
 
-            <input type="file" id="file" name="file" multiple />
-            <button id="upload">Upload</button>
-        </body>
-    </html>
+$api_url = 'http://app.sasakonnect.net:19003/api/Rejected/';
+
+// Read JSON file
+$json_data = file_get_contents($api_url);
+
+// Decode JSON data into PHP array
+$response_data = json_decode($json_data);
+
+// All user data exists in 'data' object
+$user_data = $response_data;;
+
+// Cut long data into small & select only first 10 records
+$user_data = array_slice($user_data, 0, 9);
+
+// Print data if need to debug
+//print_r($user_data);
+
+// Traverse array and display user data
+foreach ($user_data as $user) {
+	echo "name: ".$user->Cluster_name;
+	echo "<br />";
+	echo "name: ".$user->Contact_Person;
+	echo "<br /> <br />";
+}
+
+?>
