@@ -741,7 +741,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
     function last14days() {
         //bar chart
     var ctx = document.getElementById( "barChart" );
-    ctx.height = 250;;
+    ctx.height = 500;;
     var myChart = new Chart( ctx, {
         type: 'bar',
         data: {
@@ -1218,8 +1218,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
 }
 
 </script>
-
-    <script>
+<script>
     //doughut chart
     var ctx = document.getElementById( "doughutChart" );
     ctx.height = 200;
@@ -1315,11 +1314,8 @@ while ($signed = mysqli_fetch_assoc($result)) {
             responsive: true
         }
     } );
-    </script>
-
-
-
-    <script>
+</script>
+<script>
    // single bar chart
     var ctx = document.getElementById( "monthly" );
     ctx.height = 150;
@@ -1346,6 +1342,7 @@ while ($signed = mysqli_fetch_assoc($result)) {
                                 } ]
             }
         }
-    } );</script>
+    } );
+</script>
 </body>
 </html>
