@@ -50,8 +50,9 @@ $url = "http://app.sasakonnect.net:19003/api/Meters/";
 
 if(isset($_POST['submit']) && isset($_FILES['Meter_Picture']['tmp_name'])){
 
-$cfile = new CURLFile($_FILES['Meter_Picture']['tmp_name'], $_FILES['Meter_Picture']['type'], $_FILES['Meter_Picture']['name']);
+
 $curl = curl_init($url);
+$cfile = new CURLFile($_FILES['Meter_Picture']['tmp_name'], $_FILES['Meter_Picture']['type'], $_FILES['Meter_Picture']['name']);
 curl_setopt($curl, CURLOPT_URL, $url);
 curl_setopt($curl, CURLOPT_POST, true);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

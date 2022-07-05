@@ -29,67 +29,41 @@ include("session.php");
     <link rel="stylesheet" href="../assets/css/lib/chosen/chosen.min.css">
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-<!--<script>
-    $(document).ready(function(){
-// Variable to hold request
-var request;
+<script>
+fetch('http://app.sasakonnect.net:19003/api/Meters/', {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'Bearer 123abc456def'
+  },
+  body: {
+    Cluster_name :$_POST["Cluster_name"];
+  
+  Meter_Number  : $_POST["Meter_Number"];
 
-// Bind to the submit event of our form
-$("#form").submit(function(event){
+  Contact_number   : $_POST["Contact_number"];
 
-    // Prevent default posting of form - put here to work in case of errors
-    event.preventDefault();
+  date_Installed : $_POST["date_Installed"];
 
-    // Abort any pending request
-    if (request) {
-        request.abort();
-    }
-    // setup some local variables
-    var $form = $(this);
+  Region  : $_POST["Region"];
 
-    // Let's select and cache all the fields
-    var $inputs = $form.find("input, select, button");
+  Techie_team    : $_POST["Techie_team"];
 
-    // Serialize the data in the form
-    var serializedData = $form.serialize();
+  Contact_Person    : $_POST["Contact_Person"];
+  
+  Meter_Picture    : $_POST["Meter_Picture"];
 
-    // Let's disable the inputs for the duration of the Ajax request.
-    // Note: we disable elements AFTER the form data has been serialized.
-    // Disabled form elements will not be serialized.
-    $inputs.prop("disabled", true);
+  Comments: $_POST["Comments"];
+  }
+})
+  .then(response => {
+    console.log(response)
+  })
+  .catch(err => {
+    console.log(err)
+  })
 
-    // Fire off the request to /form.php
-    request = $.ajax({
-        url: "http://app.sasakonnect.net:19003/api/Meters/allow-cors",
-        type: "POST",
-        data: serializedData
-    });
-
-    // Callback handler that will be called on success
-    request.done(function (response, textStatus, jqXHR){
-        // Log a message to the console
-        console.log("Hooray, it worked!");
-    });
-
-    // Callback handler that will be called on failure
-    request.fail(function (jqXHR, textStatus, errorThrown){
-        // Log the error to the console
-        console.error(
-            "The following error occurred: "+
-            textStatus, errorThrown
-        );
-    });
-
-    // Callback handler that will be called regardless
-    // if the request failed or succeeded
-    request.always(function () {
-        // Reenable the inputs
-        $inputs.prop("disabled", false);
-    });
-
-});
-});
-</script>-->
+</script>
 </head>
 <body style="background-color:#e1e1e1">
     <!-- Left Panel -->
@@ -255,7 +229,7 @@ $("#form").submit(function(event){
                 
             }
             ?>
-                                        <form id="form" method="POST" enctype="multipart/form-data" action="api1.php"> 
+                                        <form id="form" method="POST" enctype="multipart/form-data"> 
                                         <div class="form-group">
                                         <strong><label for="x_card_code" class="control-label mb-1">Team ID</label></strong>
                                         <div class="input-group">
