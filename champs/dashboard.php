@@ -348,10 +348,10 @@ if (!$connection) {
                                     <div class="row m-0 row-group text-center border-top border-light-3">
 		   <div class="col-12 col-lg-4">
 		     <div class="p-3">
-             <small class="mb-0">My Region [<?php 
+             <strong><small class="mb-0">My Region [<?php 
              echo $_SESSION["Region"];
                
-               ?>]<span> <i class="fa fa-arrow-"></i></span></small>
+               ?>]<span> <i class="fa fa-arrow-"></i></span></small></strong>
 		       <h5 class="mb-0"><?php
           $sql =
               "SELECT COUNT(DateSigned) as sales FROM papdailysales where DateSigned=CURDATE() AND papdailysales.Region='".$_SESSION['Region']."'";
@@ -366,7 +366,7 @@ if (!$connection) {
 		   </div>
 		   <div class="col-12 col-lg-4">
 		     <div class="p-3">
-             <small class="mb-0"><span>Best Champ<i class="fa fa-arrow-"></i></span></small>
+             <strong><small class="mb-0"><span>Best Champ<i class="fa fa-arrow-"></i></span></small></strong>
 		       <h5 class="mb-0"> <?php
          $query = "SELECT Region,ChampName,Count(*) as bestchamp from papdailysales where DateSigned =CURDATE() group by Region,ChampName order by bestchamp DESC limit 1";
          $result = mysqli_query($connection, $query);
@@ -379,7 +379,7 @@ if (!$connection) {
 		   </div>
 		   <div class="col-12 col-lg-4">
 		     <div class="p-3">
-             <small class="mb-0">Signed<span> <i class="fa fa-arrow-"></i></span></small>
+        <strong><small class="mb-0">Signed<span> <i class="fa fa-arrow-"></i></span></small></strong>
 		     <b><h5 class="mb-0"> <?php
          $query =
              "SELECT COUNT(*) as myreg from papdailysales where DateSigned=CURDATE() and  ChampName='" .

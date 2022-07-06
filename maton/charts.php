@@ -163,7 +163,7 @@ if (isset($_POST["submit"])) {
         <tbody><tr>
         <td><div class="form-group"><div class="form-group has-success">
                                             <select data-placeholder="Choose a region..." class="standardSelect form-control" name="Region" tabindex="1" style="color:black; margin-top:35px;">
-                                            <option ><?php echo $all;?></option>
+                                            <option value="<?php echo $all;?>"><?php echo $all;?></option>
                                             <option value="G44">G44</option>
                                             <option value="ZMM">ZMM</option>
                                             <option value="G45S">G45S</option>
@@ -171,6 +171,9 @@ if (isset($_POST["submit"])) {
                                             <option value="R&M">R&M</option>
                                             <option value="LSM">LSM</option>
                                             <option value="KWT">KWT</option> 
+                                            <option value="HTR">HTR</option>
+                                            <option value="STN">STN</option>
+                                            <option value="MWK">MWK</option> 
                                             </select>
                                             </div>
                                             </div></td>
