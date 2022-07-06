@@ -175,7 +175,7 @@ if (isset($_POST["submit"])) {
                                                     <a href="#"><center><img class="rounded-circle" src="../images/avatar/profile.png" alt=""></center></a>
                                                 </div>
                         <div class="card-body card-block">
-                            <form action="" method="post" class="" autocomplete="off">
+                            <form action="" method="post" autocomplete="off">
                             <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
@@ -191,7 +191,7 @@ if (isset($_POST["submit"])) {
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                        <input type="text" id="username" name="LName" placeholder="Last Name" value="<?php echo $_SESSION['LName']?>" class="form-control" >
+                                        <input type="text" id="username" name="LName" placeholder="Last Name" value="<?php echo $_SESSION['LName']?>" readonly class="form-control" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -203,13 +203,13 @@ if (isset($_POST["submit"])) {
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                        <input type="password" id="password" name="password" placeholder="Current Password" class="form-control">
+                                        <input type="password" id="password" required name="password" placeholder="Current Password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                        <input type="password" id="password" name="newpass" placeholder="New Password" class="form-control">
+                                        <input type="password" id="password" required name="newpass" placeholder="New Password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-actions form-group"><button type="submit" name="submit" class="btn btn-warning btn-sm">Change Pass</button></div>
