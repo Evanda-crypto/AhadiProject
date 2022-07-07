@@ -180,15 +180,29 @@ else
                             <li><i class="fa fa-table"></i><a href="../htr_ip.php" style="color:black; font-size: 15px;">HTR</a></li></ul>
                     </li>
                     <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
-                    <li>
-                        <a href="../fill-report.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-list"></i>Fill Report </a>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tech Support</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-list"></i><a href="fill-report.php" style="color:black; font-size: 15px;">Fill Report</a></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="compiled_nats-reports.php" style="color:black; font-size: 15px;">Compiled Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="nats-graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
+                        </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Developers</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-inbox"></i><a href="../nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
-                            <li><i class="fa fa-inbox"></i><a href="../compiled_nats-reports.php" style="color:black; font-size: 15px;">Compiled Reports </a></li>
-                            <li><i class="fa fa-inbox"></i><a href="../nats-graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
+                        <li><i class="fa fa-list"></i><a href="../fill_developers_report.php" style="color:black; font-size: 15px;">Fill Report</a></li>
+                            <li><i class="fa fa-inbox"></i><a href="../view_developers_report.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="../compiled_developers_report.php" style="color:black; font-size: 15px;">Compiled Reports </a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Documentation</a>
+                        <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-list"></i><a href="../fill_documentation_report.php" style="color:black; font-size: 15px;">Fill Report</a></li>
+                            <li><i class="fa fa-inbox"></i><a href="../view_documentaion_report.php" style="color:black; font-size: 15px;">View Reports </a></li>
+                            <li><i class="fa fa-inbox"></i><a href="../compiled_documentaion_report.php" style="color:black; font-size: 15px;">Compiled Reports </a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
