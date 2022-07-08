@@ -97,6 +97,9 @@ include("../../config/config.php");
                     </li>     
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
                     <li>
+                        <a href="new_building_form.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>New Building </a>
+                    </li>
+                    <li>
                         <a href="view-champs.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>View Champs</a>
                     </li>
                     <li>

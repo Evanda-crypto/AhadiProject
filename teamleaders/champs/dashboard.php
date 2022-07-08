@@ -125,7 +125,6 @@ while ($row = mysqli_fetch_array($result)) {
 </head>
 
 <body style="background-color:#e1e1e1">
-
 <!-- Left Panel -->
 <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -155,6 +154,9 @@ while ($row = mysqli_fetch_array($result)) {
                     </li>
                     <li>
                     <li class="menu-title">BUILDINGS</li><!-- /.menu-title -->
+                    <li>
+                        <a href="new_building_form.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>New Building </a>
+                    </li>
                     <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>     
