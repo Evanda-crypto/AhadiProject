@@ -238,7 +238,7 @@ include("../config/config.php");
                                 <tbody>
                                 <?php
     
-    $sql="SELECT id,DAYNAME(reported_at) as dayn,
+    $sql="SELECT id,DAYNAME(reported_at) as dayn,Date(reported_at),
      group_concat(DISTINCT project_name ,'".'<br>'."' SEPARATOR ' ' ) AS project_name,
      group_concat(key_milestone ,'".'<br>'."' SEPARATOR ' ' ) AS key_milestone,
      group_concat(report_start_date ,'".'<br>'."' SEPARATOR ' ' ) AS report_start_date,
