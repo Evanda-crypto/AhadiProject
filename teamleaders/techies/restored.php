@@ -273,7 +273,18 @@ include("../../config/config.php");
                 <?php
                 
             }
-            ?>
+            ?><form method="POST" action="assign_multiple.php">
+            <div align="right"><div class="modal-footer"> <div class="form-group">
+                                                        <input id="teamid" name="teamid" type="text" class="form-control cc-exp" autofocus onkeyup="GetDetail(this.value)" value="<?php echo $_SESSION['Region']?>-"data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Team ID">
+                                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input id="members" name="members" type="number" class="form-control cc-exp" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;" required placeholder="Enter number of team members 2-3">
+                                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                    </div></p>
+                            <p align="right"> <input class="btn btn-danger" style="margin-left:20px;" type="submit" name="task" onClick="return confirm('Sure to assign selected tasks?')"  value="Assign Selected"></p></div></div>
+                           
                                 <table class="table table-striped" id="example">
                                     <thead>
                                         <tr>
@@ -286,6 +297,7 @@ include("../../config/config.php");
                      <th>Date Signed</th>
                      <th>Availability</th>
                      <th>Champs Comment</th>
+                     <th>Check</th>
                      <th>More</th>
                                      
                                          </tr>
@@ -310,9 +322,8 @@ include("../../config/config.php");
                                     <td><?php echo $row['updated_at']; ?></td>
                                     <td class="centered colorText"><?php echo $row['ClientAvailability']; ?></td>
                                     <td><?php echo $row['Note']; ?></td>
-                                    <td>
-                                    <button class="btn btn-warning" ><a href="assign-restored.php?client-id=<?php echo $row['ClientID']; ?>" class="text-bold">Assign Task</a></button>
-                                    </td>
+                                    <td><input type="checkbox" name="check[]" value="<?php echo $row['ClientID']?>"></td>
+                                    <td><button class="btn btn-warning" ><a href="assign-restored.php?client-id=<?php echo $row['ClientID']; ?>" class="text-bold">Assign Task</a></button></td>
                                 </tr>
                         <?php
 
@@ -321,6 +332,7 @@ include("../../config/config.php");
                         ?>
                                 </tbody>
                             </table>
+                        </form>
                         </div>
                     </div>
                     <!-- Modal -->
@@ -388,6 +400,50 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
   })
 })
+</script>
+
+<script>
+
+// onkeyup event will occur when the user
+// release the key and calls the function
+// assigned to this event
+function GetDetail(str) {
+  if (str.length == 0) {
+    document.getElementById("teamid").value = "";
+    return;
+  }
+  else {
+
+    // Creates a new XMLHttpRequest object
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+
+      // Defines a function to be called when
+      // the readyState property changes
+      if (this.readyState == 4 &&
+          this.status == 200) {
+        
+        // Typical action to be performed
+        // when the document is ready
+        var myObj = JSON.parse(this.responseText);
+
+        // Returns the response data as a
+        // string and store this array in
+        // a variable assign the value
+        // received to first name input field
+        
+        document.getElementById
+          ("members").value = myObj[0];
+      }
+    };
+
+    // xhttp.open("GET", "filename", true);
+    xmlhttp.open("GET", "retrieve.php?teamid=" + str, true);
+    
+    // Sends the request to the server
+    xmlhttp.send();
+  }
+}
 </script>
 </body>
 </html>

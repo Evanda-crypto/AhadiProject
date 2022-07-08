@@ -298,7 +298,7 @@ if(isset($_POST['submit'])){
                                         <form method="POST" action="" autocomplete="off">
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Team ID</label>
-                                                        <input id="teamid" name="teamid" type="tel" class="form-control cc-exp" autofocus onkeyup="GetDetail(this.value)" value="<?php echo $_SESSION['Region']?>-"data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Team ID">
+                                                        <input id="teamid" name="teamid" type="text" class="form-control cc-exp" autofocus onkeyup="GetDetail(this.value)" value="<?php echo $_SESSION['Region']?>-"data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Team ID">
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
 
