@@ -255,6 +255,19 @@ include("session.php");
                                                 <input id="cc-name" name="Day" type="date" value="<?php echo date('Y-m-d',strtotime("1 days"));?>" class="form-control cc-name valid" data-val="true" required autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
+                                            <div class="form-group">
+                                            <strong><label for="cc-number" class="control-label mb-1">Additional Info<span style="color: #FF0000" >*</span></label></strong>
+                                                <div class="form-group has-success">
+                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="Note" tabindex="1" required>
+                                            <option disabled selected> Choose an option</option>
+                                            <option value="8:00am to 10:00am">8:00am to 10:00am</option>
+                                            <option value="10:01am to 12:00pm">10:01am to 12:00pm</option>
+                                            <option value="12:01pm to 2:00pm">12:01pm to 2:00pm</option>
+                                            <option value="2:01pm to 4:00pm">2:01pm to 4:00pm</option>
+                                             <option value="4:01pm to 6:00pm">4:01pm to 6:00pm</option>
+                                              </select>
+                                            </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
@@ -403,15 +416,6 @@ include("session.php");
                                             <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">Description<span style="color: #FF0000" >*</span></label></strong>
                                             <input id="cc-number" name="bizdec" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Description"> 
-                                            </div>
-                                           <!-- <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Image<span style="color: #FF0000" >*</span></label>
-                                            <input id="cc-number" name="image" type="file" class="form-control cc-number identified visa" required> 
-                                            </div>-->
-                                            <div class="form-group">
-                                            <strong><label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label></strong>
-                                                <input id="cc-number" name="Note" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
                                                 <strong><span id="payment-button-amount">Submit</span></strong>

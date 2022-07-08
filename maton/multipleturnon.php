@@ -23,7 +23,7 @@ if (isset($_POST["turnon"])) {
         $data = json_decode($json, true);
         
         foreach ($rows as $dataarray) {
-            //get the employee details
+            //get the json data details
             $teamid = $dataarray["Team_ID"];
             $mac = $dataarray["Mac"];
             $bname = $dataarray["BuildingName"];
