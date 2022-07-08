@@ -175,9 +175,7 @@ include("../config/config.php");
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="name float-left"><?php echo $_SESSION[
-                 "FName"
-             ]; ?> <?php echo $_SESSION["LName"]; ?></span>
+                        <span class="name float-left"><?php echo $_SESSION["FName"]; ?> <?php echo $_SESSION["LName"]; ?></span>
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -237,14 +235,14 @@ include("../config/config.php");
                                 <?php
     
     $sql="SELECT dayname(reported_at) as dayn,Date(reported_at) as dates,
-    group_concat(DISTINCT project_name ) AS project,
-    group_concat(evaluation_period ) AS periods,
-    group_concat( key_milestone  ) AS key_milestone,
-    group_concat(completed_tasks  ) AS completed_tasks,
-    group_concat(ongoing_tasks ) AS ongoing_tasks,
-    group_concat( challenges  ) AS challenges,
-    group_concat(comments ) AS comments,
-    group_concat(developers  ) AS devs from developers_reports GROUP BY dayn,project_name,dates";
+    group_concat(DISTINCT project_name) AS project,
+    group_concat(evaluation_period ,'".'<br>'."' SEPARATOR ' ') AS periods,
+    group_concat( key_milestone ,'".'<br>'."' SEPARATOR ' ') AS key_milestone,
+    group_concat(completed_tasks  ,'".'<br>'."' SEPARATOR ' ') AS completed_tasks,
+    group_concat(ongoing_tasks ,'".'<br>'."' SEPARATOR ' ') AS ongoing_tasks,
+    group_concat( challenges  ,'".'<br>'."' SEPARATOR ' ') AS challenges,
+    group_concat(comments ,'".'<br>'."' SEPARATOR ' ') AS comments,
+    group_concat(developers  ,'".'<br>'."' SEPARATOR ' ') AS devs from developers_reports GROUP BY dayn,project_name,dates";
 $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
