@@ -216,7 +216,7 @@ include("../../../config/config.php");
                                 </thead>
                                 <tbody>
                                 <?php
-                        $query  = "SELECT papdailysales.PapStatus,papdailysales.ClientID,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,papdailysales.ChampName,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.ClientAvailability,papdailysales.AptLayout,papdailysales.DateSigned,papdailysales.Note from papdailysales LEFT JOIN 
+                        $query  = "SELECT papdailysales.PapStatus,papdailysales.ClientID,papdailysales.BuildingName,papdailysales.BuildingCode,papdailysales.Region,papdailysales.ChampName,papdailysales.ClientName,papdailysales.ClientContact,papdailysales.ClientAvailability,papdailysales.AptLayout,papdailysales.updated_at,papdailysales.Note from papdailysales LEFT JOIN 
                         papnotinstalled ON papnotinstalled.ClientID=papdailysales.ClientID WHERE papnotinstalled.ClientID is null order by papdailysales.DateSigned Desc";
                         $result  = mysqli_query($connection, $query);
 
@@ -230,7 +230,7 @@ include("../../../config/config.php");
                                     <td><?php echo $row['ChampName']; ?></td>
                                     <td><?php echo $row['ClientName']; ?></td>
                                     <td><?php echo $row['ClientContact']; ?></td>
-                                    <td><?php echo $row['DateSigned']; ?></td>
+                                    <td><?php echo $row['updated_at']; ?></td>
                                     <td><?php echo $row['ClientAvailability']; ?></td>
                                     <td><?php echo $row['Note']; ?></td>
                                   <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>

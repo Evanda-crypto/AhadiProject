@@ -72,7 +72,7 @@ include("../../config/config.php");
                         <a href="imported.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>Imported</a>
                     </li>
                     <li class="menu-title">BUILDINGS</li><!-- /.menu-title -->
-                    <li>
+                                        <li>
                         <a href="new_building_form.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>New Building </a>
                     </li>
                     <li>

@@ -294,7 +294,7 @@ include("../../config/config.php");
                                   </thead>
                                   <tbody>
 <?php
-                        $query  = "SELECT p.ClientID,p.ClientName,p.Apt,p.ClientContact,p.ClientAvailability,p.Note,p.BuildingName,p.BuildingCode,p.ChampName,p.DateSigned,p.PapStatus from 
+                        $query  = "SELECT p.ClientID,p.ClientName,p.Apt,p.ClientContact,p.ClientAvailability,p.Note,p.BuildingName,p.BuildingCode,p.ChampName,p.updated_at,p.PapStatus from 
                         papdailysales as p
                         WHERE p.PapStatus='Signed' and p.Region='".$_SESSION['Region']."'";
                         $result  = mysqli_query($connection, $query);
@@ -309,7 +309,7 @@ include("../../config/config.php");
                                     <td><?php echo $row['ChampName']; ?></td>
                                     <td><?php echo $row['ClientName']; ?></td>
                                     <td><?php echo $row['ClientContact']; ?></td>
-                                    <td><?php echo $row['DateSigned']; ?></td>
+                                    <td><?php echo $row['updated_at']; ?></td>
                                     <td class="centered colorText"><?php echo $row['ClientAvailability']; ?></td>
                                     <td><?php echo $row['Note']; ?></td>
                                     <td>
