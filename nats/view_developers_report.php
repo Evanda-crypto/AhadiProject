@@ -224,7 +224,7 @@ include("../config/config.php");
                                     <th>Day</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
-                                    <th>Period</th>
+                                    <th>Period(Days)</th>
                                     <th>Project Name</th>
                                     <th>Key Milestone</th>
                                     <th>Completed Tasks</th>

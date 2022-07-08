@@ -29,7 +29,7 @@ if (isset($_POST["submit"])) {
 
         if ($insert) {
             $_SESSION["success"] = "Report Submitted!";
-            header("Location: fill-report.php");
+            header("Location: fill_developers_report.php");
         } else {
             $_SESSION["status"] = "Please Fill the right details";
             header("Location: fill_developers_report.php");
