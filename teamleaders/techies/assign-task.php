@@ -287,7 +287,7 @@ include("../../config/config.php");
                                                         <input id="members" name="members" type="number" class="form-control cc-exp" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==1) return false;" required placeholder="Enter number of team members 2-3">
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div></p>
-                            <p align="right"> <input class="btn btn-danger" style="margin-left:20px;" type="submit" name="task" onClick="return confirm('Sure to assign selected tasks?')"  value="Assign Selected"></p></div></div>
+                            <p align="right"> <input class="btn btn-success" style="margin-left:20px;" type="submit" name="task" onClick="return confirm('Sure to assign selected tasks?')"  value="Assign Selected"></p></div></div>
                            
                                 <table class="table table-striped" id="example">
                                     <thead>
