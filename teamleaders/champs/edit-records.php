@@ -330,6 +330,19 @@ if ($result && $query) {
                                                 <input id="cc-name" name="Day" type="date" class="form-control cc-name valid" value="<?php echo $avail?>" data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
+                                            <div class="form-group">
+                                            <strong><label for="cc-number" class="control-label mb-1">Additional Info</label></strong>
+                                                <div class="form-group has-success">
+                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="note" tabindex="1" required>
+                                            <option disabled selected> Choose an option</option>
+                                            <option value="8:00am to 10:00am">8:00am to 10:00am</option>
+                                            <option value="10:01am to 12:00pm">10:01am to 12:00pm</option>
+                                            <option value="12:01pm to 2:00pm">12:01pm to 2:00pm</option>
+                                            <option value="2:01pm to 4:00pm">2:01pm to 4:00pm</option>
+                                             <option value="4:01pm to 6:00pm">4:01pm to 6:00pm</option>
+                                              </select>
+                                            </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
@@ -430,11 +443,6 @@ if ($result && $query) {
                                             <input class="form-control cc-number identified visa" data-val="true" value="<?php echo $Adults?>" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Adults" placeholder="<=13"> 
                                             </div>
                                             <div></div></div></div>
-                                            <div class="form-group">
-                                            <strong><label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label></strong>
-                                                <input id="cc-number" name="note" value="<?php echo $note?>" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                            </div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
