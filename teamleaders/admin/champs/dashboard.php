@@ -39,12 +39,10 @@ if (!$connection) {
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="60">
+    <meta http-equiv="refresh" content="300">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Dashboard</title>
-    
 
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
  
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
