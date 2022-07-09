@@ -374,31 +374,27 @@ table td {
   <thead>
     <tr>
       <th rowspan="2">Region</th>
-      <th colspan="3"><?php echo date("Y-m-d",strtotime("-3 days")); ?></th>
-      <th colspan="3"><?php echo date("Y-m-d",strtotime("-2 days")); ?></th>
-      <th colspan="3"><?php echo date("Y-m-d",strtotime("-1 days")); ?></th>
-      <th colspan="3"><?php echo date("Y-m-d"); ?></th>
+      <th colspan="2"><?php echo date("Y-m-d",strtotime("-3 days")); ?></th>
+      <th colspan="2"><?php echo date("Y-m-d",strtotime("-2 days")); ?></th>
+      <th colspan="2"><?php echo date("Y-m-d",strtotime("-1 days")); ?></th>
+      <th colspan="2"><?php echo date("Y-m-d"); ?></th>
     </tr>
     <tr>
       <th>Signed</th>
       <th>Installed</th>
-      <th>Turned On</th>
       <th>Signed</th>
       <th>Installed</th>
-      <th>Turned On</th>
       <th>Signed</th>
       <th>Installed</th>
-      <th>Turned On</th>
       <th>Signed</th>
       <th>Installed</th>
-      <th>Turned On</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>ZMM</td>
       <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='ZMM'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='ZMM'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -412,14 +408,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='ZMM'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='ZMM'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='ZMM'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -433,14 +422,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='ZMM'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='ZMM'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='ZMM'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -454,14 +436,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='ZMM'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=CURDATE() AND Region='ZMM'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=CURDATE() AND Region='ZMM'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -474,18 +449,11 @@ table td {
                                              echo $row['installed'];
                                               }
                                               ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=CURDATE() AND Region='ZMM'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
     </tr>
     <tr>
       <td>R&M</td>
       <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='R&M'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='R&M'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -499,14 +467,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='R&M'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='R&M'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='R&M'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -520,14 +481,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='R&M'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='R&M'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='R&M'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -541,14 +495,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='R&M'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=CURDATE() AND Region='R&M'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=CURDATE() AND Region='R&M'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -561,18 +508,11 @@ table td {
                                              echo $row['installed'];
                                               }
                                               ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=CURDATE() AND Region='R&M'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
     </tr>
     <tr>
       <td>G44</td>
       <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='G44'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='G44'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -586,14 +526,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='G44'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G44'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G44'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -607,14 +540,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G44'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G44'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G44'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -628,14 +554,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G44'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=CURDATE() AND Region='G44'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=CURDATE() AND Region='G44'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -648,18 +567,11 @@ table td {
                                              echo $row['installed'];
                                               }
                                               ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=CURDATE() AND Region='G44'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
     </tr>
     <tr>
       <td>G45S</td>
       <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='G45S'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='G45S'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -673,14 +585,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='G45S'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G45S'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G45S'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -694,14 +599,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G45S'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G45S'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G45S'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -715,14 +613,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G45S'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=CURDATE() AND Region='G45S'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=CURDATE() AND Region='G45S'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -735,18 +626,11 @@ table td {
                                              echo $row['installed'];
                                               }
                                               ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=CURDATE() AND Region='G45S'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
     </tr>
     <tr>
       <td>G45N</td>
       <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='G45N'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='G45N'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -760,14 +644,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='G45N'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G45N'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G45N'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -781,14 +658,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='G45N'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G45N'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G45N'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -802,14 +672,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='G45N'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=CURDATE() AND Region='G45N'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=CURDATE() AND Region='G45N'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -822,18 +685,11 @@ table td {
                                              echo $row['installed'];
                                               }
                                               ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=CURDATE() AND Region='G45N'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
     </tr>
     <tr>
       <td>KWT</td>
       <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='KWT'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='KWT'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -847,14 +703,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='KWT'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='KWT'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='KWT'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -868,14 +717,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='KWT'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='KWT'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='KWT'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -889,14 +731,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='KWT'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=CURDATE() AND Region='KWT'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=CURDATE() AND Region='KWT'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -909,18 +744,11 @@ table td {
                                              echo $row['installed'];
                                               }
                                               ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=CURDATE() AND Region='KWT'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
     </tr>
     <tr>
       <td>LSM</td>
       <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='LSM'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='LSM'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -934,14 +762,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='LSM'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='LSM'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='LSM'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -955,14 +776,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='LSM'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='LSM'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='LSM'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -976,14 +790,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='LSM'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=CURDATE() AND Region='LSM'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=CURDATE() AND Region='LSM'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -996,18 +803,11 @@ table td {
                                              echo $row['installed'];
                                               }
                                               ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=CURDATE() AND Region='LSM'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
     </tr>
     <tr>
       <td>HTR</td>
       <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='HTR'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='HTR'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -1021,14 +821,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 3 DAY) AND Region='HTR'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='HTR'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='HTR'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -1042,14 +835,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 2 DAY) AND Region='HTR'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='HTR'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='HTR'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -1063,14 +849,7 @@ table td {
                                               }
                                               ?></td>
       <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND Region='HTR'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE DateSigned=CURDATE() AND Region='HTR'";
+                                             $query="SELECT COUNT(*) as signed from papdailysales WHERE ClientAvailability=CURDATE() AND Region='HTR'";
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['signed'];
@@ -1081,13 +860,6 @@ table td {
                                              $data=mysqli_query($connection,$query);
                                              while($row=mysqli_fetch_assoc($data)){
                                              echo $row['installed'];
-                                              }
-                                              ?></td>
-      <td><?php
-                                             $query="SELECT COUNT(*) as turnedon from turnedonpap WHERE DateTurnedOn=CURDATE() AND Region='HTR'";
-                                             $data=mysqli_query($connection,$query);
-                                             while($row=mysqli_fetch_assoc($data)){
-                                             echo $row['turnedon'];
                                               }
                                               ?></td>
     </tr>
@@ -1147,7 +919,7 @@ table td {
     <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
-    order: [[11, 'desc']],
+    order: [[8, 'desc']],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
