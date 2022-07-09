@@ -492,7 +492,7 @@ maxdate= year +"-" + month + "-" + todate;
  var todayDate= new Date();
  var month= todayDate.getMonth() + 1;
  var year= todayDate.getFullYear();
- var todate=todayDate.getDate() + 6;
+ var todate=todayDate.getDate() + 7;
 if(todate<10){
   todate= "0"+ todate;
 }
