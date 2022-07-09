@@ -4,6 +4,7 @@ include("../config/config.php");
 include("session.php");
 
 ?>
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -12,7 +13,7 @@ include("session.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Business report</title>
+    <title>Residential Report</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -40,7 +41,7 @@ include("session.php");
 </head>
 <body style="background-color:#e1e1e1">
  <!-- Left Panel -->
- <aside id="left-panel" class="left-panel">
+<aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -52,16 +53,18 @@ include("session.php");
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="residential.php">Residential Report</a></li>
                             <li><i class="fa fa-table"></i><a href="business.php">Business Report</a></li>
+                            <li><i class="fa fa-table"></i><a href="jacaranda.php">Jacaranda Report</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APs</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>PANEL APS</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="not-installed.php">Not Installed</a></li>
                             <li><i class="fa fa-table"></i><a href="to-restore.php">To Restore</a></li>
+                            <li><i class="fa fa-table"></i><a href="restored.php">Restored</a></li>
                             <li><i class="fa fa-table"></i><a href="turned-on.php">Turned On</a></li>
-                            <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
                             <li><i class="fa fa-table"></i><a href="retrieved.php">Retrieved</a></li>
+                            <li><i class="fa fa-table"></i><a href="all-paps.php">All Paps</a></li>
                         </ul>
                     </li>
                     <li>
@@ -141,10 +144,10 @@ include("session.php");
                                 <div id="pay-invoice">
                                     <div class="card-body">
                                         <div class="card-title">
-                                            <h3 class="text-center">Business Report</h3>
+                                            <h3 class="text-center">Residential Report</h3>
                                         </div>
                                         <hr>
-                                        <form  method="post" action="bizzdetails.php">
+                                        <form  method="post" action="jrcsubmit.php">
                                         <?php
             if(isset($_SESSION['status'])){
                 ?>
@@ -166,20 +169,20 @@ include("session.php");
             }
             ?>
                                         <div class="form-group has-success">
-                                                <strong><label for="cc-name" class="control-label mb-1">DateSigned<span style="color: #FF0000" >*</span></label></strong>
+        <strong><label for="cc-name" class="control-label mb-1">DateSigned<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="datesigned" name="DateSigned" type="date" class="form-control cc-name valid" data-val="true" value="<?php echo date("Y-m-d"); ?>" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group has-success">
-                                            <strong><label for="cc-name" class="control-label mb-1">Champ</label></strong>
+                                            <strong>  <label for="cc-name" class="control-label mb-1">Champ</label></strong>
                                                 <input id="" name="ChampName" type="text" class="form-control cc-name valid" data-val="true" value="<?php echo $_SESSION["FName"]; ?> <?php echo $_SESSION["LName"]; ?>" name="ChampName" placeholder="Champ" readonly data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                         <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                    <strong> <label for="cc-exp" class="control-label mb-1">Building Code<span style="color: #FF0000" >*</span></label></strong>
-                                                        <input id="bcode" onkeyup="GetDetail(this.value)" placeholder="Search in 'BUILDING' to copy the EXACT building code here" name="BuildingCode" type="text" class="form-control cc-exp"   placeholder="Building Name" required>
+                                                    <strong><label for="cc-exp" class="control-label mb-1">Building Code<span style="color: #FF0000" >*</span></label></strong>
+                                                        <input id="bcode" onkeyup="GetDetail(this.value)" placeholder="BuildingCode : Format eKENRJARA1234" name="BuildingCode" pattern="[e]{1}[A-Z]{8}[0-9]{4}" type="text" class="form-control cc-exp"   placeholder="Building Name" required>
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
                                                 </div>
@@ -191,14 +194,13 @@ include("session.php");
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                            <strong><label for="cc-payment" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label></strong>
-                                                <input id="region" name="Region" placeholder="Region" type="text" class="form-control" required>
+                                            <strong> <label for="cc-payment" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label></strong>
+                                                <input id="region" name="Region" placeholder="Region" value="KWT" readonly type="text" class="form-control" required>
                                             </div>
-
                                             <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">Floor<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Floor..." class="standardSelect form-control" name="floor" tabindex="1" required>
+                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="floor" tabindex="1" required>
                                             <option value="" disabled selected>'0' is ground; '-' is Basement</option>
                                             <option value="-1">-1</option> 
                                             <option value="0">0</option>  
@@ -214,22 +216,21 @@ include("session.php");
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                            <strong><label for="cc-number" class="control-label mb-1">Business Name<span style="color: #FF0000" >*</span></label></strong>
-                                            <input id="cc-number" name="bizname" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Business Name" required> 
-                                            <div class="form-group">
-                                            <strong><label for="cc-number" class="control-label mb-1">Venue<span style="color: #FF0000" >*</span></label></strong>
-                                            <input id="cc-number" name="venue" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available" required> 
-                                            </div>
+                                            <strong><label for="cc-number" class="control-label mb-1">APT#<span style="color: #FF0000" >*</span></label></strong>
+                                            <input id="cc-number" name="Apt" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
                                             </div>
                                             <div class="form-group">
-                                            <strong><label for="cc-number" class="control-label mb-1">Layout<span style="color: #FF0000" >*</span></label></strong>
+                                            <strong><label for="cc-number" class="control-label mb-1">APT Layout<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Layout..." class="standardSelect form-control" name="bizlayout" tabindex="1" required>
-                                            <option disabled selected> Select Layout</option>
-                                            <option value="Single S(<20sqm)">Single S(<20sqm)</option>  
-                                            <option value="Single M(20-60sqm)">Single M(20-60sqm)</option>  
-                                            <option value="Single L(>60sqm)">Single L(>60sqm)</option>
-                                            <option value="Muilti-Rooms">Multi-Rooms</option>
+                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="aptlayout" tabindex="1" required>
+                                            <option disabled selected> Apartment Layout</option>
+                                            <option value="Single">Single</option>
+                                            <option value="Double">Double</option>
+                                            <option value="Bedsitter">Bedsitter</option>
+                                            <option value="1 BR">1 BR</option>
+                                             <option value="2 BR">2 BR</option>
+                                            <option value="3 BR">3 BR</option>
+                                            <option value="4 BR and above">4 BR and above</option> 
                                               </select>
                                             </div>
                                             </div>
@@ -237,7 +238,7 @@ include("session.php");
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                     <strong><label for="cc-exp" class="control-label mb-1">First Name<span style="color: #FF0000" >*</span></label></strong>
-                                                        <input id="cc-exp" name="ClientName" required type="text" class="form-control cc-exp"  data-val="true" placeholder="First Name"
+                                                        <input id="cc-exp" name="ClientName" type="text" required class="form-control cc-exp"  data-val="true" placeholder="First Name"
                                                             autocomplete="cc-exp">
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
@@ -251,8 +252,8 @@ include("session.php");
                                                 </div>
                                             </div>
                                             <div class="form-group has-success">
-                                            <strong><label for="cc-name" class="control-label mb-1">Availability<span style="color: #FF0000" >*</span></label></strong>
-                                                <input id="avail" name="Day" type="date" value="<?php echo date('Y-m-d',strtotime("1 days"));?>" class="form-control cc-name valid" data-val="true" required autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
+                                            <strong> <label for="cc-name" class="control-label mb-1">Availability<span style="color: #FF0000" >*</span></label></strong>
+                                                <input id="avail" name="Day" type="date" class="form-control cc-name valid" data-val="true" value="<?php echo date('Y-m-d',strtotime("1 days"));?>" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
@@ -281,7 +282,7 @@ include("session.php");
                                                 <div class="col-6">
                                                 <strong><label for="x_card_code" class="control-label mb-1">Phone Alt<span style="color: #FF0000" >*</span></label></strong>
                                                     <div class="input-group">
-                                                        <input id="x_card_code" name="phonealt" type="tel" pattern="[0-9]{10}" class="form-control cc-cvc" placeholder="Phone Alt 07XXXXXXXX"  data-val="true" 
+                                                        <input id="x_card_code" name="altcontact" type="tel" pattern="[0-9]{10}" class="form-control cc-cvc" placeholder="Phone Alt 07XXXXXXXX"  data-val="true" 
                                                             data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
                                                     </div>
                                                 </div>
@@ -297,7 +298,7 @@ include("session.php");
                                             <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">Gender<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Gender..." class="standardSelect form-control" name="gender" tabindex="1" required>
+                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="gender" tabindex="1" required>
                                             <option disabled selected> Select Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -306,7 +307,7 @@ include("session.php");
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                            <strong><label for="cc-number" class="control-label mb-1">Age<span style="color: #FF0000" >*</span></label></strong>
+                                            <strong> <label for="cc-number" class="control-label mb-1">Age<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
                                             <select  class="standardSelect form-control" name="age" tabindex="1" required>
                                             <option disabled selected> Select Age</option>
@@ -320,103 +321,39 @@ include("session.php");
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                            <strong><label for="cc-number" class="control-label mb-1">Role<span style="color: #FF0000" >*</span></label></strong>
-                                                <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Role..." class="standardSelect form-control" name="role" tabindex="1" required>
-                                            <option value="" disabled selected>Role</option>
-                                            <option value="Owner">Owner</option>  
-                                            <option value="Manager">Manager</option>  
-                                            <option value="Worker">Worker</option> 
-                                              </select>
+                                            <strong><label for="cc-number" class="control-label mb-1">Current ISP Package</label></strong>
+                                            <input id="cc-number" name="package" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
                                             </div>
+                                            <div class="form-group">
+                                            <strong><label for="cc-number" class="control-label mb-1">Occupation</label></strong>
+                                            <input id="cc-number" name="occupation" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
                                             </div>
                                             <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">Birthday</label></strong>
                                             <input id="min" name="Birthday" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Birthday"> 
                                             </div>
+                                            <div class="row">
+                                                <div class="col-6">
                                             <div class="form-group">
-                                            <strong><label for="cc-number" class="control-label mb-1">Current ISP Package</label></strong>
-                                            <input id="cc-number" name="package" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Enter N/A if not available"> 
-                                            </div>
+                                            <strong> <label for="cc-number" class="control-label mb-1">Household Size</label></strong>
+                                            <input class="form-control cc-number identified visa" data-val="true" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Householdsize" placeholder="Enter total number of peolpe living in the apartment"> 
+                                            </div></div>
+                                            <div class="col-6">
                                             <div class="form-group">
-                                            <strong><label for="cc-number" class="control-label mb-1">Category<span style="color: #FF0000" >*</span></label></strong>
-                                                <div class="form-group has-success">
-                                            
-                                                <select data-placeholder="Choose a Category..." class="standardSelect form-control" tabindex="1" name="bizcat" required>
-                                                <optgroup label="F-Food">
-                            <option  value="F-Food (Grocery (FG))">Grocery (FG)</option>  
-                              <option value="F-Food (Butchery (FU))">Butchery (FU)</option>
-                              <option value="F-Food (Bakery (FB))">Bakery (FB)</option>   
-                              <option value="F-Food (Food Joints (FJ))">Food Joints (FJ)</option>
-                             <option value="F-Food (Restaurant (FR))">Restaurant (FR)</option>
-                             <option value="F-Food (Coffee Shop (FC))">Coffee Shop (FC)</option>  
-                             <option value="F-Food (Milk ATM (FM))">Milk ATM (FM)</option>
-                            </optgroup>
-                             <optgroup label="S-Shop">
-                             <option  value="S-Shop (Convenient Stores (SC))">Convenient Stores (SC)</option>  
-                              <option value="S-Shop (Supermarket (SS))">Supermarket (SS)</option>
-                              <option value="S-Shop (Computing & Electronics (SE))">Computing & Electronics (SE)</option>   
-                              <option value="S-Shop (Electrical Appliance (SA))">Electrical Appliance (SA)</option>
-                             <option value="S-Shop (Home & Living (SH))">Home & Living (SH)</option>
-                             <option value="S-Shop (Furniture (SF))">Furniture (SF)</option>  
-                             <option value="S-Shop (Fashion & Apparels (SP))">Fashion & Apparels (SP)</option>
-                             <option value="S-Shop (Audio Video & Books (SV))">Audio Video & Books (SV)</option>
-                             <option value="S-Shop (Gifts & Crafts (SG))">Gifts & Crafts (SG)</option>
-                             <option value="S-Shop (Automobile (SU))">Automobile (SU)</option>  
-                             <option value="S-Shop (Real Estate(SR))">Real Estate(SR)</option>
-                             <option value="S-Shop (Hardware (SW))">Hardware (SW)</option>
-                            </optgroup>
-                            <optgroup label="V-Life Services">
-                            <option  value="V-LifeServices (Bank (VB))">Bank (VB)</option>  
-                            <option value="V-LifeServices (ATM (VA))">ATM (VA)</option>
-                            <option value="V-LifeServices (Salon & Spa (VS))">Salon & Spa (VS)</option>   
-                            <option value="V-LifeServices (Barbershop (VR))">Barbershop (VR)Electrical Appliance (SA)</option>
-                            <option value="V-LifeServices (Cyber Cafe (VC))">Cyber Cafe (VC)</option>
-                            <option value="V-LifeServices (Baby Care (VY))">Baby Care (VY)Furniture (SF)</option>  
-                            <option value="V-LifeServices (Church (VH))">Church (VH)</option>
-                            <option value="V-LifeServices (Garage (VG))">Garage (VG)</option>
-                            <option value="V-LifeServices (Cinema (VI))">Cinema (VI)</option>
-                            <option value="V-LifeServices (Police Station (VP))">Police Station (VP)</option>  
-                            <option value="V-LifeServices (Public Toilet (VT))">Public Toilet (VT)</option>
-                            <option value="V-LifeServices (Law Firm(VL))">Law Firm(VL)</option>
-                            <option value="V-LifeServices (Laudry(VD))">Laudry(VD)</option>
-                            </optgroup>
-                            <optgroup label="E-Education">
-                            <option  value="E-Education (Kindergarten (EK))">Kindergarten (EK)</option>  
-                              <option value="E-Education (Primary School (EP))">Primary School (EP)</option>
-                              <option value="E-Education (Training Center (ET))">Training Center (ET)</option>   
-                            </optgroup>
-                            <optgroup label="H-Health">
-                            <option  value="H-HealthE-Education (Chemist (HC))">Chemist (HC)</option>  
-                              <option value="H-Health (Pharmacy (HP))">Pharmacy (HP)</option>
-                              <option value="H-Health (Clinic (HL))">Clinic (HL)</option>
-                              <option  value="H-Health (Dispensary (HD))">Dispensary (HD)</option>  
-                              <option value="H-Health (Hospital (HH))">Hospital (HH)</option>
-                            </optgroup>
-                            <optgroup label="N-Nightlife">
-                            <option value="N-Nightlife (Pub (NP))">Pub (NP)</option>
-                              <option value="N-Nightlife (Bar (NB))">Bar (NB)</option>
-                              <option  value="N-Nightlife (Dwelling Zone (ND))">Dwelling Zone (ND)</option>  
-                              <option value="N-Nightlife (Club (NC))">Club (NC)</option>
-                            </optgroup>
-                            <optgroup label="L-Lodging">
-                            <option value="L-Lodging (Hotel (LH))">Hotel (LH)</option>
-                              <option value="L-Lodging (Motel (LM))">Motel (LM)</option>
-                              <option  value="L-Lodging (Guesthouse (LG))">Guesthouse (LG)</option>  
-                            </optgroup>
-                            <optgroup label="T-Transportation">
-                            <option value="T-Transportation (Gas Station (TG))">Gas Station (TG)</option>
-                              <option value="T-Transportation (Matatu Stop (TM))">Matatu Stop (TM)</option>
-                              <option  value="T-Transportation (Boda-Boda Station (TB))">Boda-Boda Station (TB)</option>  
-                              <option value="T-Transportation (Filling Station(TF))">Filling Station(TF)</option>
-                            </optgroup>
-                            </select>
-                             </div>
-                              </div>
+                                            <strong><label for="cc-number" class="control-label mb-1">Children</label></strong>
+                                            <input class="form-control cc-number identified visa" data-val="true" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Children" placeholder="<=12"> 
+                                            </div></div></div>
+                                            <div class="row">
+                                                <div class="col-6">
                                             <div class="form-group">
-                                            <strong><label for="cc-number" class="control-label mb-1">Description<span style="color: #FF0000" >*</span></label></strong>
-                                            <input id="cc-number" name="bizdec" type="text" class="form-control cc-number identified visa" maxlength="40" data-val="true" required placeholder="Description"> 
-                                            </div>
+                                            <strong><label for="cc-number" class="control-label mb-1">Teengers</label></strong>
+                                            <input class="form-control cc-number identified visa" data-val="true" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Teenagers" placeholder="13-18"> 
+                                            </div></div>
+                                            <div class="col-6">
+                                            <div class="form-group">
+                                            <strong><label for="cc-number" class="control-label mb-1">Adults</label></strong>
+                                            <input class="form-control cc-number identified visa" data-val="true" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Adults" placeholder="<=13"> 
+                                            </div></div></div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
                                                 <strong><span id="payment-button-amount">Submit</span></strong>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
@@ -449,12 +386,11 @@ include("session.php");
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/lib/chosen/chosen.jquery.min.js"></script>
-
 <script>
     jQuery(document).ready(function() {
         jQuery(".standardSelect").chosen({
             disable_search_threshold: 10,
-            no_results_text: "Oops, nothing matches",
+            no_results_text: "Oops, nothing found!",
             width: "100%"
         });
     });
@@ -502,6 +438,7 @@ if(month<10){
 maxdate= year +"-" + month + "-" + todate;
  document.getElementById("avail").setAttribute("max",maxdate);
  </script>
+
 <script>
 
 // onkeyup event will occur when the user
@@ -540,56 +477,6 @@ function GetDetail(str) {
         // last name input field
         document.getElementById(
           "region").value = myObj[1];
-      }
-    };
-
-    // xhttp.open("GET", "filename", true);
-    xmlhttp.open("GET", "retrieve.php?bcode=" + str, true);
-    
-    // Sends the request to the server
-    xmlhttp.send();
-  }
-}
-</script>
-
-<script>
-
-// onkeyup event will occur when the user
-// release the key and calls the function
-// assigned to this event
-function GetDetails(str) {
-  if (str.length == 0) {
-    document.getElementById("bnamebiz").value = "";
-    document.getElementById("regionbiz").value = "";
-    return;
-  }
-  else {
-
-    // Creates a new XMLHttpRequest object
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-
-      // Defines a function to be called when
-      // the readyState property changes
-      if (this.readyState == 4 &&
-          this.status == 200) {
-        
-        // Typical action to be performed
-        // when the document is ready
-        var myObj = JSON.parse(this.responseText);
-
-        // Returns the response data as a
-        // string and store this array in
-        // a variable assign the value
-        // received to first name input field
-        
-        document.getElementById
-          ("bnamebiz").value = myObj[0];
-        
-        // Assign the value received to
-        // last name input field
-        document.getElementById(
-          "regionbiz").value = myObj[1];
       }
     };
 

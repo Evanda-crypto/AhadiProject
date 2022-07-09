@@ -171,7 +171,11 @@ include("../config/config.php");
             }
             ?>
             <form method="POST" action="multipleturnon.php">
-            <div align="right"><div class="modal-footer">  <p align="right"> <input class="btn btn-success" type="submit" name="turnon" onClick="return confirm('Sure to change the status of the selected records to Turned On?')"  value="Turn On Selected"></p></div></div>
+            <div align="right"><div class="modal-footer">
+            <div class="form-group"><input id="date" name="date" type="date" class="form-control cc-exp" autofocus value="<?php echo date("Y-m-d"); ?>" data-val="true" required>
+                                    <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                    </div>
+                  <p align="right"> <input class="btn btn-success" type="submit" name="turnon" onClick="return confirm('Sure to change the status of the selected records to Turned On?')"  value="Turn On Selected"></p></div></div>
                             <table class="table table-bordered table-striped" id="example">
                                 <thead>
                                     <tr>
@@ -274,5 +278,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
   })
 })
 </script>
+<script>
+ var todayDate= new Date();
+ var month= todayDate.getMonth() + 1;
+ var year= todayDate.getFullYear();
+ var todate=todayDate.getDate();
+if(todate<10){
+  todate= "0"+ todate;
+}
+if(month<10){
+  month= "0"+ month;
+}
+maxdate= year +"-" + month + "-" + todate;
+ document.getElementById("date").setAttribute("max",maxdate);
+ </script>
 </body>
 </html>

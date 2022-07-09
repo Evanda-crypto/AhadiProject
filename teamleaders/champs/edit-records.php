@@ -65,7 +65,7 @@ $upd=mysqli_query($connection,$query);
 $sql="update papdailysales set ClientID=$id,CurrentPackage='$CurrISP',ClientName='$ClientName',ClientContact='$ClientContact'
 ,ClientGender='$ClientGender',ClientAge='$ClientAge',ClientOccupation='$ClientOccupation',ClientAvailability='$ClientAvailability',Region='$Region',BuildingName='$BuildingName',BuildingCode='$BuildingCode',Apt='$Apt'
 ,Floor='$Floor',AptLayout='$Layout',HouseholdSize='$HouseholdSize',Children='$Children',Teenagers='$Teenagers',Adults='$Adults',Birthday='$Birthday',ClientWhatsApp='$ClientWhatsApp',
-PhoneAlt='$PhoneAlt',Email='$email' where ClientID=$id";
+PhoneAlt='$PhoneAlt',Email='$email',Note='$note' where ClientID=$id";
 
 $result=mysqli_query($connection,$sql);
 if ($result && $query) {

@@ -56,6 +56,7 @@ include("../config/config.php");
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="residential.php">Residential Report</a></li>
                             <li><i class="fa fa-table"></i><a href="business.php">Business Report</a></li>
+                            <li><i class="fa fa-table"></i><a href="jacaranda.php">Jacaranda Report</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -177,27 +178,24 @@ include("../config/config.php");
                                  <table class="table table-bordered table-striped" id="example">
                                     <thead>
                                         <tr>
-                                        <th class="th-sm">Restore
+                                        <th class="th-sm">Client
       </th>
-      <th class="th-sm">Client Name
+      <th class="th-sm">Contact
       </th>
-      <th class="th-sm">Building Name
+      <th class="th-sm">Building
       </th>
     
                                       </tr>
                                   </thead>
                                   <tbody>
                                   <?php
-                        $query  = "SELECT ClientID,ClientName,BuildingName,BuildingCode,Region,Floor,DateSigned,Reason,Contact from papnotinstalled WHERE ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
+                        $query  = "SELECT ClientID,ClientName,BuildingName,BuildingCode,Contact from papnotinstalled WHERE ChampName='".$_SESSION['FName']." ".$_SESSION['LName']."'";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                                 <tr>
-                                <td>
-                                    <button class="btn btn-warning" ><a href="restore.php?clientid=<?php echo $row['ClientID']; ?> " onClick="return confirm('Sure to restore <?php  echo $row['ClientName']; ?> as pap client  again?')">Restore</a></button>
-                                    </td>
-                                    
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getrestituted.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
+                                <td><a data-toggle="modal" data-target="#mediumModal" data-href="getrestituted.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getrestituted.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['Contact']; ?></a></td>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getrestituted.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
                                    
                                 </tr>

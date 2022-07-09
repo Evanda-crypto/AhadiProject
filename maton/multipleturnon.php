@@ -7,7 +7,9 @@ if (isset($_POST["turnon"])) {
         $all_ids = $_POST["check"];
         $extract_id = implode(",", $all_ids);
 
-        $sql = "SELECT i.Team_ID,Upper(i.MacAddress) as Mac,CURDATE() as DateTurnedOn,'Turned On' as PapStatus,p.ChampName,p.ClientName,p.ClientID,p.ClientContact,
+        $date = $_POST['date'];
+
+        $sql = "SELECT i.Team_ID,Upper(i.MacAddress) as Mac,'".$date."' as DateTurnedOn,'Turned On' as PapStatus,p.ChampName,p.ClientName,p.ClientID,p.ClientContact,
         p.BuildingName,p.BuildingCode,p.Region FROM papinstalled as i LEFT JOIN papdailysales as p USING(ClientID) where i.ClientID IN ($extract_id)";
         $result = mysqli_query($connection, $sql);
         $rows=array();

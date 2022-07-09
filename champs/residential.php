@@ -53,6 +53,7 @@ include("session.php");
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="residential.php">Residential Report</a></li>
                             <li><i class="fa fa-table"></i><a href="business.php">Business Report</a></li>
+                            <li><i class="fa fa-table"></i><a href="jacaranda.php">Jacaranda Report</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -252,7 +253,7 @@ include("session.php");
                                             </div>
                                             <div class="form-group has-success">
                                             <strong> <label for="cc-name" class="control-label mb-1">Availability<span style="color: #FF0000" >*</span></label></strong>
-                                                <input id="cc-name" name="Day" type="date" class="form-control cc-name valid" data-val="true" value="<?php echo date('Y-m-d',strtotime("1 days"));?>" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
+                                                <input id="avail" name="Day" type="date" class="form-control cc-name valid" data-val="true" value="<?php echo date('Y-m-d',strtotime("1 days"));?>" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
@@ -406,7 +407,7 @@ if(month<10){
   month= "0"+ month;
 }
  mindate= year +"-" + month + "-" + todate;
- document.getElementById("cc-name").setAttribute("min",mindate);
+ document.getElementById("avail").setAttribute("min",mindate);
  </script>
 </body>
 <script>
@@ -423,12 +424,11 @@ if(month<10){
 maxdate= year +"-" + month + "-" + todate;
  document.getElementById("datesigned").setAttribute("max",maxdate);
  </script>
-
-<script>
+ <script>
  var todayDate= new Date();
  var month= todayDate.getMonth() + 1;
  var year= todayDate.getFullYear();
- var todate=todayDate.getDate();
+ var todate=todayDate.getDate() + 6;
 if(todate<10){
   todate= "0"+ todate;
 }
@@ -436,7 +436,7 @@ if(month<10){
   month= "0"+ month;
 }
 maxdate= year +"-" + month + "-" + todate;
- document.getElementById("min").setAttribute("max",maxdate);
+ document.getElementById("avail").setAttribute("max",maxdate);
  </script>
 
 <script>
@@ -477,56 +477,6 @@ function GetDetail(str) {
         // last name input field
         document.getElementById(
           "region").value = myObj[1];
-      }
-    };
-
-    // xhttp.open("GET", "filename", true);
-    xmlhttp.open("GET", "retrieve.php?bcode=" + str, true);
-    
-    // Sends the request to the server
-    xmlhttp.send();
-  }
-}
-</script>
-
-<script>
-
-// onkeyup event will occur when the user
-// release the key and calls the function
-// assigned to this event
-function GetDetails(str) {
-  if (str.length == 0) {
-    document.getElementById("bnamebiz").value = "";
-    document.getElementById("regionbiz").value = "";
-    return;
-  }
-  else {
-
-    // Creates a new XMLHttpRequest object
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-
-      // Defines a function to be called when
-      // the readyState property changes
-      if (this.readyState == 4 &&
-          this.status == 200) {
-        
-        // Typical action to be performed
-        // when the document is ready
-        var myObj = JSON.parse(this.responseText);
-
-        // Returns the response data as a
-        // string and store this array in
-        // a variable assign the value
-        // received to first name input field
-        
-        document.getElementById
-          ("bnamebiz").value = myObj[0];
-        
-        // Assign the value received to
-        // last name input field
-        document.getElementById(
-          "regionbiz").value = myObj[1];
       }
     };
 

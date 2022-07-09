@@ -269,10 +269,6 @@ $contact=$row['ClientContact'];
                                                 <input id="dateinstalled" name="dateinstalled" type="date" class="form-control cc-name valid" data-val="true" value="<?php echo date("Y-m-d"); ?>" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
-                                           <!-- <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">Image<span style="color: #FF0000" >*</span></label>
-                                            <input id="cc-number" name="image" type="file" class="form-control cc-number identified visa" > 
-                                            </div>-->
                                             <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="cc-number" name="note" type="text" class="form-control cc-number identified visa" maxlength="40"  required placeholder="Suggestions/Observations/Comments">
@@ -319,20 +315,6 @@ $contact=$row['ClientContact'];
         });
     });
 </script>
-<script>
- var todayDate= new Date();
- var month= todayDate.getMonth() + 1;
- var year= todayDate.getFullYear();
- var todate=todayDate.getDate();
-if(todate<10){
-  todate= "0"+ todate;
-}
-if(month<10){
-  month= "0"+ month;
-}
- mindate= year +"-" + month + "-" + todate;
- document.getElementById("cc-name").setAttribute("min",mindate);
- </script>
 </body>
 <script>
  var todayDate= new Date();
@@ -347,21 +329,6 @@ if(month<10){
 }
 maxdate= year +"-" + month + "-" + todate;
  document.getElementById("dateinstalled").setAttribute("max",maxdate);
- </script>
-
-<script>
- var todayDate= new Date();
- var month= todayDate.getMonth() + 1;
- var year= todayDate.getFullYear();
- var todate=todayDate.getDate();
-if(todate<10){
-  todate= "0"+ todate;
-}
-if(month<10){
-  month= "0"+ month;
-}
-maxdate= year +"-" + month + "-" + todate;
- document.getElementById("min").setAttribute("max",maxdate);
  </script>
 </body>
 </html>

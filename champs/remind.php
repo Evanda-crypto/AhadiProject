@@ -98,6 +98,7 @@ else
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="residential.php">Residential Report</a></li>
                             <li><i class="fa fa-table"></i><a href="business.php">Business Report</a></li>
+                            <li><i class="fa fa-table"></i><a href="jacaranda.php">Jacaranda Report</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
