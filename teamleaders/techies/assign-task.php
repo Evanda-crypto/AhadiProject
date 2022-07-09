@@ -58,6 +58,10 @@ include("../../config/config.php");
 .today{
     color:red;
 }
+input.ch1{
+   width: 17px;
+   height: 17px;
+}
 </style>
 </head>
 <body style="background-color:#e1e1e1">
@@ -326,7 +330,7 @@ include("../../config/config.php");
                                     <td><?php echo $row['updated_at']; ?></td>
                                     <td class="centered colorText"><?php echo $row['ClientAvailability']; ?></td>
                                     <td><?php echo $row['Note']; ?></td>
-                                    <td><input type="checkbox" name="check[]" value="<?php echo $row['ClientID']?>"></td>
+                                    <td><input class="ch1" type="checkbox" name="check[]" value="<?php echo $row['ClientID']?>"></td>
                                     <td><button class="btn btn-warning" ><a href="techie-task.php?client-id=<?php echo $row['ClientID']; ?>" class="text-bold">Assign Task</a></button></td>
                                 </tr>
                         <?php

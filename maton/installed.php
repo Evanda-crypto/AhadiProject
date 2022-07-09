@@ -52,6 +52,10 @@ include("../config/config.php");
 .expired{
     color:red;
 }
+input.ch1{
+   width: 17px;
+   height: 17px;
+}
 </style>
 </head>
 <body style="background-color:#e1e1e1">
@@ -214,7 +218,7 @@ while($row=$result->fetch_array()){
      <td><?php echo $row['ClientContact']?></td>
     <td><?php echo $row['Floor']?></td>
     <td>
-    <input type="checkbox" name="check[]" value="<?php echo $row['ClientID']?>">
+    <input class="ch1" type="checkbox" name="check[]" value="<?php echo $row['ClientID']?>">
     </td>
     <td>
     <button class="btn btn-warning" ><a href="turnon.php?clientid=<?php echo $row['ClientID']?>" class="text-bold">Turn On</a></button>
