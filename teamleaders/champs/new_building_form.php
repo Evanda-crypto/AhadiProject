@@ -80,9 +80,6 @@ date_default_timezone_set("Africa/Nairobi");
                         <a href="new_building_form.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>New Building </a>
                     </li>
                     <li>
-                        <a href="new_building_form.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-layout-grid3"></i>New Building </a>
-                    </li>
-                    <li>
                         <a href="buildings.php" style="color:black; font-size: 15px;"> <i class="menu-icon ti-home"></i>Buildings</a>
                     </li>     
                     <li class="menu-title" >TOOLS</li><!-- /.menu-title -->
