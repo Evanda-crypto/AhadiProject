@@ -178,21 +178,17 @@ include("session.php");
                                                 <input id="" name="ChampName" type="text" class="form-control cc-name valid" data-val="true" value="<?php echo $_SESSION["FName"]; ?> <?php echo $_SESSION["LName"]; ?>" name="ChampName" placeholder="Champ" readonly data-val-required="Please enter the name on card" autocomplete="cc-name" aria-invalid="false" aria-describedby="cc-name" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
-                                        <div class="row">
-                                                <div class="col-6">
                                                     <div class="form-group">
                                                     <strong><label for="cc-exp" class="control-label mb-1">Building Code<span style="color: #FF0000" >*</span></label></strong>
                                                         <input id="bcode" onkeyup="GetDetail(this.value)" placeholder="BuildingCode : Format eKENRJARA1234" name="BuildingCode" pattern="[e]{1}[A-Z]{8}[0-9]{4}" type="text" class="form-control cc-exp"   placeholder="Building Name" required>
                                                         <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                     </div>
-                                                </div>
-                                                <div class="col-6">
+                                               
                                                 <strong><label for="x_card_code" class="control-label mb-1">Building Name<span style="color: #FF0000" >*</span></label></strong>
                                                     <div class="input-group">
                                                         <input id="bname" name="Buildingname" type="text" class="form-control cc-cvc"  placeholder="Building Name" required>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                
                                             <div class="form-group">
                                             <strong> <label for="cc-payment" class="control-label mb-1">Region<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="region" name="Region" placeholder="Region" value="KWT" readonly type="text" class="form-control" required>

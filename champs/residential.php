@@ -259,7 +259,7 @@ include("session.php");
                                             <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">Additional Info<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
-                                            <select data-placeholder="Choose a Country..." class="standardSelect form-control" name="Note" tabindex="1" required>
+                                            <select class="standardSelect form-control" name="Note" required>
                                             <option disabled selected> Choose an option</option>
                                             <option value="8:00am to 10:00am">8:00am to 10:00am</option>
                                             <option value="10:01am to 12:00pm">10:01am to 12:00pm</option>
