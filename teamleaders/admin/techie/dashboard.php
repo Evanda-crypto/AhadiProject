@@ -376,13 +376,13 @@ table td {
       <th colspan="2"><?php echo date("Y-m-d"); ?></th>
     </tr>
     <tr>
-      <th>Signed</th>
+      <th>Available</th>
       <th>Installed</th>
-      <th>Signed</th>
+      <th>Available</th>
       <th>Installed</th>
-      <th>Signed</th>
+      <th>Available</th>
       <th>Installed</th>
-      <th>Signed</th>
+      <th>Available</th>
       <th>Installed</th>
     </tr>
   </thead>
