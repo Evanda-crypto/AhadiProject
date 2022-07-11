@@ -1,34 +1,6 @@
 <?php
 include("session.php");
 include("../config/config.php");
-
-if(isset($_POST["submit"])){
-    $contact = trim($_POST["contact"]);
-
-        $stmt = $connection->prepare("SELECT * FROM papdailysales WHERE ClientContact= ? OR PhoneAlt =?");
-        $stmt->bind_param("s", $contact,$contact);
-        $stmt->execute();
-        $stmt_result = $stmt->get_result();
-        if ($stmt_result->num_rows > 0) {
-            $data = $stmt_result->fetch_assoc();
-
-            $_SESSION["success"] = "Pap Details";
-            $cname = $data["ClientName"];
-            $cont = $data["ClientContact"];
-            $reg = $data["Region"];
-            $bname = $data["BuildingName"];
-            $bcode = $data["BuildingCode"];
-            $status = $data["PapStatus"];
-            $door = $data["Apt"];
-            $floor = $data["Floor"];
-        
-            header("Location: get_all_paps_info.php");
-        }
-        else{
-            $_SESSION["status"] = "Sorry no data matched your Search";
-            header("Location: get_all_paps_info.php");
-        }
-}
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->

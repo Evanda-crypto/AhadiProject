@@ -280,16 +280,16 @@ include("../../config/config.php");
                                     <tr>
       <th>Client Name</th>
       <th>Contact</th>
-      <th>Building Name </th>
-      <th>Building Code</th>
-      <th>Mac Address</th>
+      <th>Door No</th>
+      <th>Building </th>
+      <th>Code</th>
+      <th>Mac</th>
       <th>Techie 1</th>
       <th>Techie 2</th>
       <th>Techie 3</th>
       <th >Date Installed</th>
       <th >Date Turned On</th>
-      <th >Move to Retrieved
-      </th>
+      <th >Retrieve</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -306,7 +306,7 @@ include("../../config/config.php");
                         g.Techie2, 
                         g.Techie3, 
                         t.DateTurnedOn, 
-                        p.Region, 
+                        p.Apt, 
                         i.DateInstalled 
                       FROM 
                         turnedonpap as t 
@@ -324,6 +324,7 @@ include("../../config/config.php");
                                 <tr>
                                     <td><?php echo $row['ClientName']; ?></td>
                                     <td><?php echo $row['ClientContact']; ?></td>
+                                    <td><?php echo $row['Apt']; ?></td>
                                     <td><?php echo $row['BuildingName']; ?></td>
                                     <td><?php echo $row['BuildingCode']; ?></td>
                                     <td><?php echo $row['mac']; ?></td>
@@ -333,7 +334,7 @@ include("../../config/config.php");
                                     <td><?php echo $row['DateInstalled']; ?></td>
                                     <td><?php echo $row['DateTurnedOn']; ?></td>
                                     <td>
-                                    <button class="btn btn-danger" ><a href="retrieve_pap.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Move to Retrieved</a></button>
+                                    <button class="btn btn-danger" ><a href="retrieve_pap.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Retrieve</a></button>
                                     </td>
                                 </tr>
                         <?php
@@ -364,7 +365,7 @@ include("../../config/config.php");
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
-    order: [[8, 'desc']],
+    order: [[10, 'desc']],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
