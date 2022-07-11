@@ -32,6 +32,7 @@ $email=$row['Email'];
 $Bizname=$row['BizName'];
 $Phonealt=$row['PhoneAlt'];
 $note=$row['Note'];
+$comm=$row['comments'];
 $avail = date("Y-m-d", strtotime($availability));
 
 if(isset($_POST['submit'])){
@@ -58,6 +59,7 @@ $CurrISP = $_POST['package'];
 $email = $_POST['email'];
 $FamilyName = $_POST['FamilyName'];
 $note = $_POST['note'];
+$comment = addslashes($_POST["comments"]);
 
 
 $query="update turnedonpap set ClientID=$id,BuildingName='$BuildingName',BuildingCode='$BuildingCode',Region='$Region' where ClientID=$id";
@@ -65,7 +67,7 @@ $upd=mysqli_query($connection,$query);
 $sql="update papdailysales set ClientID=$id,CurrentPackage='$CurrISP',ClientName='$ClientName',ClientContact='$ClientContact'
 ,ClientGender='$ClientGender',ClientAge='$ClientAge',ClientOccupation='$ClientOccupation',ClientAvailability='$ClientAvailability',Region='$Region',BuildingName='$BuildingName',BuildingCode='$BuildingCode',Apt='$Apt'
 ,Floor='$Floor',AptLayout='$Layout',HouseholdSize='$HouseholdSize',Children='$Children',Teenagers='$Teenagers',Adults='$Adults',Birthday='$Birthday',ClientWhatsApp='$ClientWhatsApp',
-PhoneAlt='$PhoneAlt',Email='$email',Note='$note' where ClientID=$id";
+PhoneAlt='$PhoneAlt',Email='$email',Note='$note',comments='$comment' where ClientID=$id";
 
 $result=mysqli_query($connection,$sql);
 if ($result && $query) {
@@ -443,6 +445,11 @@ if ($result && $query) {
                                             <input class="form-control cc-number identified visa" data-val="true" value="<?php echo $Adults?>" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Adults" placeholder="<=13"> 
                                             </div>
                                             <div></div></div></div>
+                                            <div class="form-group">
+                                            <strong><label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label></strong>
+                                                <input id="cc-number" name="comments" type="text" value="<?php echo $comm;?>" class="form-control cc-number identified visa" maxlength="40" placeholder="Suggestions/Observations/Comments">
+                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                            </div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
                                                     <span id="payment-button-amount">Submit</span>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>

@@ -28,6 +28,7 @@ if(isset($_POST["submit"])){
     $Email = trim($_POST["email"]);
     $Role = trim($_POST["role"]);
     $package = trim($_POST["package"]);
+    $comment = addslashes($_POST["comments"]);
     $Status = "Signed";
 
                     $stmt= $connection->prepare("select * from papdailysales where ClientContact= ?");
@@ -50,8 +51,8 @@ if(isset($_POST["submit"])){
                             header("Location: business.php");
                         } else {
                         $insert = $connection->query("INSERT into papdailysales (DateSigned,ChampName,BuildingName,BuildingCode,Region,Venue,BizLayout,Floor,ClientName,ClientAvailability,ClientContact,
-        ClientWhatsApp,ClientGender,ClientAge,Birthday,BizName,BizCat,BizDec,Note,FamilyName,PhoneAlt,Email,Role,CurrentPackage,PapStatus) VALUES ('$DateSigned','$ChampName','$BuildingName','$BuildingCode','$Region','$Venue','$Bizlayout','$Floor','$ClientName','$ClientAvailability','$ClientContact',
-      '$ClientWhatsApp','$ClientGender','$ClientAge','$Birthday','$BizName','$BizCat','$BizDec','$Note','$FamilyName','$PhoneAlt','$Email','$Role','$package','$Status')");
+        ClientWhatsApp,ClientGender,ClientAge,Birthday,BizName,BizCat,BizDec,Note,FamilyName,PhoneAlt,Email,Role,CurrentPackage,PapStatus,comments) VALUES ('$DateSigned','$ChampName','$BuildingName','$BuildingCode','$Region','$Venue','$Bizlayout','$Floor','$ClientName','$ClientAvailability','$ClientContact',
+      '$ClientWhatsApp','$ClientGender','$ClientAge','$Birthday','$BizName','$BizCat','$BizDec','$Note','$FamilyName','$PhoneAlt','$Email','$Role','$package','$Status','$comment')");
                     if($insert){
                         $_SESSION["success"] = "Submitted";
                         header("Location: business.php");

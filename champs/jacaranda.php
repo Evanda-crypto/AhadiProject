@@ -350,6 +350,11 @@ include("session.php");
                                             <strong><label for="cc-number" class="control-label mb-1">Adults</label></strong>
                                             <input class="form-control cc-number identified visa" data-val="true" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="Adults" placeholder="<=13"> 
                                             </div></div></div>
+                                            <div class="form-group">
+                                            <strong><label for="cc-number" class="control-label mb-1">Suggestions/Observations/Comments</label></strong>
+                                                <input id="cc-number" name="comments" type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Suggestions/Observations/Comments">
+                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                            </div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-warning">
                                                 <strong><span id="payment-button-amount">Submit</span></strong>
                                                     <span id="payment-button-sending" style="display:none;">Sending…</span>

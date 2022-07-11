@@ -29,6 +29,7 @@ if (isset($_POST["submit"])) {
     $package = trim($_POST["package"]);
     $Email = trim($_POST["email"]);
     $phonealt = trim($_POST["altcontact"]);
+    $comment = addslashes($_POST["comments"]);
     $Status = "Signed";
 
     if ($connection->connect_error) {
@@ -45,11 +46,11 @@ if (isset($_POST["submit"])) {
                     header("Location: residential.php");
         } else { 
                 $insert = $connection->prepare("insert into papdailysales (DateSigned,ChampName,BuildingName,BuildingCode,Region,Apt,AptLayout,Floor,ClientName,ClientAvailability,ClientContact,
-      ClientWhatsApp,ClientGender,ClientAge,ClientOccupation,HouseholdSize,Children,Teenagers,Adults,Birthday,Note,FamilyName,CurrentPackage,Email,PhoneAlt,PapStatus)
-      values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+      ClientWhatsApp,ClientGender,ClientAge,ClientOccupation,HouseholdSize,Children,Teenagers,Adults,Birthday,Note,FamilyName,CurrentPackage,Email,PhoneAlt,PapStatus,comments)
+      values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 //values from the fields
                 $insert->bind_param(
-                    "ssssssssssssssssssssssssss",
+                    "sssssssssssssssssssssssssss",
                     $DateSigned,
                     $ChampName,
                     $BuildingName,
@@ -75,7 +76,8 @@ if (isset($_POST["submit"])) {
                     $package,
                     $Email,
                     $phonealt,
-                    $Status
+                    $Status,
+                    $comment
                 );
                 $insert->execute();
                 $insert->close();

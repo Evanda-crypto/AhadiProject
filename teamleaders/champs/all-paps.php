@@ -222,7 +222,8 @@ include("../../config/config.php");
                      <th>Contact</th>
                      <th>Date Signed</th>
                      <th>Availability</th>
-                     <th>Champs Comment</th>
+                     <th>Time</th>
+                     <th>Comment</th>
                     <th>Pap Status</th>
                      <th>Edit</th>
                                     </tr>
@@ -241,7 +242,8 @@ include("../../config/config.php");
                         p.ClientAvailability, 
                         p.AptLayout, 
                         p.updated_at, 
-                        p.Note 
+                        p.Note,
+                        p.comments  
                       from 
                         papdailysales as p 
                         left join papnotinstalled as r on r.ClientID = p.ClientID 
@@ -262,8 +264,9 @@ include("../../config/config.php");
                                     <td><?php echo ucfirst($row['ClientName']); ?></td>
                                     <td><?php echo $row['ClientContact']; ?></td>
                                     <td><?php echo $row['updated_at']; ?></td>
-                                    <td><?php echo $row['ClientAvailability']; ?></td>
-                                    <td><?php echo $row['Note']; ?></td>
+                                    <td><?php echo $row['ClientAvailability'];?></td>
+                                    <td><?php echo $row['Note'];?></td>
+                                    <td><?php echo $row['comments']; ?></td>
                                    <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>
                                     <td>
                                     <button class="btn btn-warning" ><a href="edit-records.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>

@@ -212,18 +212,19 @@ include("../../config/config.php");
                 
             }
             ?>
-                            <table class="table table-striped" id="example">
+                           <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
-                     <th>Building Name</th>
-                     <th>Building Code</th>
+                     <th>Building</th>
+                     <th>Code</th>
                      <th>Champ</th>
-                     <th>Client Name</th>
-                     <th>Client Contact</th>
+                     <th>Client</th>
+                     <th>Contact</th>
                      <th>Date Signed</th>
                      <th>Availability</th>
-                     <th>Champs Comment</th>
-                    <th>Pap Status</th>
+                     <th>Time</th>
+                     <th>Comment</th>
+                    <th>Status</th>
                      <th>Edit</th>
                                     </tr>
                                 </thead>
@@ -241,7 +242,8 @@ include("../../config/config.php");
                         p.ClientAvailability, 
                         p.AptLayout, 
                         p.updated_at, 
-                        p.Note 
+                        p.Note,
+                        p.comments 
                       from 
                         papdailysales as p 
                         left join papnotinstalled as r on r.ClientID = p.ClientID 
@@ -264,6 +266,7 @@ include("../../config/config.php");
                                     <td><?php echo $row['updated_at']; ?></td>
                                     <td><?php echo $row['ClientAvailability']; ?></td>
                                     <td><?php echo $row['Note']; ?></td>
+                                    <td><?php echo $row['comments']; ?></td>
                                    <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>
                                     <td>
                                     <button class="btn btn-warning" ><a href="edit-records.php?clientid=<?php echo $row['ClientID']; ?>" class="text-bold">Edit</a></button>
@@ -298,8 +301,8 @@ include("../../config/config.php");
 
 <script type="text/javascript">
 $( document ).ready(function() {
-    order: [[5, 'desc']],
 $('#example').DataTable({
+    order: [[5, 'desc']],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
@@ -318,7 +321,6 @@ $('#example').DataTable({
         "pagingType": "full_numbers"
         });
 });
-
 
 window.addEventListener('DOMContentLoaded', (event) => {
   var els = document.querySelectorAll('.colorText');
