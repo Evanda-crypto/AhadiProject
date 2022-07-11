@@ -5,8 +5,8 @@ include("../config/config.php");
 if(isset($_POST["submit"])){
     $contact = trim($_POST["contact"]);
 
-        $stmt = $connection->prepare("SELECT * FROM papdailysales WHERE ClientContact= ?");
-        $stmt->bind_param("s", $contact);
+        $stmt = $connection->prepare("SELECT * FROM papdailysales WHERE ClientContact= ? OR PhoneAlt =?");
+        $stmt->bind_param("s", $contact,$contact);
         $stmt->execute();
         $stmt_result = $stmt->get_result();
         if ($stmt_result->num_rows > 0) {
