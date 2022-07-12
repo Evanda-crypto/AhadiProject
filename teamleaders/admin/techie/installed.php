@@ -167,10 +167,10 @@ $result=$connection->query($sql);
 while($row=$result->fetch_array()){
   ?>
   <tr>
-    <td><?php echo $row['ClientName']?></td>
+    <td><?php echo ucwords($row['ClientName'])?></td>
     <td><?php echo $row['ClientContact']?></td>
    <td><?php echo $row['BuildingName']?></td>
-    <td><?php echo $row['techies']?></td>
+    <td><?php echo ucwords($row['techies'])?></td>
     <td><?php echo $row['Mac']?></td>
     <td><?php echo $row['DateInstalled']?></td>
 </tr>

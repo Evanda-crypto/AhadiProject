@@ -187,7 +187,7 @@ while($row=$result->fetch_array()){
     <td><?php echo $row['BuildingName']?></td>
     <td><?php echo $row['BuildingCode']?></td>
     <td><?php echo $row['Region']?></td>
-    <td><?php echo $row['ClientName']?></td>
+    <td><?php echo ucwords($row['ClientName'])?></td>
     <td><?php echo $row['ClientContact']?></td>
     <td><?php echo $row['DateSigned']?></td>
      <td><?php echo $row['ClientAvailability']?></td>

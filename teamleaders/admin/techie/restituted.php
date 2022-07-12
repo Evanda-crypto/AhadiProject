@@ -170,12 +170,12 @@ include("../../../config/config.php");
  $result = mysqli_query($connection, $query);
  while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
-                                    <td><?php echo $row["ClientName"]; ?></td>
+                                    <td><?php echo ucfirst($row["ClientName"]); ?></td>
                                     <td><?php echo $row["Contact"]; ?></td>
                                     <td><?php echo $row["BuildingName"]; ?></td>
                                     <td><?php echo $row["ChampName"]; ?></td>
                                     <td><?php echo $row["Region"]; ?></td>
-                                    <td><?php echo $row["techies"]; ?></td>
+                                    <td><?php echo ucwords($row["techies"]); ?></td>
                                     <td><?php echo $row["RestitutedDate"]; ?></td>
                                     <td><?php echo $row["Reason"]; ?></td>
                                     <td><?php echo $row["Note"]; ?></td>

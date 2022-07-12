@@ -198,9 +198,9 @@ tfoot td {
                                     <td><?php echo $row["BuildingCode"]; ?></td>
                                     <td><?php echo $row["Region"]; ?></td>
                                     <td><?php echo $row["mac"]; ?></td>
-                                    <td><?php echo $row["Techie1"]; ?></td>
-                                    <td><?php echo $row["Techie2"]; ?></td>
-                                    <td><?php echo $row["Techie3"]; ?></td>
+                                    <td><?php echo ucwords($row["Techie1"]); ?></td>
+                                    <td><?php echo ucwords($row["Techie2"]); ?></td>
+                                    <td><?php echo ucwords($row["Techie3"]); ?></td>
                                     <td><?php echo $row[
                                         "DateInstalled"
                                     ]; ?></td>
