@@ -43,7 +43,7 @@ include("../config/config.php");
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 <style>
     .table td, .table th {
-        font-size: 9px;
+        font-size: 80%;
     }
 </style>
 </head>
@@ -153,8 +153,8 @@ include("../config/config.php");
     }
     ?> Records]</strong></center>
                             </div>
-                            <div class="card-body d-md-block d-lg-none">
-                                <table class="table table-striped table-bordered" id="example" >
+                            <div class="card-body" style="overflow-x:auto;">
+                                <table class="table table-striped table-bordered" id="example">
                                     <thead>
      
       <th class="th-sm">Client
@@ -175,7 +175,7 @@ include("../config/config.php");
                         ?>
                                 <tr>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
-                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
+                                    ><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['DateTurnedOn']; ?></a></td>
                             
@@ -228,6 +228,7 @@ $('#example').DataTable(
         order: [[3, 'desc']],
         "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
         "scrollY":        "500px",
+        "scrollX": true,
         "scrollCollapse": true
     }
 );
@@ -243,6 +244,36 @@ $(document).ready(function(){
         });
     }); 
 });
+</script>
+<script>
+ $(document).ready(function () {
+$('#dtBasicExample').DataTable();
+$('.dataTables_length').addClass('bs-select');
+});
+</script>
+<script>
+$(document).ready(function(){
+  $(document).on('click','.openPopup',function(){
+        var dataURL = $(this).attr('data-href');
+        $('.modal-body').load(dataURL,function(){
+            $('#Modal').modal({show:true});
+        });
+    }); 
+});
+</script>
+<script>
+$(document).ready(function(){
+    $('.openPopup').on('click',function(){
+        var dataURL = $(this).attr('data-href');
+        $('.modal-body').load(dataURL,function(){
+            $('#Modal').modal({show:true});
+        });
+    }); 
+});
+
+function changeValue(value) {
+  document.getElementById('remind').innerHTML = value;
+}
 </script>
 </body>
 </html>
