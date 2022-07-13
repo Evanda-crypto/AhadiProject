@@ -218,7 +218,7 @@ include("../../config/config.php");
                                
  <?php
  $query =
-     "SELECT p.ClientID,p.ClientName,p.BuildingName,p.BuildingCode,p.Floor,p.DateSigned,p.Reason,p.Contact,p.ChampName,p.RestitutedDate,CONCAT(p.Techie1,'/',p.Techie2) as techies,p.Note from papnotinstalled as p  where  p.Reason<>'Already Installed' and p.Region='".$_SESSION['Region']."' order by DateSigned Desc";
+     "SELECT p.ClientID,p.ClientName,p.BuildingName,p.BuildingCode,p.Floor,p.DateSigned,p.Reason,p.Contact,p.ChampName,p.RestitutedDate,CONCAT(p.Techie1,'/',p.Techie2) as techies,p.Note from papnotinstalled as p  where p.Region='".$_SESSION['Region']."' order by DateSigned Desc";
  $result = mysqli_query($connection, $query);
  while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
