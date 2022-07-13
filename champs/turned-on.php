@@ -41,6 +41,11 @@ include("../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .table td, .table th {
+        font-size: 9px;
+    }
+</style>
 </head>
 <body style="background-color:#e1e1e1">
 <!-- Left Panel -->
@@ -149,13 +154,15 @@ include("../config/config.php");
     ?> Records]</strong></center>
                             </div>
                             <div class="card-body d-md-block d-lg-none">
-                                <table class="table table-striped table-bordered" id="example">
+                                <table class="table table-striped table-bordered" id="example" >
                                     <thead>
      
       <th class="th-sm">Client
       </th>
+      <th class="th-sm">Contact
+      </th>
   <th class="th-sm">Bname
-      </th><th class="th-sm">Date Turned On
+      </th><th class="th-sm">Date
       </th>
 
                                       </tr>
@@ -168,6 +175,7 @@ include("../config/config.php");
                         ?>
                                 <tr>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['DateTurnedOn']; ?></a></td>
                             
@@ -217,7 +225,7 @@ include("../config/config.php");
  $(document).ready(function () {
 $('#example').DataTable(
     {
-        order: [[2, 'desc']],
+        order: [[3, 'desc']],
         "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
         "scrollY":        "500px",
         "scrollCollapse": true
@@ -235,36 +243,6 @@ $(document).ready(function(){
         });
     }); 
 });
-</script>
-<script>
- $(document).ready(function () {
-$('#dtBasicExample').DataTable();
-$('.dataTables_length').addClass('bs-select');
-});
-</script>
-<script>
-$(document).ready(function(){
-  $(document).on('click','.openPopup',function(){
-        var dataURL = $(this).attr('data-href');
-        $('.modal-body').load(dataURL,function(){
-            $('#Modal').modal({show:true});
-        });
-    }); 
-});
-</script>
-<script>
-$(document).ready(function(){
-    $('.openPopup').on('click',function(){
-        var dataURL = $(this).attr('data-href');
-        $('.modal-body').load(dataURL,function(){
-            $('#Modal').modal({show:true});
-        });
-    }); 
-});
-
-function changeValue(value) {
-  document.getElementById('remind').innerHTML = value;
-}
 </script>
 </body>
 </html>
