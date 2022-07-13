@@ -175,7 +175,7 @@ include("../config/config.php");
                         ?>
                                 <tr>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientName']; ?></a></td>
-                                    ><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
+                                    <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['ClientContact']; ?></a></td>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['BuildingName']; ?></a></td>
                                     <td><a data-toggle="modal" data-target="#mediumModal" data-href="getturnedon.php?id=<?php echo $row['ClientID']; ?>" class="openPopup"><?php echo $row['DateTurnedOn']; ?></a></td>
                             
