@@ -253,7 +253,7 @@ while($row=$result->fetch_array()){
      <td><?php echo $row['comments']?></td>
      <td><?php echo $row['reporter']?></td>
      <td>
-        <button class="btn btn-danger"><a href="delete_dev_report.php?id=<?php echo $row['id']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['issue']; ?> reported by <?php  echo $row['reporter']; ?> from Reports?')">Delete</a></button>
+        <button class="btn btn-danger"><a href="delete_issue.php?id=<?php echo $row['id']; ?> " onClick="return confirm('Sure to delete <?php  echo $row['issue']; ?> reported by <?php  echo $row['reporter']; ?> from Reports?')">Delete</a></button>
         </td>
 </tr>
 <?php } ?>

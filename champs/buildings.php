@@ -41,6 +41,11 @@ include("../config/config.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .table td, .table th {
+        font-size: 80%;
+    }
+</style>
 </head>
 <body style="background-color:#e1e1e1">
 <!-- Left Panel -->
@@ -138,7 +143,7 @@ include("../config/config.php");
             <div class="animated fadeIn">
                 <div class="row">
                 <div class="col-lg-12">
-                        <div class="card">
+                        <div class="card"  style="overflow-x:auto;">
                             <div class="card-header">
                             <center><strong class="card-title">Buildings[<?php
          $query="SELECT COUNT(*) as buildings FROM buildings WHERE bstatus='6. IAP In Service' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service'";
