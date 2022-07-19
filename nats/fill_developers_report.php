@@ -244,13 +244,13 @@ date_default_timezone_set("Africa/Nairobi");
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                         <div class="form-group has-success">
-                                        <strong><label for="cc-name" class="control-label mb-1">Key Milestone<span style="color: #FF0000" >*</span></label></strong>
+                                        <strong><label for="cc-name" class="control-label mb-1">Milestones<span style="color: #FF0000" >*</span></label></strong>
                                                 <input id="milestone" name="key_milestone" type="text" class="form-control cc-name valid" data-val="true" placeholder="Key Milestone" required >
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <strong><div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Completed Tasks</label></strong>
-                                                <textarea  id="buildings" name="completed_tasks" type="text" class="form-control cc-number identified visa" placeholder="Completed Tasks"></textarea>
+                                                <textarea  id="editor" name="completed_tasks" type="text" class="form-control cc-number identified visa" placeholder="Completed Tasks"></textarea>
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
@@ -318,6 +318,14 @@ date_default_timezone_set("Africa/Nairobi");
             width: "100%"
         });
     });
+</script>
+<script>
+    ClassicEditor.create(document.querySelector("#editor"));
+
+document.querySelector("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  console.log(document.getElementById("editor").value);
+});
 </script>
 <script>
  var todayDate= new Date();

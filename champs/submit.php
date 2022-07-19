@@ -36,7 +36,7 @@ if (isset($_POST["submit"])) {
         die("connection failed : " . $connection->connect_error);
     } else {
         $stmt = $connection->prepare(
-            "select * from papdailysales  where ClientContact= ?"
+            "SELECT * from papdailysales  where ClientContact= ?"
         );
         $stmt->bind_param("s", $ClientContact);
         $stmt->execute();
@@ -46,7 +46,7 @@ if (isset($_POST["submit"])) {
                     header("Location: residential.php");
         } else {
             $stmt = $connection->prepare(
-                "select * from buildings  where bcode= ?"
+                "SELECT * from buildings  where bstatus='8. PAP>10' OR bstatus='4. Fully Installed' OR bstatus='7. PAP In Service' OR bstatus='6. IAP In Service' AND bcode= ?"
             );
             $stmt->bind_param("s", $BuildingCode);
             $stmt->execute();
