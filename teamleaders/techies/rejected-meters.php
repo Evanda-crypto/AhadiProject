@@ -356,6 +356,9 @@ function myFunction(){
 <script>
 $( document ).ready(function() {
 $('#example').DataTable({
+    order: [[1, 'asc']],
+    
+		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
             {
@@ -367,10 +370,12 @@ $('#example').DataTable({
                 ]
             }
         ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "scrollY":        "700px",
+        "scrollCollapse": true
+        
         });
 });
-
 </script>
 <script>
   /*  $.ajax({

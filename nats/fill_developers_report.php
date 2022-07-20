@@ -256,13 +256,13 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
                                             <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">Ongoing Tasks<span style="color: #FF0000" >*</span></label></strong>
-                                                <textarea id="editor2" required name="ongoing_tasks" type="text" class="form-control"  placeholder="Ongoing Tasks"></textarea>
+                                                <textarea id="editor2" required name="ongoing_tasks" required type="text" class="form-control"  placeholder="Ongoing Tasks"></textarea>
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
 
                                             <div class="form-group">
                                             <strong> <label for="cc-number" class="control-label mb-1">Challenges</label></strong>
-                                                <input id="challenges" name="challenges" type="text" class="form-control cc-number identified visa" placeholder="Challenges" required>
+                                                <input id="challenges" name="challenges" type="text" class="form-control cc-number identified visa" placeholder="Challenges">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
