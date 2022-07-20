@@ -382,7 +382,7 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
                                             <div class="form-group">
                                             <strong> <label for="cc-number" class="control-label mb-1">Comments<span style="color: #FF0000" >*</span></label></strong>
-                                                <input id="comments" name="comments" type="text" class="form-control cc-number identified visa" required placeholder="Comments" required>
+                                            <textarea id="comments" name="comments" type="text" class="form-control cc-number identified visa" required placeholder="Comments" required></textarea>
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">

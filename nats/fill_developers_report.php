@@ -215,7 +215,7 @@ date_default_timezone_set("Africa/Nairobi");
                               <div class="form-group">
                                                 <strong><label for="cc-number" class="control-label mb-1">Project Name<span style="color: #FF0000" >*</span></label></strong>
                                                 <div class="form-group has-success">
-                                            <select placeholder="Choose a Project..." class="standardSelect form-control" name="project_name" tabindex="1" required>
+                                            <select placeholder="Choose a Project..." class="standardSelect form-control" required name="project_name" tabindex="1" required>
                                             <option disabled selected >Choose Project...</option>
                                             <option value="Konnect Mart">Konnect Mart</option>
                                             <option value="Konnect Wallet">Konnect Wallet</option>
@@ -241,12 +241,12 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
                                             <div class="form-group">
                                             <strong><label for="cc-number" class="control-label mb-1">Evaluation Period</label></strong>
-                                                <input id="diff" name="evaluation_period" onkeyup="dateDiff()"  type="text" class="form-control cc-number identified visa" maxlength="40" placeholder="Duration">
+                                                <input id="diff" name="evaluation_period" onkeyup="dateDiff()"  type="text" class="form-control cc-number identified visa" required placeholder="Duration">
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                         <div class="form-group has-success">
                                         <strong><label for="cc-name" class="control-label mb-1">Milestones<span style="color: #FF0000" >*</span></label></strong>
-                                                <input id="milestones" name="key_milestone" type="text" class="form-control cc-name valid" data-val="true" placeholder="Key Milestone" required >
+                                        <textarea id="milestones" name="key_milestone" type="text" class="form-control cc-name valid" data-val="true" placeholder="Key Milestone" required ></textarea>
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <strong><div class="form-group">
