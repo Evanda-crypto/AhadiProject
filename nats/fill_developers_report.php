@@ -261,8 +261,8 @@ date_default_timezone_set("Africa/Nairobi");
                                             </div>
 
                                             <div class="form-group">
-                                            <strong> <label for="cc-number" class="control-label mb-1">Challenges<span style="color: #FF0000" >*</span></label></strong>
-                                                <input id="challenges" name="challenges" type="text" class="form-control cc-number identified visa" required placeholder="Challenges" required>
+                                            <strong> <label for="cc-number" class="control-label mb-1">Challenges</label></strong>
+                                                <input id="challenges" name="challenges" type="text" class="form-control cc-number identified visa" placeholder="Challenges" required>
                                                 <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                             </div>
                                             <div class="form-group">
