@@ -185,9 +185,29 @@ include("../../config/config.php");
                 <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                            <center><strong class="card-title">Not Installed</strong></center>
+                            <center><strong class="card-title">Not Installed[Signed]</strong></center>
                             </div>
                             <div class="card-body">
+                            <?php
+            if(isset($_SESSION['status'])){
+                ?>
+               <center><span> <div class="alert alert-danger" role="alert">
+                   <?php echo $_SESSION['status'];
+                unset($_SESSION['status']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            elseif(isset($_SESSION['success'])){
+                ?>
+                <center><span><div class="alert alert-success" role="alert">
+                   <?php echo $_SESSION['success'];
+                unset($_SESSION['success']);?>
+                 </div></span></center>
+                <?php
+                
+            }
+            ?>
                                 <table class="table table-striped" id="example">
                                     <thead>
                                         <tr>
@@ -201,19 +221,21 @@ include("../../config/config.php");
       </th>
       <th class="th-sm">Contact
       </th>
+      <th class="th-sm">DateSigned
+      </th>
       <th class="th-sm">Availability
       </th>
-      <th class="th-sm">Champs comment
+      <th class="th-sm">comment
       </th>
-      <th class="th-sm">Pap Status
+      <th class="th-sm">Delete
       </th>
                                       </tr>
                                   </thead>
                                   <tbody>
                                   <?php
                         $query  = "SELECT 
-                        p.Note,p.ClientName,p.ClientContact,p.ClientID,p.BuildingCode,p.BuildingName,p.ChampName,p.ClientAvailability,p.PapStatus 
-                      from papdailysales as p LEFT JOIN papinstalled as i on i.ClientID=p.ClientID left join papnotinstalled as r on r.ClientID=p.ClientID where p.PapStatus<>'Retrieved' and r.ClientID is null and i.ClientID is null and p.Region='".$_SESSION['Region']."'";
+                        p.Note,p.ClientName,p.ClientContact,p.ClientID,p.BuildingCode,p.BuildingName,p.ChampName,p.ClientAvailability,p.updated_at 
+                      from papdailysales as p WHERE p.PapStatus='Signed' and p.Region='".$_SESSION['Region']."'";
                         $result  = mysqli_query($connection, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
@@ -223,9 +245,12 @@ include("../../config/config.php");
                                    <td><?php echo $row['ChampName']; ?></td>
                                     <td><?php echo $row['ClientName']; ?></td>
                                     <td><?php echo $row['ClientContact']; ?></td>
+                                    <td><?php echo $row['updated_at']; ?></td>
                                     <td><?php echo $row['ClientAvailability']; ?></td>
                                     <td><?php echo $row['Note']; ?></td>
-                                    <td class="centered colorText"><?php echo $row['PapStatus']; ?></td>
+                                    <td>
+                                    <button class="btn btn-danger" ><a href="delete_signed.php?clientid=<?php echo $row['ClientID']; ?>" onClick="return confirm('Sure to delete <?php  echo $row['ClientName']; ?> from KOMP database?')" class="text-bold"><i class="fa fa-trash"></i></a></button>
+                                    </td>
                                 </tr>
                         <?php
 
@@ -272,16 +297,26 @@ include("../../config/config.php");
 
 
 <script>
- $(document).ready(function () {
-$('#example').DataTable(
-    {
+$( document ).ready(function() {
+$('#example').DataTable({
+    order: [[5, 'desc']],
+		 "processing": true,
+		 "dom": 'lBfrtip',
+		 "buttons": [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: [
+                    'excel',
+                    'csv'
+                ]
+            }
+        ],
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "scrollY":        "700px",
         "scrollCollapse": true,
         "pagingType": "full_numbers"
-    }
-);
-$('.dataTables_length').addClass('bs-select');
+        });
 });
 
 window.addEventListener('DOMContentLoaded', (event) => {

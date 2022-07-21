@@ -211,7 +211,7 @@ include("../../config/config.php");
                 
             }
             ?>
-                            <table class="table table-striped" id="example">
+                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
                      <th>Building</th>
@@ -280,6 +280,7 @@ include("../../config/config.php");
                         ?>
                                 </tbody>
                             </table>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -302,7 +303,7 @@ include("../../config/config.php");
 <script type="text/javascript">
 $( document ).ready(function() {
 $('#example').DataTable({
-    order: [[6, 'desc']],
+    order: [[5, 'desc']],
 		 "processing": true,
 		 "dom": 'lBfrtip',
 		 "buttons": [
@@ -343,71 +344,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
   })
 })
-</script>
-<script>
-   /* $(document).ready(function () {
-    // Setup - add a text input to each footer cell
-    $('#example thead th').each(function () {
-        var title = $(this).text();
-        $(this).html('<input type="text" class="form-control" placeholder="' + title + '" />');
-    });
- 
-    // DataTable
-    var table = $('#example').DataTable({
-        order: [[6, 'desc']],
-		 "processing": true,
-		 "dom": 'lBfrtip',
-		 "buttons": [
-            {
-                extend: 'collection',
-                text: 'Export',
-                buttons: [
-                    'excel',
-                    'csv'
-                ]
-            }
-        ],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "scrollY":        "700px",
-        "scrollCollapse": true,
-        "pagingType": "full_numbers",
-        initComplete: function () {
-            // Apply the search
-            this.api()
-                .columns()
-                .every(function () {
-                    var that = this;
- 
-                    $('input', this.header()).on('keyup change clear', function () {
-                        if (that.search() !== this.value) {
-                            that.search(this.value).draw();
-                        }
-                    });
-                });
-        },
-    });
-});
-
-window.addEventListener('DOMContentLoaded', (event) => {
-  var els = document.querySelectorAll('.colorText');
-  els.forEach(function(cell) {
-    if (cell.textContent === "Assigned") {
-      cell.classList.toggle('violet');
-    }
-    if (cell.textContent === "Turned On") {
-      cell.classList.toggle('green');
-    }
-    if (cell.textContent === "Signed") {
-      cell.classList.toggle('blue');
-    }
-    if (cell.textContent === "Installed") {
-      cell.classList.toggle('orange');
-    }
-    if (cell.textContent === "Restored") {
-      cell.classList.toggle('red');
-    }
-  })
-})*/
 </script>
 </body>
 </html>

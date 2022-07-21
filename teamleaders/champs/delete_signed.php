@@ -3,18 +3,21 @@ include("session.php");
 include("../../config/config.php");
 $id = $_GET['clientid'];
 
-$msg = "";
-if (isset($id)) {
+
+if (isset($id)){
 
     $query = "DELETE FROM  papdailysales  WHERE ClientID=$id";
     $result = mysqli_query($connection, $query);
 
-    if ($result) {
+    if($result)
+    {
             $_SESSION["success"] = "Deleted successfully";
-            header("Location: retrieved_paps.php");
-    } else {
-        $_SESSION["status"] = "Error occured plase try again";
-        header("Location: retrieved_paps.php");
+            header("Location: not-installed.php");
+    }
+    else
+    {
+        $_SESSION["status"] = "Not deleted.You can only delete paps with status 'Signed'";
+        header("Location: not-installed.php");
     }
 }
 ?>
