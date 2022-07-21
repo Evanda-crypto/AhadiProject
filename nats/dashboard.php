@@ -82,7 +82,7 @@ if (!$connection) {
                       "SELECT (SELECT count(*) from papdailysales as p left join papnotinstalled as r on p.ClientID=r.ClientID where r.ClientID is null)+(SELECT COUNT(*) as cccs from old) as clients";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
-                      echo $row["clients"] . "<br><br>";
+                      echo $row["clients"] . "<br>";
                   }
                   ?></span></div>
                                             <div class="stat-heading">Signed</div>
@@ -107,7 +107,7 @@ if (!$connection) {
                       "SELECT COUNT(*)as pending from papdailysales as p LEFT JOIN papinstalled as i on i.ClientID=p.ClientID left join papnotinstalled as r on r.ClientID=p.ClientID WHERE i.ClientID is null and r.ClientID is null";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
-                      echo $row["pending"] . "<br><br>";
+                      echo $row["pending"] . "<br>";
                   }
                   ?></span></div>
                                             <div class="stat-heading">Pending Istallation</div>
@@ -133,7 +133,7 @@ if (!$connection) {
                       JOIN papdailysales as p on p.ClientID=i.ClientID WHERE i.ClientID is NOT null and o.ClientID is null";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
-                      echo $row["pap"] . "<br><br>";
+                      echo $row["pap"] . "<br>";
                   }
                   ?></span></div>
                                             <div class="stat-heading">Installed</div>
@@ -157,7 +157,7 @@ if (!$connection) {
                   $query = "SELECT ((SELECT count(*) from turnedonpap) + (SELECT COUNT(*) from old)) AS turnedon";
                   $data = mysqli_query($connection, $query);
                   while ($row = mysqli_fetch_assoc($data)) {
-                      echo $row["turnedon"] . "<br><br>";
+                      echo $row["turnedon"] . "<br>";
                   }
                   ?></span></div>
                                                   <div class="dropdown show">
