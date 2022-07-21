@@ -8,7 +8,7 @@ $ch = curl_init($url);
 #$ch = curl_init();
 
 //The CURLFile class 
-#$cfile = new CURLFile($_FILES['Meter_Picture']['tmp_name'], $_FILES['Meter_Picture']['type'], $_FILES['Meter_Picture']['name']);
+$cfile = new CURLFile($_FILES['Meter_Picture']['tmp_name'], $_FILES['Meter_Picture']['type'], $_FILES['Meter_Picture']['name']);
 
 
   $fields = array( 
@@ -26,9 +26,9 @@ $ch = curl_init($url);
 
   'Contact_Person'    => $_POST["Contact_Person"],
   
-  #'Meter_Picture'    => $cfile,
+  'Meter_Picture'    => $cfile,
 
-  'Comments'    => $_POST["Comments"],);
+  'Comments'    => $_POST["Comments"]);
 
   
   curl_setopt($ch,CURLOPT_URL,$url);

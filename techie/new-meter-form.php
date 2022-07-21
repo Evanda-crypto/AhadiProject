@@ -30,38 +30,38 @@ include("session.php");
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 <script>
-fetch('http://app.sasakonnect.net:19003/api/Meters/', {
-  method: 'POST',
-  headers: {
-    'content-type': 'application/json',
-    authorization: 'Bearer 123abc456def'
-  },
-  body: {
-    Cluster_name :$_POST["Cluster_name"];
+// fetch('http://app.sasakonnect.net:19003/api/Meters/', {
+//   method: 'POST',
+//   headers: {
+//     'content-type': 'application/json',
+//     authorization: 'Bearer 123abc456def'
+//   },
+//   body: {
+//     Cluster_name :$_POST["Cluster_name"];
   
-  Meter_Number  : $_POST["Meter_Number"];
+//   Meter_Number  : $_POST["Meter_Number"];
 
-  Contact_number   : $_POST["Contact_number"];
+//   Contact_number   : $_POST["Contact_number"];
 
-  date_Installed : $_POST["date_Installed"];
+//   date_Installed : $_POST["date_Installed"];
 
-  Region  : $_POST["Region"];
+//   Region  : $_POST["Region"];
 
-  Techie_team    : $_POST["Techie_team"];
+//   Techie_team    : $_POST["Techie_team"];
 
-  Contact_Person    : $_POST["Contact_Person"];
+//   Contact_Person    : $_POST["Contact_Person"];
   
-  Meter_Picture    : $_POST["Meter_Picture"];
+//   Meter_Picture    : $_POST["Meter_Picture"];
 
-  Comments: $_POST["Comments"];
-  }
-})
-  .then(response => {
-    console.log(response)
-  })
-  .catch(err => {
-    console.log(err)
-  })
+//   Comments: $_POST["Comments"];
+//   }
+// })
+//   .then(response => {
+//     console.log(response)
+//   })
+//   .catch(err => {
+//     console.log(err)
+//   })
 
 </script>
 </head>
@@ -229,7 +229,7 @@ fetch('http://app.sasakonnect.net:19003/api/Meters/', {
                 
             }
             ?>
-                                        <form id="form" method="POST" enctype="multipart/form-data"> 
+                                        <form id="form" method="POST" enctype="multipart/form-data" action="api.php"> 
                                         <div class="form-group">
                                         <strong><label for="x_card_code" class="control-label mb-1">Team ID</label></strong>
                                         <div class="input-group">

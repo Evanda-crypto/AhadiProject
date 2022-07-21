@@ -181,7 +181,7 @@ else
                     </li>
                     <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tech Support</a>
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Noc</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-list"></i><a href="fill-report.php" style="color:black; font-size: 15px;">Fill Report</a></li>
                             <li><i class="fa fa-inbox"></i><a href="nats-reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
@@ -190,7 +190,7 @@ else
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Developers</a>
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>DevOps</a>
                         <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-list"></i><a href="../fill_developers_report.php" style="color:black; font-size: 15px;">Fill Report</a></li>
                             <li><i class="fa fa-inbox"></i><a href="../view_developers_report.php" style="color:black; font-size: 15px;">View Reports </a></li>

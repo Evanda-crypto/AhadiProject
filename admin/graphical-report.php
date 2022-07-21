@@ -104,10 +104,16 @@ if (isset($_POST["submit"])) {
                     </li>
                     <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Nats</a>
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Noc</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-inbox"></i><a href="nats_reports.php" style="color:black; font-size: 15px;">View Reports </a></li>
                             <li><i class="fa fa-inbox"></i><a href="nats_graphs.php" style="color:black; font-size: 15px;">Graphical Report </a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>DevOps</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-inbox"></i><a href="dev_reports.php" style="color:black; font-size: 15px;">View Reports</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">

@@ -196,7 +196,7 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">NATS Reports</strong></center>
+                           <center> <strong class="card-title">NOC Reports</strong></center>
                         </div>
                         <div class="card-body"><?php
             if(isset($_SESSION['status'])){
@@ -224,8 +224,8 @@ include("../config/config.php");
                                     <th>Day</th>
                                     <th>Date</th>
                                     <th>Region</th>
-                                    <th>Issues Reported</th>
-                                    <th>Zone(s) Affected</th>
+                                    <th>Issues</th>
+                                    <th>Zone(s)</th>
                                     <th>Cluster</th>
                                     <th>No of Buildings</th>
                                     <th>Duration</th>
