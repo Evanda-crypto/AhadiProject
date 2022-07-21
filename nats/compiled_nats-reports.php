@@ -1,4 +1,5 @@
 <?php
+include("includes.php");
 include("session.php");
 include("../config/config.php");
 
