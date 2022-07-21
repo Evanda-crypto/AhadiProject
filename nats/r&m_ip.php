@@ -11,7 +11,7 @@ include("../config/config.php");
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                           <center> <strong class="card-title">IP Reports G45N</strong></center>
+                           <center> <strong class="card-title">IP Reports R&M</strong></center>
                         </div>
                         <div class="card-body"><?php
             if(isset($_SESSION['status'])){
@@ -37,13 +37,14 @@ include("../config/config.php");
                                 <thead>
                                     <tr>
                                     <th>Zone</th>
-                                    <th>vlanid_device</th>
-                                    <th>vlanid_user</th>
                                     <th>device_ip</th>
                                     <th>user_ip</th>
                                     <th>cluster</th>
                                     <th>Buildings</th>
                                     <th>Codes</th>
+                                    <th>IAP</th>
+                                    <th>OAP</th>
+                                    <th>PAP</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,8 +52,9 @@ include("../config/config.php");
     
     $sql="SELECT 
     group_concat(DISTINCT zones ,'".'<br>'."' SEPARATOR ' ' ) AS zones,
-    group_concat(DISTINCT vlanid_device ,'".'<br>'."' SEPARATOR ' ' ) AS vlanid_device,
-    group_concat(DISTINCT vlanid_user ,'".'<br>'."' SEPARATOR ' ' ) AS vlanid_user,
+    group_concat(iap ,'".'<br>'."' SEPARATOR ' ' ) AS iap,
+    group_concat(oap ,'".'<br>'."' SEPARATOR ' ' ) AS oap,
+    group_concat(pap ,'".'<br>'."' SEPARATOR ' ' ) AS pap,
     group_concat(DISTINCT device_ip ,'".'<br>'."' SEPARATOR ' ' ) AS device_ip,
     group_concat(DISTINCT user_ip ,'".'<br>'."' SEPARATOR ' ' ) AS user_ip,
     group_concat(DISTINCT cluster ,'".'<br>'."' SEPARATOR ' ' ) AS cluster,
@@ -65,13 +67,14 @@ while($row=$result->fetch_array()){
   ?>
   <tr>
     <td><?php echo $row['zones']?></td>
-    <td><?php echo $row['vlanid_device']?></td>
-    <td><?php echo $row['vlanid_user']?></td>
     <td><?php echo $row['device_ip']?></td>
     <td><?php echo $row['user_ip']?></td>
     <td><?php echo $row['cluster']?></td>
     <td><?php echo $row['buildings']?></td>
     <td><?php echo $row['building_codes']?></td>
+    <td><?php echo $row['iap']?></td>
+    <td><?php echo $row['oap']?></td>
+    <td><?php echo $row['pap']?></td>
 </tr>
 <?php } ?>
                                 </tbody>
