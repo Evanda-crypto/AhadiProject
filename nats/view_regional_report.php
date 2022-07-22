@@ -240,8 +240,8 @@ include("../config/config.php");
                                     <th>Huawei Port No.</th>
                                     <th>Remote ndsk Id</th>
                                     <th>Mngmt ndsk Id</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>More</th>
+                                    <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
