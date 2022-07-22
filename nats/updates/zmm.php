@@ -180,6 +180,15 @@ else
                             <li><i class="fa fa-table"></i><a href="../lsm_ip.php" style="color:black; font-size: 15px;">LSM</a></li>
                             <li><i class="fa fa-table"></i><a href="../htr_ip.php" style="color:black; font-size: 15px;">HTR</a></li></ul>
                     </li>
+                    <li class="menu-title" >REGIONS</li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Region Description</a>
+                        <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-list"></i><a href="../fill_region_report.php">Add New Region</a></li>
+                            <li><i class="fa fa-eye text-success"></i><a href="../view_regional_report.php" style="color:black; font-size: 15px;">View Region Data</a></li>
+                        </ul>
+                           
+                    </li>
                     <li class="menu-title" >REPORTS</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" style="color:black; font-size: 15px;"class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Noc</a>

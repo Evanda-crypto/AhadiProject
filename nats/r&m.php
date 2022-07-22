@@ -98,7 +98,7 @@ include("../config/config.php");
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['iap']?></a></td>
         <td><a data-toggle="modal" data-target="#mediumModal" data-href="getbuild.php?id=<?php echo $row['id']; ?>" class="openPopup"><?php echo $row['oap']?></a></td>
        <td>
-       <button class="btn btn-warning"><a href="updates/R&M.php?id=<?php echo $row['id']; ?>">Edit</i></a></button>
+       <button class="btn btn-warning"><a href="updates/r&m.php?id=<?php echo $row['id']; ?>">Edit</i></a></button>
     </td>
     </tr>
     <?php } ?>
